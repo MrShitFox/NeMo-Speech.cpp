@@ -1,0 +1,81 @@
+{
+  "model": "../../models/Nemotron-3-Diarization.q8_0.gguf",
+  "reference_rttm": "../../test_files/diar/ami_en2002d_2132.rttm",
+  "preliminary_fixture_only": true,
+  "push_ms": 160,
+  "silence_between_enrollments_sec": 1.0,
+  "enrollment": [
+    {
+      "id": "p1_enroll",
+      "speaker": "P1",
+      "rttm_speaker_id": "MEE071",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 3.12,
+      "end_sec": 19.51,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "microphone": "ami_mix_headset",
+      "speech_condition": "clean",
+      "overlap": false
+    },
+    {
+      "id": "p2_enroll",
+      "speaker": "P2",
+      "rttm_speaker_id": "FEO070",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 29.20,
+      "end_sec": 43.05,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "microphone": "ami_mix_headset",
+      "speech_condition": "clean",
+      "overlap": false
+    }
+  ],
+  "development": [],
+  "calibration": [],
+  "final_holdout": [],
+  "known_queries": [
+    {
+      "id": "p1_known",
+      "speaker": "P1",
+      "rttm_speaker_id": "MEE071",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 48.55,
+      "end_sec": 51.16,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "microphone": "ami_mix_headset",
+      "speech_condition": "clean",
+      "overlap": false
+    },
+    {
+      "id": "p2_known_overlap",
+      "speaker": "P2",
+      "rttm_speaker_id": "FEO070",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 45.39,
+      "end_sec": 47.95,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "microphone": "ami_mix_headset",
+      "speech_condition": "overlap",
+      "overlap": true
+    }
+  ],
+  "unknown_queries": [
+    {
+      "id": "p3_unknown",
+      "speaker": "P3",
+      "rttm_speaker_id": "MEE073",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 51.22,
+      "end_sec": 57.34,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "microphone": "ami_mix_headset",
+      "speech_condition": "clean",
+      "overlap": false
+    }
+  ]
+}

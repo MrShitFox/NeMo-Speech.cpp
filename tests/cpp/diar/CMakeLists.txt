@@ -13,6 +13,14 @@ target_link_libraries(diar_enrollment_probe PRIVATE nemo_speech_diar)
 
 add_executable(diar_representation_probe diar_representation_probe.cpp)
 target_link_libraries(diar_representation_probe PRIVATE nemo_speech_diar)
+
+add_executable(diar_native_matching_probe diar_native_matching_probe.cpp)
+target_link_libraries(diar_native_matching_probe PRIVATE nemo_speech_diar)
+
+add_executable(test_aosc_profile_intervention test_aosc_profile_intervention.cpp)
+target_include_directories(test_aosc_profile_intervention PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(test_aosc_profile_intervention PRIVATE nemo_speech_diar)
+add_test(NAME aosc_profile_intervention COMMAND test_aosc_profile_intervention)
 if(UNIX)
     add_executable(diar_snapshot_cli diar_snapshot_cli.cpp)
     target_link_libraries(diar_snapshot_cli PRIVATE nemo_speech_diar)
