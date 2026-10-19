@@ -1,59 +1,13 @@
 # Documentation
 
-User and developer documentation for NeMo-Speech.cpp. The shortest path
-to a transcript lives in the [root README](../README.md); everything below is
-the detailed manual.
+- [Build guide](build.md): CPU, Vulkan, CUDA, and Metal presets.
+- [CLI guide](cli.md): local model input, streaming/offline operation, output,
+  and segmentation controls.
+- [C API guide](sdk.md): public API lifecycle and CMake package.
+- [Example configuration](../config/diar.example.yaml).
+- [Task 02 report](VOICEID_TASK02_REPORT.md): standalone runtime baseline.
+- [Task 03 report](VOICEID_TASK03_REPORT.md): physical cleanup and validation.
 
-Start with:
-
-- [Installation](install.md)
-- [Command-line workflows](cli.md)
-- [Configuration examples](../config/README.md)
-- [Model conversion](model-conversion.md)
-- [Speech-to-speech VoiceChat](s2s/README.md)
-- [HTTP/realtime and optional gRPC server](server.md)
-- [HTTP API reference](api.md)
-- [Client integration](clients.md)
-- [Native SDK integration](sdk.md)
-- [Troubleshooting](troubleshooting.md)
-- [Build from source](build.md)
-
-## ASR
-
-- [Models](asr/models.md) - ready-to-run GGUF downloads, custom checkpoint
-  conversion, and quantization options.
-- [Configuration](asr/configuration.md) - full `asr.*` key reference plus the
-  decoding / word-boosting / VAD / endpointing / diarization / postprocessing knobs.
-- [Feature matrix and customization](asr/customization.md) - which models
-  support which features, and request-time vs startup customization.
-
-## TTS
-
-- [Models](tts/models.md) - ready-to-run MagpieTTS and NanoCodec GGUF downloads,
-  tokenizer setup, and custom conversion.
-- [Configuration](tts/configuration.md) - `tts.*` key reference and serving.
-
-## NMT
-
-- [Models and conversion](nmt/models.md) - obtain and convert Riva-Translate
-  models for the llama.cpp runtime.
-- [Configuration](nmt/configuration.md) - `nmt.*` key reference and serving.
-
-## S2S
-
-- [Overview](s2s/README.md) - build and serve the streaming VoiceChat pipeline.
-- [Models and conversion](s2s/models.md) - convert complete model repositories.
-- [Docker deployment](s2s/docker.md) - build and run the VoiceChat server image.
-- [Configuration](s2s/configuration.md) - `s2s.*` settings and runtime tuning.
-- [Client integration](s2s/clients.md) - streaming, tool responses, and concurrency.
-
-## Developer guide
-
-- [Overview](development/README.md) - implementation and performance internals.
-- [Diagnostics](development/diagnostics.md) - build switches, runtime knobs, and
-  `check_backend_coverage`.
-- [ASR batching](development/asr-batching.md) - neural microbatching and
-  streaming-state arenas.
-- [llama.cpp and ggml patches](../patches/README.md) - the project-specific changes.
-- [cuBLAS shim](development/cublas-shim.md) - the in-tree drop-in cuBLAS
-  replacement.
+`VOICEID_BASELINE.md` and `VOICEID_CLEANUP_PLAN.md` preserve the earlier task
+design and baseline records; they are historical references, not current
+feature documentation.

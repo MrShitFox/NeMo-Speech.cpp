@@ -116,3 +116,5 @@ Python conversion scripts и Python CI helpers не входят в C++ runtime 
 6. **Сузить CLI и backend matrix.** Отвязать model registry/store, если продукт требует только локальный GGUF; CPU gate обязателен. CUDA/Vulkan/Metal gates запускать на подходящих SDK/device runner, а не засчитывать по configure flags.
 
 После каждого шага повторять критерии из `docs/VOICEID_BASELINE.md`, проверять `git diff --check`, C ABI symbols и то, что GGUF остаётся ignored. Не менять AOSC state, feature math и Sortformer graph в target-splitting commits.
+# Historical plan. Task 03 has been completed; see `VOICEID_TASK03_REPORT.md`
+# for the implemented cleanup and remaining follow-up.

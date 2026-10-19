@@ -119,3 +119,5 @@ ctest --test-dir build/cpu-diar --output-on-failure \
 5. Два CPU streaming запуска JFK должны оставаться детерминированными на том же toolchain и backend.
 6. Полный AMI вывод нельзя объявлять accuracy-pass только по числу сегментов: для этого нужен отдельный DER regression против локального RTTM и явная политика к перекрытиям.
 7. Проверять отсутствие runtime Python и случайного попадания GGUF: `ldd build/cpu-diar/bin/nemo-speech` и `git check-ignore -v models/Nemotron-3-Diarization.q8_0.gguf`.
+# Historical baseline. Current repository scope and validation are recorded in
+# `VOICEID_TASK03_REPORT.md`; this document describes the earlier baseline.

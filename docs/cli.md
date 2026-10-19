@@ -1,278 +1,47 @@
 # Command-line guide
 
-`nemo-speech` is the primary local interface. Inference commands accept local
-model paths, indexed Hugging Face repository IDs, or short model names. ASR,
-diarization, and TTS also have ready-to-run defaults.
-
-Run `nemo-speech --help` for the command inventory and
-`nemo-speech help <command>` for the options compiled into the installed
-build.
-
-## Models and cache
-
-List the models built into this CLI release:
+`nemo-speech` exposes `diarize`, `help`, and `--version` commands. It accepts
+local WAV files or directories and requires a local Nemotron 3 Diarization
+GGUF. The CLI does not download models.
 
 ```bash
-nemo-speech model list
-nemo-speech --json model list
+nemo-speech diarize test.wav --model models/Nemotron-3-Diarization.q8_0.gguf
 ```
 
-The human output is grouped by ASR, diarization, and TTS. `*` marks models used
-by default. The JSON form also exposes every alias, artifact role, applicable
-command, companion, pinned revision, and license.
+Run `nemo-speech --help` or `nemo-speech diarize --help` for the options in the
+build. Global `--json`, `--quiet`, and `--verbose` flags control result and
+diagnostic output.
 
-Inference downloads a missing indexed model automatically. You can download it
-ahead of time with either a short name or the full repository ID:
+## Streaming and offline modes
+
+Streaming is the default and preserves the model's AOSC speaker cache and
+streaming state. `--offline` selects the full-attention path for shorter audio.
+The `--preset` option accepts `v3-streaming` and `v3-offline`; preset geometry
+and the `--offline` flag use the same inference implementation and model.
+
+## Output
+
+Choose `--format text`, `--format json`, or `--format rttm`. JSON output may be
+written with `--output PATH`; `--output-dir DIR` preserves directory layout for
+batch input. RTTM output accepts an explicit `--recording-id NAME`. Existing
+files are kept unless `--force` is supplied.
 
 ```bash
-nemo-speech pull nemotron-3.5
-nemo-speech pull nvidia/nemotron-3.5-asr-streaming-0.6b
-nemo-speech pull magpie
+nemo-speech diarize meeting.wav --model model.gguf --format rttm \
+  --recording-id meeting --output meeting.rttm
 ```
 
-Pulling `magpie` also installs its tokenizer assets and the required NanoCodec
-companion. Downloads use the system `curl` executable, follow HTTPS only,
-resume interrupted regular-file downloads, and are accepted only after the
-pinned size and SHA-256 match. Concurrent processes share per-artifact cache
-locks. Run `nemo-speech doctor` to confirm that `curl` is available.
+Directories process WAV inputs. Use `--recursive` to descend into nested
+directories and `--concurrency N` to process several files while sharing the
+loaded model. `--no-batching` disables compatible dynamic GPU batching.
 
-The cache location is platform-specific:
+## Segmentation thresholds
 
-| Platform | Default cache |
-|---|---|
-| macOS | `~/Library/Caches/NeMoSpeech/models` |
-| Linux | `$XDG_CACHE_HOME/nemo-speech/models`, or `~/.cache/nemo-speech/models` when unset |
-| Windows | `%LOCALAPPDATA%\NeMoSpeech\models` |
+The CLI keeps the runtime's existing defaults. Optional controls are
+`--onset`, `--offset`, `--pad-onset`, `--pad-offset`, `--min-duration-on`, and
+`--min-duration-off`. These tune speaker activity hysteresis, segment padding,
+short speech removal, and short silence filling.
 
-Set `NEMO_SPEECH_MODEL_DIR` to use another location. Passing an existing local
-GGUF path or tokenizer directory always takes precedence and does not use the
-network.
-
-## Transcribe audio
-
-Transcribe one WAV file:
-
-```bash
-nemo-speech transcribe recording.wav
-nemo-speech transcribe recording.wav --model nemotron-en
-nemo-speech transcribe recording.wav --model ./models/asr.q8_0.gguf
-nemo-speech transcribe recording.wav --stream
-```
-
-File transcription submits the complete recording as one offline request by
-default. Add `--stream` to feed a recorded WAV through the streaming recognizer
-in 160 ms input chunks. `--live` also uses the streaming recognizer.
-Offline-only models such as Parakeet TDT reject `--stream` and `--live`.
-
-The file CLI accepts mono or stereo PCM16 and float32 WAV input from 8-96 kHz.
-It downmixes and resamples to the model rate. Unsupported containers or codecs
-produce an error with a conversion command.
-
-### Transcribe a microphone live
-
-```bash
-nemo-speech transcribe --live --backend auto
-nemo-speech transcribe --live --diarize --diar-model ./models/Nemotron-3-Diarization.q8_0.gguf
-```
-
-The command captures the system's default microphone and shows a live preview
-on stderr. Endpointing is on by default for `--live`, so trailing silence
-finalizes utterances without ending capture; `--endpointing=false` disables it.
-Press Ctrl-C once to
-stop; the stream is flushed and the complete final transcript is written to
-stdout. Use `--output transcript.txt` to write it to a file, or select `json`,
-`srt`, or `vtt` with `--format`.
-
-With `--diarize`, the preview shows speaker turns. Speaker labels can change
-until the diarizer confirms them, which can take up to 10 s with V2. Set
-`NO_COLOR=1` to disable colors.
-
-Live capture is compiled directly into the CLI through miniaudio and uses the
-native host audio API: CoreAudio on macOS, WASAPI on Windows, and ALSA or
-PulseAudio on Linux. No PortAudio runtime is required. The operating system may
-ask for microphone permission the first time; grant access to the terminal or
-shell running `nemo-speech`.
-
-### Subtitles and structured output
-
-```bash
-nemo-speech transcribe recording.wav --format srt --output recording.srt
-nemo-speech transcribe recording.wav --format vtt --output recording.vtt
-nemo-speech transcribe recording.wav --json
-```
-
-JSON, SRT, and WebVTT output request word timestamps automatically. Plain-text
-output remains transcript-only. `--word-times` is retained for compatibility
-but does not change the rendered output of any current CLI format.
-
-SRT and WebVTT cues prefer sentence, clause, and pause boundaries. Cues use up
-to two lines, target 37 characters per line, and allow small whole-word
-overflow within the common 42-character subtitle limit.
-
-Plain results are written to stdout. Progress and diagnostics are written to
-stderr so output can be redirected safely. Global `--json`, `--quiet`, and
-`--verbose` options work across commands. Inference and server commands show
-their lifecycle, effective configuration, results, warnings, and errors by
-default. Model-loader, backend, ggml, and llama.cpp diagnostics require
-`--verbose`.
-
-### Transcribe a directory
-
-```bash
-nemo-speech transcribe recordings/ \
-  --recursive \
-  --output-dir transcripts \
-  --concurrency 4
-```
-
-The recognizer is loaded once. Concurrent utterances share that recognizer and
-compatible inference work is dynamically batched on the GPU. Relative directory
-paths are preserved and existing outputs require `--force`.
-
-### Compose speech features
-
-A transcription can use VAD, speaker diarization, punctuation, ITN, and NMT in
-one pass:
-
-```bash
-nemo-speech transcribe meeting.wav \
-  --vad-model silero.gguf \
-  --vad-masking \
-  --diarize \
-  --pnc-model punctuation.gguf \
-  --itn-model-dir grammars/en-US \
-  --nmt-model translate.q8_0.gguf \
-  --translate-to es \
-  --json
-```
-
-Loading a VAD model alone does not alter recognition; the example enables VAD
-feature masking explicitly. `--diarize` downloads and uses the indexed default
-Sortformer model, while `--diar-model MODEL` selects a different one and also
-enables speaker tags. Use only the companion models needed by the workflow.
-
-For ASR plus speaker labels without the other stages:
-
-```bash
-nemo-speech transcribe meeting.wav --diarize --json
-```
-
-V2 supports up to four speakers and V3 up to eight. Diarization enables word
-timestamps automatically and places a 1-based `speaker` value on each
-word in JSON output.
-
-## Diarize audio
-
-Standalone diarization does not require an ASR model:
-
-```bash
-nemo-speech diarize meeting.wav
-nemo-speech diarize meeting.wav --format rttm --output meeting.rttm
-nemo-speech diarize recordings/ \
-  --format rttm --output-dir rttms --concurrency 4
-```
-
-Directory inputs load one shared model and dynamically batch compatible steps.
-Relative paths are preserved. A stateful streaming pass is the default and is
-appropriate for long recordings. `--preset offline` (V2) or `--preset v3-offline`
-(V3) selects larger streaming chunks and caches; it does not enable full
-attention. Use `--offline` for one full-attention pass over a short recording.
-The model's positional table limits that path to about 6.6 minutes, so use the
-default streaming pass for longer audio.
-
-V2 supports up to four speakers and V3 up to eight. Segmentation thresholds
-are dataset-dependent; use `--onset`, `--offset`, `--pad-onset`, `--pad-offset`,
-`--min-duration-on`, and `--min-duration-off` when applying a checkpoint's
-published postprocessing configuration.
-
-## Translate text
-
-```bash
-nemo-speech translate --model translate.q8_0.gguf --from en --to de "Speech runs locally."
-printf '%s\n' "First line" "Second line" | \
-  nemo-speech translate --model translate.q8_0.gguf --from en --to es
-```
-
-Use `--input` for a line-oriented text file and `--output` to write translations
-to a file.
-
-## Synthesize speech
-
-```bash
-nemo-speech synthesize "Hello" --output hello.wav
-```
-
-## Select a backend
-
-Backend selection is automatic. Override it with `--device` or its `--backend`
-alias:
-
-```bash
-nemo-speech transcribe recording.wav --device cuda:0
-nemo-speech transcribe recording.wav --device cpu
-nemo-speech transcribe recording.wav --device metal
-nemo-speech transcribe recording.wav --device vulkan:0
-```
-
-Run `nemo-speech doctor` to see the compiled backends and detected devices.
-
-## Convert and inspect models
-
-The built-in index covers the published ready-to-run GGUFs. From a source
-checkout, use the Python converter when working with a custom checkpoint or
-producing a different quantization:
-
-```bash
-python convert_model.py custom-model.nemo --outfile custom-model.q8_0.gguf
-nemo-speech model info custom-model.q8_0.gguf
-```
-
-Conversion tools are not included in the native binary archives; the installed
-runtime itself does not require Python.
-
-The converter can also resolve Hugging Face repository IDs through the standard
-cache. See [model conversion](model-conversion.md) for the isolated Python
-environment and supported model families. Custom files remain local; pass
-their paths explicitly or record a reusable multi-model setup in a [YAML
-configuration file](server.md#engine-and-listener-configuration).
-
-## Benchmark
-
-`nemo-speech bench <task>` loads one engine, warms it up, and runs every input
-`--repetitions` times at each `--concurrency` level. The tasks compiled into
-the build are listed by `nemo-speech help bench`; a task missing from the build
-fails with `unsupported_feature`.
-
-```bash
-# ASR over a WAV file or directory
-nemo-speech bench asr recordings/ --model asr.q8_0.gguf --concurrency 1,2,4 --json
-
-# TTS over --text, a .txt file or directory (one utterance per file), or
-# --text-file (one utterance per line)
-nemo-speech bench tts --text-file test_files/tts/ljs_audio_text_test_filelist_small.txt \
-  --magpie-model magpie.q8_0.gguf --codec-model codec.gguf --tokenizer-dir tokenizer/ \
-  --per-stream 20 --json
-
-# Diarization over a WAV file or directory
-nemo-speech bench diarize meetings/ --model sortformer.gguf
-
-# Translation over a text file, one input per line (NMT builds)
-nemo-speech bench translate lines.txt --model nmt.gguf --from en --to de
-```
-
-All tasks share `-n/--repetitions` (or `--per-stream N` requests per
-concurrent stream), `--warmup`, `-c/--concurrency`,
-`--device`, `--config`, the task's `--asr.*`/`--tts.*`/`--diar.*`/`--nmt.*`
-overrides, and `--json`. The report contains `command`, `task`, the model,
-`load_ms`, `warmup_ms`, and one `runs` entry per concurrency level with
-`concurrency`, `items`, `wall_seconds`, `items_per_second`, client-side
-`latency_ms` (`mean`/`p50`/`p90`/`p95`/`p99`/`min`/`max`), per-item `metrics`, task
-throughput such as `rtfx`, and an output-mismatch count against the first
-result observed for each input (`transcript_mismatches`,
-`audio_length_mismatches`, `segment_mismatches`, `translation_mismatches`).
-
-`bench tts` reports time to first audio (TTFA) and inter-chunk latency (ICL),
-measured at the client (`first_audio_ms`, `chunk_gap_ms`), and throughput RTFx,
-plus a per-input breakdown. It fixes `--seed`
-to 1 so repeated runs generate identical audio. The MagpieTTS runtime serializes
-requests, so TTS concurrency above 1 measures queueing.
+A YAML file may set diarization and batching fields. See
+[`config/diar.example.yaml`](../config/diar.example.yaml). CLI flags override
+environment and YAML values.

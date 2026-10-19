@@ -30,13 +30,13 @@ apply to those replies as well.
 ## Development checks
 
 Follow the [source-build guide](docs/build.md) for prerequisites and submodules.
-For a model-independent CPU ASR test build:
+For a model-independent CPU diarization test build:
 
 ```bash
 git submodule update --init llama.cpp
-scripts/configure.sh cpu-asr -DNEMO_SPEECH_BUILD_TESTS=ON
-cmake --build --preset cpu-asr
-ctest --test-dir build/cpu-asr --output-on-failure
+scripts/configure.sh cpu-diar -DBUILD_TESTING=ON
+cmake --build --preset cpu-diar
+ctest --test-dir build/cpu-diar --output-on-failure
 ```
 
 Install [pre-commit](https://pre-commit.com/) and run the same formatting,
@@ -46,8 +46,8 @@ license-header, and static file checks used by CI:
 pre-commit run --all-files
 ```
 
-Use the closest matching CUDA, Metal, Vulkan, server, or component preset when
-the change affects code outside the CPU ASR path. Include the commands and
+Use the closest matching CUDA, Metal, or Vulkan preset when the change affects
+backend code. Include the commands and
 results relevant to the change in the pull request.
 
 ## Changing llama.cpp or ggml

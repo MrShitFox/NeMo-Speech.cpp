@@ -1,5 +1,9 @@
 # Task 02: standalone Nemotron 3 diarization runtime
 
+> Historical report for commit `5a916e0`'s predecessor state. Task 03 removes
+> the remaining speech subsystems; see `VOICEID_TASK03_REPORT.md` for current
+> build targets and validation.
+
 Branch: `refactor/standalone-diarization`
 
 Baseline: Task 01, source commit `caa3f47c7c75fa2e9e6340272ebad57c1647dd44`; model SHA-256 `08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1`.
