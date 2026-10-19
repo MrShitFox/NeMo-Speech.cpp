@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 #include <math.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -41,6 +42,51 @@ main(int argc, char** argv) {
         nemo_speech_diar_destroy(model);
         return 1;
     }
+
+    size_t state_size = 0;
+    if (nemo_speech_diar_stream_state_size(stream, &state_size) != NEMO_SPEECH_ASR_OK ||
+        state_size < 108) {
+        fprintf(stderr, "state size query failed\n");
+        nemo_speech_diar_stream_close(stream);
+        nemo_speech_diar_destroy(model);
+        return 1;
+    }
+    void* snapshot = malloc(state_size);
+    size_t written = 0;
+    if (!snapshot || nemo_speech_diar_stream_save_state(
+                         stream, snapshot, state_size - 1, &written) !=
+                         NEMO_SPEECH_ASR_ERROR_INVALID_ARGUMENT ||
+        written != 0 ||
+        nemo_speech_diar_stream_save_state(stream, snapshot, state_size, &written) !=
+                         NEMO_SPEECH_ASR_OK ||
+        written != state_size) {
+        fprintf(stderr, "state save failed\n");
+        free(snapshot);
+        nemo_speech_diar_stream_close(stream);
+        nemo_speech_diar_destroy(model);
+        return 1;
+    }
+    nemo_speech_diar_stream* restored = NULL;
+    if (nemo_speech_diar_stream_open(model, &restored) != NEMO_SPEECH_ASR_OK || !restored ||
+        nemo_speech_diar_stream_load_state(restored, snapshot, written) != NEMO_SPEECH_ASR_OK) {
+        fprintf(stderr, "state load failed\n");
+        free(snapshot);
+        nemo_speech_diar_stream_close(restored);
+        nemo_speech_diar_stream_close(stream);
+        nemo_speech_diar_destroy(model);
+        return 1;
+    }
+    if (nemo_speech_diar_stream_load_state(restored, snapshot, written) !=
+        NEMO_SPEECH_ASR_ERROR_INVALID_ARGUMENT) {
+        fprintf(stderr, "active stream accepted a second state import\n");
+        free(snapshot);
+        nemo_speech_diar_stream_close(restored);
+        nemo_speech_diar_stream_close(stream);
+        nemo_speech_diar_destroy(model);
+        return 1;
+    }
+    free(snapshot);
+    nemo_speech_diar_stream_close(restored);
     nemo_speech_diar_stream_close(stream);
     nemo_speech_diar_destroy(model);
     return 0;

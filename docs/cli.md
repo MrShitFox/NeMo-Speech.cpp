@@ -45,3 +45,22 @@ short speech removal, and short silence filling.
 A YAML file may set diarization and batching fields. See
 [`config/diar.example.yaml`](../config/diar.example.yaml). CLI flags override
 environment and YAML values.
+
+## Test-only stream checkpoint utility
+
+With tests enabled on POSIX, `build/<build>/bin/diar_snapshot_cli`
+provides a two-process checkpoint path without changing the production CLI:
+
+```bash
+diar_snapshot_cli model.gguf part1.wav --save-state /private/path/session.bin
+diar_snapshot_cli model.gguf part2.wav --load-state /private/path/session.bin
+```
+
+The first process saves before `finish()`, so the next process receives pending
+audio and right-context buffers. The second process finishes the continued
+stream. Its timestamps use the session's absolute frame clock and continue
+after part one; they do not restart at the beginning of `part2.wav`. On POSIX,
+the utility writes a mode-0600 temporary file and atomically renames it into
+place. The state file contains speaker-cache embeddings and must be treated as
+sensitive. The public library API is available on all supported platforms;
+this file utility is only a test helper.

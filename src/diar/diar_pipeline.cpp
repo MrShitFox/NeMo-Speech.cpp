@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 #include "diar_pipeline.h"
+#include "diar_snapshot.h"
 
 #include <algorithm>
 #include <cmath>
@@ -33,6 +34,7 @@ DiarModel::DiarModel(
       fe_(fe_cfg_, /*bm=*/nullptr) {  // CPU FFT path, same choice as AsrModel
     const int n_bins = fe_cfg_.n_fft / 2 + 1;
     fe_.set_mel_basis(model_.mel_basis().data(), fe_cfg_.n_mels, n_bins);
+    model_fingerprint_ = DiarStreamSnapshotCodec::fingerprint_file(gguf_path);
 }
 
 DiarGeometry
@@ -220,6 +222,13 @@ DiarStream::run_one_chunk(bool force, bool final_flush) {
     const int rc_enc = static_cast<int>(std::ceil(rc_mel / static_cast<double>(sub_)));
     auto emitted =
         run_state.update(out.chunk_embs.data(), out.chunk_frames, out.preds.data(), lc_enc, rc_enc);
+    const int embedding_frames = out.chunk_frames - lc_enc - rc_enc;
+    if (!provisional && research_embedding_observer_ && embedding_frames > 0) {
+        const int embedding_dim = m_.cfg().encoder.d_model;
+        const float* central_embeddings =
+            out.chunk_embs.data() + static_cast<size_t>(lc_enc) * embedding_dim;
+        research_embedding_observer_(stt / sub_, central_embeddings, embedding_frames, embedding_dim);
+    }
     if (m_.cfg().is_v3()) {
         const int native_factor = m_.cfg().upsample_factor;
         const int state_frames = out.total_frames - out.chunk_frames;

@@ -179,6 +179,45 @@ nemo_speech_diar_stream_close(nemo_speech_diar_stream* stream) {
 }
 
 nemo_speech_asr_status
+nemo_speech_diar_stream_state_size(const nemo_speech_diar_stream* stream, size_t* size_bytes) {
+    return guard([&] {
+        if (!stream || !stream->impl || !size_bytes)
+            throw std::invalid_argument("live stream and size_bytes must not be NULL");
+        *size_bytes = 0;
+        *size_bytes = stream->impl->export_state().size();
+        return NEMO_SPEECH_ASR_OK;
+    });
+}
+
+nemo_speech_asr_status
+nemo_speech_diar_stream_save_state(
+    const nemo_speech_diar_stream* stream, void* out, size_t capacity_bytes, size_t* written) {
+    return guard([&] {
+        if (written) *written = 0;
+        if (!stream || !stream->impl || !out || !written)
+            throw std::invalid_argument("live stream, out and written must not be NULL");
+        const auto snapshot = stream->impl->export_state();
+        if (capacity_bytes < snapshot.size())
+            throw std::invalid_argument(
+                "capacity_bytes too small (need " + std::to_string(snapshot.size()) + ")");
+        std::memcpy(out, snapshot.data(), snapshot.size());
+        *written = snapshot.size();
+        return NEMO_SPEECH_ASR_OK;
+    });
+}
+
+nemo_speech_asr_status
+nemo_speech_diar_stream_load_state(
+    nemo_speech_diar_stream* stream, const void* data, size_t size_bytes) {
+    return guard([&] {
+        if (!stream || !stream->impl || !data)
+            throw std::invalid_argument("live stream and data must not be NULL");
+        stream->impl->import_state(static_cast<const uint8_t*>(data), size_bytes);
+        return NEMO_SPEECH_ASR_OK;
+    });
+}
+
+nemo_speech_asr_status
 nemo_speech_diar_offline_f32(
     nemo_speech_diar_model* model, const float* samples, size_t n_samples, int32_t sample_rate,
     nemo_speech_diar_stream** out) {

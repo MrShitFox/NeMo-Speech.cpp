@@ -98,6 +98,21 @@ NEMO_SPEECH_ASR_API nemo_speech_asr_status
 nemo_speech_diar_stream_finish(nemo_speech_diar_stream* stream);
 NEMO_SPEECH_ASR_API void nemo_speech_diar_stream_close(nemo_speech_diar_stream* stream);
 
+// ---- Streaming state checkpoint (format version 1) ----------------------
+// Snapshots contain voice-derived state and should be handled as sensitive
+// data. The size query and save call may run only between stream operations;
+// the implementation serializes them with push/finish on the same handle.
+NEMO_SPEECH_ASR_API nemo_speech_asr_status nemo_speech_diar_stream_state_size(
+    const nemo_speech_diar_stream* stream, size_t* size_bytes);
+// Two-call export: query size with out=NULL/capacity=0, allocate that many
+// bytes, then save. *written receives the exact snapshot size on success.
+NEMO_SPEECH_ASR_API nemo_speech_asr_status nemo_speech_diar_stream_save_state(
+    const nemo_speech_diar_stream* stream, void* out, size_t capacity_bytes, size_t* written);
+// Import only into a fresh stream returned by stream_open. A failed import
+// leaves that stream untouched; importing into an active stream is rejected.
+NEMO_SPEECH_ASR_API nemo_speech_asr_status nemo_speech_diar_stream_load_state(
+    nemo_speech_diar_stream* stream, const void* data, size_t size_bytes);
+
 // ---- Offline (stateless) ----
 // One full-attention pass over the whole file with no streaming state (NeMo
 // streaming_mode=False). `sample_rate` follows the push contract above

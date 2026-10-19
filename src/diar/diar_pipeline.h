@@ -14,9 +14,12 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <array>
+#include <functional>
 #include <limits>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "aosc_state.h"
@@ -25,6 +28,10 @@
 #include "sortformer_model.h"
 
 namespace nemo_speech::asr {
+
+class DiarStreamSnapshotCodec;
+class DiarSnapshotAccess;
+class DiarAoscProfileCodec;
 
 // Recognizer-level diarization config.
 struct DiarConfig {
@@ -76,6 +83,7 @@ class DiarModel {
     SortformerModel& model() { return model_; }
     MelSpectrogramExtractor& fe() { return fe_; }
     const SortformerModelConfig& cfg() const { return model_.cfg(); }
+    const std::array<uint8_t, 32>& model_fingerprint() const { return model_fingerprint_; }
     BatchMetrics batch_metrics() const { return model_.batch_metrics(); }
     DiarGeometry resolved_geometry(const DiarGeometry& requested) const;
 
@@ -92,6 +100,7 @@ class DiarModel {
     SortformerModel model_;
     MelSpecConfig fe_cfg_;
     MelSpectrogramExtractor fe_;
+    std::array<uint8_t, 32> model_fingerprint_{};
 };
 
 // Per-speaker segmentation parameters, NeMo ts_vad_post_processing semantics
@@ -135,6 +144,9 @@ compact_front(std::vector<T>& buf, size_t dead) {
 // Per-stream streaming state + timeline.
 class DiarStream {
    public:
+    using ResearchEmbeddingObserver =
+        std::function<void(int64_t coarse_frame_start, const float* frames, int n_frames, int dim)>;
+
     DiarStream(DiarModel& model, const DiarGeometry& geometry);
 
     // Feed 16 kHz mono samples; runs any chunks whose right context is
@@ -142,6 +154,12 @@ class DiarStream {
     void feed_audio(const float* samples, size_t n_samples);
     void finish();
     void reset();
+
+    // Optional test-only instrumentation. Called for committed central chunk
+    // embeddings; an empty observer has no effect on the inference path.
+    void set_research_embedding_observer(ResearchEmbeddingObserver observer) {
+        research_embedding_observer_ = std::move(observer);
+    }
 
     // Label arrived audio toward target_frame using a temporary state copy.
     // Preserve the full right context; the next complete chunk replaces this
@@ -197,6 +215,9 @@ class DiarStream {
     std::vector<Segment> segments(const DiarSegmentationCfg& cfg = DiarSegmentationCfg()) const;
 
    private:
+    friend class DiarStreamSnapshotCodec;
+    friend class DiarSnapshotAccess;
+    friend class DiarAoscProfileCodec;
     // Forced non-final chunks are previews only; only full chunks and the
     // final flush advance persistent model/feature state.
     bool run_one_chunk(bool force, bool final_flush);
@@ -226,6 +247,8 @@ class DiarStream {
     int64_t mel_consumed_ = 0;        // mel frames consumed = start of the next chunk
     int64_t provisional_frames_ = 0;  // native-cadence tail replaced on replay
     bool finished_ = false;
+
+    ResearchEmbeddingObserver research_embedding_observer_;
 
     std::vector<float> probs_;              // retained timeline tail (see frame_probs_base)
     int64_t probs_base_ = 0;                // emitted frames compacted off the front

@@ -16,6 +16,24 @@ bool supported_input_sample_rate(int sample_rate);
 
 class AudioResampler {
    public:
+    // Plain-data checkpoint. Coefficients are included so a restore keeps the
+    // exact float32 filter table even when moved between hosts/libm builds.
+    struct State {
+        int input_rate = 0;
+        int output_rate = 0;
+        uint64_t rate_gcd = 1;
+        size_t phase_count = 1;
+        bool exact_phase_table = true;
+        std::vector<float> coefficients;
+        std::vector<float> input;
+        uint64_t input_start = 0;
+        uint64_t total_input = 0;
+        uint64_t next_output = 0;
+        uint64_t source_index = 0;
+        uint64_t source_remainder = 0;
+        bool finished = false;
+    };
+
     AudioResampler(int input_rate, int output_rate);
 
     int input_rate() const { return input_rate_; }
@@ -26,6 +44,9 @@ class AudioResampler {
 
     // Emit the filter tail. No process() calls are allowed after finish().
     void finish(std::vector<float>* output);
+
+    State export_state() const;
+    void import_state(const State& state);
 
    private:
     void emit_available(bool final, std::vector<float>* output);

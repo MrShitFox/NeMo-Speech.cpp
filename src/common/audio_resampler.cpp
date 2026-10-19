@@ -105,6 +105,82 @@ AudioResampler::AudioResampler(int input_rate, int output_rate)
     }
 }
 
+AudioResampler::State
+AudioResampler::export_state() const {
+    State state;
+    state.input_rate = input_rate_;
+    state.output_rate = output_rate_;
+    state.rate_gcd = rate_gcd_;
+    state.phase_count = phase_count_;
+    state.exact_phase_table = exact_phase_table_;
+    state.coefficients = coefficients_;
+    state.input = input_;
+    state.input_start = input_start_;
+    state.total_input = total_input_;
+    state.next_output = next_output_;
+    state.source_index = source_index_;
+    state.source_remainder = source_remainder_;
+    state.finished = finished_;
+    return state;
+}
+
+void
+AudioResampler::import_state(const State& state) {
+    if (!supported_input_sample_rate(state.input_rate) || state.output_rate <= 0)
+        throw std::invalid_argument("snapshot resampler has invalid sample rates");
+    AudioResampler expected(state.input_rate, state.output_rate);
+    if (state.rate_gcd != expected.rate_gcd_ || state.phase_count != expected.phase_count_ ||
+        state.exact_phase_table != expected.exact_phase_table_ ||
+        state.coefficients.size() != expected.coefficients_.size())
+        throw std::invalid_argument("snapshot resampler geometry is invalid");
+    if (state.source_remainder >= static_cast<uint64_t>(state.output_rate) ||
+        state.total_input > (std::numeric_limits<uint64_t>::max() - 1ULL) / 12ULL ||
+        state.next_output > state.total_input * 12ULL + 1ULL)
+        throw std::invalid_argument("snapshot resampler counters are invalid");
+    if (state.input_rate == state.output_rate) {
+        if (!state.input.empty() || (!state.finished && state.input_start != 0) ||
+            (state.finished && state.input_start != state.total_input))
+            throw std::invalid_argument("snapshot equal-rate resampler history is invalid");
+    } else if (state.input_start > state.total_input ||
+               state.total_input - state.input_start != state.input.size()) {
+        throw std::invalid_argument("snapshot resampler history length is invalid");
+    } else {
+        const uint64_t out_rate = static_cast<uint64_t>(state.output_rate);
+        const uint64_t in_rate = static_cast<uint64_t>(state.input_rate);
+        const uint64_t whole = state.next_output / out_rate;
+        const uint64_t rem = state.next_output % out_rate;
+        if (whole > std::numeric_limits<uint64_t>::max() / in_rate)
+            throw std::invalid_argument("snapshot resampler source position overflows");
+        const uint64_t base = whole * in_rate;
+        const uint64_t fractional = rem * in_rate;
+        if (base > std::numeric_limits<uint64_t>::max() - fractional / out_rate ||
+            state.source_index != base + fractional / out_rate ||
+            state.source_remainder != fractional % out_rate)
+            throw std::invalid_argument("snapshot resampler phase is inconsistent");
+    }
+    for (float coefficient : state.coefficients)
+        if (!std::isfinite(coefficient))
+            throw std::invalid_argument("snapshot resampler coefficients are invalid");
+    for (float sample : state.input)
+        if (!std::isfinite(sample))
+            throw std::invalid_argument("snapshot resampler history is invalid");
+
+    // Commit only after all scalar and shape checks have passed.
+    input_rate_ = state.input_rate;
+    output_rate_ = state.output_rate;
+    rate_gcd_ = state.rate_gcd;
+    phase_count_ = state.phase_count;
+    exact_phase_table_ = state.exact_phase_table;
+    coefficients_ = state.coefficients;
+    input_ = state.input;
+    input_start_ = state.input_start;
+    total_input_ = state.total_input;
+    next_output_ = state.next_output;
+    source_index_ = state.source_index;
+    source_remainder_ = state.source_remainder;
+    finished_ = state.finished;
+}
+
 void
 AudioResampler::process(const float* input, size_t count, std::vector<float>* output) {
     if (output == nullptr)

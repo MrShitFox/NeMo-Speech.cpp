@@ -5,6 +5,16 @@ target_link_libraries(test_sortformer_parity PRIVATE nemo_speech_diar)
 add_executable(test_diar_streaming test_diar_streaming.cpp)
 target_link_libraries(test_diar_streaming PRIVATE nemo_speech_diar)
 
+add_executable(test_diar_snapshot test_diar_snapshot.cpp)
+target_link_libraries(test_diar_snapshot PRIVATE nemo_speech_diar)
+
+add_executable(diar_enrollment_probe diar_enrollment_probe.cpp)
+target_link_libraries(diar_enrollment_probe PRIVATE nemo_speech_diar)
+if(UNIX)
+    add_executable(diar_snapshot_cli diar_snapshot_cli.cpp)
+    target_link_libraries(diar_snapshot_cli PRIVATE nemo_speech_diar)
+endif()
+
 add_executable(test_diar_state test_diar_state.cpp)
 target_include_directories(test_diar_state PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../common)
 target_link_libraries(test_diar_state PRIVATE nemo_speech_diar)
@@ -23,4 +33,12 @@ endif()
 if(EXISTS "${CMAKE_SOURCE_DIR}/models/Nemotron-3-Diarization.q8_0.gguf")
     add_test(NAME diar_c_api_model
         COMMAND diar_c_smoke "${CMAKE_SOURCE_DIR}/models/Nemotron-3-Diarization.q8_0.gguf")
+    if(EXISTS "${CMAKE_SOURCE_DIR}/test_files/diar/jfk.wav" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/test_files/diar/ami_en2002d_2132.wav")
+        add_test(NAME diar_snapshot_continuity
+            COMMAND test_diar_snapshot
+                "${CMAKE_SOURCE_DIR}/models/Nemotron-3-Diarization.q8_0.gguf"
+                "${CMAKE_SOURCE_DIR}/test_files/diar/jfk.wav"
+                "${CMAKE_SOURCE_DIR}/test_files/diar/ami_en2002d_2132.wav")
+    endif()
 endif()

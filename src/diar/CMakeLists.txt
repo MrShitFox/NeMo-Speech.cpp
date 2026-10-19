@@ -1,8 +1,10 @@
 # Nemotron 3 / Sortformer V3 and its stable public C API.
 add_library(nemo_speech_diar SHARED
     aosc_state.cpp
+    diar_enrollment_profile.cpp
     diar_pipeline.cpp
     diarizer.cpp
+    diar_snapshot.cpp
     sortformer_model.cpp
     encoder/rope_transformer.cpp)
 target_include_directories(nemo_speech_diar PUBLIC

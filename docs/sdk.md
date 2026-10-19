@@ -47,6 +47,43 @@ rates to the model's rate, and expose native-cadence frame probabilities and
 speaker segments. See the declarations and ownership comments in
 [`include/nemo_speech/diar.h`](../include/nemo_speech/diar.h).
 
+## Streaming checkpoints
+
+Streaming state can be exported as an opaque versioned byte buffer and loaded
+into a newly opened stream using the same model weights and geometry. The
+two-call pattern first queries the size, then writes the snapshot:
+
+```c
+#include <stdlib.h>
+
+/* Continue from the already-created model and source stream handles. */
+size_t size = 0, written = 0;
+void *state = NULL;
+nemo_speech_diar_stream *resumed = NULL;
+status = nemo_speech_diar_stream_state_size(stream, &size);
+if (status == NEMO_SPEECH_ASR_OK) {
+    state = malloc(size);
+    if (!state) status = NEMO_SPEECH_ASR_ERROR_OUT_OF_MEMORY;
+}
+if (status == NEMO_SPEECH_ASR_OK)
+    status = nemo_speech_diar_stream_save_state(stream, state, size, &written);
+if (status == NEMO_SPEECH_ASR_OK)
+    status = nemo_speech_diar_stream_open(model, &resumed);
+if (status == NEMO_SPEECH_ASR_OK)
+    status = nemo_speech_diar_stream_load_state(resumed, state, written);
+if (status != NEMO_SPEECH_ASR_OK)
+    fprintf(stderr, "%s\n", nemo_speech_asr_last_error());
+free(state);
+nemo_speech_diar_stream_close(resumed);
+```
+
+Check every return status and `nemo_speech_asr_last_error()`. Import is only
+accepted by a fresh stream; an incompatible, damaged, or truncated snapshot
+returns `INVALID_ARGUMENT` without changing the stream. Continue with the same
+input sample rate used before export. Frame and segment times remain absolute
+to the continuing session. Snapshots contain voice-derived cache state and
+must be stored and transferred as sensitive data.
+
 ## CMake package
 
 After installing the project, a consumer can locate the diarization library

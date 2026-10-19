@@ -3,7 +3,9 @@
 #pragma once
 
 #include <cstddef>
+#include <cstdint>
 #include <memory>
+#include <mutex>
 #include <string>
 #include <vector>
 
@@ -11,6 +13,10 @@
 #include "diar_pipeline.h"
 
 namespace nemo_speech::asr {
+
+class DiarStreamSnapshotCodec;
+class DiarSnapshotAccess;
+class DiarAoscProfileCodec;
 
 enum class DiarizationMode { Streaming, Offline };
 
@@ -30,6 +36,14 @@ class DiarizationStream {
 
     void push(const float* samples, size_t n_samples, int sample_rate = 0);
     void finish();
+    void flush_available(int64_t target_frame);
+    // Internal long-stream memory control, exposed at the C++ streaming layer
+    // so tests and embedders can checkpoint custom compaction geometry.
+    void set_compaction(int64_t trigger_frames, int64_t retain_frames);
+    std::vector<uint8_t> export_state() const;
+    void import_state(const uint8_t* data, size_t size);
+    // Internal research hook; this is not part of the public C ABI.
+    void set_research_embedding_observer(DiarStream::ResearchEmbeddingObserver observer);
     int64_t frame_count() const;
     int64_t frame_probs_start() const;
     const std::vector<float>& frame_probabilities() const;
@@ -38,11 +52,17 @@ class DiarizationStream {
     std::vector<DiarSegment> segments(const DiarSegmentationCfg& config = {}) const;
 
    private:
+    friend class DiarStreamSnapshotCodec;
+    friend class DiarSnapshotAccess;
+    friend class DiarAoscProfileCodec;
+
     std::shared_ptr<DiarModel> model_;
     std::unique_ptr<DiarStream> stream_;
     std::unique_ptr<audio::AudioResampler> resampler_;
     std::vector<float> resampled_;
     int input_sample_rate_ = 0;
+    bool state_imported_ = false;
+    mutable std::mutex operation_mutex_;
 };
 
 // Standalone diarization interface that owns model lifetime, input-rate
@@ -63,6 +83,8 @@ class Diarizer {
 
     int sample_rate() const;
     int num_speakers() const;
+    int embedding_dim() const;
+    const std::array<uint8_t, 32>& model_fingerprint() const;
     double seconds_per_frame() const;
     BatchMetrics batch_metrics() const;
 

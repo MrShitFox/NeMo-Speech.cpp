@@ -19,6 +19,10 @@
 
 namespace nemo_speech::asr {
 
+class DiarStreamSnapshotCodec;
+class DiarSnapshotAccess;
+class DiarAoscProfileCodec;
+
 // Streaming geometry in coarse encoder frames (80 ms for both v2 and v3).
 // V3's public predictions are upsampled to 10 ms; its AOSC state remains on
 // this coarse grid. Prefer the named presets over setting individual fields.
@@ -65,6 +69,9 @@ class ChannelBirthGate {
     int64_t settled_frames() const;
 
    private:
+    friend class DiarStreamSnapshotCodec;
+    friend class DiarSnapshotAccess;
+    friend class DiarAoscProfileCodec;
     bool observe(const float* probs);
     void relabel(float* probs) const;
     void push_raw(const float* probs);
@@ -105,6 +112,9 @@ class AoscState {
     int64_t n_sil_frames() const { return n_sil_frames_; }
 
    private:
+    friend class DiarStreamSnapshotCodec;
+    friend class DiarSnapshotAccess;
+    friend class DiarAoscProfileCodec;
     void accumulate_silence(const float* embs, const float* preds, int n);
     void compress(const std::vector<float>& seed_preds);
 

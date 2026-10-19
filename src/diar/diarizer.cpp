@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "audio_resampler.h"
+#include "diar_snapshot.h"
 #include "runtime.h"
 
 namespace nemo_speech::asr {
@@ -40,6 +41,7 @@ DiarizationStream::DiarizationStream(std::shared_ptr<DiarModel> model, const Dia
 
 void
 DiarizationStream::push(const float* samples, size_t n_samples, int sample_rate) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
     if (!samples && n_samples > 0)
         throw std::invalid_argument("samples must not be null");
     const int model_rate = model_->cfg().sample_rate;
@@ -67,6 +69,7 @@ DiarizationStream::push(const float* samples, size_t n_samples, int sample_rate)
 
 void
 DiarizationStream::finish() {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
     if (resampler_) {
         resampled_.clear();
         resampler_->finish(&resampled_);
@@ -75,6 +78,36 @@ DiarizationStream::finish() {
             stream_->feed_audio(resampled_.data(), resampled_.size());
     }
     stream_->finish();
+}
+
+void
+DiarizationStream::flush_available(int64_t target_frame) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    stream_->flush_available(target_frame);
+}
+
+void
+DiarizationStream::set_compaction(int64_t trigger_frames, int64_t retain_frames) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    stream_->set_compaction(trigger_frames, retain_frames);
+}
+
+std::vector<uint8_t>
+DiarizationStream::export_state() const {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    return DiarStreamSnapshotCodec::encode(*this);
+}
+
+void
+DiarizationStream::import_state(const uint8_t* data, size_t size) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    DiarStreamSnapshotCodec::decode(*this, data, size);
+}
+
+void
+DiarizationStream::set_research_embedding_observer(DiarStream::ResearchEmbeddingObserver observer) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    stream_->set_research_embedding_observer(std::move(observer));
 }
 
 int64_t
@@ -187,6 +220,16 @@ Diarizer::sample_rate() const {
 int
 Diarizer::num_speakers() const {
     return model_->cfg().num_speakers;
+}
+
+int
+Diarizer::embedding_dim() const {
+    return model_->cfg().encoder.d_model;
+}
+
+const std::array<uint8_t, 32>&
+Diarizer::model_fingerprint() const {
+    return model_->model_fingerprint();
 }
 
 double
