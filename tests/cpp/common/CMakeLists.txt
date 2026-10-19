@@ -1,0 +1,3 @@
+add_executable(test_audio_resampler test_audio_resampler.cpp)
+target_link_libraries(test_audio_resampler PRIVATE nemo_speech_audio)
+add_test(NAME audio_resampler COMMAND test_audio_resampler)

@@ -19,31 +19,31 @@ repos:
     hooks:
       - id: check-added-large-files
         args: ['--maxkb=512']
-        exclude: '^(test_files/|src/tts/tokenizer/mandarin_data/)'
+        exclude: '^(test_files/)'
       - id: check-yaml
       - id: check-merge-conflict
       - id: end-of-file-fixer
-        exclude: '^(patches/|proto/riva-common/).*'
+        exclude: '^(patches/).*'
       - id: trailing-whitespace
-        exclude: '^(patches/|proto/riva-common/).*'
+        exclude: '^(patches/).*'
       - id: mixed-line-ending
         args: ['--fix=lf']
-        exclude: '^(patches/|proto/riva-common/).*'
+        exclude: '^(patches/).*'
 
   - repo: https://github.com/pre-commit/mirrors-clang-format
     rev: v18.1.8
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
-        # llama.cpp patches + vendored riva protos are upstream code — don't reformat.
-        exclude: '^(patches/|proto/riva-common/|build/|build-.*/).*'
+        # ggml patches are upstream-derived code; don't reformat patch text.
+        exclude: '^(patches/|build/|build-.*/).*'
 
   - repo: https://github.com/psf/black
     rev: 24.10.0
     hooks:
       - id: black
         args: ['--skip-string-normalization', '--line-length=100']
-        exclude: '^(proto/riva-common/|build/).*'
+        exclude: '^(build/).*'
 
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2
@@ -54,7 +54,6 @@ repos:
           - '--profile=black'
           - '--line-length=100'
           - '--skip=llama.cpp'
-          - '--skip=proto/riva-common'
           - '--skip=build'
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
@@ -62,4 +61,4 @@ repos:
     hooks:
       - id: shellcheck
         args: ['--severity=warning']
-        exclude: '^(patches/|proto/riva-common/).*'
+        exclude: '^(patches/).*'

@@ -13,10 +13,10 @@ NeMo-specific.
 Co-authored-by: anand-nv <105917641+anand-nv@users.noreply.github.com>
 
 diff --git a/ggml/include/ggml.h b/ggml/include/ggml.h
-index 19ade01735e6c072fcb7752ef7955ac5d2afe19e..6197891dbb20ad7bfd322abe731cf6fed5162eb3 100644
+index 4f64cc046b5b570a14788899b062c98c3b62dc54..fb0b5dd16a0ee4717f23edd9a5f1c7974bb866bc 100644
 --- a/ggml/include/ggml.h
 +++ b/ggml/include/ggml.h
-@@ -641,6 +641,7 @@ extern "C" {
+@@ -639,6 +639,7 @@ extern "C" {
          GGML_GLU_OP_GEGLU_ERF,
          GGML_GLU_OP_GEGLU_QUICK,
          GGML_GLU_OP_SWIGLU_CLAMP,
@@ -25,10 +25,10 @@ index 19ade01735e6c072fcb7752ef7955ac5d2afe19e..6197891dbb20ad7bfd322abe731cf6fe
          GGML_GLU_OP_COUNT,
      };
 diff --git a/ggml/src/ggml-cpu/ggml-cpu.c b/ggml/src/ggml-cpu/ggml-cpu.c
-index 4fb2e8b6f7236c95e66a0be167d531f154cfd4d1..01893e3bd07a2b98b110865a364216b56cd652d7 100644
+index 8bb0ff7bc3366be957dd20aba3fbe0f50dd249d7..0d0fe2bb2b5f4a1455e2d72e946c3b1da9dc2b45 100644
 --- a/ggml/src/ggml-cpu/ggml-cpu.c
 +++ b/ggml/src/ggml-cpu/ggml-cpu.c
-@@ -2349,6 +2349,7 @@ static int ggml_get_n_tasks(struct ggml_tensor * node, int n_threads) {
+@@ -2345,6 +2345,7 @@ static int ggml_get_n_tasks(struct ggml_tensor * node, int n_threads) {
                  case GGML_GLU_OP_GEGLU_ERF:
                  case GGML_GLU_OP_GEGLU_QUICK:
                  case GGML_GLU_OP_SWIGLU_CLAMP:
@@ -226,10 +226,10 @@ index 5de9cb5b7e0969bc10a99e40675ed35b0561637b..2a380b7d7345c79780c63ad708f1815f
  inline static void ggml_vec_geglu_f32(const int n, float * y, const float * x, const float * g) {
      uint16_t t;
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index 4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404..29bddaff6da1ee9f4f6aec73a89b4078641845ee 100644
+index 4b07c2395f594f2e81e819e34401089d61b8ecac..3e8b7eb87a0d0faf8eebe055d75df569768e5b49 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -2247,6 +2247,9 @@ static bool ggml_cuda_compute_forward(ggml_backend_cuda_context & ctx, struct gg
+@@ -2246,6 +2246,9 @@ static bool ggml_cuda_compute_forward(ggml_backend_cuda_context & ctx, struct gg
                  case GGML_GLU_OP_SWIGLU_CLAMP:
                      ggml_cuda_op_swiglu_clamp(ctx, dst);
                      break;
@@ -239,7 +239,7 @@ index 4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404..29bddaff6da1ee9f4f6aec73a89b4078
                  default:
                      return false;
              }
-@@ -3623,6 +3626,111 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -3619,6 +3622,111 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          }
      }
  
@@ -351,7 +351,7 @@ index 4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404..29bddaff6da1ee9f4f6aec73a89b4078
      //topk-moe
      if (cgraph->nodes[i]->op == GGML_OP_UNARY || cgraph->nodes[i]->op == GGML_OP_SOFT_MAX ||
              cgraph->nodes[i]->op == GGML_OP_ARGSORT) {
-@@ -3756,6 +3864,31 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -3752,6 +3860,31 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          }
      }
  
@@ -383,7 +383,7 @@ index 4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404..29bddaff6da1ee9f4f6aec73a89b4078
      // multi-(add or mul)
      if (node->op == GGML_OP_ADD || node->op == GGML_OP_MUL) {
          int     n_fuse = 0;
-@@ -4231,21 +4364,23 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4227,21 +4360,23 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          return fused_node_count - 1;
      }
  
@@ -413,7 +413,7 @@ index 4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404..29bddaff6da1ee9f4f6aec73a89b4078
              return 1;
          }
      }
-@@ -4386,6 +4521,38 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4382,6 +4517,38 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          return 2;
      }
  
@@ -452,7 +452,7 @@ index 4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404..29bddaff6da1ee9f4f6aec73a89b4078
      if (ggml_cuda_can_fuse(cgraph, i, { GGML_OP_RMS_NORM, GGML_OP_MUL, GGML_OP_ADD }, {})) {
          ggml_cuda_op_rms_norm_fused_add(*cuda_ctx, node, cgraph->nodes[i + 1], cgraph->nodes[i + 2]);
          return 2;
-@@ -5436,6 +5603,7 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
+@@ -5432,6 +5599,7 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
                  case GGML_GLU_OP_GEGLU_ERF:
                  case GGML_GLU_OP_GEGLU_QUICK:
                  case GGML_GLU_OP_SWIGLU_CLAMP:
@@ -865,10 +865,10 @@ index 5c39ccb2a05d57a82b70ffb445c0e7977e5f2f47..7b9148e42741d11a05fe452d0df55089
  
  void ggml_cuda_op_swiglu_clamp(ggml_backend_cuda_context & ctx, ggml_tensor * dst);
 diff --git a/ggml/src/ggml.c b/ggml/src/ggml.c
-index 81ecb230f6f88ff0f58292f6b4283e552f7ada39..3aaa06603030c43ee8dfe72a2170272327e3f708 100644
+index a286083b9320acbe9654b34c1cec68930a8d39ee..cab6fb9a140e99bb1647e4f906fad25804309064 100644
 --- a/ggml/src/ggml.c
 +++ b/ggml/src/ggml.c
-@@ -1259,9 +1259,10 @@ static const char * GGML_GLU_OP_NAME[GGML_GLU_OP_COUNT] = {
+@@ -1255,9 +1255,10 @@ static const char * GGML_GLU_OP_NAME[GGML_GLU_OP_COUNT] = {
      "GEGLU_ERF",
      "GEGLU_QUICK",
      "SWIGLU_CLAMP",

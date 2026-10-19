@@ -35,7 +35,7 @@ endif()
 
 # ggml-cuda links CUDA::cuda_driver PRIVATE, so the stub libcuda.so on the
 # link line doesn't propagate to downstream executables. Re-link it PUBLIC
-# here so tests/ and riva_server inherit it and ld can resolve libggml-cuda's
+# here so tests and downstream executables inherit it and ld can resolve libggml-cuda's
 # NEEDED libcuda.so.1 at link time. CUDAToolkit was found in the top-level
 # CMakeLists.txt under the same GGML_CUDA gate.
 if(GGML_CUDA)

@@ -1,20 +1,20 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
-// Generic, domain-agnostic configuration parser. Any pipeline (ASR, TTS, S2S,
-// NMT) describes its config by giving each config struct a method
+// Generic, domain-agnostic configuration parser. A pipeline describes its
+// config by giving each config struct a method
 //
 //   void Register(common::ParameterParser& p);
 //
 // that registers its scalar fields and its nested child configs - all with the
 // SAME Register() call. The parser tracks the dotted-key prefix as it recurses,
 // so leaves never repeat it and children never concatenate it; dotted keys
-// (e.g. "asr.vad.masker.onset") fall out of the nesting automatically. The
+// (e.g. "diar.vad.masker.onset") fall out of the nesting automatically. The
 // parser has no knowledge of any pipeline. One registered table is then driven
 // by CLI flags, env vars, and a YAML file:
 //
 //   MyConfig cfg;                         // defaults
 //   common::ParameterParser p;
-//   p.Register("asr", cfg);               // whole tree under "asr."
+//   p.Register("diar", cfg);              // whole tree under "diar."
 //   p.ApplyYaml(path);                    // file overrides defaults
 //   p.ApplyEnv();                         // env  overrides file
 //   for (argv) p.ParseCliArg(arg, ...);   // CLI  overrides env
@@ -76,7 +76,7 @@ class ParameterParser {
         prefix_.resize(base);
     }
 
-    // Apply one CLI token: a dotted form ("--asr.x.y=v" / "--asr.x.y v") or a
+    // Apply one CLI token: a dotted form ("--diar.x.y=v" / "--diar.x.y v") or a
     // registered alias ("--vad-onset 0.5", "--endpointing"). Pulls a value from
     // `next` (argv[i+1]) when the token has no '=' and the field needs one,
     // setting *consumed_next. Returns false if `arg` matches no key/alias.

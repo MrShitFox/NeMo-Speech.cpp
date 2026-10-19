@@ -111,10 +111,10 @@ index f5f4465b5e0cade7888d67728b71d8d745eb1939..fbd855dd5ca483874abba3e17db15b77
          it->second->last_used_time = time_now;
          return it->second.get();
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e958d83d6 100644
+index a1b65439dd33d4c91d4998bc422b41b040955eec..33bb432296b929a24a74d5c42a9088e9a938c509 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -2606,19 +2606,92 @@ static bool ggml_cuda_graph_check_compability(ggml_cgraph * cgraph) {
+@@ -2602,19 +2602,92 @@ static bool ggml_cuda_graph_check_compability(ggml_cgraph * cgraph) {
      return use_cuda_graph;
  }
  
@@ -212,7 +212,7 @@ index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e
          GGML_ASSERT((int)graph->node_props.size() == cgraph->n_nodes);
          return false;
      }
-@@ -2652,7 +2725,7 @@ static bool ggml_cuda_graph_update_required(ggml_backend_cuda_context * cuda_ctx
+@@ -2648,7 +2721,7 @@ static bool ggml_cuda_graph_update_required(ggml_backend_cuda_context * cuda_ctx
      return res;
  }
  
@@ -221,7 +221,7 @@ index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e
      ggml_cuda_graph * graph = cuda_ctx->cuda_graph(graph_key);
  
  #if CUDART_VERSION >= 12000
-@@ -4321,7 +4394,7 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4317,7 +4390,7 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
      return 0;
  }
  
@@ -230,7 +230,7 @@ index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e
      bool graph_evaluated_or_captured = false;
  
      // flag used to determine whether it is an integrated_gpu
-@@ -4540,7 +4613,7 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
+@@ -4536,7 +4609,7 @@ static void ggml_cuda_graph_evaluate_and_capture(ggml_backend_cuda_context * cud
  }
  
  #ifdef USE_CUDA_GRAPH
@@ -239,7 +239,7 @@ index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e
      ggml_cuda_graph * graph = cuda_ctx->cuda_graph(graph_key);
  
      if (graph->graph == nullptr) {
-@@ -4563,7 +4636,7 @@ static enum ggml_status ggml_backend_cuda_graph_compute(ggml_backend_t backend,
+@@ -4559,7 +4632,7 @@ static enum ggml_status ggml_backend_cuda_graph_compute(ggml_backend_t backend,
  
      bool use_cuda_graph             = false;
      bool cuda_graph_update_required = false;
@@ -248,7 +248,7 @@ index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e
  
  #ifdef USE_CUDA_GRAPH
      graph_key = ggml_cuda_graph_get_key(cgraph);
-@@ -4574,27 +4647,27 @@ static enum ggml_status ggml_backend_cuda_graph_compute(ggml_backend_t backend,
+@@ -4570,27 +4643,27 @@ static enum ggml_status ggml_backend_cuda_graph_compute(ggml_backend_t backend,
      if (graph->is_enabled()) {
          const bool graph_compatible = ggml_cuda_graph_check_compability(cgraph);
          if (graph_compatible) {
@@ -296,7 +296,7 @@ index 1c0c25329d832ca97c327df4ab2329dddc2d5013..ee47bc09e20c299d8813080a48415a2e
              }
          }
      }
-@@ -4733,7 +4806,7 @@ static void ggml_backend_cuda_graph_optimize(ggml_backend_t backend, ggml_cgraph
+@@ -4729,7 +4802,7 @@ static void ggml_backend_cuda_graph_optimize(ggml_backend_t backend, ggml_cgraph
      }
  
  #ifdef USE_CUDA_GRAPH

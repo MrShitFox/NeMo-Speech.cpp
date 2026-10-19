@@ -8,10 +8,10 @@ Subject: ggml-cuda: flatten shared-weight cuBLAS GEMMs, fuse SiLU to BF16
 Upstream: the GEMM flatten is a candidate; the SiLU/BF16 fusion is NeMo-specific.
 
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index 141caeca47a748ccb3916f98d980d220ee63217f..4c0c0633dd66cc6f717d69cd9f74a1f5d0acc404 100644
+index 1412007aa27dddcb1b23727ca7158d0856ea3e8a..4b07c2395f594f2e81e819e34401089d61b8ecac 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -1542,6 +1542,9 @@ static void ggml_cuda_mul_mat_cublas_impl(ggml_backend_cuda_context & ctx, const
+@@ -1541,6 +1541,9 @@ static void ggml_cuda_mul_mat_cublas_impl(ggml_backend_cuda_context & ctx, const
      const int64_t r2 = ne12/ne02;
      const int64_t r3 = ne13/ne03;
  
@@ -21,7 +21,7 @@ index 141caeca47a748ccb3916f98d980d220ee63217f..4c0c0633dd66cc6f717d69cd9f74a1f5
      // Theoretically cublasGemmStridedBatchedEx would always work, even for a single matrix.
      // However, for some old NVIDIA and AMD GPUs the strided/Ex GEMM is much slower,
      //     probably because the internal kernel selection logic is suboptimal.
-@@ -1561,6 +1564,21 @@ static void ggml_cuda_mul_mat_cublas_impl(ggml_backend_cuda_context & ctx, const
+@@ -1560,6 +1563,21 @@ static void ggml_cuda_mul_mat_cublas_impl(ggml_backend_cuda_context & ctx, const
                      beta,   dst_ptr, cu_data_type,   ne0,
                      cu_compute_type,
                      CUBLAS_GEMM_DEFAULT_TENSOR_OP));
@@ -43,7 +43,7 @@ index 141caeca47a748ccb3916f98d980d220ee63217f..4c0c0633dd66cc6f717d69cd9f74a1f5
      } else if (r2 == 1 && r3 == 1 && is_src0_cont_2 && is_src1_cont_2) {
          // with a [0, 2, 1, 3] perm. and ne02==1 the matrix strides need to be determined from dim 3:
          const int64_t sma = ne02 == 1 ? s03 : s02;
-@@ -1675,6 +1693,7 @@ static void ggml_cuda_mul_mat_cublas(ggml_backend_cuda_context & ctx, const ggml
+@@ -1674,6 +1692,7 @@ static void ggml_cuda_mul_mat_cublas(ggml_backend_cuda_context & ctx, const ggml
      }
  }
  
@@ -51,7 +51,7 @@ index 141caeca47a748ccb3916f98d980d220ee63217f..4c0c0633dd66cc6f717d69cd9f74a1f5
  static bool ggml_cuda_should_fuse_mul_mat(const ggml_tensor * ffn_up,
                                            const ggml_tensor * ffn_gate,
                                            const ggml_tensor * glu,
-@@ -3573,6 +3592,10 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -3569,6 +3588,10 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
      }
  
      ggml_tensor * node = cgraph->nodes[i];
@@ -62,7 +62,7 @@ index 141caeca47a748ccb3916f98d980d220ee63217f..4c0c0633dd66cc6f717d69cd9f74a1f5
  
      if (node->op == GGML_OP_MUL) {
          ggml_cuda_moe_weighted_reduction_match match;
-@@ -4208,6 +4231,25 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4204,6 +4227,25 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          return fused_node_count - 1;
      }
  

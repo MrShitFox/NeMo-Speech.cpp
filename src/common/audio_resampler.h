@@ -11,7 +11,7 @@
 
 namespace nemo_speech::audio {
 
-// Matches the input-rate range accepted by Riva speech services.
+// Accepted input range for the public diarization audio API.
 bool supported_input_sample_rate(int sample_rate);
 
 class AudioResampler {

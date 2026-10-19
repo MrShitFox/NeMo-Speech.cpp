@@ -24,49 +24,20 @@ on_fatal_signal(int signal_number) {
     std::raise(signal_number);
 }
 
-std::string
-unavailable_command(const std::string& command) {
-    (void)command;
-#if !defined(NEMO_SPEECH_CLI_ASR)
-    if (command == "transcribe")
-        return "this build does not include ASR; rebuild with -DNEMO_SPEECH_BUILD_ASR=ON";
-#endif
-#if !defined(NEMO_SPEECH_CLI_DIAR)
-    if (command == "diarize")
-        return "this build does not include diarization; rebuild with "
-               "-DNEMO_SPEECH_BUILD_DIAR=ON";
-#endif
-#if !defined(NEMO_SPEECH_CLI_NMT)
-    if (command == "translate")
-        return "this build does not include NMT; rebuild with -DNEMO_SPEECH_BUILD_NMT=ON";
-#endif
-#if !defined(NEMO_SPEECH_CLI_TTS)
-    if (command == "synthesize")
-        return "this build does not include TTS; rebuild with -DNEMO_SPEECH_BUILD_TTS=ON";
-#endif
-#if !defined(NEMO_SPEECH_CLI_HTTP)
-    if (command == "serve" || command == "health")
-        return "this build does not include HTTP serving; rebuild with "
-               "-DNEMO_SPEECH_BUILD_HTTP=ON";
-#endif
-    return {};
-}
-
 template <typename Function>
 int
-run_session(const char* command, int argc, char** argv, Function&& function) {
+run_session(int argc, char** argv, Function&& function) {
     if (argc > 2 && is_help_argument(argv[2]))
         return std::forward<Function>(function)();
     const bool log_status = !cli_quiet() && !cli_json();
     if (log_status)
-        std::fprintf(stderr, "[nemo-speech] %s session started\n", command);
+        std::fprintf(stderr, "[nemo-speech] diarize session started\n");
     const int status = std::forward<Function>(function)();
     if (log_status) {
         if (status == 0)
-            std::fprintf(stderr, "[nemo-speech] %s session finished\n", command);
+            std::fprintf(stderr, "[nemo-speech] diarize session finished\n");
         else
-            std::fprintf(
-                stderr, "[nemo-speech] %s session failed (exit code %d)\n", command, status);
+            std::fprintf(stderr, "[nemo-speech] diarize session failed (exit code %d)\n", status);
     }
     return status;
 }
@@ -77,30 +48,7 @@ print_help(const char* program) {
         "NeMo-Speech.cpp %s\n\n"
         "Usage: %s <command> [options]\n\n"
         "Commands:\n"
-#if defined(NEMO_SPEECH_CLI_ASR)
-#if defined(NEMO_SPEECH_CLI_LIVE)
-        "  transcribe   Transcribe an audio file, directory, or microphone\n"
-#else
-        "  transcribe   Transcribe an audio file or directory\n"
-#endif
-#endif
-#if defined(NEMO_SPEECH_CLI_DIAR)
         "  diarize      Identify speaker segments in an audio file\n"
-#endif
-#if defined(NEMO_SPEECH_CLI_NMT)
-        "  translate    Translate text\n"
-#endif
-#if defined(NEMO_SPEECH_CLI_TTS)
-        "  synthesize   Synthesize speech to a WAV file\n"
-#endif
-        "  bench        Benchmark an end-to-end workload (asr, tts, diarize, ...)\n"
-        "  pull         Download a pinned model from Hugging Face\n"
-        "  model        List, pull, or inspect models\n"
-        "  doctor       Inspect runtime and device availability\n"
-#if defined(NEMO_SPEECH_CLI_HTTP)
-        "  health       Check a running local HTTP server\n"
-        "  serve        Start the local API and playground\n"
-#endif
         "  help         Show help for a command\n\n"
         "Global options:\n"
         "  -h, --help       Show help\n"
@@ -115,8 +63,6 @@ print_help(const char* program) {
 
 int
 main(int argc, char** argv) {
-    // Emit a useful last-resort diagnostic around model execution. Recovery is
-    // unsafe after these signals, so restore the default handler and re-raise.
     std::signal(SIGSEGV, on_fatal_signal);
     std::signal(SIGFPE, on_fatal_signal);
 
@@ -157,96 +103,16 @@ main(int argc, char** argv) {
             print_help(argv[0]);
             return 0;
         }
-#if defined(NEMO_SPEECH_CLI_ASR)
-        if (std::strcmp(argv[2], "transcribe") == 0) {
-            print_transcribe_help(argv[0]);
-            return 0;
-        }
-#endif
-#if defined(NEMO_SPEECH_CLI_DIAR)
         if (std::strcmp(argv[2], "diarize") == 0) {
             print_diarize_help(argv[0]);
             return 0;
         }
-#endif
-#if defined(NEMO_SPEECH_CLI_NMT)
-        if (std::strcmp(argv[2], "translate") == 0) {
-            print_translate_help(argv[0]);
-            return 0;
-        }
-#endif
-#if defined(NEMO_SPEECH_CLI_TTS)
-        if (std::strcmp(argv[2], "synthesize") == 0) {
-            print_synthesize_help(argv[0]);
-            return 0;
-        }
-#endif
-        if (std::strcmp(argv[2], "bench") == 0) {
-            print_bench_help(argv[0]);
-            return 0;
-        }
-        if (std::strcmp(argv[2], "pull") == 0) {
-            std::printf("Usage: %s pull REPO\n", argv[0]);
-        } else if (std::strcmp(argv[2], "model") == 0)
-            print_model_help(argv[0]);
-        else if (std::strcmp(argv[2], "doctor") == 0)
-            print_doctor_help(argv[0]);
-#if defined(NEMO_SPEECH_CLI_HTTP)
-        else if (std::strcmp(argv[2], "health") == 0)
-            print_health_help(argv[0]);
-        else if (std::strcmp(argv[2], "serve") == 0)
-            print_serve_help(argv[0]);
-#endif
-        else {
-            const std::string unavailable = unavailable_command(argv[2]);
-            if (!unavailable.empty())
-                return print_cli_error(
-                    argv[2], unavailable, kCliExitUnsupportedFeature, "unsupported_feature");
-            return print_cli_error(
-                "", "unknown command: " + std::string(argv[2]), kCliExitInvalidArgument,
-                "invalid_argument");
-        }
-        return 0;
-    }
-#if defined(NEMO_SPEECH_CLI_ASR)
-    if (std::strcmp(argv[1], "transcribe") == 0)
-        return run_session(
-            "transcribe", argc, argv, [&] { return command_transcribe(argc - 2, argv + 2); });
-#endif
-#if defined(NEMO_SPEECH_CLI_DIAR)
-    if (std::strcmp(argv[1], "diarize") == 0)
-        return run_session(
-            "diarize", argc, argv, [&] { return command_diarize(argc - 2, argv + 2); });
-#endif
-#if defined(NEMO_SPEECH_CLI_NMT)
-    if (std::strcmp(argv[1], "translate") == 0)
-        return run_session(
-            "translate", argc, argv, [&] { return command_translate(argc - 2, argv + 2); });
-#endif
-#if defined(NEMO_SPEECH_CLI_TTS)
-    if (std::strcmp(argv[1], "synthesize") == 0)
-        return run_session(
-            "synthesize", argc, argv, [&] { return command_synthesize(argc - 2, argv + 2); });
-#endif
-    if (std::strcmp(argv[1], "bench") == 0)
-        return run_session("bench", argc, argv, [&] { return command_bench(argc - 2, argv + 2); });
-    if (std::strcmp(argv[1], "model") == 0)
-        return command_model(argc - 2, argv + 2);
-    if (std::strcmp(argv[1], "pull") == 0)
-        return command_pull(argc - 2, argv + 2);
-    if (std::strcmp(argv[1], "doctor") == 0)
-        return command_doctor(argc - 2, argv + 2);
-#if defined(NEMO_SPEECH_CLI_HTTP)
-    if (std::strcmp(argv[1], "health") == 0)
-        return command_health(argc - 2, argv + 2);
-    if (std::strcmp(argv[1], "serve") == 0)
-        return run_session("serve", argc, argv, [&] { return command_serve(argc - 2, argv + 2); });
-#endif
-    const std::string unavailable = unavailable_command(argv[1]);
-    if (!unavailable.empty())
         return print_cli_error(
-            argv[1], unavailable, kCliExitUnsupportedFeature, "unsupported_feature");
+            "", "unknown command: " + std::string(argv[2]), 2, "invalid_argument");
+    }
+    if (std::strcmp(argv[1], "diarize") == 0)
+        return run_session(argc, argv, [&] { return command_diarize(argc - 2, argv + 2); });
     return print_cli_error(
-        "", "unknown command: " + std::string(argv[1]) + " (run 'nemo-speech --help')",
-        kCliExitInvalidArgument, "invalid_argument");
+        "", "unknown command: " + std::string(argv[1]) + " (run 'nemo-speech --help')", 2,
+        "invalid_argument");
 }

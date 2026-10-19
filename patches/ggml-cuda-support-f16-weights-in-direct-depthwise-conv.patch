@@ -76,10 +76,10 @@ index 7583233b1b7cd4bee67cf7b84434ac7b41f17165..db7ee6bf62077dc9ed518ad2d4d13fbe
          GGML_ABORT("Unsupported memory layout for conv_2d_dw");
      }
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index ecf831b6446e1ddb1f0efb28c9c01d18e3591d6f..6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf 100644
+index e8b7cc9152db8300e01be4cfe8a3bc8a728f6230..98b5ef14d3ba255b7b003811ab31403962e30817 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -5572,7 +5572,8 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
+@@ -5568,7 +5568,8 @@ static bool ggml_backend_cuda_device_supports_op(ggml_backend_dev_t dev, const g
          case GGML_OP_CONV_2D:
              return (ggml_is_contiguous(op->src[0]) && ggml_is_contiguous(op->src[1]));
          case GGML_OP_CONV_2D_DW:

@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
-// Shared C ABI declarations used by the ASR and standalone diarization APIs.
+// Shared C ABI status, error, and version declarations. The ASR-prefixed
+// names remain for compatibility with the original diarization ABI.
 #ifndef NEMO_SPEECH_COMMON_H
 #define NEMO_SPEECH_COMMON_H
 
@@ -30,8 +31,8 @@ typedef enum nemo_speech_asr_status {
     NEMO_SPEECH_ASR_ERROR_CANCELLED = 4,
 } nemo_speech_asr_status;
 
-// Thread-local message for the most recent failed ASR or diarization C ABI
-// call on this thread. Valid until the next call into either API.
+// Thread-local message for the most recent failed diarization C ABI call on
+// this thread. Valid until the next call into the API.
 NEMO_SPEECH_ASR_API const char* nemo_speech_asr_last_error(void);
 NEMO_SPEECH_ASR_API const char* nemo_speech_asr_version(void);
 

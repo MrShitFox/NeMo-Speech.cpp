@@ -94,10 +94,10 @@ index 25893da48941518b5e0a8cfa20c1538fd2a5d305..f5f4465b5e0cade7888d67728b71d8d7
      return GGML_CUDA_CC_IS_NVIDIA(cc) && ggml_cuda_highest_compiled_arch(cc) == GGML_CUDA_CC_VOLTA;
  }
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index 32b96b5e7fdb48a02ad255dfab688520d86ea884..1c0c25329d832ca97c327df4ab2329dddc2d5013 100644
+index b1393c9486afed96c060fa6b0ce4c11812125b6f..a1b65439dd33d4c91d4998bc422b41b040955eec 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -5865,6 +5865,12 @@ static ggml_backend_feature * ggml_backend_cuda_get_features(ggml_backend_reg_t
+@@ -5859,6 +5859,12 @@ static ggml_backend_feature * ggml_backend_cuda_get_features(ggml_backend_reg_t
  
      {
          const auto & info = ggml_cuda_info();

@@ -1,0 +1,11 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+ * SPDX-License-Identifier: Apache-2.0
+ */
+/* Keep the established diarization ABI and shared error/version symbols public. */
+{
+    global:
+        nemo_speech_asr_*; /* legacy shared error/version ABI */
+        nemo_speech_diar_*;
+    local:
+        *;
+};

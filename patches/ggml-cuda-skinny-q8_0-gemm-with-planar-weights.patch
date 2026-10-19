@@ -17,10 +17,10 @@ Upstream: not planned (NeMo-specific encoder shapes). The MMVQ
 broadcast-bias/SiLU epilogue is a candidate on its own.
 
 diff --git a/ggml/include/ggml.h b/ggml/include/ggml.h
-index fd31b70ca3a05c4814c62a0be599ec0a56766e8e..19ade01735e6c072fcb7752ef7955ac5d2afe19e 100644
+index 224bdef927ac90bfa07ee39db3247b7bac4f14ec..4f64cc046b5b570a14788899b062c98c3b62dc54 100644
 --- a/ggml/include/ggml.h
 +++ b/ggml/include/ggml.h
-@@ -667,6 +667,10 @@ extern "C" {
+@@ -665,6 +665,10 @@ extern "C" {
          GGML_TENSOR_FLAG_PARAM   =  4, // ...contains trainable parameters
          GGML_TENSOR_FLAG_LOSS    =  8, // ...defines loss for numerical optimization (multiple loss tensors add up)
          GGML_TENSOR_FLAG_COMPUTE = 16, // ...must be computed
@@ -57,7 +57,7 @@ index 2e78ae4facb9d2fffdfe0e3352d68baf7dc4a847..25893da48941518b5e0a8cfa20c1538f
      float glu_limit = 0.0f;
  };
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520d86ea884 100644
+index 98b5ef14d3ba255b7b003811ab31403962e30817..b1393c9486afed96c060fa6b0ce4c11812125b6f 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
 @@ -17,6 +17,7 @@
@@ -68,7 +68,7 @@ index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520
  #include "ggml-cuda/convert.cuh"
  #include "ggml-cuda/count-equal.cuh"
  #include "ggml-cuda/cpy.cuh"
-@@ -741,6 +742,8 @@ struct ggml_backend_cuda_buffer_context {
+@@ -740,6 +741,8 @@ struct ggml_backend_cuda_buffer_context {
  
  static void ggml_backend_cuda_buffer_free_buffer(ggml_backend_buffer_t buffer) {
      ggml_backend_cuda_buffer_context * ctx = (ggml_backend_cuda_buffer_context *)buffer->context;
@@ -77,7 +77,7 @@ index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520
      delete ctx;
  }
  
-@@ -849,6 +852,7 @@ static void ggml_backend_cuda_buffer_clear(ggml_backend_buffer_t buffer, uint8_t
+@@ -848,6 +851,7 @@ static void ggml_backend_cuda_buffer_clear(ggml_backend_buffer_t buffer, uint8_t
      ggml_cuda_set_device(ctx->device);
      CUDA_CHECK(cudaMemsetAsync(ctx->dev_ptr, value, buffer->size, cudaStreamPerThread));
      CUDA_CHECK(cudaStreamSynchronize(cudaStreamPerThread));
@@ -85,7 +85,7 @@ index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520
  }
  
  static const ggml_backend_buffer_i ggml_backend_cuda_buffer_interface = {
-@@ -1801,16 +1805,20 @@ static bool ggml_cuda_should_fuse_mul_mat_vec_q(const ggml_tensor * tensor) {
+@@ -1800,16 +1804,20 @@ static bool ggml_cuda_should_fuse_mul_mat_vec_q(const ggml_tensor * tensor) {
                                     ggml_nbytes(src0) != ggml_backend_buffer_get_alloc_size(src0->buffer, src0) &&
                                     src0->view_src;
  
@@ -109,7 +109,7 @@ index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520
          return false;
      }
  
-@@ -1842,6 +1850,12 @@ static void ggml_cuda_mul_mat(ggml_backend_cuda_context & ctx, const ggml_tensor
+@@ -1841,6 +1849,12 @@ static void ggml_cuda_mul_mat(ggml_backend_cuda_context & ctx, const ggml_tensor
      const int cc        = ggml_cuda_info().devices[ctx.device].cc;
      const int warp_size = ggml_cuda_info().devices[ctx.device].warp_size;
  
@@ -122,7 +122,7 @@ index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520
      if (ggml_cuda_should_use_mmvf(src0->type, cc, src0->ne, src0->nb, ne11)) {
          // The custom F16 vector kernel can be used over batched cuBLAS GEMM.
          // But this is only faster for GPUs without tensor cores or with a thin src0 matrix (particularly KQV in attention)
-@@ -4121,6 +4135,64 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4117,6 +4131,64 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          return fused_node_count - 1;
      }
  
@@ -187,7 +187,7 @@ index 6730a6e28ef9ab02c74cf4e164ff2e8ac5cfb0bf..32b96b5e7fdb48a02ad255dfab688520
      // mul_mat + add
      for (ggml_op op : { GGML_OP_MUL_MAT, GGML_OP_MUL_MAT_ID }) {
          const ggml_op bias_op = op == GGML_OP_MUL_MAT ? GGML_OP_ADD : GGML_OP_ADD_ID;
-@@ -4156,14 +4228,21 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4152,14 +4224,21 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
              continue;
          }
  

@@ -122,7 +122,7 @@ ParameterParser::ParseCliArg(const std::string& arg, const char* next, bool* con
     }
     const Entry* e = ByAlias(key);
     if (!e) {
-        // Dotted form: strip leading dashes ("--asr.x.y" -> "asr.x.y").
+        // Dotted form: strip leading dashes ("--diar.x.y" -> "diar.x.y").
         std::string k = key;
         while (!k.empty() && k.front() == '-') k.erase(k.begin());
         e = ByKey(k);
@@ -160,7 +160,7 @@ ParameterParser::ApplyYaml(const std::string& path) const {
     // Minimal nested-config parser for the exact subset our config files use:
     // indentation (spaces) defines nested maps, `key: value` sets a scalar leaf,
     // `key:` opens a section, `#` starts a comment, and a value may be quoted.
-    // The dotted keys it produces (e.g. asr.vad.masker.onset) mirror the CLI
+    // The dotted keys it produces (e.g. diar.vad.masker.onset) mirror the CLI
     // flags one-to-one. Anything outside the subset - tabs, sequences, flow
     // `[`/`{`, anchors, multi-line scalars - is rejected. Leaf keys must be
     // registered (unknown key = error); a key with no value (a commented-out

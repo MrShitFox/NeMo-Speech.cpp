@@ -14,8 +14,7 @@
 #include "batching.h"
 #include "cli_util.h"
 #include "commands.h"
-#include "engine_registry.h"
-#include "model_utils.h"
+#include "diarizer.h"
 #include "parameter_parser.h"
 
 namespace {
@@ -96,12 +95,11 @@ print_diarize_help(const char* program) {
         "Diarize one WAV file or every WAV file in a directory. Concurrent\n"
         "directory work shares one model and batches compatible GPU steps.\n\n"
         "Options:\n"
-        "  -m, --model MODEL         Sortformer GGUF path or indexed HF repo\n"
-        "                            (default: nvidia/Nemotron-3-Diarization)\n"
+        "  -m, --model MODEL         Local Nemotron 3 GGUF path (required)\n"
         "  --device, --backend DEVICE\n"
         "                            auto, cpu, cuda[:N], metal, or vulkan[:N]\n"
         "  --offline                 Full-attention mode for short audio\n"
-        "  --preset NAME             V2: streaming/offline; V3: v3-streaming/v3-offline\n"
+        "  --preset NAME             v3-streaming or v3-offline\n"
         "  --config FILE             Load diarization YAML configuration\n"
         "  --format text|json|rttm   Output format (default: text)\n"
         "  --recording-id NAME       RTTM recording id\n"
@@ -224,15 +222,18 @@ command_diarize(int argc, char** argv) {
         batching.max_queue_depth = std::max(batching.max_queue_depth, workers * 4);
         batching.state_arena_slots = std::max(batching.state_arena_slots, workers);
         const auto geometry = config.resolved_geometry();
-        nemo_speech::EngineRegistry engines;
-        config.model_path =
-            resolve_model_file(config.model_path, "diarization", "diarization model").string();
+        if (config.model_path.empty())
+            throw std::invalid_argument("--model must name a local Nemotron 3 GGUF file");
+        const fs::path model_path(config.model_path);
+        if (!fs::is_regular_file(model_path))
+            throw std::invalid_argument("model file does not exist: " + config.model_path);
+        config.model_path = fs::absolute(model_path).string();
         if (cli_verbose())
             std::fprintf(
                 stderr, "diarize: model=%s mode=%s inputs=%zu concurrency=%d device=%d\n",
                 config.model_path.c_str(), offline ? "offline" : "streaming", inputs.size(),
                 workers, gpu);
-        auto engine = engines.load_diarization(gpu, config.model_path, geometry, batching);
+        auto engine = nemo_speech::asr::Diarizer::load(gpu, config.model_path, geometry, batching);
         std::vector<nemo_speech::asr::DiarizationResult> results(inputs.size());
         std::vector<std::string> errors(inputs.size());
         std::atomic<size_t> next{0};

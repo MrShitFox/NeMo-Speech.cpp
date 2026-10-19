@@ -29,7 +29,7 @@ reviews:
           limits must be queried or guarded, with a working fallback.
     - path: "patches/**"
       instructions: |
-        Patches to the pinned llama.cpp submodule. Apply the same correctness, performance and
+        Patches to ggml in the pinned submodule. Apply the same correctness, performance and
         portability checks; also check that op preconditions match what the kernels support
         and that the patch series stays consistent.
     - path: "{BENCHMARK.md,README.md,docs/**,app/bench*}"

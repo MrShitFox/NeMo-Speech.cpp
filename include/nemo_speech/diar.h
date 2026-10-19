@@ -4,13 +4,13 @@
 //
 // The Sortformer diarizer as its own pipeline: audio in, per-frame speaker
 // probabilities and speaker segments out - no ASR involved. For word-level
-// speaker tags on transcripts, use the ASR ABI instead (nemo_speech_asr_diar_config +
-// nemo_speech_asr_recognition_options.enable_speaker_diarization in asr.h); this header
-// is for consumers that only want "who spoke when".
+// speaker tags on transcripts, integrate the diarization C ABI with your
+// application; this project ships no ASR API.
 //
-// Follows the same contract as asr.h (see its header comment): opaque handles,
-// append-only size-prefixed structs, no exceptions across the ABI. Status
-// codes and nemo_speech_asr_last_error() are shared through common.h.
+// The ABI uses opaque handles, append-only size-prefixed structs, and does not
+// pass exceptions across the boundary. The status type and established
+// nemo_speech_asr_last_error() symbol retain their historical names for ABI
+// compatibility; no ASR implementation or ASR API is included.
 #ifndef NEMO_SPEECH_DIAR_H
 #define NEMO_SPEECH_DIAR_H
 
@@ -28,11 +28,10 @@ typedef struct nemo_speech_diar_stream nemo_speech_diar_stream;
 
 typedef struct nemo_speech_diar_model_config {
     size_t size;
-    const char* model_path;  // Sortformer GGUF (required)
+    const char* model_path;  // Nemotron 3 / Sortformer V3 GGUF (required)
     int32_t gpu;             // GPU device index; -1 = CPU
-    // Streaming geometry preset: "streaming"/"offline" for V2 or
-    // "v3-streaming"/"v3-offline" for V3. NULL/"" selects the model-specific
-    // low-latency default. Every preset uses the streaming state machine; the
+    // Streaming geometry preset: "v3-streaming" or "v3-offline". NULL/""
+    // selects the model-specific low-latency default. Every preset uses the streaming state machine; the
     // stateless full-attention path is nemo_speech_diar_offline_f32.
     const char* preset;
     // Individual geometry overrides in coarse 80 ms encoder frames, applied on top
@@ -65,7 +64,7 @@ typedef struct nemo_speech_diar_segmentation_config {
 typedef struct nemo_speech_diar_segment {
     double start_time;  // seconds
     double end_time;    // seconds
-    int32_t speaker;    // 1-based, matching WordInfo.speaker_tag in asr.h
+    int32_t speaker;    // 1-based speaker slot
 } nemo_speech_diar_segment;
 
 // ---- Model ----
@@ -74,8 +73,8 @@ NEMO_SPEECH_ASR_API nemo_speech_asr_status
 nemo_speech_diar_create(const nemo_speech_diar_model_config* cfg, nemo_speech_diar_model** out);
 NEMO_SPEECH_ASR_API void nemo_speech_diar_destroy(nemo_speech_diar_model* model);
 
-// Model capacity and native output cadence (V2: 4 speakers/80 ms; supported
-// high-resolution V3: 8 speakers/10 ms).
+// Model capacity and native V3 output cadence (8 speakers/10 ms for the
+// supported Nemotron 3 checkpoint).
 NEMO_SPEECH_ASR_API int32_t nemo_speech_diar_num_speakers(const nemo_speech_diar_model* model);
 NEMO_SPEECH_ASR_API double nemo_speech_diar_seconds_per_frame(const nemo_speech_diar_model* model);
 
@@ -89,7 +88,7 @@ nemo_speech_diar_stream_open(nemo_speech_diar_model* model, nemo_speech_diar_str
 // Buffer mono float32 audio; diarization advances as whole chunks
 // (chunk + right context) become available. Rates from 8-96 kHz are resampled
 // to the model rate; 0 means model rate. The rate cannot change within a
-// stream (same contract as nemo_speech_asr_stream_push_f32). Pushes after finish are
+// stream. Pushes after finish are
 // silent no-ops.
 NEMO_SPEECH_ASR_API nemo_speech_asr_status nemo_speech_diar_stream_push_f32(
     nemo_speech_diar_stream* stream, const float* samples, size_t n_samples, int32_t sample_rate);

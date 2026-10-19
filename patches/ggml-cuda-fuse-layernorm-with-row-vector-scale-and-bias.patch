@@ -9,10 +9,10 @@ have it; an upstream version should reuse the rms_norm broadcast machinery
 and add row-vector test cases.
 
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index 95c0b1bf1e9d91249aab7b56be251dd4bd6fa288..ecf831b6446e1ddb1f0efb28c9c01d18e3591d6f 100644
+index 27b83503d28b00e0ac831af0fe2a68f9b1288875..e8b7cc9152db8300e01be4cfe8a3bc8a728f6230 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -3274,6 +3274,51 @@ static bool ggml_cuda_can_fuse(const struct ggml_cgraph *                cgraph,
+@@ -3270,6 +3270,51 @@ static bool ggml_cuda_can_fuse(const struct ggml_cgraph *                cgraph,
          return false;
      }
  
@@ -64,7 +64,7 @@ index 95c0b1bf1e9d91249aab7b56be251dd4bd6fa288..ecf831b6446e1ddb1f0efb28c9c01d18
      if ((ops.size() == 2 || ops.size() == 3) && ops.begin()[0] == GGML_OP_RMS_NORM && ops.begin()[1] == GGML_OP_MUL) {
          const ggml_tensor *rms_norm = cgraph->nodes[node_idx];
          const ggml_tensor *mul      = cgraph->nodes[node_idx+1];
-@@ -4157,6 +4202,16 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
+@@ -4153,6 +4198,16 @@ static int ggml_cuda_try_fuse(ggml_backend_cuda_context * cuda_ctx, ggml_cgraph
          return 1;
      }
  

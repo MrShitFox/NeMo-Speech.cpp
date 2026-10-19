@@ -7,10 +7,10 @@ paired CFG lanes share every weight-row load.
 Upstream: candidate (generalize to ncols <= N, add m=2 fusion tests, perf data).
 
 diff --git a/ggml/src/ggml-cuda/ggml-cuda.cu b/ggml/src/ggml-cuda/ggml-cuda.cu
-index ee47bc09e20c299d8813080a48415a2e958d83d6..141caeca47a748ccb3916f98d980d220ee63217f 100644
+index 33bb432296b929a24a74d5c42a9088e9a938c509..1412007aa27dddcb1b23727ca7158d0856ea3e8a 100644
 --- a/ggml/src/ggml-cuda/ggml-cuda.cu
 +++ b/ggml/src/ggml-cuda/ggml-cuda.cu
-@@ -1783,8 +1783,8 @@ static bool ggml_cuda_should_fuse_mul_mat_vec_f(const ggml_tensor * tensor) {
+@@ -1782,8 +1782,8 @@ static bool ggml_cuda_should_fuse_mul_mat_vec_f(const ggml_tensor * tensor) {
      const int cc      = ggml_cuda_info().devices[ggml_cuda_get_device()].cc;
      use_mul_mat_vec_f = use_mul_mat_vec_f && ggml_cuda_should_use_mmvf(src0->type, cc, src0->ne, src0->nb, is_mul_mat_id ? src1->ne[2] : src1->ne[1]);
  

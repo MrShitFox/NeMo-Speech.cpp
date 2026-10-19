@@ -34,12 +34,7 @@ SOURCE_SUFFIXES = {
     ".cmake",
 }
 DERIVED_PREFIX = "src/runtime/ggml/"
-DERIVED_FILES = {
-    "src/asr/encoder/fastconformer.cpp",
-    "src/asr/encoder/fastconformer.h",
-    "src/asr/encoder/rel_pos_attention.cpp",
-    "src/asr/encoder/rel_pos_attention.h",
-}
+DERIVED_FILES: set[str] = set()
 
 
 def repository_root() -> Path:

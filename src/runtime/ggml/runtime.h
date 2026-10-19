@@ -192,8 +192,8 @@ class Module {
 // are read when a CUDA backend is created, so call them before loading models, and
 // they leave a value the user already set in the environment alone.
 //
-// Keep captured CUDA graphs instead of evicting ones idle for 10 s. For TTS and
-// VoiceChat, whose per-frame graphs must stay resident between requests.
+// Keep captured CUDA graphs instead of evicting ones idle for 10 s, so repeated
+// streaming diarization steps can reuse their captured graphs.
 void keep_cuda_graphs_resident();
 // Repack skinny-Q8 encoder weights into a separate buffer instead of in place. The
 // in-place copy races with llama.cpp's multi-stream scheduler in the same process.
