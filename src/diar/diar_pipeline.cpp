@@ -29,8 +29,9 @@ make_fe_cfg(const SortformerModelConfig& c) {
 }
 
 DiarModel::DiarModel(
-    ggml_runtime::BackendManager& bm, const std::string& gguf_path, const BatchingConfig& batching)
-    : model_(bm, gguf_path, batching), fe_cfg_(make_fe_cfg(model_.cfg())),
+    ggml_runtime::BackendManager& bm, const std::string& gguf_path, const BatchingConfig& batching,
+    const SortformerResearchConfig& research)
+    : model_(bm, gguf_path, batching, research), fe_cfg_(make_fe_cfg(model_.cfg())),
       fe_(fe_cfg_, /*bm=*/nullptr) {  // CPU FFT path, same choice as AsrModel
     const int n_bins = fe_cfg_.n_fft / 2 + 1;
     fe_.set_mel_basis(model_.mel_basis().data(), fe_cfg_.n_mels, n_bins);
@@ -107,6 +108,7 @@ DiarStream::reset() {
     state_ = AoscState(
         geo_, m_.cfg().scoring, n_spk_, m_.cfg().encoder.d_model,
         m_.model().learnable_silence_embedding());
+    state_.set_research_selection_observer(research_aosc_selection_observer_);
     birth_gate_.reset();
     audio_buf_.clear();
     audio_base_ = 0;
@@ -210,8 +212,10 @@ DiarStream::run_one_chunk(bool force, bool final_flush) {
     const float* mel = mel_buf_.data() + (w0 - mel_base_) * m_.fe().n_mels();
 
     std::optional<AoscState> preview_state;
-    if (provisional)
+    if (provisional) {
         preview_state.emplace(state_);
+        preview_state->set_research_selection_observer({});
+    }
     auto& run_state = preview_state ? *preview_state : state_;
     auto out = m_.model().run_chunk(
         mel, t_mel, run_state.spkcache_frames() ? run_state.spkcache().data() : nullptr,
@@ -221,13 +225,32 @@ DiarStream::run_one_chunk(bool force, bool final_flush) {
     const int lc_enc = static_cast<int>(std::lround(lc_mel / static_cast<double>(sub_)));
     const int rc_enc = static_cast<int>(std::ceil(rc_mel / static_cast<double>(sub_)));
     auto emitted =
-        run_state.update(out.chunk_embs.data(), out.chunk_frames, out.preds.data(), lc_enc, rc_enc);
+        run_state.update(
+            out.chunk_embs.data(), out.chunk_frames, out.preds.data(), lc_enc, rc_enc, stt / sub_);
     const int embedding_frames = out.chunk_frames - lc_enc - rc_enc;
     if (!provisional && research_embedding_observer_ && embedding_frames > 0) {
         const int embedding_dim = m_.cfg().encoder.d_model;
         const float* central_embeddings =
             out.chunk_embs.data() + static_cast<size_t>(lc_enc) * embedding_dim;
         research_embedding_observer_(stt / sub_, central_embeddings, embedding_frames, embedding_dim);
+    }
+    if (!provisional && research_feature_observer_ && embedding_frames > 0 &&
+        !out.research_features.empty()) {
+        std::vector<SortformerResearchFeatureView> views;
+        views.reserve(out.research_features.size());
+        for (const auto& feature : out.research_features) {
+            if (feature.frames != out.chunk_frames ||
+                (!feature.aliases_chunk_embeddings && feature.values.size() !=
+                    static_cast<size_t>(feature.frames) * feature.dim)) {
+                throw std::runtime_error("DiarStream: research feature shape mismatch");
+            }
+            views.push_back({
+                feature.name, feature.dim, embedding_frames,
+                (feature.aliases_chunk_embeddings ? out.chunk_embs.data() : feature.values.data()) +
+                    static_cast<size_t>(lc_enc) * feature.dim,
+                feature.extra_host_copy_bytes});
+        }
+        research_feature_observer_(stt / sub_, views);
     }
     if (m_.cfg().is_v3()) {
         const int native_factor = m_.cfg().upsample_factor;

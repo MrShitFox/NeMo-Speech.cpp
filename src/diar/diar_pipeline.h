@@ -78,7 +78,7 @@ class DiarModel {
    public:
     DiarModel(
         ggml_runtime::BackendManager& bm, const std::string& gguf_path,
-        const BatchingConfig& batching = {});
+        const BatchingConfig& batching = {}, const SortformerResearchConfig& research = {});
 
     SortformerModel& model() { return model_; }
     MelSpectrogramExtractor& fe() { return fe_; }
@@ -146,6 +146,10 @@ class DiarStream {
    public:
     using ResearchEmbeddingObserver =
         std::function<void(int64_t coarse_frame_start, const float* frames, int n_frames, int dim)>;
+    using ResearchFeatureObserver = std::function<void(
+        int64_t coarse_frame_start, const std::vector<SortformerResearchFeatureView>& features)>;
+    using ResearchAoscSelectionObserver =
+        std::function<void(const std::vector<int64_t>& source_frames)>;
 
     DiarStream(DiarModel& model, const DiarGeometry& geometry);
 
@@ -159,6 +163,15 @@ class DiarStream {
     // embeddings; an empty observer has no effect on the inference path.
     void set_research_embedding_observer(ResearchEmbeddingObserver observer) {
         research_embedding_observer_ = std::move(observer);
+    }
+    // Delivers only committed central frames. Feature pointers expire when the
+    // observer returns. Empty observer has no effect.
+    void set_research_feature_observer(ResearchFeatureObserver observer) {
+        research_feature_observer_ = std::move(observer);
+    }
+    void set_research_aosc_selection_observer(ResearchAoscSelectionObserver observer) {
+        research_aosc_selection_observer_ = std::move(observer);
+        state_.set_research_selection_observer(research_aosc_selection_observer_);
     }
 
     // Label arrived audio toward target_frame using a temporary state copy.
@@ -249,6 +262,8 @@ class DiarStream {
     bool finished_ = false;
 
     ResearchEmbeddingObserver research_embedding_observer_;
+    ResearchFeatureObserver research_feature_observer_;
+    ResearchAoscSelectionObserver research_aosc_selection_observer_;
 
     std::vector<float> probs_;              // retained timeline tail (see frame_probs_base)
     int64_t probs_base_ = 0;                // emitted frames compacted off the front

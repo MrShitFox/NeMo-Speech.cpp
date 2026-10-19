@@ -8,3 +8,11 @@ core.*
 client_logs/
 .venv/
 /models/*.gguf
+/data/private/
+/tests/data/private/
+/tests/results/private/
+*.aosc
+*.aosc-profile
+*.voiceid-profile
+*.snapshot
+*.private-audio

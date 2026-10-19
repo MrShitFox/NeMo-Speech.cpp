@@ -6,6 +6,8 @@
 
 #include <algorithm>
 #include <array>
+#include <cerrno>
+#include <chrono>
 #include <cmath>
 #include <cstdint>
 #include <fstream>
@@ -24,6 +26,7 @@
 #if defined(_WIN32)
 #include <sys/stat.h>
 #else
+#include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #endif
@@ -275,14 +278,62 @@ std::string fingerprint_hex(const std::array<uint8_t, 32>& fingerprint) {
 }
 
 void write_private_file(const std::string& path, const std::vector<uint8_t>& bytes) {
-    std::ofstream out(path, std::ios::binary | std::ios::trunc);
-    if (!out) throw std::runtime_error("cannot open output file: " + path);
-    out.write(reinterpret_cast<const char*>(bytes.data()), static_cast<std::streamsize>(bytes.size()));
-    out.close();
-    if (!out) throw std::runtime_error("failed writing output file: " + path);
 #if !defined(_WIN32)
-    if (chmod(path.c_str(), S_IRUSR | S_IWUSR) != 0)
-        throw std::runtime_error("cannot set mode 0600 on output file: " + path);
+    const std::filesystem::path target(path);
+    const auto parent = target.parent_path().empty() ? std::filesystem::path(".") : target.parent_path();
+    std::string temporary = (parent / (target.filename().string() + ".tmp.XXXXXX")).string();
+    std::vector<char> temporary_name(temporary.begin(), temporary.end());
+    temporary_name.push_back('\0');
+    int fd = ::mkstemp(temporary_name.data());  // creates the file with mode 0600
+    if (fd < 0) throw std::runtime_error("cannot create private temporary output: " + path);
+    temporary.assign(temporary_name.data());
+    bool renamed = false;
+    try {
+        size_t offset = 0;
+        while (offset < bytes.size()) {
+            const ssize_t count = ::write(fd, bytes.data() + offset, bytes.size() - offset);
+            if (count < 0 && errno == EINTR) continue;
+            if (count <= 0) throw std::runtime_error("failed writing private output: " + path);
+            offset += static_cast<size_t>(count);
+        }
+        if (::fsync(fd) != 0) throw std::runtime_error("failed syncing private output: " + path);
+        if (::close(fd) != 0) {
+            fd = -1;
+            throw std::runtime_error("failed closing private output: " + path);
+        }
+        fd = -1;
+        if (::rename(temporary.c_str(), path.c_str()) != 0)
+            throw std::runtime_error("failed atomically replacing private output: " + path);
+        renamed = true;
+        const int dir_fd = ::open(parent.c_str(), O_RDONLY | O_DIRECTORY);
+        if (dir_fd >= 0) {
+            (void)::fsync(dir_fd);
+            (void)::close(dir_fd);
+        }
+    } catch (...) {
+        if (fd >= 0) (void)::close(fd);
+        if (!renamed) (void)::unlink(temporary.c_str());
+        throw;
+    }
+#else
+    const auto suffix = std::chrono::steady_clock::now().time_since_epoch().count();
+    const std::string temporary = path + ".tmp." + std::to_string(suffix);
+    {
+        std::ofstream out(temporary, std::ios::binary | std::ios::trunc);
+        if (!out) throw std::runtime_error("cannot open temporary output: " + path);
+        out.write(reinterpret_cast<const char*>(bytes.data()), static_cast<std::streamsize>(bytes.size()));
+        out.close();
+        if (!out) {
+            std::filesystem::remove(temporary);
+            throw std::runtime_error("failed writing temporary output: " + path);
+        }
+    }
+    std::error_code error;
+    std::filesystem::rename(temporary, path, error);
+    if (error) {
+        std::filesystem::remove(temporary);
+        throw std::runtime_error("failed atomically replacing output: " + path);
+    }
 #endif
 }
 

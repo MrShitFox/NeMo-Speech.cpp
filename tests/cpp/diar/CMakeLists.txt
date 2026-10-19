@@ -10,6 +10,9 @@ target_link_libraries(test_diar_snapshot PRIVATE nemo_speech_diar)
 
 add_executable(diar_enrollment_probe diar_enrollment_probe.cpp)
 target_link_libraries(diar_enrollment_probe PRIVATE nemo_speech_diar)
+
+add_executable(diar_representation_probe diar_representation_probe.cpp)
+target_link_libraries(diar_representation_probe PRIVATE nemo_speech_diar)
 if(UNIX)
     add_executable(diar_snapshot_cli diar_snapshot_cli.cpp)
     target_link_libraries(diar_snapshot_cli PRIVATE nemo_speech_diar)

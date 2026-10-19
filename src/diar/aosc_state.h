@@ -12,6 +12,7 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -87,6 +88,7 @@ class ChannelBirthGate {
 
 class AoscState {
    public:
+    using ResearchSelectionObserver = std::function<void(const std::vector<int64_t>& source_frames)>;
     AoscState(
         const DiarGeometry& geo, const DiarScoringConfig& scoring, int n_spk, int emb_dim,
         const std::vector<float>& learned_silence = {});
@@ -97,7 +99,16 @@ class AoscState {
     //   preds:      ((spkcache_frames + fifo_frames + t3), n_spk) model output.
     //   lc, rc:     this window's left/right context in encoder frames.
     // Returns the emitted chunk predictions ((t3 - lc - rc), n_spk).
-    std::vector<float> update(const float* chunk_embs, int t3, const float* preds, int lc, int rc);
+    std::vector<float> update(
+        const float* chunk_embs, int t3, const float* preds, int lc, int rc,
+        int64_t central_frame_start = -1);
+
+    // Research-only trace of rows selected during AOSC compression. Entries
+    // are coarse stream frame IDs; -1 denotes a silence row or unavailable
+    // lineage (for example, a restored snapshot). Does not affect compression.
+    void set_research_selection_observer(ResearchSelectionObserver observer) {
+        research_selection_observer_ = std::move(observer);
+    }
 
     int spkcache_frames() const { return spk_frames_; }
     int fifo_frames() const { return fifo_frames_; }
@@ -131,6 +142,9 @@ class AoscState {
     std::vector<float> mean_sil_emb_;  // emb_dim
     int64_t n_sil_frames_ = 0;
     bool use_learned_silence_ = false;
+    ResearchSelectionObserver research_selection_observer_;
+    std::vector<int64_t> spkcache_source_frames_;
+    std::vector<int64_t> fifo_source_frames_;
 };
 
 }  // namespace nemo_speech::asr

@@ -110,6 +110,19 @@ DiarizationStream::set_research_embedding_observer(DiarStream::ResearchEmbedding
     stream_->set_research_embedding_observer(std::move(observer));
 }
 
+void
+DiarizationStream::set_research_feature_observer(DiarStream::ResearchFeatureObserver observer) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    stream_->set_research_feature_observer(std::move(observer));
+}
+
+void
+DiarizationStream::set_research_aosc_selection_observer(
+    DiarStream::ResearchAoscSelectionObserver observer) {
+    std::lock_guard<std::mutex> operation_lock(operation_mutex_);
+    stream_->set_research_aosc_selection_observer(std::move(observer));
+}
+
 int64_t
 DiarizationStream::frame_count() const {
     return stream_->n_frames();

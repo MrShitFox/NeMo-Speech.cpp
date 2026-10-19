@@ -15,6 +15,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <memory>
 #include <stdexcept>
 #include <string>
@@ -89,6 +90,37 @@ struct SortformerModelConfig {
     }
 };
 
+// Opt-in, C++-only research taps. An empty config preserves the original
+// graph and output-copy path exactly. Transformer layer indices are zero-based
+// and refer to block outputs before encoder.final_norm.
+struct SortformerResearchConfig {
+    bool pre_encoder = false;
+    bool encoder_output = false;
+    bool encoder_proj = false;
+    std::vector<int> transformer_layers;
+
+    bool enabled() const {
+        return pre_encoder || encoder_output || encoder_proj || !transformer_layers.empty();
+    }
+};
+
+struct SortformerResearchFeature {
+    std::string name;
+    int dim = 0;
+    int frames = 0;
+    std::vector<float> values;  // frame-major, (frames, dim)
+    bool aliases_chunk_embeddings = false;  // values are in ChunkOutput::chunk_embs
+    size_t extra_host_copy_bytes = 0;  // model-output and per-item split copies for this feature
+};
+
+struct SortformerResearchFeatureView {
+    std::string name;
+    int dim = 0;
+    int frames = 0;
+    const float* values = nullptr;  // frame-major, valid during the observer call
+    size_t extra_host_copy_bytes = 0;
+};
+
 // Root Module for the per-chunk graph. Per-call inputs (by name):
 //   input.mel      (n_mels, T_mel)  - required
 //   input.state    (512, Lmax, B)   - optional compact state
@@ -97,6 +129,7 @@ struct SortformerModelConfig {
 class SortformerGraph : public ggml_runtime::Module {
    public:
     explicit SortformerGraph(const SortformerModelConfig& cfg);
+    SortformerGraph(const SortformerModelConfig& cfg, const SortformerResearchConfig& research);
     ~SortformerGraph();
 
     void define_tensors(ggml_runtime::Session* session) override;
@@ -107,6 +140,7 @@ class SortformerGraph : public ggml_runtime::Module {
 
    private:
     SortformerModelConfig cfg_;
+    SortformerResearchConfig research_;
     ggml_runtime::Linear* feature_stack_proj_;
     RopeTransformerEncoder* rope_encoder_;
     ggml_runtime::Linear* encoder_proj_;
@@ -123,7 +157,7 @@ class SortformerModel {
    public:
     SortformerModel(
         ggml_runtime::BackendManager& bm, const std::string& gguf_path,
-        const BatchingConfig& batching = {});
+        const BatchingConfig& batching = {}, const SortformerResearchConfig& research = {});
     ~SortformerModel();
 
     const SortformerModelConfig& cfg() const { return cfg_; }
@@ -150,6 +184,9 @@ class SortformerModel {
         // coarse row.
         std::vector<float> native_preds;
         int native_total_frames = 0;
+        // Present only when research taps were requested at construction.
+        std::vector<SortformerResearchFeature> research_features;
+        size_t research_host_copy_bytes = 0;
     };
 
     // mel: (n_mels, t_mel) frame-major (each frame's n_mels contiguous).
@@ -163,6 +200,7 @@ class SortformerModel {
     class SortformerBatcher;
 
     SortformerModelConfig cfg_;
+    SortformerResearchConfig research_;
     std::vector<float> mel_basis_;
     std::vector<float> learnable_silence_embedding_;
     std::unique_ptr<ggml_runtime::GGUFLoader> loader_;

@@ -81,12 +81,16 @@ parse_config(const ggml_runtime::GGUFLoader& loader) {
 }
 
 SortformerGraph::SortformerGraph(const SortformerModelConfig& cfg)
-    : cfg_(cfg), feature_stack_proj_(nullptr), rope_encoder_(nullptr),
+    : SortformerGraph(cfg, SortformerResearchConfig{}) {}
+
+SortformerGraph::SortformerGraph(
+    const SortformerModelConfig& cfg, const SortformerResearchConfig& research)
+    : cfg_(cfg), research_(research), feature_stack_proj_(nullptr), rope_encoder_(nullptr),
       subpixel_upsample_(nullptr) {
     feature_stack_proj_ = new ggml_runtime::Linear(
         "encoder.pre_encode.proj", cfg.n_mels * cfg.encoder.subsampling_factor,
         cfg.encoder.d_model, false);
-    rope_encoder_ = new RopeTransformerEncoder("encoder", cfg.rope_encoder);
+    rope_encoder_ = new RopeTransformerEncoder("encoder", cfg.rope_encoder, research.transformer_layers);
     encoder_proj_ =
         new ggml_runtime::Linear("encoder_proj", cfg.encoder.d_model, cfg.transformer.hidden_size);
     subpixel_upsample_ = new ggml_runtime::Conv1D(
@@ -158,6 +162,7 @@ SortformerGraph::build_graph(
         enc_in.add_tensor(ggml_runtime::ggml_bf_tensor(x, chunk_embs.buft));
         enc_in.add_tensor(tc->get_tensor_by_name("input.positions"));
         auto encoded = rope_encoder_->build_graph(session, enc_in, tc);
+        auto encoder_output = encoded.get_tensor(0);
         auto proj = encoder_proj_->build_graph(session, encoded, tc).get_tensor(0);
 
         // Conv1D consumes (time, channels, batch). Convert back to a
@@ -205,6 +210,22 @@ SortformerGraph::build_graph(
         ggml_runtime::TensorBag out;
         out.add_tensor(ggml_runtime::ggml_bf_tensor(ggml_sigmoid(ctx, logits.tensor), logits.buft));
         out.add_tensor(chunk_embs);
+        if (research_.enabled()) {
+            const int64_t state_frames = x->ne[1] - chunk_embs.tensor->ne[1];
+            auto current_window = [&](ggml_runtime::ggml_bf_tensor feature) {
+                if (state_frames == 0 && feature.tensor->ne[1] == chunk_embs.tensor->ne[1])
+                    return feature;
+                auto view = ggml_view_3d(
+                    ctx, feature.tensor, feature.tensor->ne[0], chunk_embs.tensor->ne[1], batch,
+                    feature.tensor->nb[1], feature.tensor->nb[2],
+                    static_cast<size_t>(state_frames) * feature.tensor->nb[1]);
+                return ggml_runtime::ggml_bf_tensor(ggml_cont(ctx, view), feature.buft);
+            };
+            if (research_.encoder_output) out.add_tensor(current_window(encoder_output));
+            if (research_.encoder_proj) out.add_tensor(current_window(proj));
+            for (size_t i = 0; i < research_.transformer_layers.size(); ++i)
+                out.add_tensor(current_window(encoded.get_tensor(i + 1)));
+        }
         return out;
     }
 }
@@ -308,13 +329,37 @@ class SortformerModel::SortformerBatcher {
         const size_t embs_item = static_cast<size_t>(t3) * d;
         std::vector<float> preds(preds_item * B);
         std::vector<float> embs(embs_item * B);
-        std::vector<ggml_runtime::Session::Output> outputs(2);
+        struct ResearchBuffer {
+            std::string name;
+            int dim;
+            size_t item_values;
+            std::vector<float> values;
+        };
+        std::vector<ResearchBuffer> research_buffers;
+        const auto& research = model_->research_;
+        if (research.encoder_output)
+            research_buffers.push_back({"encoder_output", d, static_cast<size_t>(t3) * d, {}});
+        if (research.encoder_proj)
+            research_buffers.push_back(
+                {"encoder_proj", model_->cfg_.transformer.hidden_size,
+                 static_cast<size_t>(t3) * model_->cfg_.transformer.hidden_size, {}});
+        for (int layer : research.transformer_layers)
+            research_buffers.push_back(
+                {"encoder.layer." + std::to_string(layer), d, static_cast<size_t>(t3) * d, {}});
+        for (auto& feature : research_buffers) feature.values.resize(feature.item_values * B);
+
+        std::vector<ggml_runtime::Session::Output> outputs(2 + research_buffers.size());
         outputs[0].index = 0;
         outputs[0].host_buffer = preds.data();
         outputs[0].nbytes = preds.size() * sizeof(float);
         outputs[1].index = 1;
         outputs[1].host_buffer = embs.data();
         outputs[1].nbytes = embs.size() * sizeof(float);
+        for (size_t i = 0; i < research_buffers.size(); ++i) {
+            outputs[i + 2].index = static_cast<int>(i + 2);
+            outputs[i + 2].host_buffer = research_buffers[i].values.data();
+            outputs[i + 2].nbytes = research_buffers[i].values.size() * sizeof(float);
+        }
         model_->session_->run(inputs, outputs);
 
         const int out_native_total = static_cast<int>(outputs[0].out_shape[1]);
@@ -329,6 +374,13 @@ class SortformerModel::SortformerBatcher {
                 " batch=" + std::to_string(out_pred_batch) + "/" + std::to_string(out_emb_batch) +
                 ", expected total=" + std::to_string(total) + " chunk=" + std::to_string(t3) +
                 " batch=" + std::to_string(B) + ")");
+        }
+        for (size_t i = 0; i < research_buffers.size(); ++i) {
+            const auto& shape = outputs[i + 2].out_shape;
+            if (shape[0] != research_buffers[i].dim || shape[1] != t3 || shape[2] != B) {
+                throw std::runtime_error(
+                    "sortformer: unexpected research feature shape for " + research_buffers[i].name);
+            }
         }
 
         std::vector<ChunkOutput> results(static_cast<size_t>(B));
@@ -359,6 +411,22 @@ class SortformerModel::SortformerBatcher {
             result.chunk_embs.assign(
                 embs.begin() + static_cast<size_t>(b) * embs_item,
                 embs.begin() + static_cast<size_t>(b + 1) * embs_item);
+            result.research_features.reserve(research_buffers.size());
+            if (research.pre_encoder)
+                result.research_features.push_back({"pre_encoder", d, t3, {}, true});
+            for (const auto& feature : research_buffers) {
+                const size_t offset = static_cast<size_t>(b) * feature.item_values;
+                SortformerResearchFeature copied;
+                copied.name = feature.name;
+                copied.dim = feature.dim;
+                copied.frames = t3;
+                copied.values.assign(
+                    feature.values.begin() + static_cast<std::ptrdiff_t>(offset),
+                    feature.values.begin() + static_cast<std::ptrdiff_t>(offset + feature.item_values));
+                copied.extra_host_copy_bytes = 2 * feature.item_values * sizeof(float);
+                result.research_host_copy_bytes += copied.extra_host_copy_bytes;
+                result.research_features.push_back(std::move(copied));
+            }
         }
         return results;
     }
@@ -369,7 +437,8 @@ class SortformerModel::SortformerBatcher {
 
 SortformerModel::SortformerModel(
     ggml_runtime::BackendManager& bm, const std::string& gguf_path,
-    const BatchingConfig& batching) {
+    const BatchingConfig& batching, const SortformerResearchConfig& research)
+    : research_(research) {
     loader_ = std::make_unique<ggml_runtime::GGUFLoader>(gguf_path);
     cfg_ = parse_config(*loader_);
 
@@ -387,7 +456,16 @@ SortformerModel::SortformerModel(
             learnable_silence_embedding_.size() * sizeof(float));
     }
 
-    graph_ = std::make_unique<SortformerGraph>(cfg_);
+    if (!std::is_sorted(research_.transformer_layers.begin(), research_.transformer_layers.end()) ||
+        std::adjacent_find(research_.transformer_layers.begin(), research_.transformer_layers.end()) !=
+            research_.transformer_layers.end() ||
+        (!research_.transformer_layers.empty() &&
+         (research_.transformer_layers.front() < 0 ||
+          research_.transformer_layers.back() >= cfg_.encoder.n_layers))) {
+        throw std::invalid_argument(
+            "research transformer layers must be sorted, unique, and in model range");
+    }
+    graph_ = std::make_unique<SortformerGraph>(cfg_, research_);
     session_ = std::make_unique<ggml_runtime::Session>(bm, graph_.get(), loader_.get());
     // Keep the streaming state-length cycle and occasional tail shapes cached.
     session_->set_run_cache_capacity(48);

@@ -48,7 +48,9 @@ class RopeTransformerBlock : public ggml_runtime::Module {
 // int32 position vector shared by all batch elements.
 class RopeTransformerEncoder : public ggml_runtime::Module {
    public:
-    RopeTransformerEncoder(const std::string& name, const RopeTransformerConfig& cfg);
+    RopeTransformerEncoder(
+        const std::string& name, const RopeTransformerConfig& cfg,
+        const std::vector<int>& research_tap_layers = {});
     ~RopeTransformerEncoder();
 
     void define_tensors(ggml_runtime::Session* session) override;
@@ -59,6 +61,7 @@ class RopeTransformerEncoder : public ggml_runtime::Module {
 
    private:
     RopeTransformerConfig cfg_;
+    std::vector<int> research_tap_layers_;
     ggml_runtime::LayerNorm* embed_norm_;
     std::vector<RopeTransformerBlock*> layers_;
     ggml_runtime::LayerNorm* final_norm_;

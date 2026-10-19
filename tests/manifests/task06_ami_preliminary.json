@@ -1,0 +1,93 @@
+{
+  "model": "../../models/Nemotron-3-Diarization.q8_0.gguf",
+  "reference_rttm": "../../test_files/diar/ami_en2002d_2132.rttm",
+  "preliminary_fixture_only": true,
+  "representations": [
+    "pre_encoder",
+    "encoder_output",
+    "encoder_proj",
+    "encoder.layer.0",
+    "encoder.layer.7",
+    "encoder.layer.15",
+    "encoder.layer.23",
+    "encoder.layer.30"
+  ],
+  "enrollment": [
+    {
+      "id": "p1_enroll",
+      "speaker": "person_1",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 3.12,
+      "end_sec": 19.51,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "device": "ami_meeting_recording",
+      "overlap": false
+    },
+    {
+      "id": "p2_enroll",
+      "speaker": "person_2",
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 29.20,
+      "end_sec": 43.05,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "device": "ami_meeting_recording",
+      "overlap": false
+    }
+  ],
+  "preliminary": [
+    {
+      "id": "p1_test",
+      "speaker": "person_1",
+      "known": true,
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 48.55,
+      "end_sec": 51.16,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "device": "ami_meeting_recording",
+      "overlap": false
+    },
+    {
+      "id": "p2_test",
+      "speaker": "person_2",
+      "known": true,
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 45.39,
+      "end_sec": 47.95,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "device": "ami_meeting_recording",
+      "overlap": true
+    },
+    {
+      "id": "p3_unknown",
+      "speaker": "person_3",
+      "known": false,
+      "audio": "../../test_files/diar/ami_en2002d_2132.wav",
+      "start_sec": 51.22,
+      "end_sec": 57.34,
+      "recording_id": "ami_en2002d_2132",
+      "session": "ami_fixture_session",
+      "device": "ami_meeting_recording",
+      "overlap": false
+    }
+  ],
+  "context_probes": [
+    {
+      "target": "p1_test",
+      "after_known": ["p2_enroll"],
+      "after_unknown": ["p3_unknown"],
+      "after_unknown_long": [
+        "p3_unknown",
+        "p3_unknown",
+        "p3_unknown",
+        "p3_unknown"
+      ],
+      "reverse_enrollment_order": true,
+      "aosc_only_warm_start": true,
+      "full_snapshot_warm_start": true
+    }
+  ]
+}

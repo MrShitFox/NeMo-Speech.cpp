@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 #include "rope_transformer.h"
 
+#include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
@@ -124,8 +125,9 @@ RopeTransformerBlock::build_graph(
 }
 
 RopeTransformerEncoder::RopeTransformerEncoder(
-    const std::string& name, const RopeTransformerConfig& cfg)
-    : cfg_(cfg) {
+    const std::string& name, const RopeTransformerConfig& cfg,
+    const std::vector<int>& research_tap_layers)
+    : cfg_(cfg), research_tap_layers_(research_tap_layers) {
     if (cfg.d_model <= 0 || cfg.n_heads <= 0 || cfg.n_layers <= 0 || cfg.d_ff <= 0 ||
         cfg.pos_emb_max_len <= 0 || !std::isfinite(cfg.rope_base) || cfg.rope_base <= 0 ||
         !std::isfinite(cfg.rotary_fraction) || cfg.rotary_fraction <= 0 ||
@@ -133,6 +135,14 @@ RopeTransformerEncoder::RopeTransformerEncoder(
         static_cast<int>(cfg.d_model / cfg.n_heads * cfg.rotary_fraction) == 0 ||
         static_cast<int>(cfg.d_model / cfg.n_heads * cfg.rotary_fraction) % 2 != 0) {
         throw std::invalid_argument("RoPE transformer has incompatible head/rotary dimensions");
+    }
+    if (!std::is_sorted(research_tap_layers_.begin(), research_tap_layers_.end()) ||
+        std::adjacent_find(research_tap_layers_.begin(), research_tap_layers_.end()) !=
+            research_tap_layers_.end() ||
+        (!research_tap_layers_.empty() &&
+         (research_tap_layers_.front() < 0 || research_tap_layers_.back() >= cfg.n_layers))) {
+        throw std::invalid_argument(
+            "research transformer tap layers must be sorted, unique, and in range");
     }
     const int64_t norm_shape[4] = {cfg.d_model, 1, 1, 1};
     embed_norm_ = cfg.pre_block_norm ? new ggml_runtime::LayerNorm(name + ".embed_norm", norm_shape)
@@ -177,7 +187,17 @@ RopeTransformerEncoder::build_graph(
     ggml_runtime::TensorBag bag;
     bag.add_tensor(x);
     bag.add_tensor(input_tensors.get_tensor(1));
-    for (auto* layer : layers_) bag = layer->build_graph(session, bag, tc);
+    ggml_runtime::TensorBag tapped;
+    size_t tap_index = 0;
+    for (size_t layer_index = 0; layer_index < layers_.size(); ++layer_index) {
+        bag = layers_[layer_index]->build_graph(session, bag, tc);
+        if (tap_index < research_tap_layers_.size() &&
+            research_tap_layers_[tap_index] == static_cast<int>(layer_index)) {
+            tapped.add_tensor(bag.get_tensor(0));
+            ++tap_index;
+        }
+    }
     auto out = final_norm_->build_graph(session, one(bag.get_tensor(0).tensor, x.buft), tc);
+    for (size_t i = 0; i < tapped.tensor_count(); ++i) out.add_tensor(tapped.get_tensor(i));
     return out;
 }

@@ -44,6 +44,9 @@ class DiarizationStream {
     void import_state(const uint8_t* data, size_t size);
     // Internal research hook; this is not part of the public C ABI.
     void set_research_embedding_observer(DiarStream::ResearchEmbeddingObserver observer);
+    void set_research_feature_observer(DiarStream::ResearchFeatureObserver observer);
+    void set_research_aosc_selection_observer(
+        DiarStream::ResearchAoscSelectionObserver observer);
     int64_t frame_count() const;
     int64_t frame_probs_start() const;
     const std::vector<float>& frame_probabilities() const;
