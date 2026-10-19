@@ -18,35 +18,15 @@
 #ifndef NEMO_SPEECH_ASR_H
 #define NEMO_SPEECH_ASR_H
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+#include "nemo_speech/common.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#if defined(_WIN32)
-#if defined(NEMO_SPEECH_ASR_BUILD)
-#define NEMO_SPEECH_ASR_API __declspec(dllexport)
-#else
-#define NEMO_SPEECH_ASR_API __declspec(dllimport)
-#endif
-#else
-#define NEMO_SPEECH_ASR_API __attribute__((visibility("default")))
-#endif
-
 typedef struct nemo_speech_asr_recognizer nemo_speech_asr_recognizer;
 typedef struct nemo_speech_asr_stream nemo_speech_asr_stream;
 typedef struct nemo_speech_asr_result nemo_speech_asr_result;
-
-typedef enum nemo_speech_asr_status {
-    NEMO_SPEECH_ASR_OK = 0,
-    NEMO_SPEECH_ASR_ERROR_INVALID_ARGUMENT = 1,
-    NEMO_SPEECH_ASR_ERROR_OUT_OF_MEMORY = 2,
-    NEMO_SPEECH_ASR_ERROR_RUNTIME = 3,
-    NEMO_SPEECH_ASR_ERROR_CANCELLED = 4,
-} nemo_speech_asr_status;
 
 typedef enum nemo_speech_asr_decoder_kind {
     NEMO_SPEECH_ASR_DECODER_GREEDY = 0,
@@ -284,13 +264,6 @@ NEMO_SPEECH_ASR_API const char* nemo_speech_asr_result_language_code(
     const nemo_speech_asr_result* result, size_t alt, size_t i);
 
 NEMO_SPEECH_ASR_API void nemo_speech_asr_result_destroy(nemo_speech_asr_result* result);
-
-// ---- Misc ----
-
-// Thread-local last error message for the most recent failed call on this
-// thread. Valid until the next nemo_speech_asr_* call on the same thread.
-NEMO_SPEECH_ASR_API const char* nemo_speech_asr_last_error(void);
-NEMO_SPEECH_ASR_API const char* nemo_speech_asr_version(void);
 
 #ifdef __cplusplus
 }  // extern "C"

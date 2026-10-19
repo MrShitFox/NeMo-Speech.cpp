@@ -1,25 +1,40 @@
 # SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
-# Generic, domain-agnostic config parser (ParameterParser). Shared by every
-# pipeline (asr, tts, s2s, nmt). STATIC + PIC so it links cleanly into each
-# pipeline's shared lib; default visibility so the inline Register() methods in
-# config headers (which call into here) resolve in whatever binary instantiates
-# them. The config-file format is a small nested key/value subset parsed in-house
-# (parameter_parser.cpp), so there is no external YAML dependency.
+# Generic configuration and JSON helpers shared by the pipelines.
 add_library(nemo_speech_common STATIC
-    audio_decoder.cpp
-    audio_file.cpp
-    audio_resampler.cpp
     json.cpp
     parameter_parser.cpp
-    subtitles.cpp
 )
-
-# Public so config headers' `#include "parameter_parser.h"` reaches every
-# consumer (server, tests, C ABI). nvtx_utils.h also lives here.
 target_include_directories(nemo_speech_common PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
 set_target_properties(nemo_speech_common PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+# Audio I/O and resampling are shared by ASR, diarization, and TTS. Keeping
+# them in one library avoids compiling the frontend separately into pipelines.
+add_library(nemo_speech_audio SHARED
+    audio_file.cpp
+    audio_resampler.cpp
+)
+target_include_directories(nemo_speech_audio PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+if(WIN32)
+    set_target_properties(nemo_speech_audio PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
+install(TARGETS nemo_speech_audio
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+# The streaming decoder is currently used only by its focused test. It is
+# excluded from the default build and is pulled in when that test is enabled.
+if(NEMO_SPEECH_BUILD_ASR)
+    add_library(nemo_speech_audio_decoder STATIC EXCLUDE_FROM_ALL audio_decoder.cpp)
+    target_include_directories(nemo_speech_audio_decoder PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+    target_link_libraries(nemo_speech_audio_decoder PUBLIC nemo_speech_audio)
+endif()
+
+# Subtitle formatting belongs to the ASR/live transcript path, not diarization.
+if(NEMO_SPEECH_BUILD_ASR)
+    add_library(nemo_speech_subtitles STATIC EXCLUDE_FROM_ALL subtitles.cpp)
+    target_include_directories(nemo_speech_subtitles PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+endif()
 
 # Shared WFST grammar runtime for ASR ITN and TTS TN. Keep this separate from
 # nemo_speech_common so builds that do not request text normalization retain

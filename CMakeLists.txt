@@ -176,12 +176,6 @@ elseif(BUILD_TESTING)
     set(NEMO_SPEECH_BUILD_TESTS ON)
 endif()
 
-if(NEMO_SPEECH_BUILD_DIAR AND NOT NEMO_SPEECH_BUILD_ASR)
-    message(STATUS
-        "Diarization currently shares the ASR runtime library; building that library "
-        "without the transcribe CLI/API surface")
-endif()
-
 # Drop-in cuBLAS shim (native GEMM, no cuBLASLt). Release builds can substitute
 # it for real cuBLAS to reduce their runtime closure.
 # Disabled by default for source builds, which link the CUDA toolkit's cuBLAS.
@@ -407,6 +401,10 @@ if(NEMO_SPEECH_BUILD_TOOLS)
 endif()
 
 if(NEMO_SPEECH_BUILD_ASR OR NEMO_SPEECH_BUILD_DIAR)
+    install(FILES include/nemo_speech/common.h
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/nemo_speech)
+endif()
+if(NEMO_SPEECH_BUILD_ASR)
     install(FILES include/nemo_speech/asr.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/nemo_speech)
 endif()

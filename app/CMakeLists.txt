@@ -14,6 +14,7 @@ add_executable(nemo_speech_cli
 set_target_properties(nemo_speech_cli PROPERTIES OUTPUT_NAME nemo-speech)
 target_link_libraries(nemo_speech_cli PRIVATE
     nemo_speech_common
+    nemo_speech_audio
     nemo_speech_engine_registry
     ggml
     ggml-base
@@ -30,6 +31,7 @@ if(NEMO_SPEECH_BUILD_ASR)
         transcribe.cpp)
     target_compile_definitions(nemo_speech_cli PRIVATE NEMO_SPEECH_CLI_ASR=1)
     target_link_libraries(nemo_speech_cli PRIVATE nemo_speech_asr)
+    target_link_libraries(nemo_speech_cli PRIVATE nemo_speech_subtitles)
     if(NEMO_SPEECH_BUILD_MIC_CAPTURE)
         target_sources(nemo_speech_cli PRIVATE
             live_terminal.cpp
@@ -81,7 +83,7 @@ endif()
 if(NEMO_SPEECH_BUILD_DIAR)
     target_compile_definitions(nemo_speech_cli PRIVATE NEMO_SPEECH_CLI_DIAR=1)
     target_sources(nemo_speech_cli PRIVATE bench_diarize.cpp diarize.cpp)
-    target_link_libraries(nemo_speech_cli PRIVATE nemo_speech_asr)
+    target_link_libraries(nemo_speech_cli PRIVATE nemo_speech_diar)
 endif()
 if(NEMO_SPEECH_BUILD_TTS)
     target_compile_definitions(nemo_speech_cli PRIVATE NEMO_SPEECH_CLI_TTS=1)

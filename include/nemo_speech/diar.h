@@ -10,12 +10,11 @@
 //
 // Follows the same contract as asr.h (see its header comment): opaque handles,
 // append-only size-prefixed structs, no exceptions across the ABI. Status
-// codes and nemo_speech_asr_last_error() are shared with the ASR surface - both live in
-// the same library.
+// codes and nemo_speech_asr_last_error() are shared through common.h.
 #ifndef NEMO_SPEECH_DIAR_H
 #define NEMO_SPEECH_DIAR_H
 
-#include "nemo_speech/asr.h"  // NEMO_SPEECH_ASR_API, nemo_speech_asr_status, nemo_speech_asr_last_error
+#include "nemo_speech/common.h"
 
 #ifdef __cplusplus
 extern "C" {

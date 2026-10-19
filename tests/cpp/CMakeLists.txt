@@ -12,13 +12,15 @@ add_executable(test_shared_utilities
     ${CMAKE_SOURCE_DIR}/app/cli_util.cpp)
 target_include_directories(test_shared_utilities PRIVATE ${CMAKE_SOURCE_DIR}/app)
 target_link_libraries(test_shared_utilities PRIVATE
-    nemo_speech_common nemo_speech_engine_registry ggml)
+    nemo_speech_audio nemo_speech_common nemo_speech_engine_registry ggml)
 add_test(NAME shared_utilities COMMAND test_shared_utilities)
 
-add_executable(test_subtitles
-    ${CMAKE_SOURCE_DIR}/tests/cpp/common/test_subtitles.cpp)
-target_link_libraries(test_subtitles PRIVATE nemo_speech_common)
-add_test(NAME subtitles COMMAND test_subtitles)
+if(NEMO_SPEECH_BUILD_ASR)
+    add_executable(test_subtitles
+        ${CMAKE_SOURCE_DIR}/tests/cpp/common/test_subtitles.cpp)
+    target_link_libraries(test_subtitles PRIVATE nemo_speech_subtitles)
+    add_test(NAME subtitles COMMAND test_subtitles)
+endif()
 
 if(TARGET nemo_speech_http_server)
     add_executable(test_http_server_config
@@ -119,8 +121,11 @@ if(TARGET nemo_speech_cli)
     endif()
 endif()
 
-if(NEMO_SPEECH_BUILD_ASR OR NEMO_SPEECH_BUILD_DIAR)
+if(NEMO_SPEECH_BUILD_ASR)
     add_subdirectory(asr)
+endif()
+if(NEMO_SPEECH_BUILD_DIAR)
+    add_subdirectory(diar)
 endif()
 if(NEMO_SPEECH_BUILD_TTS)
     add_subdirectory(tts)

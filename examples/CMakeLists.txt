@@ -32,7 +32,7 @@ endif()
 # Standalone speaker diarization over the nemo_speech_diar_* C ABI (no ASR model).
 if(NEMO_SPEECH_BUILD_DIAR)
     add_executable(diarize_file diarize_file.cpp)
-    target_link_libraries(diarize_file PRIVATE nemo_speech_asr_c)
+    target_link_libraries(diarize_file PRIVATE nemo_speech_diar_c)
     install(TARGETS diarize_file RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
     if(UNIX AND NOT APPLE)
         target_link_options(diarize_file PRIVATE "LINKER:--allow-shlib-undefined")
