@@ -19,6 +19,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <future>
+#include <iostream>
 #include <string>
 #include <thread>
 #include <vector>
@@ -29,7 +30,7 @@
 using namespace nemo_speech::asr;
 
 static const char* kUsage =
-    "usage: %s <sortformer.gguf> <audio.wav> [--gpu] [--offline] [--rttm NAME]\n"
+    "usage: %s <sortformer.gguf> <audio.wav> [--device cpu|vulkan] [--gpu-device N] [--gpu] [--offline] [--rttm NAME]\n"
     "    [--dump-probs FILE] [--push-ms MS] [--compact-frames N]\n"
     "    [--batching-check]\n"
     "    [--preset streaming|offline]\n"
@@ -45,6 +46,9 @@ main(int argc, char** argv) {
     const std::string gguf_path = argv[1];
     const std::string wav_path = argv[2];
     bool use_gpu = false;
+    bool gpu_device_explicit = false;
+    int gpu_device_idx = 0;
+    std::string gpu_backend_name;
     bool offline = false;    // full-attention single pass, no streaming state
     std::string probs_path;  // raw f32 (n_frames x n_spk) frame-probs dump
     std::string rttm_name;
@@ -52,6 +56,7 @@ main(int argc, char** argv) {
     DiarSegmentationCfg seg_cfg;  // current library postprocessing defaults
     int push_ms = 160;
     int compact_frames = 0;  // 0 = library default compaction horizon
+    int benchmark_repeats = 0;
     bool batching_check = false;
     for (int i = 3; i < argc; i++) {
         const std::string a = argv[i];
@@ -67,6 +72,26 @@ main(int argc, char** argv) {
         auto next = [&]() { return std::stoi(next_str()); };
         if (a == "--gpu")
             use_gpu = true;
+        else if (a == "--device") {
+            const std::string device = next_str();
+            if (device == "cpu") {
+                use_gpu = false;
+                gpu_backend_name.clear();
+            } else if (device == "vulkan") {
+                use_gpu = true;
+                gpu_backend_name = "Vulkan";
+            } else {
+                std::fprintf(stderr, "--device must be cpu or vulkan\n");
+                return 2;
+            }
+        } else if (a == "--gpu-device") {
+            gpu_device_idx = next();
+            if (gpu_device_idx < 0 || gpu_device_idx > 1024) {
+                std::fprintf(stderr, "--gpu-device must be in [0,1024]\n");
+                return 2;
+            }
+            gpu_device_explicit = true;
+        }
         else if (a == "--offline")
             offline = true;
         else if (a == "--dump-probs")
@@ -100,6 +125,13 @@ main(int argc, char** argv) {
             // frames, retain N/2) to exercise the long-stream memory bound on
             // short clips. Output must match an uncompacted run exactly.
             compact_frames = next();
+        else if (a == "--benchmark-repeats") {
+            benchmark_repeats = next();
+            if (benchmark_repeats < 3 || benchmark_repeats > 20) {
+                std::fprintf(stderr, "--benchmark-repeats must be in [3,20]\n");
+                return 2;
+            }
+        }
         else if (a == "--batching-check")
             batching_check = true;
         else if (a == "--onset")
@@ -131,8 +163,19 @@ main(int argc, char** argv) {
         std::fprintf(stderr, "--batching-check requires streaming mode\n");
         return 2;
     }
+    if (gpu_device_explicit && !use_gpu) {
+        std::fprintf(stderr, "--gpu-device requires --device vulkan or --gpu\n");
+        return 2;
+    }
+    if (benchmark_repeats > 0 && batching_check) {
+        std::fprintf(stderr, "--benchmark-repeats cannot be combined with --batching-check\n");
+        return 2;
+    }
+    const auto model_init_start = std::chrono::steady_clock::now();
     ggml_runtime::Params backend_params;
     backend_params.use_gpu = use_gpu;
+    backend_params.gpu_device_idx = gpu_device_idx;
+    backend_params.gpu_backend_name = gpu_backend_name;
     ggml_runtime::BackendManager bm(backend_params);
     BatchingConfig batching;
     batching.enabled = batching_check;
@@ -140,11 +183,14 @@ main(int argc, char** argv) {
     batching.max_queue_delay_us = 500000;
     DiarModel model(bm, gguf_path, batching);
     const ScopedBatchCohort scalar_cohort(1);
+    const double model_init_ms = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - model_init_start).count();
 
     std::vector<float> probs;
     std::vector<DiarSegment> segs;
     int64_t n_frames = 0;
     double sec_per_frame = 0.0;
+    const auto first_inference_start = std::chrono::steady_clock::now();
     if (offline) {
         probs = model.diarize_offline(audio.data(), audio.size(), &n_frames);
         sec_per_frame = model.cfg().seconds_per_output_frame();
@@ -167,6 +213,8 @@ main(int argc, char** argv) {
         n_frames = stream.n_frames();
         sec_per_frame = stream.seconds_per_frame();
     }
+    const double first_inference_ms = std::chrono::duration<double, std::milli>(
+        std::chrono::steady_clock::now() - first_inference_start).count();
     if (batching_check) {
         struct ChunkInput {
             std::vector<float> mel;
@@ -364,6 +412,39 @@ main(int argc, char** argv) {
         std::fprintf(
             stdout, "B=4 diarization parity PASS (%lld ms)\n",
             static_cast<long long>(elapsed.count()));
+    }
+    if (std::getenv("NEMO_SPEECH_SCHEDULE_CAPTURE") != nullptr)
+        model.model().session()->dump_schedule(std::cerr, "test_diar_streaming inference");
+    if (benchmark_repeats > 0) {
+        std::vector<double> warm_ms;
+        warm_ms.reserve(static_cast<size_t>(benchmark_repeats));
+        for (int repeat = 0; repeat < benchmark_repeats; ++repeat) {
+            const auto start = std::chrono::steady_clock::now();
+            if (offline) {
+                int64_t ignored_frames = 0;
+                (void)model.diarize_offline(audio.data(), audio.size(), &ignored_frames);
+            } else {
+                DiarStream stream(model, geo);
+                if (compact_frames > 0)
+                    stream.set_compaction(compact_frames, compact_frames / 2);
+                const size_t push = static_cast<size_t>(push_ms) * 16;
+                for (size_t offset = 0; offset < audio.size(); offset += push)
+                    stream.feed_audio(audio.data() + offset, std::min(push, audio.size() - offset));
+                stream.finish();
+            }
+            warm_ms.push_back(std::chrono::duration<double, std::milli>(
+                std::chrono::steady_clock::now() - start).count());
+        }
+        const double audio_seconds = static_cast<double>(audio.size()) / 16000.0;
+        std::fprintf(stderr,
+            "[benchmark] {\"device\":\"%s\",\"gpu_device\":\"%s\",\"audio_seconds\":%.6f,"
+            "\"model_init_ms\":%.3f,\"first_inference_ms\":%.3f,\"warm_inference_ms\":[",
+            use_gpu ? bm.selected_gpu_backend_name().c_str() : "CPU",
+            use_gpu ? bm.selected_gpu_device_name().c_str() : "CPU",
+            audio_seconds, model_init_ms, first_inference_ms);
+        for (size_t i = 0; i < warm_ms.size(); ++i)
+            std::fprintf(stderr, "%s%.3f", i ? "," : "", warm_ms[i]);
+        std::fprintf(stderr, "]}\n");
     }
     if (!probs_path.empty()) {
         std::FILE* f = std::fopen(probs_path.c_str(), "wb");

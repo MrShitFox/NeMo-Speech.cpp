@@ -3,6 +3,7 @@
 #pragma once
 
 #include <cstddef>
+#include <iosfwd>
 #include <cstdint>
 #include <memory>
 #include <mutex>
@@ -74,7 +75,7 @@ class Diarizer {
    public:
     static std::shared_ptr<Diarizer> load(
         int gpu, const std::string& model_path, DiarGeometry geometry = {},
-        BatchingConfig batching = {});
+        BatchingConfig batching = {}, std::string gpu_backend_name = {});
 
     Diarizer(std::shared_ptr<DiarModel> model, DiarGeometry geometry);
 
@@ -90,6 +91,7 @@ class Diarizer {
     const std::array<uint8_t, 32>& model_fingerprint() const;
     double seconds_per_frame() const;
     BatchMetrics batch_metrics() const;
+    void dump_schedule(std::ostream& out, const std::string& session_label) const;
 
    private:
     std::shared_ptr<DiarModel> model_;

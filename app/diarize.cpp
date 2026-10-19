@@ -3,8 +3,11 @@
 
 #include <algorithm>
 #include <atomic>
+#include <chrono>
 #include <cstdio>
+#include <cstdlib>
 #include <filesystem>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <thread>
@@ -144,6 +147,7 @@ command_diarize(int argc, char** argv) {
         parser.ApplyEnv("NEMO_SPEECH");
         std::string format = cli_json() ? "json" : "text";
         std::string recording_id;
+        std::string gpu_backend_name;
         int gpu = default_gpu_index();
         int concurrency = 0;
         bool offline = false;
@@ -159,7 +163,10 @@ command_diarize(int argc, char** argv) {
             else if (arg == "--gpu")
                 gpu = parse_int(value_after(i, argc, argv, arg), arg, -1, 1024);
             else if (arg == "--device" || arg == "--backend") {
-                gpu = parse_device(value_after(i, argc, argv, arg), arg);
+                const std::string device = value_after(i, argc, argv, arg);
+                gpu = parse_device(device, arg);
+                if (device == "vulkan" || device.rfind("vulkan:", 0) == 0)
+                    gpu_backend_name = "Vulkan";
             } else if (arg == "--offline")
                 offline = true;
             else if (arg == "--preset")
@@ -233,9 +240,11 @@ command_diarize(int argc, char** argv) {
                 stderr, "diarize: model=%s mode=%s inputs=%zu concurrency=%d device=%d\n",
                 config.model_path.c_str(), offline ? "offline" : "streaming", inputs.size(),
                 workers, gpu);
-        auto engine = nemo_speech::asr::Diarizer::load(gpu, config.model_path, geometry, batching);
+        auto engine = nemo_speech::asr::Diarizer::load(
+            gpu, config.model_path, geometry, batching, gpu_backend_name);
         std::vector<nemo_speech::asr::DiarizationResult> results(inputs.size());
         std::vector<std::string> errors(inputs.size());
+        std::vector<double> inference_ms(inputs.size(), 0.0);
         std::atomic<size_t> next{0};
         std::vector<std::thread> worker_threads;
         worker_threads.reserve(workers);
@@ -248,11 +257,14 @@ command_diarize(int argc, char** argv) {
                     try {
                         const auto source =
                             nemo_speech::audio::load_wav_file(inputs[index].string());
+                        const auto inference_start = std::chrono::steady_clock::now();
                         results[index] = engine->diarize(
                             source.samples.data(), source.samples.size(), source.sample_rate,
                             offline ? nemo_speech::asr::DiarizationMode::Offline
                                     : nemo_speech::asr::DiarizationMode::Streaming,
                             segmentation);
+                        inference_ms[index] = std::chrono::duration<double, std::milli>(
+                            std::chrono::steady_clock::now() - inference_start).count();
                     }
                     catch (const std::exception& error) {
                         errors[index] = error.what();
@@ -261,6 +273,8 @@ command_diarize(int argc, char** argv) {
             });
         }
         for (auto& worker : worker_threads) worker.join();
+        if (cli_verbose() && std::getenv("NEMO_SPEECH_SCHEDULE_CAPTURE") != nullptr)
+            engine->dump_schedule(std::cerr, "Sortformer inference");
         if (cli_verbose() && batching.enabled) {
             const auto metrics = engine->batch_metrics();
             std::fprintf(
@@ -268,6 +282,23 @@ command_diarize(int argc, char** argv) {
                 static_cast<unsigned long long>(metrics.batches),
                 static_cast<unsigned long long>(metrics.items),
                 static_cast<unsigned long long>(metrics.max_observed_batch));
+        }
+        if (cli_verbose()) {
+            std::vector<double> completed;
+            completed.reserve(inference_ms.size());
+            for (size_t i = 0; i < inference_ms.size(); ++i)
+                if (errors[i].empty()) completed.push_back(inference_ms[i]);
+            if (!completed.empty()) {
+                std::sort(completed.begin(), completed.end());
+                double total_ms = 0.0;
+                for (double value : completed) total_ms += value;
+                const size_t p95_index = (95 * completed.size() + 99) / 100 - 1;
+                std::fprintf(
+                    stderr,
+                    "diarize: inference_latency_ms mean=%.2f p50=%.2f p95=%.2f max=%.2f completed=%zu\n",
+                    total_ms / completed.size(), completed[(completed.size() - 1) / 2],
+                    completed[p95_index], completed.back(), completed.size());
+            }
         }
 
         if (directory && output_dir.empty())

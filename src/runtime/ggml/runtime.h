@@ -202,6 +202,9 @@ void keep_skinny_q8_weights_separate();
 struct Params {
     bool use_gpu = false;
     int gpu_device_idx = 0;
+    // Optional ggml backend registry name (for example, "Vulkan"). When set,
+    // gpu_device_idx is counted only among matching GPU devices.
+    std::string gpu_backend_name;
     char* pe_bin_path = nullptr;
     int n_threads = 4;  // CPU backend threads
 };
@@ -227,6 +230,8 @@ class BackendManager {
     // owned by this BackendManager.
     std::vector<ggml_backend_t> get_backends();
     const Params& get_params() const { return params; }
+    const std::string& selected_gpu_backend_name() const { return selected_gpu_backend_name_; }
+    const std::string& selected_gpu_device_name() const { return selected_gpu_device_name_; }
 
     // Sessions sharing a manager serialize backend setup and compute. Use
     // separate managers for independent execution lanes.
@@ -238,6 +243,8 @@ class BackendManager {
    private:
     Params params;
     ggml_backend_t borrowed_gpu_backend_ = nullptr;
+    std::string selected_gpu_backend_name_;
+    std::string selected_gpu_device_name_;
     std::vector<ggml_backend_ptr> backends;
     // Non-owning alias into `backends`.
     ggml_backend_t gpu_backend = nullptr;

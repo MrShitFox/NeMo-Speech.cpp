@@ -19,6 +19,20 @@ using namespace nemo_speech::asr;
 
 namespace {
 
+struct DeviceSelection {
+    int gpu_index = -1;
+    std::string backend_name;
+    int requested_gpu_index = 0;
+};
+
+DeviceSelection device_selection;
+
+std::shared_ptr<Diarizer>
+load_diarizer(const std::string& model_path, DiarGeometry geometry = {}) {
+    return Diarizer::load(
+        device_selection.gpu_index, model_path, geometry, {}, device_selection.backend_name);
+}
+
 void
 require(bool condition, const char* message) {
     if (!condition) throw std::runtime_error(message);
@@ -192,7 +206,7 @@ test_silence_and_compaction(
     extended.insert(extended.end(), 5 * 16000, 0.f);
     const size_t split = std::min(extended.size() - 1, audio.size() + 4500 * 16);
     constexpr size_t kChunk = 160 * 16;
-    auto diarizer = Diarizer::load(-1, model_path);
+    auto diarizer = load_diarizer(model_path);
 
     auto reference = diarizer->streaming_diarize();
     reference->set_compaction(500, 200);
@@ -227,7 +241,7 @@ test_speaker_changes(
     std::vector<float> crop(ami.begin() + begin, ami.begin() + end);
     constexpr size_t kChunk = 160 * 16;
     const size_t split = crop.size() / 2 + 731;
-    auto diarizer = Diarizer::load(-1, model_path);
+    auto diarizer = load_diarizer(model_path);
 
     auto reference = diarizer->streaming_diarize();
     push_range(*reference, crop, 0, split, 16000, kChunk);
@@ -264,11 +278,34 @@ make_48k_test_audio(const std::vector<float>& source) {
 
 int
 main(int argc, char** argv) {
-    if (argc != 4) {
-        std::fprintf(stderr, "usage: %s <sortformer.gguf> <jfk.wav> <ami.wav>\n", argv[0]);
+    if (argc < 4) {
+        std::fprintf(stderr, "usage: %s <sortformer.gguf> <jfk.wav> <ami.wav> [--device cpu|vulkan] [--gpu-device N]\n", argv[0]);
         return 2;
     }
     try {
+        std::string device = "cpu";
+        for (int i = 4; i < argc; ++i) {
+            const std::string arg = argv[i];
+            if ((arg == "--device" || arg == "--gpu-device") && i + 1 >= argc)
+                throw std::runtime_error(arg + " requires a value");
+            if (arg == "--device") device = argv[++i];
+            else if (arg == "--gpu-device") {
+                const int index = std::stoi(argv[++i]);
+                if (index < 0 || index > 1024) throw std::runtime_error("--gpu-device must be in [0,1024]");
+                device_selection.requested_gpu_index = index;
+            } else {
+                throw std::runtime_error("unknown option: " + arg);
+            }
+        }
+        if (device != "cpu" && device != "vulkan")
+            throw std::runtime_error("--device must be cpu or vulkan");
+        if (device == "cpu" && device_selection.requested_gpu_index != 0)
+            throw std::runtime_error("--gpu-device requires --device vulkan");
+        if (device == "vulkan") {
+            device_selection.gpu_index = device_selection.requested_gpu_index;
+            device_selection.backend_name = "Vulkan";
+        }
+
         std::vector<float> audio;
         int sample_rate = 0;
         if (!read_wav_mono_16k(argv[2], audio, sample_rate) || sample_rate != 16000)
@@ -278,7 +315,7 @@ main(int argc, char** argv) {
         // compression on the short JFK fixture, keeping this acceptance test
         // bounded while exercising the real Sortformer V3 pipeline.
         DiarGeometry geometry{32, 8, 13, 4, 0, 1};
-        auto diarizer = Diarizer::load(-1, argv[1], geometry);
+        auto diarizer = load_diarizer(argv[1], geometry);
         test_empty_and_rejections(diarizer);
         test_first_processed_chunk(diarizer, audio);
 
@@ -289,7 +326,7 @@ main(int argc, char** argv) {
 
         // Reference run with the same API call boundaries used by the
         // restored path.
-        auto reference_model = Diarizer::load(-1, argv[1], geometry);
+        auto reference_model = load_diarizer(argv[1], geometry);
         auto reference = reference_model->streaming_diarize();
         push_range(*reference, audio, 0, split1, 16000, kChunk16k);
         push_range(*reference, audio, split1, split2, 16000, kChunk16k);
@@ -301,7 +338,7 @@ main(int argc, char** argv) {
 
         // First checkpoint is deliberately after unaligned 160 ms pushes and
         // after AOSC compression. The model and stream are both destroyed.
-        auto part1_model = Diarizer::load(-1, argv[1], geometry);
+        auto part1_model = load_diarizer(argv[1], geometry);
         auto part1 = part1_model->streaming_diarize();
         push_range(*part1, audio, 0, split1, 16000, kChunk16k);
         const auto state1 = timed_export(*part1, "after AOSC updates / partial audio");
@@ -310,7 +347,7 @@ main(int argc, char** argv) {
 
         // Restore, continue part two, save again, destroy everything, restore
         // once more and finish the tail.
-        auto part2_model = Diarizer::load(-1, argv[1], geometry);
+        auto part2_model = load_diarizer(argv[1], geometry);
         auto part2 = part2_model->streaming_diarize();
         timed_import(*part2, state1, "cross-model reload");
         push_range(*part2, audio, split1, split2, 16000, kChunk16k);
@@ -318,7 +355,7 @@ main(int argc, char** argv) {
         part2.reset();
         part2_model.reset();
 
-        auto part3_model = Diarizer::load(-1, argv[1], geometry);
+        auto part3_model = load_diarizer(argv[1], geometry);
         auto part3 = part3_model->streaming_diarize();
         timed_import(*part3, state2, "second cross-model reload");
         push_range(*part3, audio, split2, audio.size(), 16000, kChunk16k);
@@ -349,7 +386,7 @@ main(int argc, char** argv) {
         test_silence_and_compaction(argv[1], audio);
         test_speaker_changes(argv[1], argv[3]);
 
-        std::fprintf(stderr, "[snapshot] all CPU continuity checks passed\n");
+        std::fprintf(stderr, "[snapshot] all %s continuity checks passed\n", device.c_str());
         return 0;
     } catch (const std::exception& e) {
         std::fprintf(stderr, "[snapshot] failure: %s\n", e.what());

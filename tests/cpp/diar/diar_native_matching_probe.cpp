@@ -887,12 +887,15 @@ uint64_t fnv1a64(const std::string& data) {
     return hash;
 }
 
-std::string config_fingerprint(const DiarGeometry& geometry, int sample_rate, int speakers, int threads, int push_ms) {
+std::string config_fingerprint(
+    const DiarGeometry& geometry, int sample_rate, int speakers, int threads, int push_ms,
+    const std::string& backend_name) {
     const std::string material = std::to_string(sample_rate) + ":" + std::to_string(speakers) + ":" +
         std::to_string(geometry.spkcache_len) + ":" + std::to_string(geometry.fifo_len) + ":" +
         std::to_string(geometry.chunk_len) + ":" + std::to_string(geometry.spkcache_update_period) + ":" +
         std::to_string(geometry.chunk_left_context) + ":" + std::to_string(geometry.chunk_right_context) + ":" +
-        std::to_string(push_ms) + ":cpu:" + std::to_string(threads);
+        std::to_string(push_ms) + ":" + (backend_name == "CPU" ? "cpu" : backend_name) + ":" +
+        std::to_string(threads);
     std::ostringstream out;
     out << std::hex << std::setfill('0') << std::setw(16) << fnv1a64(material);
     return out.str();
@@ -952,10 +955,13 @@ size_t resident_memory_bytes() {
 struct Options {
     std::filesystem::path manifest;
     std::string report = "-";
+    std::string device = "cpu";
     std::filesystem::path profile_out;
     std::filesystem::path profile_in;
     std::vector<std::string> identity_channel_specs;
     int threads = 4;
+    int gpu_device = 0;
+    int benchmark_repeats = 0;
 };
 
 Options parse_args(int argc, char** argv) {
@@ -973,11 +979,23 @@ Options parse_args(int argc, char** argv) {
         else if (arg == "--profile-in") options.profile_in = next("--profile-in");
         else if (arg == "--identity-channel") options.identity_channel_specs.push_back(next("--identity-channel"));
         else if (arg == "--threads") options.threads = std::stoi(next("--threads"));
+        else if (arg == "--device") options.device = next("--device");
+        else if (arg == "--gpu-device") options.gpu_device = std::stoi(next("--gpu-device"));
+        else if (arg == "--benchmark-repeats") options.benchmark_repeats = std::stoi(next("--benchmark-repeats"));
         else if (arg == "--help" || arg == "-h")
-            throw std::runtime_error("usage: diar_native_matching_probe MANIFEST.json [--report FILE] [--profile-out FILE] [--profile-in FILE --identity-channel ID=N] [--threads N]");
+            throw std::runtime_error("usage: diar_native_matching_probe MANIFEST.json [--device cpu|vulkan] [--gpu-device N] [--report FILE] [--profile-out FILE] [--profile-in FILE --identity-channel ID=N] [--threads N] [--benchmark-repeats N]");
         else throw std::runtime_error("unknown option: " + arg);
     }
     if (options.threads <= 0 || options.threads > 256) throw std::runtime_error("--threads must be in [1,256]");
+    if (options.device != "cpu" && options.device != "vulkan")
+        throw std::runtime_error("--device must be cpu or vulkan");
+    if (options.gpu_device < 0 || options.gpu_device > 1024)
+        throw std::runtime_error("--gpu-device must be in [0,1024]");
+    if (options.benchmark_repeats != 0 &&
+        (options.benchmark_repeats < 3 || options.benchmark_repeats > 20))
+        throw std::runtime_error("--benchmark-repeats must be in [3,20]");
+    if (options.device == "cpu" && options.gpu_device != 0)
+        throw std::runtime_error("--gpu-device requires --device vulkan");
     if (!options.profile_out.empty() && !options.profile_in.empty())
         throw std::runtime_error("--profile-out and --profile-in are mutually exclusive");
     if (!options.profile_in.empty() && options.identity_channel_specs.empty())
@@ -1053,8 +1071,11 @@ int main(int argc, char** argv) {
         if (!manifest.rttm.empty() && !std::filesystem::exists(manifest.rttm))
             throw std::runtime_error("RTTM reference not found: " + manifest.rttm.string());
 
+        const auto model_init_start = std::chrono::steady_clock::now();
         ggml_runtime::Params params;
-        params.use_gpu = false;
+        params.use_gpu = options.device == "vulkan";
+        params.gpu_device_idx = options.gpu_device;
+        params.gpu_backend_name = params.use_gpu ? "Vulkan" : "";
         params.n_threads = options.threads;
         params.pe_bin_path = const_cast<char*>("");
         ggml_runtime::BackendManager backend(params);
@@ -1062,6 +1083,8 @@ int main(int argc, char** argv) {
                                                  SortformerResearchConfig{});
         const DiarGeometry geometry = model->resolved_geometry(DiarGeometry::v3_streaming());
         auto diarizer = std::make_shared<Diarizer>(model, geometry);
+        const double model_init_ms = std::chrono::duration<double, std::milli>(
+            std::chrono::steady_clock::now() - model_init_start).count();
         const size_t rss_after_model = resident_memory_bytes();
         const std::vector<Clip> eval_clips = queries(manifest);
         if (eval_clips.empty()) throw std::runtime_error("manifest has no known or unknown queries");
@@ -1104,6 +1127,34 @@ int main(int argc, char** argv) {
         const std::string p2 = enrolled_ids.size() < 2 ? std::string() : enrolled_ids[1];
         const int p1_channel = mapping.count(p1) ? mapping.at(p1) : -1;
         const int p2_channel = !p2.empty() && mapping.count(p2) ? mapping.at(p2) : -1;
+
+        struct ResearchBenchmarkRun {
+            double wall_ms = 0.0;
+            double inference_ms = 0.0;
+            double audio_seconds = 0.0;
+        };
+        ResearchBenchmarkRun research_benchmark_warmup;
+        std::vector<ResearchBenchmarkRun> research_benchmark_runs;
+        if (options.benchmark_repeats > 0) {
+            const auto run_warm_start = [&]() {
+                const auto begin = std::chrono::steady_clock::now();
+                const auto outputs = evaluate_group(
+                    diarizer, geometry, eval_clips, manifest, &immutable_profile, mapping,
+                    context.enrollment_channel_activity, "benchmark_aosc_profile");
+                ResearchBenchmarkRun run;
+                run.wall_ms = std::chrono::duration<double, std::milli>(
+                    std::chrono::steady_clock::now() - begin).count();
+                for (const auto& output : outputs) {
+                    run.inference_ms += output.elapsed_ms;
+                    run.audio_seconds += output.source_duration_sec;
+                }
+                return run;
+            };
+            research_benchmark_warmup = run_warm_start();
+            research_benchmark_runs.reserve(static_cast<size_t>(options.benchmark_repeats));
+            for (int repeat = 0; repeat < options.benchmark_repeats; ++repeat)
+                research_benchmark_runs.push_back(run_warm_start());
+        }
 
         std::vector<std::pair<std::string, std::vector<uint8_t>>> conditions;
         if (loaded_from_disk) {
@@ -1228,15 +1279,26 @@ int main(int argc, char** argv) {
              << hex_bytes(diarizer->model_fingerprint().data(), diarizer->model_fingerprint().size())
              << "\",\"sample_rate\":" << diarizer->sample_rate() << ",\"speaker_channels\":"
              << diarizer->num_speakers() << ",\"embedding_dimension\":" << diarizer->embedding_dim() << "},\n";
+        json << "  \"backend\":{\"requested\":" << json_quote(options.device)
+             << ",\"name\":" << json_quote(params.use_gpu ? backend.selected_gpu_backend_name() : "CPU")
+             << ",\"device_name\":";
+        if (params.use_gpu) json << json_quote(backend.selected_gpu_device_name());
+        else json << "null";
+        json << ",\"device_index\":";
+        if (params.use_gpu) json << params.gpu_device_idx;
+        else json << "null";
+        json << ",\"threads\":" << params.n_threads << "},\n";
         json << "  \"streaming\":{\"preset\":\"v3_streaming\",\"push_ms\":" << manifest.push_ms
-             << ",\"backend\":\"CPU\",\"threads\":" << params.n_threads
+             << ",\"backend\":" << json_quote(params.use_gpu ? backend.selected_gpu_backend_name() : "CPU")
+             << ",\"threads\":" << params.n_threads
              << ",\"speaker_cache_frames\":" << geometry.spkcache_len
              << ",\"fifo_frames\":" << geometry.fifo_len << ",\"chunk_frames\":" << geometry.chunk_len
              << ",\"update_period_frames\":" << geometry.spkcache_update_period
              << ",\"left_context_frames\":" << geometry.chunk_left_context
              << ",\"right_context_frames\":" << geometry.chunk_right_context
              << ",\"fingerprint_fnv1a64\":" << json_quote(config_fingerprint(
-                    geometry, diarizer->sample_rate(), diarizer->num_speakers(), params.n_threads, manifest.push_ms))
+                    geometry, diarizer->sample_rate(), diarizer->num_speakers(), params.n_threads,
+                    manifest.push_ms, params.use_gpu ? backend.selected_gpu_backend_name() : "CPU"))
              << "},\n";
 
         json << "  \"dataset\":{\"preliminary_fixture_only\":" << (manifest.preliminary_fixture_only ? "true" : "false")
@@ -1474,6 +1536,7 @@ int main(int argc, char** argv) {
             return count ? sum / count : std::numeric_limits<double>::quiet_NaN();
         };
         json << "  \"performance\":{\"cpu_threads\":" << params.n_threads
+             << ",\"model_init_ms\":" << model_init_ms
              << ",\"resident_memory_bytes_after_model_load\":" << rss_after_model
              << ",\"aosc_profile_bytes\":" << profile.size()
              << ",\"retained_condition_profile_bytes\":" << condition_profile_storage_bytes
@@ -1491,7 +1554,45 @@ int main(int argc, char** argv) {
         json_number(json, 10.0 * average_ms("full_aosc_warm_start"));
         json << ",\"pairwise_2_profile_bytes_estimate\":" << 2 * profile.size()
              << ",\"pairwise_10_profile_bytes_estimate\":" << 10 * profile.size()
-             << ",\"pairwise_timing_status\":\"linear estimate from measured single-context inference; independent profiles unavailable\"},\n";
+             << ",\"pairwise_timing_status\":\"linear estimate from measured single-context inference; independent profiles unavailable\","
+             << "\"research_warm_start_benchmark\":";
+        if (research_benchmark_runs.empty()) {
+            json << "null},\n";
+        } else {
+            std::vector<double> wall_ms;
+            std::vector<double> inference_ms;
+            double audio_seconds = 0.0;
+            for (const auto& run : research_benchmark_runs) {
+                wall_ms.push_back(run.wall_ms);
+                inference_ms.push_back(run.inference_ms);
+                audio_seconds = run.audio_seconds;
+            }
+            const auto median = [](std::vector<double> values) {
+                std::sort(values.begin(), values.end());
+                const size_t mid = values.size() / 2;
+                return values.size() % 2 == 0 ? 0.5 * (values[mid - 1] + values[mid]) : values[mid];
+            };
+            const auto mean = [](const std::vector<double>& values) {
+                return std::accumulate(values.begin(), values.end(), 0.0) / values.size();
+            };
+            json << "{\"loaded_model_reused\":true,\"profile_source\":"
+                 << json_quote(loaded_from_disk ? "disk_imported_aosc_only" : "fresh_enrollment_export")
+                 << ",\"warmup_iterations\":1,\"measured_repeats\":" << research_benchmark_runs.size()
+                 << ",\"fresh_streams_per_repeat\":" << eval_clips.size()
+                 << ",\"audio_seconds_per_repeat\":" << audio_seconds
+                 << ",\"warmup_wall_ms\":" << research_benchmark_warmup.wall_ms
+                 << ",\"warmup_inference_ms\":" << research_benchmark_warmup.inference_ms
+                 << ",\"wall_ms\":[";
+            for (size_t i = 0; i < wall_ms.size(); ++i) json << (i ? "," : "") << wall_ms[i];
+            json << "],\"inference_ms\":[";
+            for (size_t i = 0; i < inference_ms.size(); ++i) json << (i ? "," : "") << inference_ms[i];
+            json << "],\"mean_wall_ms\":" << mean(wall_ms)
+                 << ",\"median_wall_ms\":" << median(wall_ms)
+                 << ",\"mean_inference_ms\":" << mean(inference_ms)
+                 << ",\"median_inference_ms\":" << median(inference_ms)
+                 << ",\"inference_audio_seconds_per_wall_second\":"
+                 << (audio_seconds * 1000.0 / mean(inference_ms)) << "}},\n";
+        }
 
         json << "  \"baselines\":{\"fresh_session\":\"results method=fresh_context\","
              << "\"full_aosc_warm_start\":\"results method=full_aosc_warm_start\","

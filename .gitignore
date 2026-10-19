@@ -11,6 +11,7 @@ client_logs/
 /data/private/
 /tests/data/private/
 /tests/results/private/
+/VCTK-Corpus-0.92/
 *.aosc
 *.aosc-profile
 *.voiceid-profile

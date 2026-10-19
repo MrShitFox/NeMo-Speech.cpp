@@ -1516,26 +1516,35 @@ SortformerResearchConfig make_research_config(const std::vector<std::string>& re
 
 int main(int argc, char** argv) {
     if (argc < 2) {
-        std::cerr << "usage: " << argv[0] << " MANIFEST.json [--repeat N] [--report FILE]\n";
+        std::cerr << "usage: " << argv[0] << " MANIFEST.json [--device cpu|vulkan] [--gpu-device N] [--repeat N] [--report FILE]\n";
         return 2;
     }
     try {
         int repeats = 1;
         std::string report_path = "-";
+        std::string device = "cpu";
+        int gpu_device = 0;
         for (int i = 2; i < argc; ++i) {
             const std::string arg = argv[i];
             if (arg == "--repeat" && i + 1 < argc) repeats = std::stoi(argv[++i]);
             else if (arg == "--report" && i + 1 < argc) report_path = argv[++i];
+            else if (arg == "--device" && i + 1 < argc) device = argv[++i];
+            else if (arg == "--gpu-device" && i + 1 < argc) gpu_device = std::stoi(argv[++i]);
             else throw std::runtime_error("unknown or incomplete option: " + arg);
         }
         if (repeats < 1 || repeats > 20) throw std::runtime_error("--repeat must be in [1,20]");
+        if (device != "cpu" && device != "vulkan") throw std::runtime_error("--device must be cpu or vulkan");
+        if (gpu_device < 0 || gpu_device > 1024) throw std::runtime_error("--gpu-device must be in [0,1024]");
+        if (device == "cpu" && gpu_device != 0) throw std::runtime_error("--gpu-device requires --device vulkan");
         const Manifest manifest = load_manifest(argv[1]);
         validate_manifest(manifest);
         const auto research = make_research_config(manifest.representations);
         if (!std::filesystem::exists(manifest.model)) throw std::runtime_error("model not found: " + manifest.model);
 
         ggml_runtime::Params params;
-        params.use_gpu = false;
+        params.use_gpu = device == "vulkan";
+        params.gpu_device_idx = gpu_device;
+        params.gpu_backend_name = params.use_gpu ? "Vulkan" : "";
         params.n_threads = 4;
         params.pe_bin_path = const_cast<char*>("");
         ggml_runtime::BackendManager backend(params);
@@ -1554,8 +1563,15 @@ int main(int argc, char** argv) {
              << ",\"n_layers\":" << model->cfg().encoder.n_layers << ",\"encoder_dim\":" << model->cfg().encoder.d_model
              << ",\"encoder_proj_dim\":" << model->cfg().transformer.hidden_size << ",\"speaker_channels\":"
              << model->cfg().num_speakers << "},\n";
-        json << "  \"backend\":{\"name\":\"CPU\",\"threads\":" << params.n_threads
-             << ",\"stream_push_ms\":160},\n";
+        json << "  \"backend\":{\"requested\":" << json_quote(device)
+             << ",\"name\":" << json_quote(params.use_gpu ? backend.selected_gpu_backend_name() : "CPU")
+             << ",\"device_name\":";
+        if (params.use_gpu) json << json_quote(backend.selected_gpu_device_name());
+        else json << "null";
+        json << ",\"device_index\":";
+        if (params.use_gpu) json << gpu_device;
+        else json << "null";
+        json << ",\"threads\":" << params.n_threads << ",\"stream_push_ms\":160},\n";
         json << "  \"representations\":[";
         bool first_rep = true;
         for (const auto& rep : available_representations(manifest)) {

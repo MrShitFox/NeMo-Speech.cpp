@@ -14,10 +14,11 @@ namespace nemo_speech::asr {
 namespace {
 
 ggml_runtime::Params
-backend_params(int gpu) {
+backend_params(int gpu, const std::string& gpu_backend_name) {
     ggml_runtime::Params params;
     params.use_gpu = gpu >= 0;
     params.gpu_device_idx = gpu < 0 ? 0 : gpu;
+    params.gpu_backend_name = gpu_backend_name;
     params.pe_bin_path = const_cast<char*>("");
     return params;
 }
@@ -26,8 +27,10 @@ struct DiarizerResources {
     ggml_runtime::BackendManager backend;
     DiarModel model;
 
-    DiarizerResources(int gpu, const std::string& model_path, const BatchingConfig& batching)
-        : backend(backend_params(gpu)), model(backend, model_path, batching) {}
+    DiarizerResources(
+        int gpu, const std::string& model_path, const BatchingConfig& batching,
+        const std::string& gpu_backend_name)
+        : backend(backend_params(gpu, gpu_backend_name)), model(backend, model_path, batching) {}
 };
 
 }  // namespace
@@ -155,8 +158,9 @@ DiarizationStream::segments(const DiarSegmentationCfg& config) const {
 
 std::shared_ptr<Diarizer>
 Diarizer::load(
-    int gpu, const std::string& model_path, DiarGeometry geometry, BatchingConfig batching) {
-    auto resources = std::make_shared<DiarizerResources>(gpu, model_path, batching);
+    int gpu, const std::string& model_path, DiarGeometry geometry, BatchingConfig batching,
+    std::string gpu_backend_name) {
+    auto resources = std::make_shared<DiarizerResources>(gpu, model_path, batching, gpu_backend_name);
     // Streams retain this alias, which keeps both the model and its backend alive.
     auto* model_pointer = &resources->model;
     auto model = std::shared_ptr<DiarModel>(std::move(resources), model_pointer);
@@ -253,6 +257,11 @@ Diarizer::seconds_per_frame() const {
 BatchMetrics
 Diarizer::batch_metrics() const {
     return model_->batch_metrics();
+}
+
+void
+Diarizer::dump_schedule(std::ostream& out, const std::string& session_label) const {
+    model_->model().session()->dump_schedule(out, session_label);
 }
 
 }  // namespace nemo_speech::asr
