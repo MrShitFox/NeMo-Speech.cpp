@@ -1,0 +1,1937 @@
+{
+  "folds": [
+    {
+      "aosc_context_profile": {
+        "aosc_profile_import": {
+          "backend": "Vulkan",
+          "cache_frames": 264,
+          "context_pause_ms_per_utterance": 250,
+          "device_name": "Vulkan0",
+          "evaluation_identities_used": false,
+          "model_fingerprint": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+          "native_speaker_channels": 8,
+          "profile_bytes": 551305,
+          "profile_sha256": "89cf28029bf2236cc2393b25fdf76e88b5264e494c07a13de297edffc9ff3aa8",
+          "schema": "nemo-speech.voiceid-task09b-context-profile.v1",
+          "source_job_count": 160,
+          "training_context_speakers": 8
+        }
+      },
+      "feature_context_comparison": [
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 26.0841064453125,
+          "mean_pooled_cosine_to_fresh": 0.9912391394376755,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9888336658477783,
+              0.9897793650627136,
+              0.9903834313154221,
+              0.9910643398761749,
+              0.9919777512550354,
+              0.9930229842662811,
+              0.9958431124687195
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 30.538986206054688,
+          "mean_pooled_cosine_to_fresh": 0.9987444877624512,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9950044751167297,
+              0.9982459306716919,
+              0.9985108524560928,
+              0.9990891516208649,
+              0.9991932511329651,
+              0.9993198275566101,
+              0.999714732170105
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 23.89337921142578,
+          "mean_pooled_cosine_to_fresh": 0.9969035983085632,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9948894381523132,
+              0.9960022687911987,
+              0.996500164270401,
+              0.9967793822288513,
+              0.9974917620420456,
+              0.9977519631385803,
+              0.9988978505134583
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 20.610260009765625,
+          "mean_pooled_cosine_to_fresh": 0.997419673204422,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9959193468093872,
+              0.9963285624980927,
+              0.9968840926885605,
+              0.9974794387817383,
+              0.9978517293930054,
+              0.9980729818344116,
+              0.9993904829025269
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 6.217004776000977,
+          "mean_pooled_cosine_to_fresh": 0.3476972013711929,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.1762147694826126,
+              0.20444457828998566,
+              0.28124573454260826,
+              0.3424287885427475,
+              0.41356606036424637,
+              0.49131255149841313,
+              0.5657449960708618
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 6.023105621337891,
+          "mean_pooled_cosine_to_fresh": 0.9705323129892349,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9328078031539917,
+              0.9544517993927002,
+              0.961961954832077,
+              0.9717400670051575,
+              0.9851873815059662,
+              0.989494651556015,
+              0.9916984438896179
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 5.9235453605651855,
+          "mean_pooled_cosine_to_fresh": 0.46246944218873975,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.42397117614746094,
+              0.4343922436237335,
+              0.44519952684640884,
+              0.4548764228820801,
+              0.46472756564617157,
+              0.4951658040285111,
+              0.5500219464302063
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 6.415164947509766,
+          "mean_pooled_cosine_to_fresh": 0.4701318606734276,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4272814691066742,
+              0.43475874662399294,
+              0.44424863159656525,
+              0.4538620263338089,
+              0.47915516793727875,
+              0.5394307374954224,
+              0.5710577964782715
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 14.953125,
+          "mean_pooled_cosine_to_fresh": 0.4427377477288246,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.28338611125946045,
+              0.31924056708812715,
+              0.34575799107551575,
+              0.42297984659671783,
+              0.5169343948364258,
+              0.6269911527633668,
+              0.7112591862678528
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 13.455078125,
+          "mean_pooled_cosine_to_fresh": 0.9824669837951661,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9441683888435364,
+              0.9666136741638184,
+              0.973300889134407,
+              0.9853541851043701,
+              0.995707169175148,
+              0.998409366607666,
+              0.9990429282188416
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 12.16796875,
+          "mean_pooled_cosine_to_fresh": 0.38535195887088775,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.279273122549057,
+              0.2986803650856018,
+              0.324051596224308,
+              0.36659714579582214,
+              0.4285174235701561,
+              0.510476416349411,
+              0.5419246554374695
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 11.005859375,
+          "mean_pooled_cosine_to_fresh": 0.39538330435752866,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2806832194328308,
+              0.3020301580429077,
+              0.3230295404791832,
+              0.3568256050348282,
+              0.4871755391359329,
+              0.5254772365093231,
+              0.5832369923591614
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 20,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 0.0,
+          "mean_pooled_cosine_to_fresh": 1.0000000178813935,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999998807907104,
+              0.9999999403953552,
+              0.9999999403953552,
+              1.0,
+              1.0000001192092896,
+              1.0000001192092896,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 0.613006591796875,
+          "mean_pooled_cosine_to_fresh": 0.9999996215105057,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999979138374329,
+              0.999999076128006,
+              0.9999995827674866,
+              0.9999998211860657,
+              0.9999999403953552,
+              1.0000001192092896,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 1,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 0.613006591796875,
+          "mean_pooled_cosine_to_fresh": 0.9999998092651368,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999989867210388,
+              0.9999993860721588,
+              0.9999996870756149,
+              0.9999999105930328,
+              1.0000001192092896,
+              1.0000001192092896,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 1,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_1",
+          "maximum_absolute_frame_difference": 0.613006591796875,
+          "mean_pooled_cosine_to_fresh": 0.9999998092651368,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999989867210388,
+              0.9999993860721588,
+              0.9999996870756149,
+              0.9999999105930328,
+              1.0000001192092896,
+              1.0000001192092896,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        }
+      ],
+      "fold_id": "fold_1",
+      "identity_decision_comparison": [
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.33397960662841797,
+              -0.0928983062505722,
+              0.026388206984847784,
+              0.13909772783517838,
+              0.274382509291172,
+              0.43483863770961756,
+              0.6235592365264893
+            ]
+          },
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_1",
+          "known_correct_accept_rate": 0.5,
+          "known_correct_accepts": 5,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.3560643494129181,
+              0.46360255777835846,
+              0.5150635093450546,
+              0.6808525919914246,
+              0.7158932387828827,
+              0.7781969308853149,
+              0.7857559323310852
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.9377293586730957,
+          "model_key": "fold_1_encoder_layer_7_supcon_linear",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6847962737083435,
+          "top_identity_changes_vs_fresh": 0,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.40444615483283997,
+              0.43933185040950773,
+              0.48572372645139694,
+              0.5371531546115875,
+              0.5779027938842773,
+              0.6182810485363006,
+              0.62471604347229
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.3165217936038971,
+              0.41373269259929657,
+              0.5162409991025925,
+              0.5955458879470825,
+              0.655250146985054,
+              0.667598444223404,
+              0.6890798807144165
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.3466666340827942,
+              -0.12274533808231353,
+              -0.015642709098756313,
+              0.12404650822281837,
+              0.3105098009109497,
+              0.45379238128662097,
+              0.6750856637954712
+            ]
+          },
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_1",
+          "known_correct_accept_rate": 0.5,
+          "known_correct_accepts": 5,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4629357159137726,
+              0.5063538938760758,
+              0.5499705374240875,
+              0.6880490183830261,
+              0.7287098616361618,
+              0.7782088160514832,
+              0.798191487789154
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.9081215381622314,
+          "model_key": "fold_1_encoder_layer_7_supcon_linear",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6847962737083435,
+          "top_identity_changes_vs_fresh": 1,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2537911534309387,
+              0.42083982825279237,
+              0.4782038852572441,
+              0.521917849779129,
+              0.5858897715806961,
+              0.6235906183719635,
+              0.6359161734580994
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4556744694709778,
+              0.4813055515289307,
+              0.5455624461174011,
+              0.6567999124526978,
+              0.7070601880550385,
+              0.7661520600318908,
+              0.8086063861846924
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.3291654586791992,
+              -0.12281858846545217,
+              -0.0032122917473316193,
+              0.12803589552640915,
+              0.2942645400762558,
+              0.41452136337757106,
+              0.6695185303688049
+            ]
+          },
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_1",
+          "known_correct_accept_rate": 0.5,
+          "known_correct_accepts": 5,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.45684486627578735,
+              0.4718994081020355,
+              0.609655112028122,
+              0.6836954951286316,
+              0.7146259546279907,
+              0.7614216566085815,
+              0.785300076007843
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.9120018124580384,
+          "model_key": "fold_1_encoder_layer_7_supcon_linear",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6847962737083435,
+          "top_identity_changes_vs_fresh": 2,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.26342928409576416,
+              0.4444563716650009,
+              0.4862091541290283,
+              0.510793149471283,
+              0.5833963453769684,
+              0.5950715065002441,
+              0.6151248812675476
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4290958642959595,
+              0.5089205503463745,
+              0.5688501447439194,
+              0.6582417786121368,
+              0.6785621345043182,
+              0.7392785131931304,
+              0.8089120388031006
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 3,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.35885894298553467,
+              -0.05306679382920265,
+              0.06414792779833078,
+              0.17750843614339828,
+              0.34595225751399994,
+              0.47808291912078854,
+              0.7123721837997437
+            ]
+          },
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_1",
+          "known_correct_accept_rate": 0.3,
+          "known_correct_accepts": 3,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4318733215332031,
+              0.4694869309663773,
+              0.5475645363330841,
+              0.6711713373661041,
+              0.69019715487957,
+              0.7517049312591553,
+              0.7537745237350464
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.8307037442922592,
+          "model_key": "fold_1_encoder_layer_7_supcon_linear",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6847962737083435,
+          "top_identity_changes_vs_fresh": 1,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.1794888973236084,
+              0.33050976395606996,
+              0.42749204486608505,
+              0.5021955668926239,
+              0.5522076040506363,
+              0.5992189526557923,
+              0.6058337092399597
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.5204479098320007,
+              0.5491916954517364,
+              0.6023746579885483,
+              0.6669531166553497,
+              0.7380411922931671,
+              0.7900825500488281,
+              0.8504942655563354
+            ]
+          }
+        }
+      ],
+      "selected_model_key": "fold_1_encoder_layer_7_supcon_linear"
+    },
+    {
+      "aosc_context_profile": {
+        "aosc_profile_import": {
+          "backend": "Vulkan",
+          "cache_frames": 264,
+          "context_pause_ms_per_utterance": 250,
+          "device_name": "Vulkan0",
+          "evaluation_identities_used": false,
+          "model_fingerprint": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+          "native_speaker_channels": 8,
+          "profile_bytes": 551305,
+          "profile_sha256": "50e5ff4e27c4b76e461686a52f09f2f76a1474d9d8d7fc9a386be81d46384fe4",
+          "schema": "nemo-speech.voiceid-task09b-context-profile.v1",
+          "source_job_count": 160,
+          "training_context_speakers": 8
+        }
+      },
+      "feature_context_comparison": [
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 25.30364990234375,
+          "mean_pooled_cosine_to_fresh": 0.9904106676578521,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9852411150932312,
+              0.9875678181648254,
+              0.9893156886100769,
+              0.991110622882843,
+              0.9921030700206757,
+              0.992499715089798,
+              0.9928959012031555
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 31.270198822021484,
+          "mean_pooled_cosine_to_fresh": 0.998606088757515,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9963012933731079,
+              0.9980816662311554,
+              0.9983689486980438,
+              0.9987460374832153,
+              0.9991322010755539,
+              0.999166214466095,
+              0.999488353729248
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 17.328857421875,
+          "mean_pooled_cosine_to_fresh": 0.9951198905706405,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9916279315948486,
+              0.993362832069397,
+              0.9945711940526962,
+              0.9954711198806763,
+              0.9958200007677078,
+              0.9965402901172637,
+              0.9971566796302795
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 23.0948486328125,
+          "mean_pooled_cosine_to_fresh": 0.9935156494379044,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9905803799629211,
+              0.9916414439678192,
+              0.9922436326742172,
+              0.9936449527740479,
+              0.9947797656059265,
+              0.9950715065002441,
+              0.9961159825325012
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 7.592860698699951,
+          "mean_pooled_cosine_to_fresh": 0.40244099870324135,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.19615760445594788,
+              0.22131954431533812,
+              0.27238472551107407,
+              0.37425597012043,
+              0.4999609440565109,
+              0.6491856455802918,
+              0.7624639272689819
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 7.7226972579956055,
+          "mean_pooled_cosine_to_fresh": 0.9709423840045929,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9044893383979797,
+              0.9542390584945679,
+              0.9685744047164917,
+              0.9785416722297668,
+              0.982385665178299,
+              0.9852594554424285,
+              0.986611008644104
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 5.919490814208984,
+          "mean_pooled_cosine_to_fresh": 0.5022291034460068,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4170491397380829,
+              0.43772068023681643,
+              0.4436306208372116,
+              0.4704913944005966,
+              0.5423428267240524,
+              0.6108964204788209,
+              0.71660315990448
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 5.054174423217773,
+          "mean_pooled_cosine_to_fresh": 0.4872894912958145,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4273914396762848,
+              0.4416452288627625,
+              0.4481920376420021,
+              0.4647875428199768,
+              0.5031616240739822,
+              0.5679087758064271,
+              0.6471400856971741
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 18.6484375,
+          "mean_pooled_cosine_to_fresh": 0.5264949470758438,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.33025291562080383,
+              0.34514794647693636,
+              0.3609083667397499,
+              0.41034604609012604,
+              0.6544239521026611,
+              0.835632473230362,
+              0.9236066937446594
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 16.52734375,
+          "mean_pooled_cosine_to_fresh": 0.9824749439954757,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9285798072814941,
+              0.9642118513584137,
+              0.9815766364336014,
+              0.9888612926006317,
+              0.9953536987304688,
+              0.9961650311946869,
+              0.9974885582923889
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 12.09765625,
+          "mean_pooled_cosine_to_fresh": 0.4392504751682281,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2954295575618744,
+              0.3089313417673111,
+              0.33435213565826416,
+              0.3695085644721985,
+              0.4963778480887413,
+              0.7100739479064943,
+              0.7754112482070923
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 15.005859375,
+          "mean_pooled_cosine_to_fresh": 0.3881316721439362,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2820410430431366,
+              0.3008013963699341,
+              0.324882447719574,
+              0.3564942628145218,
+              0.42303693294525146,
+              0.5356358110904694,
+              0.604792594909668
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 20,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 0.0,
+          "mean_pooled_cosine_to_fresh": 1.0,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999998807907104,
+              0.9999999344348908,
+              0.9999999403953552,
+              1.0,
+              1.0,
+              1.0000001192092896,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 0.597015380859375,
+          "mean_pooled_cosine_to_fresh": 0.9999996453523636,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999988079071045,
+              0.9999991476535797,
+              0.9999993294477463,
+              0.9999997913837433,
+              0.9999999552965164,
+              1.0,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 2,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 0.597015380859375,
+          "mean_pooled_cosine_to_fresh": 0.9999996960163117,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999989867210388,
+              0.9999992728233338,
+              0.999999463558197,
+              0.9999997913837433,
+              0.9999998956918716,
+              1.000000011920929,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 3,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_2",
+          "maximum_absolute_frame_difference": 0.537994384765625,
+          "mean_pooled_cosine_to_fresh": 0.9999997973442077,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999982714653015,
+              0.999999338388443,
+              0.9999998211860657,
+              0.9999999403953552,
+              1.0,
+              1.0000001192092896,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        }
+      ],
+      "fold_id": "fold_2",
+      "identity_decision_comparison": [
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.4016146957874298,
+              -0.21999464929103849,
+              -0.127020962536335,
+              0.02113991416990757,
+              0.16378165408968925,
+              0.37293003201484676,
+              0.689663827419281
+            ]
+          },
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_2",
+          "known_correct_accept_rate": 0.7,
+          "known_correct_accepts": 7,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.5478066802024841,
+              0.5554224908351898,
+              0.6463980972766876,
+              0.7534433305263519,
+              0.7931390851736069,
+              0.8297236919403076,
+              0.8498695492744446
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.9347282826900483,
+          "model_key": "fold_2_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6255831122398376,
+          "top_identity_changes_vs_fresh": 0,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.05079099163413048,
+              0.1374438475817442,
+              0.18955979496240616,
+              0.28462299704551697,
+              0.39847227185964584,
+              0.46726738214492797,
+              0.4712766408920288
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.17544347047805786,
+              0.3853074163198471,
+              0.49669527262449265,
+              0.5692742168903351,
+              0.6895155757665634,
+              0.7531391620635987,
+              0.7581459879875183
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 2,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.2857538163661957,
+              -0.15597065985202788,
+              -0.057341392152011395,
+              0.044803936034440994,
+              0.1884571611881256,
+              0.3986461848020552,
+              0.7116552591323853
+            ]
+          },
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_2",
+          "known_correct_accept_rate": 0.6,
+          "known_correct_accepts": 6,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.5172646045684814,
+              0.5293476343154907,
+              0.602468267083168,
+              0.6962729096412659,
+              0.7783158868551254,
+              0.7996156811714172,
+              0.8196158409118652
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.8519842207431794,
+          "model_key": "fold_2_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6255831122398376,
+          "top_identity_changes_vs_fresh": 2,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.03655558452010155,
+              0.0672546986490488,
+              0.20191819593310356,
+              0.31967656314373016,
+              0.4844561144709587,
+              0.4986735165119171,
+              0.5296451449394226
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.3354909420013428,
+              0.47028307616710663,
+              0.5507694631814957,
+              0.6301682889461517,
+              0.7507167458534241,
+              0.7831427872180938,
+              0.8065320253372192
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.24295203387737274,
+              -0.09290872067213056,
+              -0.004262783215381205,
+              0.12742217630147934,
+              0.3036963567137718,
+              0.5228090405464172,
+              0.6952624320983887
+            ]
+          },
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_2",
+          "known_correct_accept_rate": 0.7,
+          "known_correct_accepts": 7,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4741306006908417,
+              0.5280947417020798,
+              0.5796385556459427,
+              0.6923464238643646,
+              0.777169942855835,
+              0.7834835827350617,
+              0.8013343811035156
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.8013596355915069,
+          "model_key": "fold_2_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6255831122398376,
+          "top_identity_changes_vs_fresh": 3,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.01567123271524906,
+              0.11056894790381193,
+              0.21437440067529678,
+              0.30855418741703033,
+              0.47747524082660675,
+              0.4910374730825424,
+              0.5154076218605042
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.521747350692749,
+              0.5830448389053344,
+              0.5960552841424942,
+              0.7256091833114624,
+              0.7715873718261719,
+              0.7874857783317566,
+              0.8262056112289429
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.26271456480026245,
+              -0.13913245648145672,
+              -0.03384968638420105,
+              0.07394508272409439,
+              0.26237543672323227,
+              0.4604940831661224,
+              0.7013202905654907
+            ]
+          },
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_2",
+          "known_correct_accept_rate": 0.7,
+          "known_correct_accepts": 7,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.46742740273475647,
+              0.5111001759767533,
+              0.6092861294746399,
+              0.6671726703643799,
+              0.7554014027118683,
+              0.7806354880332946,
+              0.8084179162979126
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.7931422352790832,
+          "model_key": "fold_2_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.6255831122398376,
+          "top_identity_changes_vs_fresh": 3,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.0563695915043354,
+              0.12897564508020878,
+              0.22029296681284904,
+              0.2850988358259201,
+              0.45405035465955734,
+              0.47389100193977357,
+              0.492284893989563
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4848428964614868,
+              0.5233774423599243,
+              0.5614582896232605,
+              0.698634922504425,
+              0.743449404835701,
+              0.8160296201705932,
+              0.840970516204834
+            ]
+          }
+        }
+      ],
+      "selected_model_key": "fold_2_encoder_layer_7_speaker_ce_mlp"
+    },
+    {
+      "aosc_context_profile": {
+        "aosc_profile_import": {
+          "backend": "Vulkan",
+          "cache_frames": 264,
+          "context_pause_ms_per_utterance": 250,
+          "device_name": "Vulkan0",
+          "evaluation_identities_used": false,
+          "model_fingerprint": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+          "native_speaker_channels": 8,
+          "profile_bytes": 551305,
+          "profile_sha256": "f18f3763afe95976a0767c8dadb0f446ee6abaa962aeb94d305b482bec1d47e2",
+          "schema": "nemo-speech.voiceid-task09b-context-profile.v1",
+          "source_job_count": 160,
+          "training_context_speakers": 8
+        }
+      },
+      "feature_context_comparison": [
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 27.78435516357422,
+          "mean_pooled_cosine_to_fresh": 0.9881914049386978,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9828488826751709,
+              0.9840712010860443,
+              0.9858574867248535,
+              0.989305704832077,
+              0.9901634752750397,
+              0.9906932294368744,
+              0.9919215440750122
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 27.227157592773438,
+          "mean_pooled_cosine_to_fresh": 0.9985311836004257,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9950044751167297,
+              0.9977731347084046,
+              0.998320460319519,
+              0.9988111555576324,
+              0.9990875571966171,
+              0.9991694271564484,
+              0.9993059635162354
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 24.567138671875,
+          "mean_pooled_cosine_to_fresh": 0.9945100277662278,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9912949800491333,
+              0.9930872738361358,
+              0.9936522096395493,
+              0.9947732388973236,
+              0.995378315448761,
+              0.9955490887165069,
+              0.9971486330032349
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 32.67042541503906,
+          "mean_pooled_cosine_to_fresh": 0.9952756077051162,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9925525188446045,
+              0.9927026212215424,
+              0.9945519864559174,
+              0.9953375458717346,
+              0.9962226748466492,
+              0.9969923079013825,
+              0.9974847435951233
+            ]
+          },
+          "representation": "encoder.layer.7",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 7.798460483551025,
+          "mean_pooled_cosine_to_fresh": 0.47892947793006896,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.25005441904067993,
+              0.2870328903198242,
+              0.31809966266155243,
+              0.41238531470298767,
+              0.6308446675539017,
+              0.7888229846954345,
+              0.8312872052192688
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 6.876330375671387,
+          "mean_pooled_cosine_to_fresh": 0.9659477353096009,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9131224155426025,
+              0.9326480209827424,
+              0.9538795500993729,
+              0.9749612510204315,
+              0.9808800965547562,
+              0.9855773985385895,
+              0.9869520664215088
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 6.951470375061035,
+          "mean_pooled_cosine_to_fresh": 0.5083105623722076,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.368167906999588,
+              0.393155625462532,
+              0.4093553423881531,
+              0.45467472076416016,
+              0.5217931568622589,
+              0.7071425020694735,
+              0.9518669843673706
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 6.775582313537598,
+          "mean_pooled_cosine_to_fresh": 0.46168492436409,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.3762663006782532,
+              0.4294898480176926,
+              0.43740957230329514,
+              0.4552415460348129,
+              0.4695742130279541,
+              0.5008059829473496,
+              0.6265807747840881
+            ]
+          },
+          "representation": "encoder_output",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 22.8671875,
+          "mean_pooled_cosine_to_fresh": 0.5972513362765313,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.30006369948387146,
+              0.32029514014720917,
+              0.3837314322590828,
+              0.5280523747205734,
+              0.813325509428978,
+              0.9491372287273407,
+              0.972751796245575
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 23.0234375,
+          "mean_pooled_cosine_to_fresh": 0.9788004070520401,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9218287467956543,
+              0.9537177503108978,
+              0.9699450433254242,
+              0.9859859347343445,
+              0.9930948913097382,
+              0.9960913240909577,
+              0.9969112277030945
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 13.30859375,
+          "mean_pooled_cosine_to_fresh": 0.49086449295282364,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2801923155784607,
+              0.29282409846782687,
+              0.30569176375865936,
+              0.42032191157341003,
+              0.6227974891662598,
+              0.765210455656052,
+              0.9946481585502625
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 13.10546875,
+          "mean_pooled_cosine_to_fresh": 0.3297806829214096,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2728913724422455,
+              0.2806454569101334,
+              0.29337577521800995,
+              0.30735501646995544,
+              0.32829294353723526,
+              0.3744320899248124,
+              0.6276078820228577
+            ]
+          },
+          "representation": "encoder_proj",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 20,
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 0.0,
+          "mean_pooled_cosine_to_fresh": 0.9999999910593033,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999999403953552,
+              0.9999999403953552,
+              0.9999999403953552,
+              1.0,
+              1.0,
+              1.000000011920929,
+              1.0000001192092896
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 0,
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 0.599456787109375,
+          "mean_pooled_cosine_to_fresh": 0.9999994188547134,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999939203262329,
+              0.999998825788498,
+              0.9999995678663254,
+              0.9999998807907104,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 2,
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 0.599456787109375,
+          "mean_pooled_cosine_to_fresh": 0.9999993920326233,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999939203262329,
+              0.9999988615512848,
+              0.9999994486570358,
+              0.9999998509883881,
+              0.9999999552965164,
+              1.0,
+              1.0
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        },
+        {
+          "bit_identical_target_features": 3,
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_3",
+          "maximum_absolute_frame_difference": 0.599456787109375,
+          "mean_pooled_cosine_to_fresh": 0.9999994784593582,
+          "pooled_cosine_quantiles": {
+            "count": 20,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9999939203262329,
+              0.9999991357326508,
+              0.9999995678663254,
+              0.9999999403953552,
+              1.0,
+              1.0,
+              1.0
+            ]
+          },
+          "representation": "pre_encoder",
+          "target_count": 20,
+          "target_features_compared": 20
+        }
+      ],
+      "fold_id": "fold_3",
+      "identity_decision_comparison": [
+        {
+          "acceptance_changes_vs_fresh": 0,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.4774843454360962,
+              -0.29430336952209474,
+              -0.1800023503601551,
+              0.08433706685900688,
+              0.37109214067459106,
+              0.5516767859458923,
+              0.7836462259292603
+            ]
+          },
+          "context_mode": "silent_2_56s",
+          "fold_id": "fold_3",
+          "known_correct_accept_rate": 0.0,
+          "known_correct_accepts": 0,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.20025897026062012,
+              0.3827372133731842,
+              0.5791845321655273,
+              0.6773503720760345,
+              0.7208415567874908,
+              0.7396822869777679,
+              0.7489286661148071
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.9447531193494797,
+          "model_key": "fold_3_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.8202121257781982,
+          "top_identity_changes_vs_fresh": 1,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.12141769379377365,
+              0.24475243017077447,
+              0.44453705847263336,
+              0.6712079048156738,
+              0.73165462911129,
+              0.7436235845088959,
+              0.8165230751037598
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.3170384168624878,
+              0.44852888584136963,
+              0.5584555566310883,
+              0.6868896782398224,
+              0.7592096328735352,
+              0.7890874445438385,
+              0.802919328212738
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 0,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.40047597885131836,
+              -0.2551527351140976,
+              -0.1451513022184372,
+              0.1064956896007061,
+              0.3923666924238205,
+              0.5450007677078246,
+              0.7956058382987976
+            ]
+          },
+          "context_mode": "unrelated_train_speaker_a",
+          "fold_id": "fold_3",
+          "known_correct_accept_rate": 0.0,
+          "known_correct_accepts": 0,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.30830785632133484,
+              0.3558017581701279,
+              0.6207741647958755,
+              0.7203479707241058,
+              0.7477637082338333,
+              0.7622361719608307,
+              0.8092530965805054
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.8611054956912995,
+          "model_key": "fold_3_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.8202121257781982,
+          "top_identity_changes_vs_fresh": 3,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2729543149471283,
+              0.29468109309673307,
+              0.4490418881177902,
+              0.6512497067451477,
+              0.7339076548814774,
+              0.7585701942443848,
+              0.7665959000587463
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.4540066719055176,
+              0.47945667803287506,
+              0.6177013218402863,
+              0.7315339744091034,
+              0.8067943453788757,
+              0.8323995053768158,
+              0.8342616558074951
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 1,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.44613972306251526,
+              -0.2788848578929901,
+              -0.14084798842668533,
+              0.15059547871351242,
+              0.5005181729793549,
+              0.6399586200714111,
+              0.8231937885284424
+            ]
+          },
+          "context_mode": "unrelated_train_speaker_b",
+          "fold_id": "fold_3",
+          "known_correct_accept_rate": 0.1,
+          "known_correct_accepts": 1,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.32793813943862915,
+              0.43308464884757997,
+              0.5875865519046783,
+              0.7262968122959137,
+              0.7634003013372421,
+              0.7812291026115418,
+              0.8236811757087708
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.8987121880054474,
+          "model_key": "fold_3_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.8202121257781982,
+          "top_identity_changes_vs_fresh": 2,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.11312687397003174,
+              0.20968806147575378,
+              0.5512556880712509,
+              0.6757941544055939,
+              0.7548588514328003,
+              0.7816811800003052,
+              0.7870692014694214
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.27690351009368896,
+              0.5235209882259368,
+              0.6067662984132767,
+              0.7699950933456421,
+              0.8273550271987915,
+              0.8558616042137146,
+              0.8571560382843018
+            ]
+          }
+        },
+        {
+          "acceptance_changes_vs_fresh": 0,
+          "between_speaker_embedding_cosine": {
+            "count": 180,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.4088565707206726,
+              -0.2681875556707382,
+              -0.14609923586249352,
+              0.13452303409576416,
+              0.3860096260905266,
+              0.539211618900299,
+              0.7796183228492737
+            ]
+          },
+          "context_mode": "aosc_profile_import",
+          "fold_id": "fold_3",
+          "known_correct_accept_rate": 0.0,
+          "known_correct_accepts": 0,
+          "known_genuine_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.327041894197464,
+              0.35053348541259766,
+              0.5932594686746597,
+              0.6620123982429504,
+              0.725665882229805,
+              0.758271449804306,
+              0.7931578159332275
+            ]
+          },
+          "known_queries": 10,
+          "mean_identity_cosine_to_fresh": 0.8079255372285843,
+          "model_key": "fold_3_encoder_layer_7_speaker_ce_mlp",
+          "registry_size": 8,
+          "target_count": 20,
+          "target_speakers": 10,
+          "threshold": 0.8202121257781982,
+          "top_identity_changes_vs_fresh": 7,
+          "unknown_false_accept_rate": 0.0,
+          "unknown_false_accepts": 0,
+          "unknown_queries": 10,
+          "unknown_top_score_distribution": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.2429565191268921,
+              0.3290195673704147,
+              0.46239225566387177,
+              0.5762079060077667,
+              0.6972728371620178,
+              0.7247016906738281,
+              0.7755133509635925
+            ]
+          },
+          "within_speaker_embedding_cosine": {
+            "count": 10,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.5156417489051819,
+              0.5213965356349946,
+              0.5826207399368286,
+              0.7045291066169739,
+              0.8038651496171951,
+              0.8437359929084778,
+              0.8815138339996338
+            ]
+          }
+        }
+      ],
+      "selected_model_key": "fold_3_encoder_layer_7_speaker_ce_mlp"
+    }
+  ],
+  "protocol": {
+    "context_audio": "same query speech follows either 2.56s silence or one unrelated training-speaker utterance; AOSC mode imports a fixed profile made only from eight training speakers",
+    "contexts": [
+      "silent_2_56s",
+      "unrelated_train_speaker_a",
+      "unrelated_train_speaker_b",
+      "aosc_profile_import"
+    ],
+    "features": "three taps compared at matching target-relative 80ms timestamps; fresh baseline comes from the bulk extraction record",
+    "target_speakers": "ten per fold (five from registry8 and five unknown), two independent query utterances each",
+    "threshold": "fixed selected-head threshold calibrated on calibration speakers for 10s enrollment and 3s query; reused unchanged under all context modes"
+  },
+  "schema": "nemo-speech.voiceid-task09b-context.v1"
+}

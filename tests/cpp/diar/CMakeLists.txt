@@ -14,6 +14,9 @@ target_link_libraries(diar_enrollment_probe PRIVATE nemo_speech_diar)
 add_executable(diar_representation_probe diar_representation_probe.cpp)
 target_link_libraries(diar_representation_probe PRIVATE nemo_speech_diar)
 
+add_executable(diar_voiceid_feature_probe diar_voiceid_feature_probe.cpp)
+target_link_libraries(diar_voiceid_feature_probe PRIVATE nemo_speech_diar)
+
 add_executable(diar_native_matching_probe diar_native_matching_probe.cpp)
 target_link_libraries(diar_native_matching_probe PRIVATE nemo_speech_diar)
 

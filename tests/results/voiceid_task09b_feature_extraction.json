@@ -1,0 +1,60 @@
+{
+  "schema": "nemo-speech.voiceid-task09b-feature-extraction-summary.v1",
+  "model": {
+    "path": "models/Nemotron-3-Diarization.q8_0.gguf",
+    "fingerprint": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+    "original_weights_modified": false
+  },
+  "record_format": {
+    "magic": "NVFTR001",
+    "version": 1,
+    "sample_rate_hz": 16000,
+    "frame_period_ms": 80,
+    "feature_dtype": "float32",
+    "byte_order": "little-endian",
+    "speech_mask": "one 8-channel, 10ms VAD bitset per feature frame; speech frame requires at least 4 active bits",
+    "validation": "record headers, shape, byte order, timestamps, mask lengths, source hashes, model/backend metadata, and finite values passed"
+  },
+  "representations": {
+    "pre_encoder": 512,
+    "encoder.layer.7": 512,
+    "encoder_output": 512,
+    "encoder_proj": 192
+  },
+  "fresh_stream": {
+    "jobs": 6128,
+    "feature_records": 24512,
+    "backend": "Vulkan",
+    "device": "Vulkan0",
+    "zero_speech_jobs": 0,
+    "source_hash_validation": "passed",
+    "native_probability_parity_jobs": 3,
+    "native_probability_mismatches": 0
+  },
+  "context_stress": {
+    "jobs": 240,
+    "feature_records": 960,
+    "contexts": ["silent_2_56s", "unrelated_train_speaker_a", "unrelated_train_speaker_b", "aosc_profile_import"],
+    "backend": "Vulkan",
+    "device": "Vulkan0",
+    "zero_speech_jobs": 0,
+    "source_context_and_profile_hash_validation": "passed",
+    "native_probability_parity_jobs": 3,
+    "native_probability_mismatches": 0
+  },
+  "aosc_profiles": {
+    "count": 3,
+    "training_only_speakers_per_profile": 8,
+    "source_utterances_per_profile": 160,
+    "native_channels_per_profile": 8,
+    "evaluation_identity_audio_used": false
+  },
+  "streaming_protocol": {
+    "fresh_stream_initial_state": "empty; isolated utterance pushed in 160ms chunks",
+    "context_pause_ms_between_utterances": 250,
+    "fixed_context_silence_sec": 2.56,
+    "unrelated_context_speakers": "training-role identities only",
+    "aosc_profile_source": "predeclared training-role speakers only"
+  },
+  "research_feature_taps_change_native_probabilities": false
+}

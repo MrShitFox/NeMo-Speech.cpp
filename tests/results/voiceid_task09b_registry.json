@@ -1,0 +1,81 @@
+{
+  "add_after_removal_in_separate_process": {
+    "actual_enrollment_speech_sec": 10.25,
+    "embedding_dimension": 128,
+    "native_channel_index": null,
+    "registered_identities": 16,
+    "registered_identity": "external_user_after_removal",
+    "source_selector_used_only_for_audio": "p313"
+  },
+  "all_external_ids_independent_of_native_channels": true,
+  "fold_id": "fold_1",
+  "head_objective": "supcon_linear",
+  "identity_count_before_queries": 16,
+  "known_query_in_separate_process": {
+    "actual_query_speech_sec": 3.4800000190734863,
+    "best_cosine": 0.8176529407501221,
+    "best_identity": "external_user_01",
+    "decision": "external_user_01",
+    "native_channel_index": null,
+    "registry_size": 16,
+    "scores": {
+      "external_user_01": 0.8176529407501221,
+      "external_user_02": -0.03731533885002136,
+      "external_user_03": -0.12358864396810532,
+      "external_user_04": 0.4428875744342804,
+      "external_user_05": -0.04359261691570282,
+      "external_user_06": 0.23957563936710358,
+      "external_user_07": 0.5308592915534973,
+      "external_user_08": -0.1488882303237915,
+      "external_user_09": 0.30714932084083557,
+      "external_user_10": 0.30550259351730347,
+      "external_user_11": 0.5300619006156921,
+      "external_user_12": -0.015473108738660812,
+      "external_user_13": 0.05989958345890045,
+      "external_user_14": -0.3176461458206177,
+      "external_user_15": 0.20917056500911713,
+      "external_user_16": 0.509182870388031
+    },
+    "source_selector_used_only_for_audio": "p311",
+    "threshold": 0.6847962737083435
+  },
+  "native_channel_index_used": false,
+  "registration_processes": 16,
+  "registry_file": "/home/glebus/.cache/nemo-speech-task09b/voiceid_registry_fold1_replay.json",
+  "remove_in_separate_process": {
+    "registered_identities": 15,
+    "removed": "external_user_01"
+  },
+  "representation": "encoder.layer.7",
+  "schema": "nemo-speech.voiceid-task09b-registry-replay.v1",
+  "selected_model_key": "fold_1_encoder_layer_7_supcon_linear",
+  "threshold_from_calibration_only": 0.6847962737083435,
+  "unknown_query_in_separate_process": {
+    "actual_query_speech_sec": 4.560000061988831,
+    "best_cosine": 0.3696204721927643,
+    "best_identity": "external_user_15",
+    "decision": "UNKNOWN",
+    "native_channel_index": null,
+    "registry_size": 16,
+    "scores": {
+      "external_user_01": -0.19332563877105713,
+      "external_user_02": -0.25839662551879883,
+      "external_user_03": 0.30513691902160645,
+      "external_user_04": -0.08586978167295456,
+      "external_user_05": 0.11265521496534348,
+      "external_user_06": 0.2469310611486435,
+      "external_user_07": -0.18743105232715607,
+      "external_user_08": 0.27525559067726135,
+      "external_user_09": -0.5079905390739441,
+      "external_user_10": -0.4318210482597351,
+      "external_user_11": -0.29848888516426086,
+      "external_user_12": -0.1024213507771492,
+      "external_user_13": -0.02978159300982952,
+      "external_user_14": 0.36863499879837036,
+      "external_user_15": 0.3696204721927643,
+      "external_user_16": -0.24307496845722198
+    },
+    "source_selector_used_only_for_audio": "p313",
+    "threshold": 0.6847962737083435
+  }
+}
