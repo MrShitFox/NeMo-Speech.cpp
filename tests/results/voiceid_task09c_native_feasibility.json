@@ -1,0 +1,188 @@
+{
+  "cpu_matching_benchmark": {
+    "checksum": 740.90946,
+    "compiler_mode": "-O3 -DNDEBUG -march=native",
+    "dimension": 512,
+    "query_vectors": 12000,
+    "registry_rows": [
+      {
+        "multiply_accumulate_terms_per_query": 512,
+        "prototype_raw_bytes": 2048,
+        "queries_per_second": 980726.92,
+        "query_latency_us": 1.0196518,
+        "registry_size": 1
+      },
+      {
+        "multiply_accumulate_terms_per_query": 1024,
+        "prototype_raw_bytes": 4096,
+        "queries_per_second": 678533.46,
+        "query_latency_us": 1.4737667,
+        "registry_size": 2
+      },
+      {
+        "multiply_accumulate_terms_per_query": 2048,
+        "prototype_raw_bytes": 8192,
+        "queries_per_second": 435683.29,
+        "query_latency_us": 2.2952452,
+        "registry_size": 4
+      },
+      {
+        "multiply_accumulate_terms_per_query": 4096,
+        "prototype_raw_bytes": 16384,
+        "queries_per_second": 249211.82,
+        "query_latency_us": 4.0126508,
+        "registry_size": 8
+      },
+      {
+        "multiply_accumulate_terms_per_query": 8192,
+        "prototype_raw_bytes": 32768,
+        "queries_per_second": 134192.39,
+        "query_latency_us": 7.4519873,
+        "registry_size": 16
+      },
+      {
+        "multiply_accumulate_terms_per_query": 32768,
+        "prototype_raw_bytes": 131072,
+        "queries_per_second": 35637.745,
+        "query_latency_us": 28.060137,
+        "registry_size": 64
+      },
+      {
+        "multiply_accumulate_terms_per_query": 131072,
+        "prototype_raw_bytes": 524288,
+        "queries_per_second": 9008.5525,
+        "query_latency_us": 111.00562,
+        "registry_size": 256
+      }
+    ],
+    "schema": "nemo-speech.voiceid-task09c-matching-benchmark.v1"
+  },
+  "cross_process_registry": {
+    "dimensions": [
+      512
+    ],
+    "external_id_count": 16,
+    "external_ids": [
+      "tenant_001",
+      "tenant_002",
+      "tenant_003",
+      "tenant_004",
+      "tenant_005",
+      "tenant_006",
+      "tenant_007",
+      "tenant_008",
+      "tenant_009",
+      "tenant_010",
+      "tenant_011",
+      "tenant_012",
+      "tenant_013",
+      "tenant_014",
+      "tenant_015",
+      "tenant_016"
+    ],
+    "known_query": {
+      "actual_query_speech_sec": 3.4800000190734863,
+      "best_cosine": 0.7294889688491821,
+      "best_identity": "tenant_001",
+      "decision": "tenant_001",
+      "native_channel_index": null,
+      "registry_size": 16,
+      "scores": {
+        "tenant_001": 0.7294889688491821,
+        "tenant_002": -0.12795868515968323,
+        "tenant_003": -0.0847470685839653,
+        "tenant_004": 0.35471010208129883,
+        "tenant_005": -0.09715990722179413,
+        "tenant_006": 0.15802162885665894,
+        "tenant_007": 0.46695566177368164,
+        "tenant_008": -0.050078727304935455,
+        "tenant_009": 0.4743541181087494,
+        "tenant_010": 0.3265214264392853,
+        "tenant_011": 0.41400671005249023,
+        "tenant_012": -0.10122506320476532,
+        "tenant_013": -0.1114983931183815,
+        "tenant_014": -0.07866181433200836,
+        "tenant_015": -0.015397601760923862,
+        "tenant_016": 0.45390358567237854
+      },
+      "source_selector_used_only_for_audio": "p311",
+      "threshold": 0.584615170955658
+    },
+    "native_channel_indices_used": false,
+    "query_processes": 2,
+    "raw_float32_bytes_per_profile": [
+      2048
+    ],
+    "registered_profiles_successful": 16,
+    "registration_processes": 16,
+    "registry_json_bytes": 62415,
+    "serialized_prototype_base64_chars_mean": 2732.0,
+    "serialized_prototype_payload_bytes_mean": 2048.0,
+    "training_transform_reloaded_from_registry": true,
+    "unknown_query": {
+      "actual_query_speech_sec": 4.560000061988831,
+      "best_cosine": 0.23899227380752563,
+      "best_identity": "tenant_008",
+      "decision": "UNKNOWN",
+      "native_channel_index": null,
+      "registry_size": 16,
+      "scores": {
+        "tenant_001": -0.30825185775756836,
+        "tenant_002": -0.270972341299057,
+        "tenant_003": 0.12416777014732361,
+        "tenant_004": -0.026888269931077957,
+        "tenant_005": -0.03760495036840439,
+        "tenant_006": -0.033336978405714035,
+        "tenant_007": -0.14496470987796783,
+        "tenant_008": 0.23899227380752563,
+        "tenant_009": -0.03932274505496025,
+        "tenant_010": -0.13449488580226898,
+        "tenant_011": -0.1870976835489273,
+        "tenant_012": -0.08093763887882233,
+        "tenant_013": 0.14675642549991608,
+        "tenant_014": 0.1289670467376709,
+        "tenant_015": 0.13156604766845703,
+        "tenant_016": -0.24724113941192627
+      },
+      "source_selector_used_only_for_audio": "p313",
+      "threshold": 0.584615170955658
+    }
+  },
+  "evaluation_status": "research registry serialization and matching feasibility only; not a recognition reliability validation",
+  "feature_extraction_interface": {
+    "context_profile_required": false,
+    "existing_observer": "Task 06 SortformerResearchConfig pre_encoder tap; Task 09B NVFTR probe already emits 512D frame features and VAD masks",
+    "inference_backend_checked": "Vulkan0, model fingerprint 08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+    "public_c_abi_changed": false
+  },
+  "fold_id": "fold_1",
+  "limitations": "Registry replay consumes cached Task 09B feature arrays in Python. It verifies arbitrary external IDs, profile serialization, process restart, and matching semantics, but does not implement native production inference or measure end-to-end audio latency.",
+  "method": "pre_encoder 512D mean, fold training-only diagonal z-score, normalized cosine prototypes",
+  "representation_storage": {
+    "complexity": "O(512 * registry_size) multiply-accumulate terms per query",
+    "match_cost": "one 512-element dot product per registered identity after a 512-element standardization and L2 normalization",
+    "mean_std_control_dimension": 1024,
+    "mean_std_raw_float32_bytes_per_identity": 4096,
+    "prototype_dimension": 512,
+    "raw_float32_bytes_per_identity": 2048
+  },
+  "schema": "nemo-speech.voiceid-task09c-native-feasibility.v1",
+  "threshold": 0.584615170955658,
+  "threshold_limitation": "threshold is calibrated on 15 speakers with at most 14 leave-one-out impostor competitors; the 16-profile registry is a storage/matching exercise, not a calibrated 16-person operating point",
+  "vulkan_feature_extraction_benchmark": {
+    "audio_seconds_per_wall_second": 21.97626511706898,
+    "backend": "Vulkan",
+    "cpu_model": "AMD Ryzen 5 1600 Six-Core Processor",
+    "device": "Vulkan0",
+    "feature_representation": "pre_encoder",
+    "job_count": 12,
+    "model_fingerprint": "08456d9e22cd9a323c0364d98375f3746d6e68507ebb705cd46438c534c7a3a1",
+    "parity_checked_jobs": 3,
+    "parity_mismatches": 0,
+    "schema": "nemo-speech.voiceid-task09c-feature-extraction-benchmark.v1",
+    "scope": "native feature extraction benchmark over cached PCM16 WAVs from a fixed 12-job Task 09B subset; excludes source FLAC conversion and production integration",
+    "total_audio_sec": 55.31931250000001,
+    "wall_milliseconds_per_job": 209.76916158300205,
+    "wall_seconds": 2.5172299389960244
+  }
+}

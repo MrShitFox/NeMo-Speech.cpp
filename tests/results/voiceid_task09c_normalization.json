@@ -1,0 +1,2309 @@
+{
+  "audio_policy": {
+    "applied_gain_db": {
+      "max": 5.999999999999998,
+      "mean": 0.631743111451388,
+      "median": 0.2706811415110099,
+      "min": -5.999999999999998,
+      "p10_p90": [
+        -3.259442911554282,
+        5.923633775606286
+      ]
+    },
+    "gain_limit_db": [
+      -6.0,
+      6.0
+    ],
+    "input_rms_dbfs": {
+      "max": -16.71513816806531,
+      "mean": -26.89522297049568,
+      "median": -26.27481519140919,
+      "min": -43.417896843035386
+    },
+    "job_count": 9148,
+    "output_rms_dbfs": {
+      "max": -22.715141777201243,
+      "mean": -26.26347698396992,
+      "median": -26.000000761873572,
+      "min": -37.41765012765733
+    },
+    "peak_limit_dbfs": -1.0,
+    "same_policy_for_all_speakers_and_microphones": true,
+    "source_summary": "/home/glebus/.cache/nemo-speech-task09c/rmsnorm_summary.json",
+    "speaker_labels_or_evaluation_outcomes_used": false,
+    "target_rms_dbfs": -26.0
+  },
+  "dataset_status": "VCTK follow-up on previously studied identities; not independent validation",
+  "feature_representation": "frozen pre_encoder mean with Task 09B training-speaker-only per-dimension z-score and cosine matching",
+  "limitations": "RMS normalization changes waveform amplitude only; it does not equalize microphone frequency response and the gain cap leaves some low-level clips below target",
+  "mic1_calibration_threshold_transfer": [
+    {
+      "fold_id": "fold_1",
+      "normalized_mic1_calibration_threshold": 0.5832057595252991,
+      "normalized_threshold_applied_to_normalized_audio": {
+        "known_correct_accepts": 11,
+        "known_queries": 32,
+        "known_rank1_correct": 29,
+        "known_rejected_as_unknown": 21,
+        "known_wrong_identity_accepts": 0,
+        "unknown_false_accepts": 1,
+        "unknown_queries": 88
+      },
+      "normalized_threshold_calibration": {
+        "calibration_known_accept_rate": 0.8651685393258427,
+        "calibration_known_accepts": 77,
+        "calibration_known_queries": 89,
+        "calibration_unknown_false_accepts": 4,
+        "calibration_unknown_queries": 89,
+        "calibration_unknown_speaker_clusters": 15,
+        "maximum_calibrated_registry_size": 14,
+        "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+        "target_calibration_false_accept_rate": 0.05,
+        "threshold": 0.5832057595252991,
+        "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+      },
+      "query_microphone": "mic1",
+      "raw_mic1_calibration_evaluation": {
+        "known_correct_accepts": 5,
+        "known_queries": 32,
+        "known_rank1_correct": null,
+        "known_rejected_as_unknown": null,
+        "known_wrong_identity_accepts": null,
+        "unknown_false_accepts": 0,
+        "unknown_queries": 88
+      }
+    },
+    {
+      "fold_id": "fold_1",
+      "normalized_mic1_calibration_threshold": 0.5832057595252991,
+      "normalized_threshold_applied_to_normalized_audio": {
+        "known_correct_accepts": 4,
+        "known_queries": 32,
+        "known_rank1_correct": 25,
+        "known_rejected_as_unknown": 28,
+        "known_wrong_identity_accepts": 0,
+        "unknown_false_accepts": 0,
+        "unknown_queries": 88
+      },
+      "normalized_threshold_calibration": {
+        "calibration_known_accept_rate": 0.8651685393258427,
+        "calibration_known_accepts": 77,
+        "calibration_known_queries": 89,
+        "calibration_unknown_false_accepts": 4,
+        "calibration_unknown_queries": 89,
+        "calibration_unknown_speaker_clusters": 15,
+        "maximum_calibrated_registry_size": 14,
+        "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+        "target_calibration_false_accept_rate": 0.05,
+        "threshold": 0.5832057595252991,
+        "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+      },
+      "query_microphone": "mic2",
+      "raw_mic1_calibration_evaluation": {
+        "known_correct_accepts": 5,
+        "known_queries": 32,
+        "known_rank1_correct": null,
+        "known_rejected_as_unknown": null,
+        "known_wrong_identity_accepts": null,
+        "unknown_false_accepts": 0,
+        "unknown_queries": 88
+      }
+    },
+    {
+      "fold_id": "fold_2",
+      "normalized_mic1_calibration_threshold": 0.4896460473537445,
+      "normalized_threshold_applied_to_normalized_audio": {
+        "known_correct_accepts": 21,
+        "known_queries": 32,
+        "known_rank1_correct": 32,
+        "known_rejected_as_unknown": 11,
+        "known_wrong_identity_accepts": 0,
+        "unknown_false_accepts": 1,
+        "unknown_queries": 88
+      },
+      "normalized_threshold_calibration": {
+        "calibration_known_accept_rate": 0.9886363636363636,
+        "calibration_known_accepts": 87,
+        "calibration_known_queries": 88,
+        "calibration_unknown_false_accepts": 4,
+        "calibration_unknown_queries": 88,
+        "calibration_unknown_speaker_clusters": 15,
+        "maximum_calibrated_registry_size": 14,
+        "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+        "target_calibration_false_accept_rate": 0.05,
+        "threshold": 0.4896460473537445,
+        "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+      },
+      "query_microphone": "mic1",
+      "raw_mic1_calibration_evaluation": {
+        "known_correct_accepts": 6,
+        "known_queries": 32,
+        "known_rank1_correct": null,
+        "known_rejected_as_unknown": null,
+        "known_wrong_identity_accepts": null,
+        "unknown_false_accepts": 0,
+        "unknown_queries": 88
+      }
+    },
+    {
+      "fold_id": "fold_2",
+      "normalized_mic1_calibration_threshold": 0.4896460473537445,
+      "normalized_threshold_applied_to_normalized_audio": {
+        "known_correct_accepts": 6,
+        "known_queries": 32,
+        "known_rank1_correct": 23,
+        "known_rejected_as_unknown": 26,
+        "known_wrong_identity_accepts": 0,
+        "unknown_false_accepts": 1,
+        "unknown_queries": 88
+      },
+      "normalized_threshold_calibration": {
+        "calibration_known_accept_rate": 0.9886363636363636,
+        "calibration_known_accepts": 87,
+        "calibration_known_queries": 88,
+        "calibration_unknown_false_accepts": 4,
+        "calibration_unknown_queries": 88,
+        "calibration_unknown_speaker_clusters": 15,
+        "maximum_calibrated_registry_size": 14,
+        "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+        "target_calibration_false_accept_rate": 0.05,
+        "threshold": 0.4896460473537445,
+        "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+      },
+      "query_microphone": "mic2",
+      "raw_mic1_calibration_evaluation": {
+        "known_correct_accepts": 6,
+        "known_queries": 32,
+        "known_rank1_correct": null,
+        "known_rejected_as_unknown": null,
+        "known_wrong_identity_accepts": null,
+        "unknown_false_accepts": 0,
+        "unknown_queries": 88
+      }
+    },
+    {
+      "fold_id": "fold_3",
+      "normalized_mic1_calibration_threshold": 0.4878791868686676,
+      "normalized_threshold_applied_to_normalized_audio": {
+        "known_correct_accepts": 24,
+        "known_queries": 32,
+        "known_rank1_correct": 31,
+        "known_rejected_as_unknown": 8,
+        "known_wrong_identity_accepts": 0,
+        "unknown_false_accepts": 1,
+        "unknown_queries": 88
+      },
+      "normalized_threshold_calibration": {
+        "calibration_known_accept_rate": 0.9195402298850575,
+        "calibration_known_accepts": 80,
+        "calibration_known_queries": 87,
+        "calibration_unknown_false_accepts": 4,
+        "calibration_unknown_queries": 87,
+        "calibration_unknown_speaker_clusters": 15,
+        "maximum_calibrated_registry_size": 14,
+        "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+        "target_calibration_false_accept_rate": 0.05,
+        "threshold": 0.4878791868686676,
+        "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+      },
+      "query_microphone": "mic1",
+      "raw_mic1_calibration_evaluation": {
+        "known_correct_accepts": 3,
+        "known_queries": 32,
+        "known_rank1_correct": null,
+        "known_rejected_as_unknown": null,
+        "known_wrong_identity_accepts": null,
+        "unknown_false_accepts": 6,
+        "unknown_queries": 88
+      }
+    },
+    {
+      "fold_id": "fold_3",
+      "normalized_mic1_calibration_threshold": 0.4878791868686676,
+      "normalized_threshold_applied_to_normalized_audio": {
+        "known_correct_accepts": 2,
+        "known_queries": 32,
+        "known_rank1_correct": 26,
+        "known_rejected_as_unknown": 29,
+        "known_wrong_identity_accepts": 1,
+        "unknown_false_accepts": 5,
+        "unknown_queries": 88
+      },
+      "normalized_threshold_calibration": {
+        "calibration_known_accept_rate": 0.9195402298850575,
+        "calibration_known_accepts": 80,
+        "calibration_known_queries": 87,
+        "calibration_unknown_false_accepts": 4,
+        "calibration_unknown_queries": 87,
+        "calibration_unknown_speaker_clusters": 15,
+        "maximum_calibrated_registry_size": 14,
+        "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+        "target_calibration_false_accept_rate": 0.05,
+        "threshold": 0.4878791868686676,
+        "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+      },
+      "query_microphone": "mic2",
+      "raw_mic1_calibration_evaluation": {
+        "known_correct_accepts": 3,
+        "known_queries": 32,
+        "known_rank1_correct": null,
+        "known_rejected_as_unknown": null,
+        "known_wrong_identity_accepts": null,
+        "unknown_false_accepts": 6,
+        "unknown_queries": 88
+      }
+    }
+  ],
+  "normalized_condition_results": [
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p240": 12.279999732971191,
+          "p245": 10.919999718666077,
+          "p246": 10.43999993801117,
+          "p248": 11.240000128746033,
+          "p259": 11.370000123977661,
+          "p262": 12.079999685287476,
+          "p272": 10.360000193119049,
+          "p273": 12.319999694824219,
+          "p298": 11.620000123977661,
+          "p310": 10.139999866485596,
+          "p315": 10.03000009059906,
+          "p326": 15.47000002861023,
+          "p334": 12.260000228881836,
+          "p335": 12.400000095367432,
+          "p364": 11.980000019073486
+        },
+        "calibration_enrollment_source_count": {
+          "p240": 32,
+          "p245": 32,
+          "p246": 32,
+          "p248": 32,
+          "p259": 32,
+          "p262": 32,
+          "p272": 32,
+          "p273": 32,
+          "p298": 32,
+          "p310": 32,
+          "p315": 32,
+          "p326": 32,
+          "p334": 32,
+          "p335": 32,
+          "p364": 32
+        },
+        "calibration_genuine_scores": 56,
+        "calibration_known_accepts_at_threshold": 38,
+        "calibration_known_queries": 56,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 2,
+        "calibration_unknown_far": 0.03571428571428571,
+        "calibration_unknown_max_score_trials": 56,
+        "calibration_usable_query_clips": 56,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.5458682775497437
+      },
+      "enrollment_microphone": "mic1",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_1",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.28125,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.75
+      },
+      "known_correct_accept_delta_vs_raw": 0,
+      "known_correct_accept_rate": 0.5,
+      "known_correct_accept_speaker_macro": 0.5,
+      "known_correct_accepts": 16,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.13653846085071564,
+          0.35684980154037477,
+          0.41318099945783615,
+          0.5372927784919739,
+          0.6555370986461639,
+          0.7571245074272156,
+          0.7914984822273254
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.3752989172935486,
+          -0.22776585668325425,
+          -0.12535475566983223,
+          -0.03995525278151035,
+          0.11205261759459972,
+          0.3284079104661944,
+          0.4831680953502655
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 29,
+      "known_rejected_as_unknown": 16,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.8416666666666667,
+      "open_set_correct": 101,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic1",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 16,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.13994590938091278,
+            0.33748626708984375,
+            0.44008413702249527,
+            0.5515811443328857,
+            0.6609312891960144,
+            0.7575111448764801,
+            0.8059108853340149
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 29,
+        "known_rejected_as_unknown": 16,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.5318335890769958,
+        "unknown_false_accepts": 3,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.0888235792517662,
+            0.17169473320245743,
+            0.23089398071169853,
+            0.31477098166942596,
+            0.38714444637298584,
+            0.4537557989358902,
+            0.586744487285614
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.5318335890769958,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.5458682775497437,
+      "unknown_correct_rejections": 85,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.07954545454545454
+      },
+      "unknown_false_accept_delta_vs_raw": 0,
+      "unknown_false_accept_rate": 0.03409090909090909,
+      "unknown_false_accept_speaker_macro": 0.03409090909090909,
+      "unknown_false_accepts": 3,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.09729809314012527,
+          0.19926170855760575,
+          0.24391186609864235,
+          0.31679104268550873,
+          0.39033500105142593,
+          0.4533865690231323,
+          0.5837063789367676
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9698660714285714,
+      "verification_eer_descriptive_only": 0.09375,
+      "verification_far": 0.0,
+      "verification_frr": 0.5
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p240": 12.279999732971191,
+          "p245": 10.919999718666077,
+          "p246": 10.43999993801117,
+          "p248": 11.240000128746033,
+          "p259": 11.370000123977661,
+          "p262": 12.079999685287476,
+          "p272": 10.360000193119049,
+          "p273": 12.319999694824219,
+          "p298": 11.620000123977661,
+          "p310": 10.139999866485596,
+          "p315": 10.03000009059906,
+          "p326": 15.47000002861023,
+          "p334": 12.260000228881836,
+          "p335": 12.400000095367432,
+          "p364": 11.980000019073486
+        },
+        "calibration_enrollment_source_count": {
+          "p240": 32,
+          "p245": 32,
+          "p246": 32,
+          "p248": 32,
+          "p259": 32,
+          "p262": 32,
+          "p272": 32,
+          "p273": 32,
+          "p298": 32,
+          "p310": 32,
+          "p315": 32,
+          "p326": 32,
+          "p334": 32,
+          "p335": 32,
+          "p364": 32
+        },
+        "calibration_genuine_scores": 56,
+        "calibration_known_accepts_at_threshold": 4,
+        "calibration_known_queries": 56,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 2,
+        "calibration_unknown_far": 0.03571428571428571,
+        "calibration_unknown_max_score_trials": 56,
+        "calibration_usable_query_clips": 56,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.5816099643707275
+      },
+      "enrollment_microphone": "mic1",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_1",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.03125,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.25
+      },
+      "known_correct_accept_delta_vs_raw": -1,
+      "known_correct_accept_rate": 0.125,
+      "known_correct_accept_speaker_macro": 0.125,
+      "known_correct_accepts": 4,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.06161660701036453,
+          0.15706272572278976,
+          0.2959378734230995,
+          0.4494549334049225,
+          0.53994320333004,
+          0.6073121309280396,
+          0.7144666314125061
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.4457230865955353,
+          -0.3276884645223618,
+          -0.1956721805036068,
+          -0.058574434369802475,
+          0.17030347883701324,
+          0.34904914796352393,
+          0.5444303750991821
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 25,
+      "known_rejected_as_unknown": 28,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.7666666666666667,
+      "open_set_correct": 92,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic2",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 5,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.07585809379816055,
+            0.15928310602903367,
+            0.30782414227724075,
+            0.47087979316711426,
+            0.5452329367399216,
+            0.6090319097042084,
+            0.7362378835678101
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 26,
+        "known_rejected_as_unknown": 26,
+        "known_wrong_identity_accepts": 1,
+        "threshold": 0.5574004650115967,
+        "unknown_false_accepts": 0,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.0786176398396492,
+            0.15030400902032853,
+            0.19417891651391983,
+            0.26315146684646606,
+            0.35666292160749435,
+            0.44816150665283205,
+            0.526283860206604
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.5574004650115967,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.5816099643707275,
+      "unknown_correct_rejections": 88,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.0
+      },
+      "unknown_false_accept_delta_vs_raw": 0,
+      "unknown_false_accept_rate": 0.0,
+      "unknown_false_accept_speaker_macro": 0.0,
+      "unknown_false_accepts": 0,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.08041665703058243,
+          0.15483580380678177,
+          0.20004583150148392,
+          0.2604939937591553,
+          0.3461477980017662,
+          0.4496378391981125,
+          0.5283075571060181
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9161551339285714,
+      "verification_eer_descriptive_only": 0.1875,
+      "verification_far": 0.0,
+      "verification_frr": 0.875
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p240": 13.31000006198883,
+          "p245": 10.31000018119812,
+          "p246": 11.069999933242798,
+          "p248": 11.350000262260437,
+          "p259": 11.919999957084656,
+          "p262": 10.639999866485596,
+          "p272": 10.40999972820282,
+          "p273": 11.759999990463257,
+          "p298": 10.160000085830688,
+          "p310": 10.059999942779541,
+          "p315": null,
+          "p326": 11.130000352859497,
+          "p334": 10.50000011920929,
+          "p335": 11.650000214576721,
+          "p364": 10.399999976158142
+        },
+        "calibration_enrollment_source_count": {
+          "p240": 32,
+          "p245": 32,
+          "p246": 32,
+          "p248": 32,
+          "p259": 32,
+          "p262": 32,
+          "p272": 32,
+          "p273": 32,
+          "p298": 32,
+          "p310": 32,
+          "p315": 0,
+          "p326": 32,
+          "p334": 32,
+          "p335": 32,
+          "p364": 32
+        },
+        "calibration_genuine_scores": 56,
+        "calibration_known_accepts_at_threshold": 5,
+        "calibration_known_queries": 56,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 1,
+        "calibration_profile_successes": 14,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 2,
+        "calibration_unknown_far": 0.03571428571428571,
+        "calibration_unknown_max_score_trials": 56,
+        "calibration_usable_query_clips": 56,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 13,
+        "threshold": 0.5853891372680664
+      },
+      "enrollment_microphone": "mic2",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_1",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.03125,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.34375
+      },
+      "known_correct_accept_delta_vs_raw": -3,
+      "known_correct_accept_rate": 0.1875,
+      "known_correct_accept_speaker_macro": 0.1875,
+      "known_correct_accepts": 6,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.10944239050149918,
+          0.1748717710375786,
+          0.31649457663297653,
+          0.4163437485694885,
+          0.5595315992832184,
+          0.6487198770046234,
+          0.7167893648147583
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.4400169551372528,
+          -0.30704096555709837,
+          -0.22582726925611496,
+          -0.05651378631591797,
+          0.18257232382893562,
+          0.32722474932670603,
+          0.4694857597351074
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 26,
+      "known_rejected_as_unknown": 26,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.7666666666666667,
+      "open_set_correct": 92,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic1",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 9,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.12400589883327484,
+            0.1720082700252533,
+            0.32968620210886,
+            0.43586112558841705,
+            0.5656231641769409,
+            0.6512611985206604,
+            0.7196445465087891
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 26,
+        "known_rejected_as_unknown": 23,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.5636948943138123,
+        "unknown_false_accepts": 2,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.04785075783729553,
+            0.17804442793130876,
+            0.21782305464148521,
+            0.29297058284282684,
+            0.3784431144595146,
+            0.4883066326379776,
+            0.6023615598678589
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.5636948943138123,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.5853891372680664,
+      "unknown_correct_rejections": 86,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.056818181818181816
+      },
+      "unknown_false_accept_delta_vs_raw": 0,
+      "unknown_false_accept_rate": 0.022727272727272728,
+      "unknown_false_accept_speaker_macro": 0.022727272727272728,
+      "unknown_false_accepts": 2,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.05007455125451088,
+          0.18729392588138583,
+          0.2246023193001747,
+          0.2929936796426773,
+          0.39646513015031815,
+          0.48910686671733855,
+          0.5987810492515564
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9217354910714286,
+      "verification_eer_descriptive_only": 0.1875,
+      "verification_far": 0.0,
+      "verification_frr": 0.8125
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p240": 13.31000006198883,
+          "p245": 10.31000018119812,
+          "p246": 11.069999933242798,
+          "p248": 11.350000262260437,
+          "p259": 11.919999957084656,
+          "p262": 10.639999866485596,
+          "p272": 10.40999972820282,
+          "p273": 11.759999990463257,
+          "p298": 10.160000085830688,
+          "p310": 10.059999942779541,
+          "p315": null,
+          "p326": 11.130000352859497,
+          "p334": 10.50000011920929,
+          "p335": 11.650000214576721,
+          "p364": 10.399999976158142
+        },
+        "calibration_enrollment_source_count": {
+          "p240": 32,
+          "p245": 32,
+          "p246": 32,
+          "p248": 32,
+          "p259": 32,
+          "p262": 32,
+          "p272": 32,
+          "p273": 32,
+          "p298": 32,
+          "p310": 32,
+          "p315": 0,
+          "p326": 32,
+          "p334": 32,
+          "p335": 32,
+          "p364": 32
+        },
+        "calibration_genuine_scores": 56,
+        "calibration_known_accepts_at_threshold": 34,
+        "calibration_known_queries": 56,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 1,
+        "calibration_profile_successes": 14,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 2,
+        "calibration_unknown_far": 0.03571428571428571,
+        "calibration_unknown_max_score_trials": 56,
+        "calibration_usable_query_clips": 56,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 13,
+        "threshold": 0.5874530673027039
+      },
+      "enrollment_microphone": "mic2",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_1",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.15625,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.71875
+      },
+      "known_correct_accept_delta_vs_raw": 0,
+      "known_correct_accept_rate": 0.4375,
+      "known_correct_accept_speaker_macro": 0.4375,
+      "known_correct_accepts": 14,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.35589954257011414,
+          0.4636863857507706,
+          0.491161972284317,
+          0.5761594474315643,
+          0.6592325270175934,
+          0.7527838468551636,
+          0.8054406642913818
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.4098224639892578,
+          -0.3125998556613922,
+          -0.24904176592826843,
+          -0.12553691118955612,
+          0.31920814514160156,
+          0.4211690485477448,
+          0.5851773619651794
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 31,
+      "known_rejected_as_unknown": 18,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.8333333333333334,
+      "open_set_correct": 100,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic2",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 14,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.3475595712661743,
+            0.4551639348268509,
+            0.4952136427164078,
+            0.5833335518836975,
+            0.6720884144306183,
+            0.7700213015079499,
+            0.8174760937690735
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 30,
+        "known_rejected_as_unknown": 18,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.6037718057632446,
+        "unknown_false_accepts": 1,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.10370437055826187,
+            0.22534306943416596,
+            0.2650910019874573,
+            0.32728514075279236,
+            0.4422627091407776,
+            0.5057827472686768,
+            0.6081323027610779
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.6037718057632446,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.5874530673027039,
+      "unknown_correct_rejections": 86,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.056818181818181816
+      },
+      "unknown_false_accept_delta_vs_raw": 1,
+      "unknown_false_accept_rate": 0.022727272727272728,
+      "unknown_false_accept_speaker_macro": 0.022727272727272728,
+      "unknown_false_accepts": 2,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.0823143720626831,
+          0.2161208838224411,
+          0.27749229967594147,
+          0.3404839038848877,
+          0.4429956451058388,
+          0.5073930799961089,
+          0.5954859852790833
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9712611607142857,
+      "verification_eer_descriptive_only": 0.08705357142857142,
+      "verification_far": 0.0,
+      "verification_frr": 0.5625
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p233": 11.010000109672546,
+          "p245": 10.919999718666077,
+          "p255": 11.050000071525574,
+          "p271": 10.389999806880951,
+          "p274": 11.259999930858612,
+          "p285": 10.319999754428864,
+          "p287": 11.399999976158142,
+          "p301": 17.079999566078186,
+          "p303": 10.330000042915344,
+          "p307": 10.910000205039978,
+          "p314": 10.099999904632568,
+          "p326": 15.47000002861023,
+          "p330": 10.139999866485596,
+          "p340": 10.75,
+          "p374": 12.639999866485596
+        },
+        "calibration_enrollment_source_count": {
+          "p233": 32,
+          "p245": 32,
+          "p255": 32,
+          "p271": 32,
+          "p274": 32,
+          "p285": 32,
+          "p287": 32,
+          "p301": 32,
+          "p303": 32,
+          "p307": 32,
+          "p314": 32,
+          "p326": 32,
+          "p330": 32,
+          "p340": 32,
+          "p374": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 56,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.4257994592189789
+      },
+      "enrollment_microphone": "mic1",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_2",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.65625,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.9375
+      },
+      "known_correct_accept_delta_vs_raw": -2,
+      "known_correct_accept_rate": 0.8125,
+      "known_correct_accept_speaker_macro": 0.8125,
+      "known_correct_accepts": 26,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.36594507098197937,
+          0.41211861073970796,
+          0.44168010354042053,
+          0.550070732831955,
+          0.6727400571107864,
+          0.7215529501438142,
+          0.7986085414886475
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.3629244863986969,
+          -0.17625531554222107,
+          -0.11715167947113514,
+          0.024050614796578884,
+          0.16220130398869514,
+          0.2573806524276734,
+          0.40799975395202637
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 32,
+      "known_rejected_as_unknown": 6,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.9,
+      "open_set_correct": 108,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic1",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 28,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.37440016865730286,
+            0.4262649238109589,
+            0.46919696033000946,
+            0.5488151907920837,
+            0.6763024926185608,
+            0.7291009485721588,
+            0.8318085074424744
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 32,
+        "known_rejected_as_unknown": 4,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.42812982201576233,
+        "unknown_false_accepts": 8,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.0409357026219368,
+            0.12058776915073395,
+            0.18210574239492416,
+            0.2486719936132431,
+            0.2976880222558975,
+            0.412692055106163,
+            0.4935801327228546
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.42812982201576233,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.4257994592189789,
+      "unknown_correct_rejections": 82,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.1590909090909091
+      },
+      "unknown_false_accept_delta_vs_raw": -2,
+      "unknown_false_accept_rate": 0.06818181818181818,
+      "unknown_false_accept_speaker_macro": 0.06818181818181818,
+      "unknown_false_accepts": 6,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.010882505215704441,
+          0.11297154799103737,
+          0.1739845722913742,
+          0.2371833398938179,
+          0.29499316215515137,
+          0.39343485832214353,
+          0.49743977189064026
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9994419642857143,
+      "verification_eer_descriptive_only": 0.004464285714285714,
+      "verification_far": 0.0,
+      "verification_frr": 0.1875
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p233": 11.010000109672546,
+          "p245": 10.919999718666077,
+          "p255": 11.050000071525574,
+          "p271": 10.389999806880951,
+          "p274": 11.259999930858612,
+          "p285": 10.319999754428864,
+          "p287": 11.399999976158142,
+          "p301": 17.079999566078186,
+          "p303": 10.330000042915344,
+          "p307": 10.910000205039978,
+          "p314": 10.099999904632568,
+          "p326": 15.47000002861023,
+          "p330": 10.139999866485596,
+          "p340": 10.75,
+          "p374": 12.639999866485596
+        },
+        "calibration_enrollment_source_count": {
+          "p233": 32,
+          "p245": 32,
+          "p255": 32,
+          "p271": 32,
+          "p274": 32,
+          "p285": 32,
+          "p287": 32,
+          "p301": 32,
+          "p303": 32,
+          "p307": 32,
+          "p314": 32,
+          "p326": 32,
+          "p330": 32,
+          "p340": 32,
+          "p374": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 29,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.41832128167152405
+      },
+      "enrollment_microphone": "mic1",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_2",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.061718750000000044,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.53125
+      },
+      "known_correct_accept_delta_vs_raw": 1,
+      "known_correct_accept_rate": 0.28125,
+      "known_correct_accept_speaker_macro": 0.28125,
+      "known_correct_accepts": 9,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.010504680685698986,
+          0.07133705168962479,
+          0.21969109773635864,
+          0.34579190611839294,
+          0.4291890040040016,
+          0.5492691993713379,
+          0.6488559246063232
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.3593032658100128,
+          -0.20753162652254104,
+          -0.1394282951951027,
+          -0.02132336236536503,
+          0.10587543435394764,
+          0.22628221213817626,
+          0.45495983958244324
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 23,
+      "known_rejected_as_unknown": 21,
+      "known_wrong_identity_accepts": 2,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.7916666666666666,
+      "open_set_correct": 95,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic2",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 8,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.03622150421142578,
+            0.1336597591638565,
+            0.2528384402394295,
+            0.3600054532289505,
+            0.4440917521715164,
+            0.5578138530254364,
+            0.6478500962257385
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 25,
+        "known_rejected_as_unknown": 22,
+        "known_wrong_identity_accepts": 2,
+        "threshold": 0.42224347591400146,
+        "unknown_false_accepts": 2,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.043215058743953705,
+            0.11784937381744384,
+            0.17077013477683067,
+            0.2210688218474388,
+            0.291248194873333,
+            0.360351625084877,
+            0.49703261256217957
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.42224347591400146,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.41832128167152405,
+      "unknown_correct_rejections": 86,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.056818181818181816
+      },
+      "unknown_false_accept_delta_vs_raw": 0,
+      "unknown_false_accept_rate": 0.022727272727272728,
+      "unknown_false_accept_speaker_macro": 0.022727272727272728,
+      "unknown_false_accepts": 2,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.04481147229671478,
+          0.1252272829413414,
+          0.1766810342669487,
+          0.2208491787314415,
+          0.27324775606393814,
+          0.3553907126188278,
+          0.5027039051055908
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9140625,
+      "verification_eer_descriptive_only": 0.15625,
+      "verification_far": 0.008928571428571428,
+      "verification_frr": 0.6875
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p233": 11.050000190734863,
+          "p245": 10.31000018119812,
+          "p255": 10.220000147819519,
+          "p271": 10.800000071525574,
+          "p274": 10.130000054836273,
+          "p285": 10.419999718666077,
+          "p287": 11.700000047683716,
+          "p301": 16.419999957084656,
+          "p303": 12.120000004768372,
+          "p307": 11.329999923706055,
+          "p314": 11.070000171661377,
+          "p326": 11.130000352859497,
+          "p330": 10.259999990463257,
+          "p340": 11.250000059604645,
+          "p374": 10.200000047683716
+        },
+        "calibration_enrollment_source_count": {
+          "p233": 32,
+          "p245": 32,
+          "p255": 32,
+          "p271": 32,
+          "p274": 32,
+          "p285": 32,
+          "p287": 32,
+          "p301": 32,
+          "p303": 32,
+          "p307": 32,
+          "p314": 32,
+          "p326": 32,
+          "p330": 32,
+          "p340": 32,
+          "p374": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 28,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.43326425552368164
+      },
+      "enrollment_microphone": "mic2",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_2",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.125,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.59375
+      },
+      "known_correct_accept_delta_vs_raw": 0,
+      "known_correct_accept_rate": 0.34375,
+      "known_correct_accept_speaker_macro": 0.34375,
+      "known_correct_accepts": 11,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.08588921278715134,
+          0.16178171038627626,
+          0.26835809648036957,
+          0.3992939591407776,
+          0.48774129152297974,
+          0.5541518092155457,
+          0.6584349274635315
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.37778154015541077,
+          -0.20091601461172104,
+          -0.13833852484822273,
+          -0.03886833228170872,
+          0.1125160101801157,
+          0.23431960791349438,
+          0.5210192799568176
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 24,
+      "known_rejected_as_unknown": 20,
+      "known_wrong_identity_accepts": 1,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.7833333333333333,
+      "open_set_correct": 94,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic1",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 11,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.03970515355467796,
+            0.25625240206718447,
+            0.28851377964019775,
+            0.3931904733181,
+            0.4989772289991379,
+            0.5431581258773803,
+            0.647483766078949
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 26,
+        "known_rejected_as_unknown": 20,
+        "known_wrong_identity_accepts": 1,
+        "threshold": 0.46576443314552307,
+        "unknown_false_accepts": 3,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.06688027828931808,
+            0.163656921684742,
+            0.20397958904504776,
+            0.28065189719200134,
+            0.33697330951690674,
+            0.40847325325012207,
+            0.5149660706520081
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.46576443314552307,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.43326425552368164,
+      "unknown_correct_rejections": 83,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.14772727272727273
+      },
+      "unknown_false_accept_delta_vs_raw": 2,
+      "unknown_false_accept_rate": 0.056818181818181816,
+      "unknown_false_accept_speaker_macro": 0.056818181818181816,
+      "unknown_false_accepts": 5,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.03499175235629082,
+          0.15942693054676058,
+          0.2007528953254223,
+          0.276720255613327,
+          0.32548025995492935,
+          0.4029702991247177,
+          0.5216729640960693
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9303850446428571,
+      "verification_eer_descriptive_only": 0.15625,
+      "verification_far": 0.008928571428571428,
+      "verification_frr": 0.625
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p233": 11.050000190734863,
+          "p245": 10.31000018119812,
+          "p255": 10.220000147819519,
+          "p271": 10.800000071525574,
+          "p274": 10.130000054836273,
+          "p285": 10.419999718666077,
+          "p287": 11.700000047683716,
+          "p301": 16.419999957084656,
+          "p303": 12.120000004768372,
+          "p307": 11.329999923706055,
+          "p314": 11.070000171661377,
+          "p326": 11.130000352859497,
+          "p330": 10.259999990463257,
+          "p340": 11.250000059604645,
+          "p374": 10.200000047683716
+        },
+        "calibration_enrollment_source_count": {
+          "p233": 32,
+          "p245": 32,
+          "p255": 32,
+          "p271": 32,
+          "p274": 32,
+          "p285": 32,
+          "p287": 32,
+          "p301": 32,
+          "p303": 32,
+          "p307": 32,
+          "p314": 32,
+          "p326": 32,
+          "p330": 32,
+          "p340": 32,
+          "p374": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 47,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.506263256072998
+      },
+      "enrollment_microphone": "mic2",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_2",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.71875,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.96875
+      },
+      "known_correct_accept_delta_vs_raw": -2,
+      "known_correct_accept_rate": 0.84375,
+      "known_correct_accept_speaker_macro": 0.84375,
+      "known_correct_accepts": 27,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.24679450690746307,
+          0.5034877300262451,
+          0.5284010171890259,
+          0.6026908159255981,
+          0.6797249764204025,
+          0.7323440790176392,
+          0.7702963352203369
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.3117425739765167,
+          -0.17890876531600952,
+          -0.06687714532017708,
+          0.08890413120388985,
+          0.24788905680179596,
+          0.351890727877617,
+          0.6818049550056458
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 32,
+      "known_rejected_as_unknown": 5,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.9,
+      "open_set_correct": 108,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic2",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 29,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.23306380212306976,
+            0.5031187117099762,
+            0.5566845387220383,
+            0.60733562707901,
+            0.6689293682575226,
+            0.7363359570503235,
+            0.756570041179657
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 32,
+        "known_rejected_as_unknown": 3,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.4998754858970642,
+        "unknown_false_accepts": 6,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.08499740064144135,
+            0.21987213790416718,
+            0.2787259817123413,
+            0.34529048204421997,
+            0.4225894436240196,
+            0.4861584603786468,
+            0.5826430320739746
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.4998754858970642,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.506263256072998,
+      "unknown_correct_rejections": 81,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.022727272727272728,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.13636363636363635
+      },
+      "unknown_false_accept_delta_vs_raw": 1,
+      "unknown_false_accept_rate": 0.07954545454545454,
+      "unknown_false_accept_speaker_macro": 0.07954545454545454,
+      "unknown_false_accepts": 7,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.06863491982221603,
+          0.21457449942827225,
+          0.28188440948724747,
+          0.35141006112098694,
+          0.4190255180001259,
+          0.49739162623882294,
+          0.6360121965408325
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9847935267857143,
+      "verification_eer_descriptive_only": 0.060267857142857144,
+      "verification_far": 0.013392857142857142,
+      "verification_frr": 0.15625
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p228": 12.160000085830688,
+          "p231": 11.239999890327454,
+          "p246": 10.43999993801117,
+          "p255": 11.050000071525574,
+          "p261": 10.889999866485596,
+          "p263": 10.99999988079071,
+          "p269": 10.889999747276306,
+          "p274": 11.259999930858612,
+          "p294": 11.319999814033508,
+          "p326": 15.47000002861023,
+          "p330": 10.139999866485596,
+          "p333": 11.449999928474426,
+          "p335": 12.400000095367432,
+          "p374": 12.639999866485596,
+          "s5": 10.5
+        },
+        "calibration_enrollment_source_count": {
+          "p228": 32,
+          "p231": 32,
+          "p246": 32,
+          "p255": 32,
+          "p261": 32,
+          "p263": 32,
+          "p269": 32,
+          "p274": 32,
+          "p294": 32,
+          "p326": 32,
+          "p330": 32,
+          "p333": 32,
+          "p335": 32,
+          "p374": 32,
+          "s5": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 46,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.46799173951148987
+      },
+      "enrollment_microphone": "mic1",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_3",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.65625,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.9375
+      },
+      "known_correct_accept_delta_vs_raw": 0,
+      "known_correct_accept_rate": 0.78125,
+      "known_correct_accept_speaker_macro": 0.78125,
+      "known_correct_accepts": 25,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.1923547387123108,
+          0.370689857006073,
+          0.4904077351093292,
+          0.5677142143249512,
+          0.6132919788360596,
+          0.6619912326335907,
+          0.7341504096984863
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.34732088446617126,
+          -0.21419137418270112,
+          -0.14250961691141129,
+          -0.022138990461826324,
+          0.1870163530111313,
+          0.2952570497989655,
+          0.4568801820278168
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 31,
+      "known_rejected_as_unknown": 7,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.9166666666666666,
+      "open_set_correct": 110,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic1",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 25,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.20341196656227112,
+            0.34162670373916626,
+            0.49115707725286484,
+            0.592307984828949,
+            0.6199238896369934,
+            0.6670827507972718,
+            0.7883882522583008
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 31,
+        "known_rejected_as_unknown": 7,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.47240573167800903,
+        "unknown_false_accepts": 1,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.10296809673309326,
+            0.1695817932486534,
+            0.24365809187293053,
+            0.33672893047332764,
+            0.390795074403286,
+            0.43027105629444123,
+            0.5375290513038635
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.47240573167800903,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.46799173951148987,
+      "unknown_correct_rejections": 85,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.07954545454545454
+      },
+      "unknown_false_accept_delta_vs_raw": 2,
+      "unknown_false_accept_rate": 0.03409090909090909,
+      "unknown_false_accept_speaker_macro": 0.03409090909090909,
+      "unknown_false_accepts": 3,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.10784467309713364,
+          0.18134236186742783,
+          0.2393871173262596,
+          0.3326616734266281,
+          0.37297822535037994,
+          0.4310873359441757,
+          0.5353698134422302
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9810267857142857,
+      "verification_eer_descriptive_only": 0.09375,
+      "verification_far": 0.0,
+      "verification_frr": 0.21875
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p228": 12.160000085830688,
+          "p231": 11.239999890327454,
+          "p246": 10.43999993801117,
+          "p255": 11.050000071525574,
+          "p261": 10.889999866485596,
+          "p263": 10.99999988079071,
+          "p269": 10.889999747276306,
+          "p274": 11.259999930858612,
+          "p294": 11.319999814033508,
+          "p326": 15.47000002861023,
+          "p330": 10.139999866485596,
+          "p333": 11.449999928474426,
+          "p335": 12.400000095367432,
+          "p374": 12.639999866485596,
+          "s5": 10.5
+        },
+        "calibration_enrollment_source_count": {
+          "p228": 32,
+          "p231": 32,
+          "p246": 32,
+          "p255": 32,
+          "p261": 32,
+          "p263": 32,
+          "p269": 32,
+          "p274": 32,
+          "p294": 32,
+          "p326": 32,
+          "p330": 32,
+          "p333": 32,
+          "p335": 32,
+          "p374": 32,
+          "s5": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 13,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.4725496172904968
+      },
+      "enrollment_microphone": "mic1",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_3",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.0,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.1257812499999993
+      },
+      "known_correct_accept_delta_vs_raw": -4,
+      "known_correct_accept_rate": 0.0625,
+      "known_correct_accept_speaker_macro": 0.0625,
+      "known_correct_accepts": 2,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.06898843497037888,
+          0.2196295216679573,
+          0.26206454634666443,
+          0.3335886299610138,
+          0.4094661921262741,
+          0.4612681478261948,
+          0.4994879364967346
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.3570425808429718,
+          -0.24309629946947098,
+          -0.15338622778654099,
+          -0.042150579392910004,
+          0.1357378140091896,
+          0.2574119955301285,
+          0.4962726831436157
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 26,
+      "known_rejected_as_unknown": 29,
+      "known_wrong_identity_accepts": 1,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.7083333333333334,
+      "open_set_correct": 85,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic2",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 6,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.06396573036909103,
+            0.21042006611824035,
+            0.2946125566959381,
+            0.3612300604581833,
+            0.44619642198085785,
+            0.4847228705883026,
+            0.5590893626213074
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 25,
+        "known_rejected_as_unknown": 25,
+        "known_wrong_identity_accepts": 1,
+        "threshold": 0.4689290225505829,
+        "unknown_false_accepts": 10,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.09121747314929962,
+            0.15368874520063402,
+            0.2208729013800621,
+            0.3284459859132767,
+            0.41122564673423767,
+            0.47740101516246797,
+            0.5531256794929504
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.4689290225505829,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.4725496172904968,
+      "unknown_correct_rejections": 83,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.011363636363636364,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.10227272727272728
+      },
+      "unknown_false_accept_delta_vs_raw": -5,
+      "unknown_false_accept_rate": 0.056818181818181816,
+      "unknown_false_accept_speaker_macro": 0.056818181818181816,
+      "unknown_false_accepts": 5,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.09742265939712524,
+          0.15697184652090074,
+          0.21335729584097862,
+          0.3287946432828903,
+          0.4128020405769348,
+          0.4549915254116058,
+          0.5493618845939636
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9377790178571429,
+      "verification_eer_descriptive_only": 0.1517857142857143,
+      "verification_far": 0.004464285714285714,
+      "verification_frr": 0.9375
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p228": 10.289999961853027,
+          "p231": 11.169999957084656,
+          "p246": 11.069999933242798,
+          "p255": 10.220000147819519,
+          "p261": 10.520000100135803,
+          "p263": 10.72000002861023,
+          "p269": 10.080000042915344,
+          "p274": 10.130000054836273,
+          "p294": 10.210000038146973,
+          "p326": 11.130000352859497,
+          "p330": 10.259999990463257,
+          "p333": 10.909999966621399,
+          "p335": 11.650000214576721,
+          "p374": 10.200000047683716,
+          "s5": 10.570000171661377
+        },
+        "calibration_enrollment_source_count": {
+          "p228": 32,
+          "p231": 32,
+          "p246": 32,
+          "p255": 32,
+          "p261": 32,
+          "p263": 32,
+          "p269": 32,
+          "p274": 32,
+          "p294": 32,
+          "p326": 32,
+          "p330": 32,
+          "p333": 32,
+          "p335": 32,
+          "p374": 32,
+          "s5": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 22,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.41446924209594727
+      },
+      "enrollment_microphone": "mic2",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_3",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.125,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.4375
+      },
+      "known_correct_accept_delta_vs_raw": -3,
+      "known_correct_accept_rate": 0.28125,
+      "known_correct_accept_speaker_macro": 0.28125,
+      "known_correct_accepts": 9,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.10448969155550003,
+          0.18562752306461333,
+          0.30982059985399246,
+          0.365665927529335,
+          0.4281120151281357,
+          0.50701302587986,
+          0.5570647120475769
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.40519285202026367,
+          -0.22794910669326782,
+          -0.14146911725401878,
+          0.012380572967231274,
+          0.14957134053111076,
+          0.2785429567098619,
+          0.46040964126586914
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 24,
+      "known_rejected_as_unknown": 21,
+      "known_wrong_identity_accepts": 2,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.6083333333333333,
+      "open_set_correct": 73,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic1",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 12,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.12744854390621185,
+            0.18823689669370652,
+            0.304813876748085,
+            0.3761305958032608,
+            0.4547388628125191,
+            0.497858601808548,
+            0.5819780230522156
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 26,
+        "known_rejected_as_unknown": 19,
+        "known_wrong_identity_accepts": 1,
+        "threshold": 0.4170665442943573,
+        "unknown_false_accepts": 17,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.1180950403213501,
+            0.2208615690469742,
+            0.256369911134243,
+            0.3223356008529663,
+            0.40009431540966034,
+            0.47453319430351254,
+            0.5489047765731812
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.4170665442943573,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.41446924209594727,
+      "unknown_correct_rejections": 64,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.14772727272727273,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.4090909090909091
+      },
+      "unknown_false_accept_delta_vs_raw": 7,
+      "unknown_false_accept_rate": 0.2727272727272727,
+      "unknown_false_accept_speaker_macro": 0.2727272727272727,
+      "unknown_false_accepts": 24,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.11257613450288773,
+          0.21034473180770874,
+          0.25016869232058525,
+          0.3448609411716461,
+          0.4200003519654274,
+          0.47457241415977475,
+          0.5386382937431335
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9363839285714286,
+      "verification_eer_descriptive_only": 0.18080357142857142,
+      "verification_far": 0.013392857142857142,
+      "verification_frr": 0.65625
+    },
+    {
+      "audio_preprocessing": "fixed RMS -26 dBFS target; gain capped +/-6 dB; peak capped -1 dBFS; VAD recomputed",
+      "condition_calibration": {
+        "calibration_actual_enrollment_sec": {
+          "p228": 10.289999961853027,
+          "p231": 11.169999957084656,
+          "p246": 11.069999933242798,
+          "p255": 10.220000147819519,
+          "p261": 10.520000100135803,
+          "p263": 10.72000002861023,
+          "p269": 10.080000042915344,
+          "p274": 10.130000054836273,
+          "p294": 10.210000038146973,
+          "p326": 11.130000352859497,
+          "p330": 10.259999990463257,
+          "p333": 10.909999966621399,
+          "p335": 11.650000214576721,
+          "p374": 10.200000047683716,
+          "s5": 10.570000171661377
+        },
+        "calibration_enrollment_source_count": {
+          "p228": 32,
+          "p231": 32,
+          "p246": 32,
+          "p255": 32,
+          "p261": 32,
+          "p263": 32,
+          "p269": 32,
+          "p274": 32,
+          "p294": 32,
+          "p326": 32,
+          "p330": 32,
+          "p333": 32,
+          "p335": 32,
+          "p374": 32,
+          "s5": 32
+        },
+        "calibration_genuine_scores": 60,
+        "calibration_known_accepts_at_threshold": 40,
+        "calibration_known_queries": 60,
+        "calibration_profile_attempts": 15,
+        "calibration_profile_failures": 0,
+        "calibration_profile_successes": 15,
+        "calibration_target_far": 0.05,
+        "calibration_unknown_false_accepts": 3,
+        "calibration_unknown_far": 0.05,
+        "calibration_unknown_max_score_trials": 60,
+        "calibration_usable_query_clips": 60,
+        "policy": "leave-one-identity-out maximum impostor cosine over paired query clips; 5% target fitted on calibration speakers only",
+        "registry_coverage_limit": 14,
+        "threshold": 0.5522910952568054
+      },
+      "enrollment_microphone": "mic2",
+      "enrollment_profile_attempts": 8,
+      "enrollment_profile_failures": 0,
+      "enrollment_profile_successes": 8,
+      "fold_id": "fold_3",
+      "known_correct_accept_ci95": {
+        "lower_95": 0.34375,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 8,
+        "upper_95": 0.75
+      },
+      "known_correct_accept_delta_vs_raw": 1,
+      "known_correct_accept_rate": 0.5625,
+      "known_correct_accept_speaker_macro": 0.5625,
+      "known_correct_accepts": 18,
+      "known_genuine_scores": {
+        "count": 32,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.23964174091815948,
+          0.4088682413101196,
+          0.5051061287522316,
+          0.5644099414348602,
+          0.6267623156309128,
+          0.6725834310054779,
+          0.7276047468185425
+        ]
+      },
+      "known_impostor_scores": {
+        "count": 224,
+        "min_p10_p25_p50_p75_p90_max": [
+          -0.3626512885093689,
+          -0.2173458978533745,
+          -0.125307722017169,
+          0.06883465126156807,
+          0.19606362655758858,
+          0.3219980120658875,
+          0.6297061443328857
+        ]
+      },
+      "known_queries": 32,
+      "known_rank1_correct": 29,
+      "known_rejected_as_unknown": 14,
+      "known_wrong_identity_accepts": 0,
+      "method": "Task09B train_zscore_cosine on pre_encoder mean",
+      "no_decision_rate": 0.0,
+      "no_decisions": 0,
+      "open_set_accuracy": 0.825,
+      "open_set_correct": 99,
+      "open_set_queries": 120,
+      "query_attempts": 120,
+      "query_microphone": "mic2",
+      "raw_same_condition_reference": {
+        "known_correct_accepts": 17,
+        "known_genuine_scores": {
+          "count": 32,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.24073007702827454,
+            0.44764348566532136,
+            0.5158601850271225,
+            0.5848652720451355,
+            0.6306849122047424,
+            0.6783784151077271,
+            0.7341312170028687
+          ]
+        },
+        "known_queries": 32,
+        "known_rank1_correct": 29,
+        "known_rejected_as_unknown": 15,
+        "known_wrong_identity_accepts": 0,
+        "threshold": 0.577735185623169,
+        "unknown_false_accepts": 7,
+        "unknown_queries": 88,
+        "unknown_top1_scores": {
+          "count": 88,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.17339256405830383,
+            0.2621823251247406,
+            0.3331797495484352,
+            0.4082598239183426,
+            0.47385894507169724,
+            0.5623601257801055,
+            0.6545007824897766
+          ]
+        }
+      },
+      "raw_same_condition_threshold": 0.577735185623169,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "threshold": 0.5522910952568054,
+      "unknown_correct_rejections": 81,
+      "unknown_false_accept_ci95": {
+        "lower_95": 0.022727272727272728,
+        "method": "speaker-cluster bootstrap over per-speaker rates, 1000 resamples",
+        "speaker_clusters": 22,
+        "upper_95": 0.13636363636363635
+      },
+      "unknown_false_accept_delta_vs_raw": 0,
+      "unknown_false_accept_rate": 0.07954545454545454,
+      "unknown_false_accept_speaker_macro": 0.07954545454545454,
+      "unknown_false_accepts": 7,
+      "unknown_queries": 88,
+      "unknown_top1_scores": {
+        "count": 88,
+        "min_p10_p25_p50_p75_p90_max": [
+          0.1761055290699005,
+          0.26819765865802764,
+          0.3279315009713173,
+          0.40117980539798737,
+          0.4772883206605911,
+          0.5430539011955261,
+          0.6372551918029785
+        ]
+      },
+      "verification_auc_descriptive_only": 0.9806082589285714,
+      "verification_eer_descriptive_only": 0.08705357142857142,
+      "verification_far": 0.008928571428571428,
+      "verification_frr": 0.4375
+    }
+  ],
+  "protocol": {
+    "enrollment_speech_sec": 10,
+    "query_clips_per_speaker": "up to four; each original mic1/mic2 source utterance remains paired",
+    "raw_comparison": "same frozen z-score representation and same speaker/microphone protocol on original PCM16 audio; audio variant selected without evaluation outcomes",
+    "registry_size": 8,
+    "same_utterance_pairs": true,
+    "threshold": "per fold and mic condition, calibrated only on calibration speakers; separate frozen mic1-calibration transfer rows are also reported"
+  },
+  "schema": "nemo-speech.voiceid-task09c-audio-normalization.v1",
+  "score_shift_summary": "raw and normalized condition score quantiles are included per fold; repeated mic renderings are clustered by source utterance and speaker"
+}

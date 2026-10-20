@@ -1,0 +1,990 @@
+{
+  "expected_pooled_reference": {
+    "pre_encoder_mean": [
+      112,
+      126,
+      17,
+      365
+    ],
+    "pre_encoder_mean_std": [
+      114,
+      126,
+      18,
+      365
+    ],
+    "selected_learned_head": [
+      103,
+      126,
+      13,
+      365
+    ]
+  },
+  "fold_results": {
+    "pre_encoder_mean": [
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_1",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.7653720238095238,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 0.9392857142857143
+        },
+        "known_correct_accept_rate": 0.8536585365853658,
+        "known_correct_accept_speaker_macro": 0.8550595238095239,
+        "known_correct_accepts": 35,
+        "known_queries": 41,
+        "known_rank1_correct": 41,
+        "known_rejected_as_unknown": 6,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.43000004440546,
+        "method": "mean_cosine",
+        "model_key": null,
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9325153374233128,
+        "open_set_correct": 152,
+        "pooling": "single_pooled",
+        "query_attempts": 163,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "pre_encoder",
+        "score_distributions": {
+          "genuine": {
+            "count": 41,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9479019641876221,
+              0.961910605430603,
+              0.9675069451332092,
+              0.9743471741676331,
+              0.9810610413551331,
+              0.9852269291877747,
+              0.9894223809242249
+            ]
+          },
+          "impostor": {
+            "count": 1263,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.6204028129577637,
+              0.7688466787338257,
+              0.8191258609294891,
+              0.8659419417381287,
+              0.9028644263744354,
+              0.9305280804634094,
+              0.9727018475532532
+            ]
+          },
+          "unknown_top1": {
+            "count": 122,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.8630738258361816,
+              0.8976980686187744,
+              0.9070638716220856,
+              0.9266527593135834,
+              0.9451927989721298,
+              0.9570109069347382,
+              0.9727018475532532
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.6976744186046512,
+          "calibration_known_accepts": 60,
+          "calibration_known_queries": 86,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 86,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.9634900689125061,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 117,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.08982683982683982
+        },
+        "unknown_false_accept_rate": 0.040983606557377046,
+        "unknown_false_accept_speaker_macro": 0.03679653679653679,
+        "unknown_false_accepts": 5,
+        "unknown_queries": 122,
+        "validation_selected_model": false,
+        "verification_auc": 0.9975281463028407,
+        "verification_eer": 0.024467489330475253,
+        "verification_far": 0.004750593824228029,
+        "verification_frr": 0.14634146341463414,
+        "verification_genuine_accepts": 35,
+        "verification_genuine_trials": 41,
+        "verification_impostor_accepts": 6,
+        "verification_impostor_trials": 1263,
+        "verification_policy_threshold": 0.9634900689125061
+      },
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_2",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.8,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 0.9821428571428572
+        },
+        "known_correct_accept_rate": 0.9090909090909091,
+        "known_correct_accept_speaker_macro": 0.9071428571428571,
+        "known_correct_accepts": 40,
+        "known_queries": 44,
+        "known_rank1_correct": 44,
+        "known_rejected_as_unknown": 4,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.227499946951866,
+        "method": "mean_cosine",
+        "model_key": null,
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.927710843373494,
+        "open_set_correct": 154,
+        "pooling": "single_pooled",
+        "query_attempts": 166,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "pre_encoder",
+        "score_distributions": {
+          "genuine": {
+            "count": 44,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.8859814405441284,
+              0.9573994934558868,
+              0.9683784693479538,
+              0.9741771519184113,
+              0.9785941541194916,
+              0.9825747668743133,
+              0.9874321222305298
+            ]
+          },
+          "impostor": {
+            "count": 1284,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.6234003901481628,
+              0.7687061190605163,
+              0.8227774947881699,
+              0.8720507621765137,
+              0.9094924032688141,
+              0.9313513457775116,
+              0.9711178541183472
+            ]
+          },
+          "unknown_top1": {
+            "count": 122,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.8451552987098694,
+              0.88314847946167,
+              0.8991905003786087,
+              0.918893575668335,
+              0.9311595559120178,
+              0.9493000924587249,
+              0.9711178541183472
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.925,
+          "calibration_known_accepts": 74,
+          "calibration_known_queries": 80,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 80,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.9537294507026672,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 114,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.16818181818181818
+        },
+        "unknown_false_accept_rate": 0.06557377049180328,
+        "unknown_false_accept_speaker_macro": 0.06515151515151515,
+        "unknown_false_accepts": 8,
+        "unknown_queries": 122,
+        "validation_selected_model": false,
+        "verification_auc": 0.9871495327102804,
+        "verification_eer": 0.04531294250920419,
+        "verification_far": 0.014018691588785047,
+        "verification_frr": 0.09090909090909091,
+        "verification_genuine_accepts": 40,
+        "verification_genuine_trials": 44,
+        "verification_impostor_accepts": 18,
+        "verification_impostor_trials": 1284,
+        "verification_policy_threshold": 0.9537294507026672
+      },
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_3",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.75,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 1.0
+        },
+        "known_correct_accept_rate": 0.9024390243902439,
+        "known_correct_accept_speaker_macro": 0.8999999999999999,
+        "known_correct_accepts": 37,
+        "known_queries": 41,
+        "known_rank1_correct": 41,
+        "known_rejected_as_unknown": 4,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.498750030994415,
+        "method": "mean_cosine",
+        "model_key": null,
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9506172839506173,
+        "open_set_correct": 154,
+        "pooling": "single_pooled",
+        "query_attempts": 162,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "pre_encoder",
+        "score_distributions": {
+          "genuine": {
+            "count": 41,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.936691403388977,
+              0.9586537480354309,
+              0.9656745195388794,
+              0.9745278358459473,
+              0.9805330038070679,
+              0.9840684533119202,
+              0.9864948987960815
+            ]
+          },
+          "impostor": {
+            "count": 1255,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.6942824721336365,
+              0.7958160161972045,
+              0.8387537002563477,
+              0.8787574172019958,
+              0.9075390696525574,
+              0.9308843612670898,
+              0.9679207801818848
+            ]
+          },
+          "unknown_top1": {
+            "count": 121,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.8797502517700195,
+              0.9033797383308411,
+              0.9180176258087158,
+              0.9331541061401367,
+              0.9436066746711731,
+              0.9512159824371338,
+              0.9645214080810547
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.85,
+          "calibration_known_accepts": 68,
+          "calibration_known_queries": 80,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 80,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.9580048322677612,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 117,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.006493506493506493,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.06126623376623375
+        },
+        "unknown_false_accept_rate": 0.03305785123966942,
+        "unknown_false_accept_speaker_macro": 0.03073593073593073,
+        "unknown_false_accepts": 4,
+        "unknown_queries": 121,
+        "validation_selected_model": false,
+        "verification_auc": 0.9965795355164707,
+        "verification_eer": 0.04311534350403265,
+        "verification_far": 0.005577689243027889,
+        "verification_frr": 0.0975609756097561,
+        "verification_genuine_accepts": 37,
+        "verification_genuine_trials": 41,
+        "verification_impostor_accepts": 7,
+        "verification_impostor_trials": 1255,
+        "verification_policy_threshold": 0.9580048322677612
+      }
+    ],
+    "pre_encoder_mean_std": [
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_1",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.6951636904761905,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 0.9508928571428572
+        },
+        "known_correct_accept_rate": 0.8292682926829268,
+        "known_correct_accept_speaker_macro": 0.8342261904761905,
+        "known_correct_accepts": 34,
+        "known_queries": 41,
+        "known_rank1_correct": 41,
+        "known_rejected_as_unknown": 7,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.43000004440546,
+        "method": "mean_std_cosine",
+        "model_key": null,
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9202453987730062,
+        "open_set_correct": 150,
+        "pooling": "single_pooled",
+        "query_attempts": 163,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "pre_encoder",
+        "score_distributions": {
+          "genuine": {
+            "count": 41,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.969244122505188,
+              0.975537896156311,
+              0.9793648719787598,
+              0.9847581386566162,
+              0.9876025319099426,
+              0.9887199997901917,
+              0.9903464317321777
+            ]
+          },
+          "impostor": {
+            "count": 1263,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.7922213077545166,
+              0.8948442101478576,
+              0.9148568212985992,
+              0.9350149631500244,
+              0.9513542354106903,
+              0.9620261788368225,
+              0.9833704233169556
+            ]
+          },
+          "unknown_top1": {
+            "count": 122,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9309095144271851,
+              0.9506216526031495,
+              0.9564176946878433,
+              0.9618011116981506,
+              0.9693229645490646,
+              0.9742530047893524,
+              0.9833704233169556
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.7093023255813954,
+          "calibration_known_accepts": 61,
+          "calibration_known_queries": 86,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 86,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.9766674041748047,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 116,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.09956709956709957
+        },
+        "unknown_false_accept_rate": 0.04918032786885246,
+        "unknown_false_accept_speaker_macro": 0.0422077922077922,
+        "unknown_false_accepts": 6,
+        "unknown_queries": 122,
+        "validation_selected_model": false,
+        "verification_auc": 0.9968136260935055,
+        "verification_eer": 0.024467489330475253,
+        "verification_far": 0.007125890736342043,
+        "verification_frr": 0.17073170731707318,
+        "verification_genuine_accepts": 34,
+        "verification_genuine_trials": 41,
+        "verification_impostor_accepts": 9,
+        "verification_impostor_trials": 1263,
+        "verification_policy_threshold": 0.9766674041748047
+      },
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_2",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.825,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 1.0
+        },
+        "known_correct_accept_rate": 0.9318181818181818,
+        "known_correct_accept_speaker_macro": 0.925,
+        "known_correct_accepts": 41,
+        "known_queries": 44,
+        "known_rank1_correct": 44,
+        "known_rejected_as_unknown": 3,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.227499946951866,
+        "method": "mean_std_cosine",
+        "model_key": null,
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9578313253012049,
+        "open_set_correct": 159,
+        "pooling": "single_pooled",
+        "query_attempts": 166,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "pre_encoder",
+        "score_distributions": {
+          "genuine": {
+            "count": 44,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9525667428970337,
+              0.9752555906772613,
+              0.9787524938583374,
+              0.9825006723403931,
+              0.9849324077367783,
+              0.987413638830185,
+              0.9902560710906982
+            ]
+          },
+          "impostor": {
+            "count": 1284,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.8511727452278137,
+              0.8962930977344513,
+              0.9171863347291946,
+              0.9363681375980377,
+              0.9521170258522034,
+              0.9613022923469543,
+              0.9798605442047119
+            ]
+          },
+          "unknown_top1": {
+            "count": 122,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.9287154078483582,
+              0.9445321679115295,
+              0.9510820955038071,
+              0.9580060243606567,
+              0.962571457028389,
+              0.9674052834510803,
+              0.9770122766494751
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.8875,
+          "calibration_known_accepts": 71,
+          "calibration_known_queries": 80,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 80,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.97445148229599,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 118,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.003598484848484859,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.07655303030303025
+        },
+        "unknown_false_accept_rate": 0.03278688524590164,
+        "unknown_false_accept_speaker_macro": 0.031818181818181815,
+        "unknown_false_accepts": 4,
+        "unknown_queries": 122,
+        "validation_selected_model": false,
+        "verification_auc": 0.9929375531011045,
+        "verification_eer": 0.04531294250920419,
+        "verification_far": 0.006230529595015576,
+        "verification_frr": 0.06818181818181818,
+        "verification_genuine_accepts": 41,
+        "verification_genuine_trials": 44,
+        "verification_impostor_accepts": 8,
+        "verification_impostor_trials": 1284,
+        "verification_policy_threshold": 0.97445148229599
+      },
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_3",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.9,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 1.0
+        },
+        "known_correct_accept_rate": 0.9512195121951219,
+        "known_correct_accept_speaker_macro": 0.9541666666666666,
+        "known_correct_accepts": 39,
+        "known_queries": 41,
+        "known_rank1_correct": 41,
+        "known_rejected_as_unknown": 2,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.498750030994415,
+        "method": "mean_std_cosine",
+        "model_key": null,
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9382716049382716,
+        "open_set_correct": 152,
+        "pooling": "single_pooled",
+        "query_attempts": 162,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "pre_encoder",
+        "score_distributions": {
+          "genuine": {
+            "count": 41,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.969244122505188,
+              0.975537896156311,
+              0.9796167016029358,
+              0.9829487204551697,
+              0.9857133626937866,
+              0.9882713556289673,
+              0.9909170866012573
+            ]
+          },
+          "impostor": {
+            "count": 1255,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.8605994582176208,
+              0.906855309009552,
+              0.9216402471065521,
+              0.9393873810768127,
+              0.953893393278122,
+              0.9643922090530396,
+              0.9813833236694336
+            ]
+          },
+          "unknown_top1": {
+            "count": 121,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.936873197555542,
+              0.9512987732887268,
+              0.9581393599510193,
+              0.9644900560379028,
+              0.9677133560180664,
+              0.9718694090843201,
+              0.9813833236694336
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.8625,
+          "calibration_known_accepts": 69,
+          "calibration_known_queries": 80,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 80,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.9742056131362915,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 113,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0070075757575757585,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.130551948051948
+        },
+        "unknown_false_accept_rate": 0.06611570247933884,
+        "unknown_false_accept_speaker_macro": 0.05822510822510822,
+        "unknown_false_accepts": 8,
+        "unknown_queries": 121,
+        "validation_selected_model": false,
+        "verification_auc": 0.9971820036925468,
+        "verification_eer": 0.024545719560781266,
+        "verification_far": 0.01195219123505976,
+        "verification_frr": 0.04878048780487805,
+        "verification_genuine_accepts": 39,
+        "verification_genuine_trials": 41,
+        "verification_impostor_accepts": 15,
+        "verification_impostor_trials": 1255,
+        "verification_policy_threshold": 0.9742056131362915
+      }
+    ],
+    "selected_learned_head": [
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_1",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.8854166666666667,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 1.0
+        },
+        "known_correct_accept_rate": 0.9512195121951219,
+        "known_correct_accept_speaker_macro": 0.9479166666666667,
+        "known_correct_accepts": 39,
+        "known_queries": 41,
+        "known_rank1_correct": 41,
+        "known_rejected_as_unknown": 2,
+        "known_wrong_identity_accepts": 0,
+        "mean_actual_enrollment_sec": 11.43000004440546,
+        "method": "supcon_linear",
+        "model_key": "fold_1_encoder_layer_7_supcon_linear",
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9754601226993865,
+        "open_set_correct": 159,
+        "pooling": "single_pooled",
+        "query_attempts": 163,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "encoder.layer.7",
+        "score_distributions": {
+          "genuine": {
+            "count": 41,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.6007327437400818,
+              0.7091110944747925,
+              0.7643738389015198,
+              0.8176088333129883,
+              0.8621662855148315,
+              0.9143034815788269,
+              0.9236605167388916
+            ]
+          },
+          "impostor": {
+            "count": 1263,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.6015453338623047,
+              -0.3092871308326721,
+              -0.17885610461235046,
+              0.021156618371605873,
+              0.27929049730300903,
+              0.4523010373115539,
+              0.7369254231452942
+            ]
+          },
+          "unknown_top1": {
+            "count": 122,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.030455807223916054,
+              0.2565548360347748,
+              0.31988558173179626,
+              0.45534858107566833,
+              0.5376424938440323,
+              0.628712409734726,
+              0.7369254231452942
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.9418604651162791,
+          "calibration_known_accepts": 81,
+          "calibration_known_queries": 86,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 86,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.6847962737083435,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 120,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.03896103896103896
+        },
+        "unknown_false_accept_rate": 0.01639344262295082,
+        "unknown_false_accept_speaker_macro": 0.012987012987012986,
+        "unknown_false_accepts": 2,
+        "unknown_queries": 122,
+        "validation_selected_model": true,
+        "verification_auc": 0.99897649807852,
+        "verification_eer": 0.021300426780989902,
+        "verification_far": 0.0023752969121140144,
+        "verification_frr": 0.04878048780487805,
+        "verification_genuine_accepts": 39,
+        "verification_genuine_trials": 41,
+        "verification_impostor_accepts": 3,
+        "verification_impostor_trials": 1263,
+        "verification_policy_threshold": 0.6847962737083435
+      },
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_2",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.711875,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 1.0
+        },
+        "known_correct_accept_rate": 0.8863636363636364,
+        "known_correct_accept_speaker_macro": 0.875,
+        "known_correct_accepts": 39,
+        "known_queries": 44,
+        "known_rank1_correct": 42,
+        "known_rejected_as_unknown": 4,
+        "known_wrong_identity_accepts": 1,
+        "mean_actual_enrollment_sec": 11.227499946951866,
+        "method": "speaker_ce_mlp",
+        "model_key": "fold_2_encoder_layer_7_speaker_ce_mlp",
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.9457831325301205,
+        "open_set_correct": 157,
+        "pooling": "single_pooled",
+        "query_attempts": 166,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "encoder.layer.7",
+        "score_distributions": {
+          "genuine": {
+            "count": 44,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.400068998336792,
+              0.6301123559474945,
+              0.694486990571022,
+              0.7571147382259369,
+              0.8362469673156738,
+              0.8691418170928955,
+              0.8833006620407104
+            ]
+          },
+          "impostor": {
+            "count": 1284,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.4466703534126282,
+              -0.24159258902072905,
+              -0.1500505954027176,
+              -0.04080810025334358,
+              0.15178420022130013,
+              0.33726635873317723,
+              0.7615224123001099
+            ]
+          },
+          "unknown_top1": {
+            "count": 122,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.021444054320454597,
+              0.19025219529867174,
+              0.2752763032913208,
+              0.3761068433523178,
+              0.4590482860803604,
+              0.5246118605136871,
+              0.6390665769577026
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.975,
+          "calibration_known_accepts": 78,
+          "calibration_known_queries": 80,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 80,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.6255831122398376,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 118,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0070075757575757585,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.07316017316017315
+        },
+        "unknown_false_accept_rate": 0.03278688524590164,
+        "unknown_false_accept_speaker_macro": 0.03452380952380952,
+        "unknown_false_accepts": 4,
+        "unknown_queries": 122,
+        "validation_selected_model": true,
+        "verification_auc": 0.9959820164259416,
+        "verification_eer": 0.022656471254602094,
+        "verification_far": 0.011682242990654205,
+        "verification_frr": 0.09090909090909091,
+        "verification_genuine_accepts": 40,
+        "verification_genuine_trials": 44,
+        "verification_impostor_accepts": 15,
+        "verification_impostor_trials": 1284,
+        "verification_policy_threshold": 0.6255831122398376
+      },
+      {
+        "actual_query_duration_bucket_metrics": {},
+        "enrollment_budget_sec": 10,
+        "fold_id": "fold_3",
+        "known_correct_accept_ci95": {
+          "lower_95": 0.4270833333333333,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 8,
+          "upper_95": 0.8261979166666665
+        },
+        "known_correct_accept_rate": 0.6097560975609756,
+        "known_correct_accept_speaker_macro": 0.6395833333333334,
+        "known_correct_accepts": 25,
+        "known_queries": 41,
+        "known_rank1_correct": 37,
+        "known_rejected_as_unknown": 14,
+        "known_wrong_identity_accepts": 2,
+        "mean_actual_enrollment_sec": 11.498750030994415,
+        "method": "speaker_ce_mlp",
+        "model_key": "fold_3_encoder_layer_7_speaker_ce_mlp",
+        "no_decision_rate": 0.0,
+        "no_decisions": 0,
+        "open_set_accuracy": 0.8580246913580247,
+        "open_set_correct": 139,
+        "pooling": "single_pooled",
+        "query_attempts": 162,
+        "query_budget_sec": 3,
+        "registry_size_requested": 8,
+        "registry_size_usable": 8,
+        "representation": "encoder.layer.7",
+        "score_distributions": {
+          "genuine": {
+            "count": 41,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.6062453389167786,
+              0.7143328785896301,
+              0.8001633286476135,
+              0.8581295013427734,
+              0.8951511979103088,
+              0.9130581617355347,
+              0.9382085204124451
+            ]
+          },
+          "impostor": {
+            "count": 1255,
+            "min_p10_p25_p50_p75_p90_max": [
+              -0.5767001509666443,
+              -0.39541214108467104,
+              -0.2984243184328079,
+              -0.03090374357998371,
+              0.4767221510410309,
+              0.6734044671058655,
+              0.8857375979423523
+            ]
+          },
+          "unknown_top1": {
+            "count": 121,
+            "min_p10_p25_p50_p75_p90_max": [
+              0.1575000286102295,
+              0.3560652434825897,
+              0.47648534178733826,
+              0.6385528445243835,
+              0.7393468618392944,
+              0.7981255054473877,
+              0.8768144845962524
+            ]
+          }
+        },
+        "threshold_calibration": {
+          "calibration_known_accept_rate": 0.5375,
+          "calibration_known_accepts": 43,
+          "calibration_known_queries": 80,
+          "calibration_unknown_false_accepts": 4,
+          "calibration_unknown_queries": 80,
+          "calibration_unknown_speaker_clusters": 15,
+          "maximum_calibrated_registry_size": 14,
+          "policy": "single global threshold fitted on leave-one-identity-out maximum impostor scores; reused for every evaluation registry and duration",
+          "target_calibration_false_accept_rate": 0.05,
+          "threshold": 0.8202121257781982,
+          "uncertainty_note": "calibration speaker population is only 15 identities per fold; pair/query counts are correlated within speaker"
+        },
+        "unknown_correct_rejections": 114,
+        "unknown_false_accept_ci95": {
+          "lower_95": 0.0,
+          "method": "speaker-cluster bootstrap over per-speaker attempt rates, 500 resamples",
+          "speaker_clusters": 22,
+          "upper_95": 0.16818181818181818
+        },
+        "unknown_false_accept_rate": 0.05785123966942149,
+        "unknown_false_accept_speaker_macro": 0.07272727272727274,
+        "unknown_false_accepts": 7,
+        "unknown_queries": 121,
+        "validation_selected_model": true,
+        "verification_auc": 0.979768729958216,
+        "verification_eer": 0.07483237780584977,
+        "verification_far": 0.01195219123505976,
+        "verification_frr": 0.34146341463414637,
+        "verification_genuine_accepts": 27,
+        "verification_genuine_trials": 41,
+        "verification_impostor_accepts": 15,
+        "verification_impostor_trials": 1255,
+        "verification_policy_threshold": 0.8202121257781982
+      }
+    ]
+  },
+  "interpretation": "pooled attempts span repeated speaker identities across folds and are not independent-trial confidence bounds; use fold and speaker-cluster results",
+  "primary_condition": {
+    "enrollment_sec": 10,
+    "query_microphone": "mic1",
+    "query_sec": 3,
+    "registry_size": 8,
+    "threshold": "Task 09B calibration threshold, frozen per fold"
+  },
+  "reproduced_pooled_counts": {
+    "pre_encoder_mean": [
+      112,
+      126,
+      17,
+      365
+    ],
+    "pre_encoder_mean_std": [
+      114,
+      126,
+      18,
+      365
+    ],
+    "selected_learned_head": [
+      103,
+      126,
+      13,
+      365
+    ]
+  },
+  "reproduction_status": "exact count match",
+  "schema": "nemo-speech.voiceid-task09c-baselines.v1",
+  "source_evaluator": "tests/tools/evaluate_voiceid_head.py on original Task 09B manifest and cached Vulkan feature pools",
+  "source_full_result": "/home/glebus/.cache/nemo-speech-task09b/task09c_reproduction_verification.json",
+  "source_full_result_sha256": "382be75c079ffd022cf43e50f0eeb886f699993d7c7fba88b8f01cccd7553ee7"
+}

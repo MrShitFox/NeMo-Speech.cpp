@@ -1,0 +1,2787 @@
+{
+  "enrollment_budget_results": [
+    {
+      "enrollment_budget_sec": 5,
+      "fold_id": "fold_1",
+      "known_correct_accept_rate": 0.5365853658536586,
+      "known_correct_accepts": 22,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 19,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 6.141250006854534,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.37873783707618713,
+            0.4128805994987488,
+            0.48255687952041626,
+            0.6093511581420898,
+            0.7679327130317688,
+            0.8149011135101318,
+            0.8232697248458862
+          ]
+        },
+        "impostor": {
+          "count": 1263,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.49518364667892456,
+            -0.23371658325195313,
+            -0.1362360194325447,
+            -0.011918249540030956,
+            0.2212037742137909,
+            0.34881236553192135,
+            0.5755479335784912
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.10257568210363388,
+            0.211065074801445,
+            0.26431024074554443,
+            0.3427288085222244,
+            0.4182083457708359,
+            0.492782598733902,
+            0.5755479335784912
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.0,
+      "unknown_false_accepts": 0,
+      "unknown_queries": 122,
+      "verification_auc": 0.9885097425796111,
+      "verification_eer": 0.07102717107931174,
+      "verification_far": 0.0,
+      "verification_frr": 0.4634146341463415,
+      "verification_genuine_accepts": 22,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 0,
+      "verification_impostor_trials": 1263,
+      "verification_policy_threshold": 0.584615170955658
+    },
+    {
+      "enrollment_budget_sec": 10,
+      "fold_id": "fold_1",
+      "known_correct_accept_rate": 0.7317073170731707,
+      "known_correct_accepts": 30,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 11,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 11.43000004440546,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.41448038816452026,
+            0.4897352159023285,
+            0.5764140486717224,
+            0.6760460138320923,
+            0.7966336607933044,
+            0.8308804035186768,
+            0.8708873391151428
+          ]
+        },
+        "impostor": {
+          "count": 1263,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.46632686257362366,
+            -0.2316080302000046,
+            -0.13132807612419128,
+            -0.005116547457873821,
+            0.22628812491893768,
+            0.3542017877101898,
+            0.6248014569282532
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.15130692720413208,
+            0.23332103341817856,
+            0.2705005928874016,
+            0.3460228890180588,
+            0.4278874844312668,
+            0.5080834329128266,
+            0.6248014569282532
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.03278688524590164,
+      "unknown_false_accepts": 4,
+      "unknown_queries": 122,
+      "verification_auc": 0.9944769518954097,
+      "verification_eer": 0.04893497866095051,
+      "verification_far": 0.003167062549485352,
+      "verification_frr": 0.2682926829268293,
+      "verification_genuine_accepts": 30,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 4,
+      "verification_impostor_trials": 1263,
+      "verification_policy_threshold": 0.584615170955658
+    },
+    {
+      "enrollment_budget_sec": 15,
+      "fold_id": "fold_1",
+      "known_correct_accept_rate": 0.8048780487804879,
+      "known_correct_accepts": 33,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 8,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 16.223750039935112,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.41813424229621887,
+            0.5296052098274231,
+            0.5914403200149536,
+            0.7020190954208374,
+            0.8066529631614685,
+            0.8408061861991882,
+            0.8904693126678467
+          ]
+        },
+        "impostor": {
+          "count": 1263,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.4782399535179138,
+            -0.23709671199321747,
+            -0.13512754440307617,
+            0.00039840949466452,
+            0.2372577264904976,
+            0.3655872404575347,
+            0.6271834969520569
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.16973651945590973,
+            0.23464086651802063,
+            0.2805505096912384,
+            0.3470820188522339,
+            0.4300682917237282,
+            0.5164650559425354,
+            0.6271834969520569
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.02459016393442623,
+      "unknown_false_accepts": 3,
+      "unknown_queries": 122,
+      "verification_auc": 0.9950562926056814,
+      "verification_eer": 0.04655968174883649,
+      "verification_far": 0.0023752969121140144,
+      "verification_frr": 0.1951219512195122,
+      "verification_genuine_accepts": 33,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 3,
+      "verification_impostor_trials": 1263,
+      "verification_policy_threshold": 0.584615170955658
+    },
+    {
+      "enrollment_budget_sec": 30,
+      "fold_id": "fold_1",
+      "known_correct_accept_rate": 0.8780487804878049,
+      "known_correct_accepts": 36,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 5,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 31.178750053048134,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.4430834650993347,
+            0.5690092444419861,
+            0.6387243866920471,
+            0.7299199104309082,
+            0.8276388645172119,
+            0.8576219081878662,
+            0.9063280820846558
+          ]
+        },
+        "impostor": {
+          "count": 1263,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.5022414326667786,
+            -0.24829343259334563,
+            -0.14859870076179504,
+            -0.008304156363010406,
+            0.2497798204421997,
+            0.37790864706039423,
+            0.620232343673706
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.19742241501808167,
+            0.2501509040594101,
+            0.28975340723991394,
+            0.36761748790740967,
+            0.4590684100985527,
+            0.5342169344425202,
+            0.620232343673706
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.040983606557377046,
+      "unknown_false_accepts": 5,
+      "unknown_queries": 122,
+      "verification_auc": 0.9963308421682792,
+      "verification_eer": 0.04497615047409381,
+      "verification_far": 0.004750593824228029,
+      "verification_frr": 0.12195121951219512,
+      "verification_genuine_accepts": 36,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 6,
+      "verification_impostor_trials": 1263,
+      "verification_policy_threshold": 0.584615170955658
+    },
+    {
+      "enrollment_budget_sec": 60,
+      "fold_id": "fold_1",
+      "known_correct_accept_rate": 0.5121951219512195,
+      "known_correct_accepts": 21,
+      "known_queries": 41,
+      "known_rank1_correct": 24,
+      "known_rejected_as_unknown": 20,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 61.01000000536442,
+      "no_decisions": 0,
+      "registry_failure_ids": [
+        "p311",
+        "p232",
+        "p288",
+        "p260"
+      ],
+      "registry_profile_failures": 4,
+      "registry_size_requested": 8,
+      "registry_size_usable": 4,
+      "score_distributions": {
+        "genuine": {
+          "count": 24,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.4905659556388855,
+            0.5740190863609315,
+            0.6728399842977524,
+            0.7313940823078156,
+            0.7693860828876495,
+            0.8616264700889588,
+            0.8748012781143188
+          ]
+        },
+        "impostor": {
+          "count": 628,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.5287745594978333,
+            -0.23152016401290892,
+            -0.1272972710430622,
+            0.03420310281217098,
+            0.21805012226104736,
+            0.3293954849243164,
+            0.5783004760742188
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.03841184452176094,
+            0.12299606055021291,
+            0.20457953587174416,
+            0.2798742800951004,
+            0.352782167494297,
+            0.41598431169986727,
+            0.5783004760742188
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.0,
+      "unknown_false_accepts": 0,
+      "unknown_queries": 122,
+      "verification_auc": 0.9993365180467091,
+      "verification_eer": 0.004777070063694267,
+      "verification_far": 0.0,
+      "verification_frr": 0.125,
+      "verification_genuine_accepts": 21,
+      "verification_genuine_trials": 24,
+      "verification_impostor_accepts": 0,
+      "verification_impostor_trials": 628,
+      "verification_policy_threshold": 0.584615170955658
+    },
+    {
+      "enrollment_budget_sec": 5,
+      "fold_id": "fold_2",
+      "known_correct_accept_rate": 0.7045454545454546,
+      "known_correct_accepts": 31,
+      "known_queries": 44,
+      "known_rank1_correct": 42,
+      "known_rejected_as_unknown": 13,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 6.183749929070473,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 44,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.06346707791090012,
+            0.33454757630825044,
+            0.44865643233060837,
+            0.5967462658882141,
+            0.6866374313831329,
+            0.7511754035949707,
+            0.8003879189491272
+          ]
+        },
+        "impostor": {
+          "count": 1284,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.46979430317878723,
+            -0.22176599353551865,
+            -0.11947218887507915,
+            0.0013273842632770538,
+            0.13471684977412224,
+            0.24769454300403598,
+            0.6166161298751831
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.03296281769871712,
+            0.11418028473854065,
+            0.20268893241882324,
+            0.2598910629749298,
+            0.3476000800728798,
+            0.41307021379470826,
+            0.6166161298751831
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.02459016393442623,
+      "unknown_false_accepts": 3,
+      "unknown_queries": 122,
+      "verification_auc": 0.9840873690172756,
+      "verification_eer": 0.0480387992070235,
+      "verification_far": 0.002336448598130841,
+      "verification_frr": 0.29545454545454547,
+      "verification_genuine_accepts": 31,
+      "verification_genuine_trials": 44,
+      "verification_impostor_accepts": 3,
+      "verification_impostor_trials": 1284,
+      "verification_policy_threshold": 0.4999958276748657
+    },
+    {
+      "enrollment_budget_sec": 10,
+      "fold_id": "fold_2",
+      "known_correct_accept_rate": 0.8181818181818182,
+      "known_correct_accepts": 36,
+      "known_queries": 44,
+      "known_rank1_correct": 44,
+      "known_rejected_as_unknown": 8,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 11.227499946951866,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 44,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.3482510447502136,
+            0.45734400749206544,
+            0.5574568808078766,
+            0.6554697155952454,
+            0.723180741071701,
+            0.7836040556430817,
+            0.8468298316001892
+          ]
+        },
+        "impostor": {
+          "count": 1284,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.5080534815788269,
+            -0.2289452150464058,
+            -0.12488375976681709,
+            0.0009725932613946497,
+            0.13340343162417412,
+            0.2570162147283554,
+            0.6313693523406982
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.01856878399848938,
+            0.13373462557792665,
+            0.19350462034344673,
+            0.269623339176178,
+            0.3562921956181526,
+            0.4563334584236145,
+            0.6313693523406982
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.040983606557377046,
+      "unknown_false_accepts": 5,
+      "unknown_queries": 122,
+      "verification_auc": 0.9971856414613424,
+      "verification_eer": 0.022656471254602094,
+      "verification_far": 0.003894080996884735,
+      "verification_frr": 0.18181818181818182,
+      "verification_genuine_accepts": 36,
+      "verification_genuine_trials": 44,
+      "verification_impostor_accepts": 5,
+      "verification_impostor_trials": 1284,
+      "verification_policy_threshold": 0.4999958276748657
+    },
+    {
+      "enrollment_budget_sec": 15,
+      "fold_id": "fold_2",
+      "known_correct_accept_rate": 0.9318181818181818,
+      "known_correct_accepts": 41,
+      "known_queries": 44,
+      "known_rank1_correct": 44,
+      "known_rejected_as_unknown": 3,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 16.487499944865704,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 44,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.4273702800273895,
+            0.5304722011089325,
+            0.6037788987159729,
+            0.6855750381946564,
+            0.7436748743057251,
+            0.8044319093227388,
+            0.8521403074264526
+          ]
+        },
+        "impostor": {
+          "count": 1284,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.5063307285308838,
+            -0.2336748734116554,
+            -0.12836836278438568,
+            0.001504729560110718,
+            0.13658134639263153,
+            0.2731719404459,
+            0.6474646925926208
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.05475917086005211,
+            0.11973496153950691,
+            0.19721835479140282,
+            0.2839146554470062,
+            0.3751068413257599,
+            0.457124850153923,
+            0.6474646925926208
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.04918032786885246,
+      "unknown_false_accepts": 6,
+      "unknown_queries": 122,
+      "verification_auc": 0.9987432738600963,
+      "verification_eer": 0.020709430756159726,
+      "verification_far": 0.005451713395638629,
+      "verification_frr": 0.06818181818181818,
+      "verification_genuine_accepts": 41,
+      "verification_genuine_trials": 44,
+      "verification_impostor_accepts": 7,
+      "verification_impostor_trials": 1284,
+      "verification_policy_threshold": 0.4999958276748657
+    },
+    {
+      "enrollment_budget_sec": 30,
+      "fold_id": "fold_2",
+      "known_correct_accept_rate": 0.9318181818181818,
+      "known_correct_accepts": 41,
+      "known_queries": 44,
+      "known_rank1_correct": 44,
+      "known_rejected_as_unknown": 3,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 31.44499995559454,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 44,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.43735384941101074,
+            0.5196378827095032,
+            0.6253335624933243,
+            0.7114677131175995,
+            0.7589796036481857,
+            0.8220514953136444,
+            0.8654447197914124
+          ]
+        },
+        "impostor": {
+          "count": 1284,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.5038533806800842,
+            -0.2314404472708702,
+            -0.12911437451839447,
+            0.0035389551194384694,
+            0.13595687597990036,
+            0.2741221159696579,
+            0.6850214600563049
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.0488947331905365,
+            0.13605386912822723,
+            0.2170184589922428,
+            0.2984689176082611,
+            0.3973974660038948,
+            0.48193614780902877,
+            0.6850214600563049
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.05737704918032787,
+      "unknown_false_accepts": 7,
+      "unknown_queries": 122,
+      "verification_auc": 0.998601670914755,
+      "verification_eer": 0.01993061455678278,
+      "verification_far": 0.005451713395638629,
+      "verification_frr": 0.06818181818181818,
+      "verification_genuine_accepts": 41,
+      "verification_genuine_trials": 44,
+      "verification_impostor_accepts": 7,
+      "verification_impostor_trials": 1284,
+      "verification_policy_threshold": 0.4999958276748657
+    },
+    {
+      "enrollment_budget_sec": 60,
+      "fold_id": "fold_2",
+      "known_correct_accept_rate": 0.7727272727272727,
+      "known_correct_accepts": 34,
+      "known_queries": 44,
+      "known_rank1_correct": 35,
+      "known_rejected_as_unknown": 10,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 61.58333326379458,
+      "no_decisions": 0,
+      "registry_failure_ids": [
+        "p313",
+        "p336"
+      ],
+      "registry_profile_failures": 2,
+      "registry_size_requested": 8,
+      "registry_size_usable": 6,
+      "score_distributions": {
+        "genuine": {
+          "count": 35,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.4344280958175659,
+            0.5419171810150146,
+            0.6271507441997528,
+            0.7392114400863647,
+            0.7890874743461609,
+            0.8367393970489502,
+            0.8758901357650757
+          ]
+        },
+        "impostor": {
+          "count": 961,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.5154411196708679,
+            -0.23777006566524506,
+            -0.12947137653827667,
+            -0.0026669390499591827,
+            0.1493942141532898,
+            0.2960873246192932,
+            0.7111591100692749
+          ]
+        },
+        "unknown_top1": {
+          "count": 122,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.02366400696337223,
+            0.13825896084308625,
+            0.2089989297091961,
+            0.3099835067987442,
+            0.3992471769452095,
+            0.4695050746202469,
+            0.7111591100692749
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.09016393442622951,
+      "unknown_false_accepts": 11,
+      "unknown_queries": 122,
+      "verification_auc": 0.9982458748327635,
+      "verification_eer": 0.025211832912145085,
+      "verification_far": 0.011446409989594173,
+      "verification_frr": 0.02857142857142857,
+      "verification_genuine_accepts": 34,
+      "verification_genuine_trials": 35,
+      "verification_impostor_accepts": 11,
+      "verification_impostor_trials": 961,
+      "verification_policy_threshold": 0.4999958276748657
+    },
+    {
+      "enrollment_budget_sec": 5,
+      "fold_id": "fold_3",
+      "known_correct_accept_rate": 0.9024390243902439,
+      "known_correct_accepts": 37,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 4,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 6.394999995827675,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.43145275115966797,
+            0.4950973689556122,
+            0.5886189341545105,
+            0.6593043208122253,
+            0.7001203894615173,
+            0.7584478855133057,
+            0.8162569403648376
+          ]
+        },
+        "impostor": {
+          "count": 1255,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.4622340500354767,
+            -0.24533627033233643,
+            -0.1535913422703743,
+            0.013146687299013138,
+            0.2325843647122383,
+            0.35652867555618295,
+            0.5452772974967957
+          ]
+        },
+        "unknown_top1": {
+          "count": 121,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.09352235496044159,
+            0.17618052661418915,
+            0.2835782766342163,
+            0.36628785729408264,
+            0.43050894141197205,
+            0.481613427400589,
+            0.5364344716072083
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.08264462809917356,
+      "unknown_false_accepts": 10,
+      "unknown_queries": 121,
+      "verification_auc": 0.9974152171800602,
+      "verification_eer": 0.024545719560781266,
+      "verification_far": 0.010358565737051793,
+      "verification_frr": 0.0975609756097561,
+      "verification_genuine_accepts": 37,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 13,
+      "verification_impostor_trials": 1255,
+      "verification_policy_threshold": 0.4899310767650604
+    },
+    {
+      "enrollment_budget_sec": 10,
+      "fold_id": "fold_3",
+      "known_correct_accept_rate": 0.9512195121951219,
+      "known_correct_accepts": 39,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 2,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 11.498750030994415,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.44312959909439087,
+            0.582038938999176,
+            0.6418203711509705,
+            0.7010732889175415,
+            0.7448154091835022,
+            0.7958152890205383,
+            0.8350756168365479
+          ]
+        },
+        "impostor": {
+          "count": 1255,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.4684298634529114,
+            -0.25910518765449525,
+            -0.15845416486263275,
+            0.025791149586439133,
+            0.25647778809070587,
+            0.3781384706497193,
+            0.598130464553833
+          ]
+        },
+        "unknown_top1": {
+          "count": 121,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.07364614307880402,
+            0.19119206070899963,
+            0.3031485080718994,
+            0.38178449869155884,
+            0.44179823994636536,
+            0.48801377415657043,
+            0.5566455721855164
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.09090909090909091,
+      "unknown_false_accepts": 11,
+      "unknown_queries": 121,
+      "verification_auc": 0.9980371198134292,
+      "verification_eer": 0.02932659605480517,
+      "verification_far": 0.01195219123505976,
+      "verification_frr": 0.04878048780487805,
+      "verification_genuine_accepts": 39,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 15,
+      "verification_impostor_trials": 1255,
+      "verification_policy_threshold": 0.4899310767650604
+    },
+    {
+      "enrollment_budget_sec": 15,
+      "fold_id": "fold_3",
+      "known_correct_accept_rate": 0.9512195121951219,
+      "known_correct_accepts": 39,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 2,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 16.0587500333786,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.4542982578277588,
+            0.5741275548934937,
+            0.6623818278312683,
+            0.7315406799316406,
+            0.7734372019767761,
+            0.8116280436515808,
+            0.8401967287063599
+          ]
+        },
+        "impostor": {
+          "count": 1255,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.4950670897960663,
+            -0.2681999742984772,
+            -0.16638974100351334,
+            0.015497809275984764,
+            0.2530275136232376,
+            0.3804865419864656,
+            0.6205105781555176
+          ]
+        },
+        "unknown_top1": {
+          "count": 121,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.056679584085941315,
+            0.19315741956233978,
+            0.3177553117275238,
+            0.37348300218582153,
+            0.45010513067245483,
+            0.4955287277698517,
+            0.5671224594116211
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.12396694214876033,
+      "unknown_false_accepts": 15,
+      "unknown_queries": 121,
+      "verification_auc": 0.9981537265571859,
+      "verification_eer": 0.026936157807793217,
+      "verification_far": 0.016733067729083666,
+      "verification_frr": 0.04878048780487805,
+      "verification_genuine_accepts": 39,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 21,
+      "verification_impostor_trials": 1255,
+      "verification_policy_threshold": 0.4899310767650604
+    },
+    {
+      "enrollment_budget_sec": 30,
+      "fold_id": "fold_3",
+      "known_correct_accept_rate": 1.0,
+      "known_correct_accepts": 41,
+      "known_queries": 41,
+      "known_rank1_correct": 41,
+      "known_rejected_as_unknown": 0,
+      "known_wrong_identity_accepts": 0,
+      "mean_actual_enrollment_sec": 32.816250026226044,
+      "no_decisions": 0,
+      "registry_failure_ids": [],
+      "registry_profile_failures": 0,
+      "registry_size_requested": 8,
+      "registry_size_usable": 8,
+      "score_distributions": {
+        "genuine": {
+          "count": 41,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.49483510851860046,
+            0.5595813989639282,
+            0.6836177706718445,
+            0.7563481330871582,
+            0.7837460041046143,
+            0.8232314586639404,
+            0.8630464673042297
+          ]
+        },
+        "impostor": {
+          "count": 1255,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.4679054021835327,
+            -0.2785534501075745,
+            -0.1778160035610199,
+            0.021206941455602646,
+            0.262446790933609,
+            0.38782594799995435,
+            0.6104253530502319
+          ]
+        },
+        "unknown_top1": {
+          "count": 121,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.06919080018997192,
+            0.18268494307994843,
+            0.3233007788658142,
+            0.3810957074165344,
+            0.4695768356323242,
+            0.5102217793464661,
+            0.5974640250205994
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.18181818181818182,
+      "unknown_false_accepts": 22,
+      "unknown_queries": 121,
+      "verification_auc": 0.9988728014770187,
+      "verification_eer": 0.02175687493926732,
+      "verification_far": 0.024701195219123506,
+      "verification_frr": 0.0,
+      "verification_genuine_accepts": 41,
+      "verification_genuine_trials": 41,
+      "verification_impostor_accepts": 31,
+      "verification_impostor_trials": 1255,
+      "verification_policy_threshold": 0.4899310767650604
+    },
+    {
+      "enrollment_budget_sec": 60,
+      "fold_id": "fold_3",
+      "known_correct_accept_rate": 0.6585365853658537,
+      "known_correct_accepts": 27,
+      "known_queries": 41,
+      "known_rank1_correct": 27,
+      "known_rejected_as_unknown": 13,
+      "known_wrong_identity_accepts": 1,
+      "mean_actual_enrollment_sec": 61.33400007486343,
+      "no_decisions": 0,
+      "registry_failure_ids": [
+        "p279",
+        "p227",
+        "p360"
+      ],
+      "registry_profile_failures": 3,
+      "registry_size_requested": 8,
+      "registry_size_usable": 5,
+      "score_distributions": {
+        "genuine": {
+          "count": 27,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.517525851726532,
+            0.5417122840881348,
+            0.6782709658145905,
+            0.7359738349914551,
+            0.7812190353870392,
+            0.8276358723640442,
+            0.8751925230026245
+          ]
+        },
+        "impostor": {
+          "count": 783,
+          "min_p10_p25_p50_p75_p90_max": [
+            -0.44592148065567017,
+            -0.26714348793029785,
+            -0.16508113592863083,
+            -0.014747058972716331,
+            0.20259808003902435,
+            0.3460831820964816,
+            0.620654284954071
+          ]
+        },
+        "unknown_top1": {
+          "count": 121,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.058574311435222626,
+            0.137985497713089,
+            0.25761786103248596,
+            0.3339760899543762,
+            0.4172704517841339,
+            0.5131276249885559,
+            0.620654284954071
+          ]
+        }
+      },
+      "unknown_false_accept_rate": 0.12396694214876033,
+      "unknown_false_accepts": 15,
+      "unknown_queries": 121,
+      "verification_auc": 0.9983444491745896,
+      "verification_eer": 0.0070242656449553,
+      "verification_far": 0.020434227330779056,
+      "verification_frr": 0.0,
+      "verification_genuine_accepts": 27,
+      "verification_genuine_trials": 27,
+      "verification_impostor_accepts": 16,
+      "verification_impostor_trials": 783,
+      "verification_policy_threshold": 0.4899310767650604
+    }
+  ],
+  "evaluation_status": "Task 09B 8-person/3-second enrollment budget regression evidence on previously studied VCTK identities",
+  "limitations": "Enrollment clip budgets can overshoot by the final utterance; the same-speaker prototype stability measurements are VCTK utterance evidence, not session stability.",
+  "method": "frozen pre_encoder mean, training-speaker-only diagonal z-score, one pooled cosine prototype",
+  "profile_generation_and_stability": {
+    "fold_results": [
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            5.03000009059906,
+            5.5200000405311584,
+            5.797499865293503,
+            6.014999866485596,
+            6.45250016450882,
+            7.1050000250339505,
+            7.210000216960907
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_1",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8435834050178528,
+            0.8542777836322785,
+            0.8792434632778168,
+            0.9314999580383301,
+            0.9505016058683395,
+            0.9591072142124176,
+            0.9738669395446777
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.000000035762787,
+            1.0000001192092896
+          ]
+        },
+        "requested_enrollment_speech_sec": 5,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            2.0,
+            2.0,
+            2.0,
+            3.5,
+            4.0,
+            4.3,
+            5.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            10.06000006198883,
+            10.521999955177307,
+            10.96000026166439,
+            11.389999985694885,
+            11.74999988079071,
+            12.392000019550323,
+            13.12000024318695
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_1",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.000000035762787,
+            1.0000001192092896
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8435834050178528,
+            0.8542777836322785,
+            0.8792434632778168,
+            0.9314999580383301,
+            0.9505016058683395,
+            0.9591072142124176,
+            0.9738669395446777
+          ]
+        },
+        "requested_enrollment_speech_sec": 10,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            4.0,
+            4.7,
+            5.0,
+            6.5,
+            7.0,
+            7.0,
+            7.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            15.139999866485596,
+            15.181999993324279,
+            15.514999970793724,
+            16.4450002014637,
+            16.772499978542328,
+            16.97800017595291,
+            17.369999885559082
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_1",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.9356749653816223,
+            0.9531543374061584,
+            0.964817002415657,
+            0.9734980165958405,
+            0.9780528694391251,
+            0.9870738804340362,
+            0.9889129996299744
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8052866458892822,
+            0.8394737184047699,
+            0.8619790524244308,
+            0.9075024724006653,
+            0.9401302933692932,
+            0.9512592613697052,
+            0.9657308459281921
+          ]
+        },
+        "requested_enrollment_speech_sec": 15,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            5.0,
+            6.4,
+            7.75,
+            9.0,
+            9.25,
+            10.6,
+            12.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            30.22999995946884,
+            30.411999744176864,
+            30.662500381469727,
+            31.139999985694885,
+            31.552499756217003,
+            31.977000093460084,
+            32.46000063419342
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_1",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8776558637619019,
+            0.9137077569961548,
+            0.9307374954223633,
+            0.9362317025661469,
+            0.9496260732412338,
+            0.9716976940631866,
+            0.9746240377426147
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.7374739050865173,
+            0.7788541913032532,
+            0.8068652153015137,
+            0.8720009028911591,
+            0.9030979126691818,
+            0.9357620060443879,
+            0.9563024044036865
+          ]
+        },
+        "requested_enrollment_speech_sec": 30,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            13.0,
+            13.0,
+            13.75,
+            16.5,
+            19.0,
+            19.6,
+            21.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            47.13000005483627,
+            49.097000640630725,
+            52.31750014424324,
+            57.93500007688999,
+            60.86999994516373,
+            61.44300014972687,
+            61.58999967575073
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 4
+        },
+        "fold_id": "fold_1",
+        "profile_attempts": 8,
+        "profile_failures": 4,
+        "profile_successes": 4,
+        "prototype_cosine_to_10s_profile": {
+          "count": 4,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8688332438468933,
+            0.8787790894508362,
+            0.8936978578567505,
+            0.9106782674789429,
+            0.9290291368961334,
+            0.9464147329330445,
+            0.9580051302909851
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 4,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.6896257400512695,
+            0.7245546638965606,
+            0.7769480496644974,
+            0.8157021999359131,
+            0.8565457314252853,
+            0.9127000033855438,
+            0.9501361846923828
+          ]
+        },
+        "requested_enrollment_speech_sec": 60,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            24.0,
+            24.7,
+            26.5,
+            31.5,
+            32.0,
+            32.0,
+            32.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            5.009999871253967,
+            5.576999998092651,
+            5.8575000166893005,
+            6.1249998807907104,
+            6.42999991774559,
+            6.918999934196472,
+            7.4999998807907104
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_2",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8593018054962158,
+            0.8750553369522095,
+            0.9004463255405426,
+            0.9113034307956696,
+            0.9206835627555847,
+            0.9423100352287292,
+            0.9485205411911011
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0000001192092896,
+            1.0000001192092896,
+            1.0000001192092896
+          ]
+        },
+        "requested_enrollment_speech_sec": 5,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            2.0,
+            2.0,
+            2.0,
+            3.0,
+            3.25,
+            4.0,
+            4.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            10.070000171661377,
+            10.196000051498412,
+            10.924999982118607,
+            11.24999988079071,
+            11.707499980926514,
+            12.041999876499176,
+            12.279999732971191
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_2",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0000001192092896,
+            1.0000001192092896,
+            1.0000001192092896
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8593018054962158,
+            0.8750553369522095,
+            0.9004463255405426,
+            0.9113034307956696,
+            0.9206835627555847,
+            0.9423100352287292,
+            0.9485205411911011
+          ]
+        },
+        "requested_enrollment_speech_sec": 10,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            4.0,
+            4.0,
+            4.75,
+            6.0,
+            6.0,
+            6.6,
+            8.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            15.199999928474426,
+            15.528999865055084,
+            15.684999957680702,
+            16.205000042915344,
+            17.042499840259552,
+            18.006999850273132,
+            18.28000009059906
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_2",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8759294748306274,
+            0.9056606292724609,
+            0.9411002993583679,
+            0.958173930644989,
+            0.9780379086732864,
+            0.9815824210643769,
+            0.9872664213180542
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.6351584792137146,
+            0.7586491227149963,
+            0.8223407864570618,
+            0.8860029578208923,
+            0.894830197095871,
+            0.9209206879138947,
+            0.9393573999404907
+          ]
+        },
+        "requested_enrollment_speech_sec": 15,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            6.0,
+            6.0,
+            6.0,
+            7.5,
+            9.0,
+            9.6,
+            11.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            30.100000023841858,
+            30.37299976348877,
+            30.75999988615513,
+            31.309999883174896,
+            32.05249997973442,
+            32.66900008916855,
+            33.110000252723694
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_2",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8012229800224304,
+            0.8268084704875946,
+            0.9051381647586823,
+            0.9334581196308136,
+            0.9473014920949936,
+            0.9501549601554871,
+            0.9545976519584656
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.5418722033500671,
+            0.721898353099823,
+            0.8106589168310165,
+            0.8586965203285217,
+            0.885776087641716,
+            0.8879701256752014,
+            0.8917211294174194
+          ]
+        },
+        "requested_enrollment_speech_sec": 30,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            11.0,
+            11.7,
+            12.0,
+            13.5,
+            14.75,
+            17.0,
+            17.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            52.919999957084656,
+            54.68400011062622,
+            59.339999943971634,
+            61.2500005364418,
+            61.77499958872795,
+            62.36299942135811,
+            62.439999639987946
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 2
+        },
+        "fold_id": "fold_2",
+        "profile_attempts": 8,
+        "profile_failures": 2,
+        "profile_successes": 6,
+        "prototype_cosine_to_10s_profile": {
+          "count": 6,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.7746304869651794,
+            0.7794302701950073,
+            0.8049411475658417,
+            0.8987392485141754,
+            0.9364201724529266,
+            0.9395606517791748,
+            0.9406957626342773
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 6,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.5236117243766785,
+            0.6316730380058289,
+            0.758509948849678,
+            0.8332607746124268,
+            0.8584363758563995,
+            0.8811460733413696,
+            0.9016052484512329
+          ]
+        },
+        "requested_enrollment_speech_sec": 60,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            22.0,
+            24.1,
+            25.75,
+            27.0,
+            31.25,
+            32.0,
+            32.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            5.360000014305115,
+            5.618999975919723,
+            5.730000004172325,
+            5.974999934434891,
+            6.617499947547913,
+            7.435000061988831,
+            9.080000162124634
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_3",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8925401568412781,
+            0.9009096324443817,
+            0.9197692275047302,
+            0.9348585307598114,
+            0.9498697072267532,
+            0.9604447364807129,
+            0.9849432110786438
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "requested_enrollment_speech_sec": 5,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            2.0,
+            2.0,
+            2.75,
+            3.0,
+            3.0,
+            3.3,
+            4.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            10.790000081062317,
+            10.916000044345855,
+            10.992500096559525,
+            11.55500003695488,
+            11.98999996483326,
+            12.079999959468841,
+            12.080000042915344
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_3",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            1.0,
+            1.0,
+            1.0,
+            1.0000000596046448,
+            1.0000001192092896,
+            1.0000001192092896,
+            1.0000001192092896
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8925401568412781,
+            0.9009096324443817,
+            0.9197692275047302,
+            0.9348585307598114,
+            0.9498697072267532,
+            0.9604447364807129,
+            0.9849432110786438
+          ]
+        },
+        "requested_enrollment_speech_sec": 10,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            4.0,
+            4.0,
+            4.75,
+            5.5,
+            6.0,
+            6.3,
+            7.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            15.139999866485596,
+            15.231000030040741,
+            15.315000101923943,
+            15.745000064373016,
+            16.562499925494194,
+            17.332000148296355,
+            17.710000038146973
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_3",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.9461483955383301,
+            0.9613081634044647,
+            0.970545306801796,
+            0.9739942848682404,
+            0.9769027382135391,
+            0.9787223756313324,
+            0.9815298914909363
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8725658655166626,
+            0.8757747173309326,
+            0.8829789161682129,
+            0.9119573831558228,
+            0.9223811477422714,
+            0.941444742679596,
+            0.951759397983551
+          ]
+        },
+        "requested_enrollment_speech_sec": 15,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            5.0,
+            6.4,
+            7.0,
+            7.5,
+            8.25,
+            9.0,
+            9.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            30.55999994277954,
+            30.588000041246413,
+            30.67500014603138,
+            31.17499977350235,
+            33.46250031888485,
+            36.16099984645843,
+            40.97000026702881
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 0
+        },
+        "fold_id": "fold_3",
+        "profile_attempts": 8,
+        "profile_failures": 0,
+        "profile_successes": 8,
+        "prototype_cosine_to_10s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8935843706130981,
+            0.9221761465072632,
+            0.9347715228796005,
+            0.9442973136901855,
+            0.9509511142969131,
+            0.9579270124435425,
+            0.9670956134796143
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8223318457603455,
+            0.842420881986618,
+            0.8520728647708893,
+            0.8840676546096802,
+            0.9045619666576385,
+            0.9137496232986451,
+            0.9267683625221252
+          ]
+        },
+        "requested_enrollment_speech_sec": 30,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            13.0,
+            13.0,
+            13.0,
+            15.0,
+            18.0,
+            18.0,
+            18.0
+          ]
+        }
+      },
+      {
+        "actual_usable_speech_sec": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            50.940000116825104,
+            51.31800000667572,
+            54.907500222325325,
+            60.3199999332428,
+            60.907500103116035,
+            62.70600004196167,
+            63.14000046253204
+          ]
+        },
+        "failure_reasons": {
+          "enrollment_data_exhaustion_before_budget": 3
+        },
+        "fold_id": "fold_3",
+        "profile_attempts": 8,
+        "profile_failures": 3,
+        "profile_successes": 5,
+        "prototype_cosine_to_10s_profile": {
+          "count": 5,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8922339081764221,
+            0.9021605372428894,
+            0.9170504808425903,
+            0.9230617880821228,
+            0.9333762526512146,
+            0.9383074402809143,
+            0.9415948987007141
+          ]
+        },
+        "prototype_cosine_to_5s_profile": {
+          "count": 5,
+          "min_p10_p25_p50_p75_p90_max": [
+            0.8189654350280762,
+            0.8301294803619385,
+            0.8468755483627319,
+            0.8600413203239441,
+            0.8767298460006714,
+            0.8985286951065063,
+            0.913061261177063
+          ]
+        },
+        "requested_enrollment_speech_sec": 60,
+        "selected_enrollment_clip_count": {
+          "count": 8,
+          "min_p10_p25_p50_p75_p90_max": [
+            21.0,
+            23.1,
+            26.25,
+            27.5,
+            32.0,
+            32.0,
+            32.0
+          ]
+        }
+      }
+    ],
+    "per_identity_budget_outcomes": {
+      "fold_1": {
+        "p231": {
+          "10": {
+            "actual_usable_speech_sec": 11.239999890327454,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.759999871253967,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.489999651908875,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 14
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.169999837875366,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 61.58999967575073,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 31
+          }
+        },
+        "p232": {
+          "10": {
+            "actual_usable_speech_sec": 10.06000006198883,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 7
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.480000019073486,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 31.28000009059906,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 18
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.03000009059906,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 4
+          },
+          "60": {
+            "actual_usable_speech_sec": 53.109999895095825,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        },
+        "p237": {
+          "10": {
+            "actual_usable_speech_sec": 11.639999866485596,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 5
+          },
+          "15": {
+            "actual_usable_speech_sec": 17.369999885559082,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 8
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.99999988079071,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 15
+          },
+          "5": {
+            "actual_usable_speech_sec": 7.059999942779541,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 60.69999980926514,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 27
+          }
+        },
+        "p260": {
+          "10": {
+            "actual_usable_speech_sec": 11.04000037908554,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 7
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.410000383853912,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 12
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.720000624656677,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 19
+          },
+          "5": {
+            "actual_usable_speech_sec": 7.210000216960907,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 5
+          },
+          "60": {
+            "actual_usable_speech_sec": 49.940000891685486,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        },
+        "p266": {
+          "10": {
+            "actual_usable_speech_sec": 12.079999923706055,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 4
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.139999866485596,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 5
+          },
+          "30": {
+            "actual_usable_speech_sec": 31.479999721050262,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 13
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.859999895095825,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 60.370000183582306,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 24
+          }
+        },
+        "p276": {
+          "10": {
+            "actual_usable_speech_sec": 13.12000024318695,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 5
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.81000030040741,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 7
+          },
+          "30": {
+            "actual_usable_speech_sec": 32.46000063419342,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 13
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.250000238418579,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 61.3800003528595,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 25
+          }
+        },
+        "p288": {
+          "10": {
+            "actual_usable_speech_sec": 10.71999990940094,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 7
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.619999945163727,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 10
+          },
+          "30": {
+            "actual_usable_speech_sec": 31.769999861717224,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 19
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.819999814033508,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 4
+          },
+          "60": {
+            "actual_usable_speech_sec": 55.49999997019768,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        },
+        "p311": {
+          "10": {
+            "actual_usable_speech_sec": 11.540000081062317,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 7
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.200000047683716,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.22999995946884,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 21
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.730000019073486,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 4
+          },
+          "60": {
+            "actual_usable_speech_sec": 47.13000005483627,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        }
+      },
+      "fold_2": {
+        "p225": {
+          "10": {
+            "actual_usable_speech_sec": 10.070000171661377,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 4
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.18000030517578,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 6
+          },
+          "30": {
+            "actual_usable_speech_sec": 33.110000252723694,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 13
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.820000052452087,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 61.3100004196167,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 26
+          }
+        },
+        "p231": {
+          "10": {
+            "actual_usable_speech_sec": 11.239999890327454,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.759999871253967,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.489999651908875,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 14
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.169999837875366,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 61.58999967575073,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 31
+          }
+        },
+        "p240": {
+          "10": {
+            "actual_usable_speech_sec": 12.279999732971191,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 5
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.229999780654907,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 6
+          },
+          "30": {
+            "actual_usable_speech_sec": 31.9099999666214,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 12
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.349999904632568,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 60.639999866485596,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 25
+          }
+        },
+        "p249": {
+          "10": {
+            "actual_usable_speech_sec": 11.259999871253967,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 4
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.669999837875366,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 6
+          },
+          "30": {
+            "actual_usable_speech_sec": 31.670000314712524,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 11
+          },
+          "5": {
+            "actual_usable_speech_sec": 7.4999998807907104,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 61.19000065326691,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 22
+          }
+        },
+        "p263": {
+          "10": {
+            "actual_usable_speech_sec": 11.149999976158142,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.199999928474426,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 8
+          },
+          "30": {
+            "actual_usable_speech_sec": 32.480000019073486,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 12
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.669999957084656,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 4
+          },
+          "60": {
+            "actual_usable_speech_sec": 62.439999639987946,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 26
+          }
+        },
+        "p305": {
+          "10": {
+            "actual_usable_speech_sec": 11.93999993801117,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 17.889999747276306,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 7
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.949999451637268,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 14
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.079999923706055,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 62.32999932765961,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 28
+          }
+        },
+        "p313": {
+          "10": {
+            "actual_usable_speech_sec": 10.25,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 18.28000009059906,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.100000023841858,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 17
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.009999871253967,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 55.44000017642975,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        },
+        "p336": {
+          "10": {
+            "actual_usable_speech_sec": 11.629999995231628,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 8
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.689999997615814,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 11
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.849999964237213,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 17
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.870000004768372,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 4
+          },
+          "60": {
+            "actual_usable_speech_sec": 52.919999957084656,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        }
+      },
+      "fold_3": {
+        "p227": {
+          "10": {
+            "actual_usable_speech_sec": 11.769999921321869,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 7
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.35999983549118,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.869999825954437,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 18
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.089999973773956,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 4
+          },
+          "60": {
+            "actual_usable_speech_sec": 51.47999995946884,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        },
+        "p230": {
+          "10": {
+            "actual_usable_speech_sec": 11.34000015258789,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 5
+          },
+          "15": {
+            "actual_usable_speech_sec": 16.12000012397766,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 7
+          },
+          "30": {
+            "actual_usable_speech_sec": 40.97000026702881,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 14
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.730000019073486,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 63.14000046253204,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 21
+          }
+        },
+        "p245": {
+          "10": {
+            "actual_usable_speech_sec": 11.00000011920929,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 4
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.370000004768372,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 7
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.55999994277954,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 13
+          },
+          "5": {
+            "actual_usable_speech_sec": 9.080000162124634,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 60.269999980926514,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 27
+          }
+        },
+        "p266": {
+          "10": {
+            "actual_usable_speech_sec": 12.079999923706055,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 4
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.139999866485596,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 5
+          },
+          "30": {
+            "actual_usable_speech_sec": 31.479999721050262,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 13
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.859999895095825,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 60.370000183582306,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 24
+          }
+        },
+        "p279": {
+          "10": {
+            "actual_usable_speech_sec": 11.959999978542328,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.330000102519989,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 8
+          },
+          "30": {
+            "actual_usable_speech_sec": 33.2500005364418,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 18
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.7299999594688416,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 56.05000030994415,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        },
+        "p303": {
+          "10": {
+            "actual_usable_speech_sec": 12.080000042915344,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 5
+          },
+          "15": {
+            "actual_usable_speech_sec": 17.170000195503235,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 7
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.700000166893005,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 13
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.730000019073486,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 2
+          },
+          "60": {
+            "actual_usable_speech_sec": 62.519999861717224,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 28
+          }
+        },
+        "p316": {
+          "10": {
+            "actual_usable_speech_sec": 10.97000002861023,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 17.710000038146973,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 8
+          },
+          "30": {
+            "actual_usable_speech_sec": 34.09999966621399,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 16
+          },
+          "5": {
+            "actual_usable_speech_sec": 5.360000014305115,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 60.36999988555908,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 27
+          }
+        },
+        "p360": {
+          "10": {
+            "actual_usable_speech_sec": 10.790000081062317,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 10,
+            "selected_enrollment_clip_count": 6
+          },
+          "15": {
+            "actual_usable_speech_sec": 15.270000100135803,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 15,
+            "selected_enrollment_clip_count": 9
+          },
+          "30": {
+            "actual_usable_speech_sec": 30.600000083446503,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 30,
+            "selected_enrollment_clip_count": 18
+          },
+          "5": {
+            "actual_usable_speech_sec": 6.579999923706055,
+            "failure_reason": null,
+            "profile_success": true,
+            "requested_speech_sec": 5,
+            "selected_enrollment_clip_count": 3
+          },
+          "60": {
+            "actual_usable_speech_sec": 50.940000116825104,
+            "failure_reason": "enrollment_data_exhaustion_before_budget",
+            "profile_success": false,
+            "requested_speech_sec": 60,
+            "selected_enrollment_clip_count": 32
+          }
+        }
+      }
+    },
+    "protocol": "one profile attempt for each of the eight registered evaluation identities per fold; no profile uses AOSC or one of eight native channels"
+  },
+  "prototype_construction_selection": {
+    "alternative": "mean_norm_utterance_proto: L2-normalize each enrollment utterance mean before averaging",
+    "development_balanced_macro_scores": "see normalization result; no evaluation identities selected the prototype method",
+    "selected_global_method": "train_zscore_mean: one pooled mean prototype, then training-only diagonal standardization",
+    "selection_source": "tests/results/voiceid_task09c_pooling.json"
+  },
+  "schema": "nemo-speech.voiceid-task09c-enrollment.v1"
+}

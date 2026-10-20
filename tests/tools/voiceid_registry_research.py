@@ -9,6 +9,7 @@ production inference API.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import sys
@@ -22,6 +23,24 @@ from task09b_voiceid import FeatureData, cosine, load_data
 
 
 SCHEMA = "nemo-speech.voiceid-task09b-research-registry.v1"
+
+
+def pack_f32(values: np.ndarray) -> str:
+    array = np.asarray(values, dtype="<f4")
+    return base64.b64encode(array.tobytes(order="C")).decode("ascii")
+
+
+def unpack_f32(value: str, dimension: int) -> np.ndarray:
+    array = np.frombuffer(base64.b64decode(value, validate=True), dtype="<f4")
+    if len(array) != dimension or not np.isfinite(array).all():
+        raise ValueError("serialized float32 vector has an invalid shape or non-finite values")
+    return array.copy()
+
+
+def prototype_vector(record: dict[str, Any], dimension: int) -> np.ndarray:
+    if "prototype_f32le_base64" in record:
+        return unpack_f32(record["prototype_f32le_base64"], dimension)
+    return np.asarray(record["prototype"], dtype=np.float32)
 
 
 def sha256_file(path: Path) -> str:
@@ -52,6 +71,43 @@ def load_head(args: argparse.Namespace, manifest: dict[str, Any], assets: dict[s
     return head, fold, model
 
 
+def load_method(args: argparse.Namespace, manifest: dict[str, Any], assets: dict[str, dict[str, Any]],
+                pooled: dict[str, np.ndarray]) -> tuple[Method, dict[str, Any], dict[str, Any]]:
+    if args.voiceid_method == "selected_head":
+        return load_head(args, manifest, assets, pooled)
+    fold = next(row for row in manifest["folds"] if row["fold_id"] == args.fold_id)
+    data = FeatureData(assets, pooled, "pre_encoder")
+    method = Method("train_zscore_cosine", "pre_encoder", data, fold["train_utterance_job_ids"])
+    model = {"model_key": None, "representation": "pre_encoder",
+             "objective": "train_zscore_cosine", "portable_export": None}
+    return method, fold, model
+
+
+def frozen_transform(method: Method) -> dict[str, Any]:
+    center = np.asarray(method.mean_center, dtype="<f4")
+    scale = np.asarray(method.mean_scale, dtype="<f4")
+    digest = hashlib.sha256(center.tobytes() + scale.tobytes()).hexdigest()
+    return {"kind": "training_speaker_diagonal_zscore", "dimension": len(center),
+            "center_f32le_base64": pack_f32(center), "scale_f32le_base64": pack_f32(scale), "sha256": digest}
+
+
+def apply_saved_transform(method: Method, registry: dict[str, Any]) -> None:
+    transform = registry.get("embedding_transform")
+    if not transform or transform.get("kind") != "training_speaker_diagonal_zscore":
+        raise ValueError("frozen pre-encoder registry is missing its serialized training transform")
+    dimension = int(transform["dimension"])
+    center = unpack_f32(transform["center_f32le_base64"], dimension)
+    scale = unpack_f32(transform["scale_f32le_base64"], dimension)
+    if dimension != method.data.dim or np.any(scale <= 0):
+        raise ValueError("serialized training transform has an invalid dimension or scale")
+    digest = hashlib.sha256(np.asarray(center, dtype="<f4").tobytes() +
+                            np.asarray(scale, dtype="<f4").tobytes()).hexdigest()
+    if digest != transform.get("sha256"):
+        raise ValueError("serialized training transform fingerprint mismatch")
+    method.mean_center = center
+    method.mean_scale = scale
+
+
 def source_jobs(fold: dict[str, Any], source_speaker: str, role: str) -> list[str]:
     people = fold["evaluation_people"]
     if source_speaker not in people:
@@ -64,11 +120,12 @@ def source_jobs(fold: dict[str, Any], source_speaker: str, role: str) -> list[st
     raise ValueError(role)
 
 
-def read_registry(path: Path, expected: dict[str, str] | None = None) -> dict[str, Any]:
+def read_registry(path: Path, expected: dict[str, Any] | None = None) -> dict[str, Any]:
     if not path.exists():
         if expected is None:
             raise FileNotFoundError(path)
-        return {"schema": SCHEMA, **expected, "embedding_dimension": 128, "identities": {}}
+        return {"schema": SCHEMA, **expected,
+                "embedding_dimension": expected.get("embedding_dimension", 128), "identities": {}}
     registry = json.loads(path.read_text(encoding="utf-8"))
     if registry.get("schema") != SCHEMA:
         raise ValueError("unsupported research registry schema")
@@ -85,6 +142,8 @@ def main() -> int:
 
     def add_shared(command: argparse.ArgumentParser, need_features: bool = True) -> None:
         command.add_argument("--registry", type=Path, required=True)
+        command.add_argument("--voiceid-method", choices=("selected_head", "pre_encoder_zscore"),
+                             default="selected_head")
         if need_features:
             command.add_argument("--manifest", type=Path, default=Path("tests/manifests/task09b_vctk_splits.json"))
             command.add_argument("--pooled-features", type=Path, required=True)
@@ -120,20 +179,34 @@ def main() -> int:
         return 0
 
     manifest, assets, pooled = load_data(args.manifest, args.pooled_features)
-    head, fold, model = load_head(args, manifest, assets, pooled)
+    head, fold, model = load_method(args, manifest, assets, pooled)
     metadata_path = args.pooled_features.parent / "features.jsonl"
     first_metadata = json.loads(metadata_path.open(encoding="utf-8").readline())
-    export_path = args.run_dir / model["portable_export"]
+    export_path = args.run_dir / model["portable_export"] if model["portable_export"] else None
     expected = {
         "fold_id": args.fold_id,
         "model_key": model["model_key"],
         "representation": model["representation"],
         "objective": model["objective"],
         "base_model_fingerprint": first_metadata["model_gguf_fingerprint"],
-        "head_sha256": sha256_file(export_path),
     }
+    if args.voiceid_method == "selected_head":
+        expected.update({"head_sha256": sha256_file(export_path), "embedding_dimension": 128})
+    else:
+        transform = frozen_transform(head)
+        expected.update({"method_kind": "frozen_pre_encoder_zscore_cosine",
+                         "embedding_dimension": head.data.dim,
+                         "embedding_transform_sha256": transform["sha256"]})
     registry = read_registry(args.registry, expected)
     data = head.data
+    if args.voiceid_method == "pre_encoder_zscore":
+        existing_transform = registry.get("embedding_transform")
+        if existing_transform is None:
+            registry["embedding_transform"] = transform
+        elif existing_transform.get("sha256") != transform["sha256"]:
+            raise ValueError("registry training transform differs from the current fold statistics")
+        # Query processes use the normalization values reloaded from the registry file.
+        apply_saved_transform(head, registry)
 
     if args.command == "register":
         if not args.identity.strip():
@@ -151,18 +224,21 @@ def main() -> int:
         selected_job_ids = [str(data.pooled["job_ids"][index])
                             for index in pooled_audio["selected_job_indices"]]
         registry["identities"][args.identity] = {
-            "prototype": embedding.tolist(),
+            ("prototype_f32le_base64" if args.voiceid_method == "pre_encoder_zscore" else "prototype"):
+                pack_f32(embedding) if args.voiceid_method == "pre_encoder_zscore" else embedding.tolist(),
             "embedding_norm": float(np.linalg.norm(embedding)),
             "actual_enrollment_speech_sec": pooled_audio["speech_duration_sec"],
             "source_utterance_count": len(pooled_audio["selected_job_indices"]),
             "source_audio_hashes": sorted(assets[job_id]["source_sha256"] for job_id in selected_job_ids),
             "pooling": "single pooled prototype over VAD-active frames",
+            "prototype_encoding": "little-endian float32 base64" if args.voiceid_method == "pre_encoder_zscore" else "float32 JSON array",
         }
         atomic_json(args.registry, registry)
         print(json.dumps({"registered_identity": args.identity,
                           "source_selector_used_only_for_audio": args.source_speaker,
                           "actual_enrollment_speech_sec": pooled_audio["speech_duration_sec"],
                           "embedding_dimension": len(embedding),
+                          "prototype_raw_bytes": int(embedding.nbytes),
                           "native_channel_index": None,
                           "registered_identities": len(registry["identities"])}))
         return 0
@@ -172,7 +248,7 @@ def main() -> int:
     if pooled_query["speech_duration_sec"] < args.query_sec:
         raise ValueError("not enough VAD-active query speech for requested budget")
     query_embedding = head.embed_many([pooled_query])[0]
-    scores = {identity: cosine(query_embedding, np.asarray(record["prototype"], dtype=np.float32))
+    scores = {identity: cosine(query_embedding, prototype_vector(record, registry["embedding_dimension"]))
               for identity, record in registry["identities"].items()}
     best_identity = max(scores, key=scores.get) if scores else None
     best_score = scores.get(best_identity) if best_identity is not None else None
