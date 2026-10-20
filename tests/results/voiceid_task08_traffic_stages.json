@@ -1,0 +1,1809 @@
+{
+  "manifest_fingerprint_fnv1a64": "16d0ad55840c8b8e",
+  "manifest_sha256": "be9928d3af71dfde838d950165896105a06a4dbc7b7cff41ae751066e5b25fae",
+  "per_stage": [
+    {
+      "after_unknown_speakers": 1,
+      "category_counts": {
+        "known_correct": 10
+      },
+      "evaluated_known_returns": 10,
+      "identity_decisions_changed_from_clean_profile": 0,
+      "median_max_registered_channel_mean": 0.9362385603742311,
+      "temporary_profiles_changed": 0
+    },
+    {
+      "after_unknown_speakers": 2,
+      "category_counts": {
+        "known_correct": 10
+      },
+      "evaluated_known_returns": 10,
+      "identity_decisions_changed_from_clean_profile": 0,
+      "median_max_registered_channel_mean": 0.9362385603742311,
+      "temporary_profiles_changed": 1
+    },
+    {
+      "after_unknown_speakers": 3,
+      "category_counts": {
+        "known_correct": 10
+      },
+      "evaluated_known_returns": 10,
+      "identity_decisions_changed_from_clean_profile": 0,
+      "median_max_registered_channel_mean": 0.9362385603742311,
+      "temporary_profiles_changed": 5
+    },
+    {
+      "after_unknown_speakers": 4,
+      "category_counts": {
+        "known_correct": 10
+      },
+      "evaluated_known_returns": 10,
+      "identity_decisions_changed_from_clean_profile": 0,
+      "median_max_registered_channel_mean": 0.9362385603742311,
+      "temporary_profiles_changed": 6
+    }
+  ],
+  "profiles": [
+    {
+      "budget_sec": 60,
+      "case_id": "TR01",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 2,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 246,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2880142970,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.8870514588897319,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 118.9724,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9952673214237865,
+          "profile_import_ms": 5.787587,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 246,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2880142970,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.8870514588897319,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 119.814578,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9952673214237865,
+          "profile_import_ms": 5.759985,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 246,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2880142970,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.8870514588897319,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 125.268739,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9952673214237865,
+          "profile_import_ms": 5.439387,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 246,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              194,
+              48,
+              14,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 3904139774,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              194,
+              48,
+              14,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.8859778135862978,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 125.038817,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9941016396855921,
+          "profile_import_ms": 5.63353,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR02",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 2,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 76,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2289436200,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9999129466320339,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 92.852725,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9998975929461027,
+          "profile_import_ms": 6.046222,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 76,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2289436200,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9999129466320339,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 93.639318,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9998975929461027,
+          "profile_import_ms": 5.648327,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 76,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              196,
+              48,
+              12,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2784007824,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              196,
+              48,
+              12,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9995511840832861,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 94.514101,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9994712809198781,
+          "profile_import_ms": 5.820869,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 76,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              196,
+              48,
+              12,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2784007824,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              196,
+              48,
+              12,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9995511840832861,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 92.644565,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9994712809198781,
+          "profile_import_ms": 5.515721,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR03",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 2,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 88,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2549058094,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9750085012479262,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 61.421247,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9628670364618301,
+          "profile_import_ms": 5.842407,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 88,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2549058094,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9750085012479262,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 60.951068,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9628670364618301,
+          "profile_import_ms": 8.962989,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 88,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              192,
+              48,
+              16,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 758779667,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              192,
+              48,
+              16,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9686744009906595,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 60.1303,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9621130742809989,
+          "profile_import_ms": 6.495552,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 88,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              165,
+              48,
+              16,
+              15,
+              12,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 201605767,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              165,
+              48,
+              16,
+              15,
+              12,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9633912857283246,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 60.538636,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9563511440699751,
+          "profile_import_ms": 5.623075,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR04",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 2,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 84,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 3705552269,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9993346532185873,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 60.945944,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9992159548259917,
+          "profile_import_ms": 5.831844,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 84,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 3705552269,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              208,
+              48,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9993346532185873,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 64.358857,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9992159548259917,
+          "profile_import_ms": 5.652018,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 84,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              197,
+              48,
+              11,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 77491127,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              197,
+              48,
+              11,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9930644936504818,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 59.820579,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9901615196750277,
+          "profile_import_ms": 5.662759,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 84,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              197,
+              48,
+              11,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 77491127,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              197,
+              48,
+              11,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9930644936504818,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 64.18027,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9901615196750277,
+          "profile_import_ms": 6.809294,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR05",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 4,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 264,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              112,
+              48,
+              48,
+              48,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 190685840,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              112,
+              48,
+              48,
+              48,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9162599085810983,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 123.878084,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9947262889508045,
+          "profile_import_ms": 5.614902,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 264,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              84,
+              48,
+              48,
+              48,
+              28,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2799560197,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              84,
+              48,
+              48,
+              48,
+              28,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9163015248403662,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 127.664409,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9949193876801115,
+          "profile_import_ms": 5.713432,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 265,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              72,
+              48,
+              48,
+              48,
+              40,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 4179594659,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              72,
+              48,
+              48,
+              48,
+              40,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9169247152052754,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 124.068304,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9931282567528059,
+          "profile_import_ms": 6.025131,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 264,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              59,
+              48,
+              48,
+              48,
+              40,
+              13,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 2652681755,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              59,
+              48,
+              48,
+              48,
+              40,
+              13,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9154979352053165,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 124.855076,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9937724010510878,
+          "profile_import_ms": 5.744531,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "aosc_ready": true,
+      "budget_sec": 60,
+      "case_id": "TR06",
+      "group_size": 4,
+      "identity_mapping_error": "multiple enrolled identities selected the same native channel",
+      "identity_mapping_valid": false,
+      "order_variant": "randomized",
+      "population": "final_holdout",
+      "status": "not_evaluated_profile_or_mapping_invalid"
+    },
+    {
+      "aosc_ready": true,
+      "budget_sec": 60,
+      "case_id": "TR07",
+      "group_size": 4,
+      "identity_mapping_error": "multiple enrolled identities selected the same native channel",
+      "identity_mapping_valid": false,
+      "order_variant": "randomized",
+      "population": "final_holdout",
+      "status": "not_evaluated_profile_or_mapping_invalid"
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR08",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 4,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 116,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              112,
+              48,
+              48,
+              48,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 4255786613,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              112,
+              48,
+              48,
+              48,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6351149712505011,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 65.345583,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.958475446906583,
+          "profile_import_ms": 5.767944,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 116,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              112,
+              48,
+              48,
+              48,
+              0,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 4255786613,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              112,
+              48,
+              48,
+              48,
+              0,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6351149712505011,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 64.971605,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.958475446906583,
+          "profile_import_ms": 5.540707,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 117,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              97,
+              48,
+              48,
+              48,
+              15,
+              0,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 3531491034,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              97,
+              48,
+              48,
+              48,
+              15,
+              0,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6370736191744951,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 66.98457,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9567101185138409,
+          "profile_import_ms": 5.862625,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 117,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              89,
+              48,
+              48,
+              48,
+              15,
+              8,
+              0,
+              0
+            ],
+            "cache_frames": 264,
+            "crc32": 1584171696,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              89,
+              48,
+              48,
+              48,
+              15,
+              8,
+              0,
+              0
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6385127463760152,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 66.104527,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9601277097677573,
+          "profile_import_ms": 5.549584,
+          "temporary_profile_changed": true,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR09",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 8,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 90,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "cache_frames": 264,
+            "crc32": 2679405881,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9935424407323201,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 64.539969,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9916279163625505,
+          "profile_import_ms": 9.408248,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 90,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "cache_frames": 264,
+            "crc32": 2679405881,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9935424407323201,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 65.123027,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9916279163625505,
+          "profile_import_ms": 5.636853,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 90,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "cache_frames": 264,
+            "crc32": 2679405881,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9935424407323201,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 65.104902,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9916279163625505,
+          "profile_import_ms": 5.479932,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 90,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "cache_frames": 264,
+            "crc32": 2679405881,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              27,
+              24,
+              24,
+              45,
+              24,
+              40
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9935424407323201,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 63.926399,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9916279163625505,
+          "profile_import_ms": 5.526591,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR10",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 8,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 150,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 127811257,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6690059619388956,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 100.38098,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.8872989730040233,
+          "profile_import_ms": 5.450709,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 150,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 127811257,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6690059619388956,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 99.904736,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.8872989730040233,
+          "profile_import_ms": 5.530141,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 150,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 127811257,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6690059619388956,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 99.797496,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.8872989730040233,
+          "profile_import_ms": 5.505163,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 150,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 127811257,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              48,
+              24,
+              40,
+              24,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.6690059619388956,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 100.088464,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.8872989730040233,
+          "profile_import_ms": 5.524741,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR11",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 8,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 73,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 995401937,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9367601659199963,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 93.883186,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9170555823469815,
+          "profile_import_ms": 5.441163,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 73,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 995401937,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9367601659199963,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 96.246473,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9170555823469815,
+          "profile_import_ms": 5.532549,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 73,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 995401937,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9367601659199963,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 96.207484,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9170555823469815,
+          "profile_import_ms": 5.434521,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 73,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "cache_frames": 264,
+            "crc32": 995401937,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              47,
+              41,
+              24,
+              24
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9367601659199963,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 96.793347,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9170555823469815,
+          "profile_import_ms": 5.485648,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    },
+    {
+      "budget_sec": 60,
+      "case_id": "TR12",
+      "clean_profile_category": "known_correct",
+      "continuous_return_category_after_all_unknowns": "known_correct",
+      "continuous_return_matches_clean_category": true,
+      "group_size": 8,
+      "identity_mapping_matches_full_run": true,
+      "order_variant": "randomized",
+      "permanent_profile_immutable": true,
+      "population": "final_holdout",
+      "profile_crc32_matches_full_run": true,
+      "stages": [
+        {
+          "activity_frames": 103,
+          "after_unknown_speakers": 1,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "cache_frames": 264,
+            "crc32": 750548447,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9357169548284661,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 96.834729,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9153926117906293,
+          "profile_import_ms": 5.538762,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 103,
+          "after_unknown_speakers": 2,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "cache_frames": 264,
+            "crc32": 750548447,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9357169548284661,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 101.120432,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9153926117906293,
+          "profile_import_ms": 7.518571,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 103,
+          "after_unknown_speakers": 3,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "cache_frames": 264,
+            "crc32": 750548447,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9357169548284661,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 97.247379,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9153926117906293,
+          "profile_import_ms": 5.760637,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        },
+        {
+          "activity_frames": 103,
+          "after_unknown_speakers": 4,
+          "cache_rows": {
+            "argmax_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "cache_frames": 264,
+            "crc32": 750548447,
+            "embedding_dim": 512,
+            "positive_rows_by_channel_gt_0_5": [
+              48,
+              24,
+              24,
+              24,
+              32,
+              32,
+              24,
+              48
+            ],
+            "rows_with_multiple_positive_channel_metadata": 0,
+            "speaker_channels": 8
+          },
+          "diagnostic_max_registered_channel_mean": 0.9357169548284661,
+          "identity_decision_changed_from_clean_profile": false,
+          "inference_ms": 97.630297,
+          "known_return_category": "known_correct",
+          "mean_top1_top2_margin": 0.9153926117906293,
+          "profile_import_ms": 5.447396,
+          "temporary_profile_changed": false,
+          "top1_dominance": 1.0
+        }
+      ],
+      "status": "complete",
+      "unknown_speaker_count": 4
+    }
+  ],
+  "profiles_matching_full_run_mapping": 10,
+  "profiles_matching_full_run_profile_crc32": 10,
+  "profiles_not_evaluated": 2,
+  "profiles_with_stage_evaluation": 10,
+  "raw_result_records": 12,
+  "schema": "nemo-speech.voiceid-task08-traffic-stages.v1",
+  "unknown_speakers_per_sequence": [
+    4
+  ]
+}

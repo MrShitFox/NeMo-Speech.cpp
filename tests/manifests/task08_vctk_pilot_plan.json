@@ -1,0 +1,2426 @@
+{
+  "compactor_script_sha256": "1f1fd35d4c29423b86516710b2b063a6ddba0328145102274aee83531ccb988b",
+  "conversion": "ffmpeg -nostdin -v error -y -i <source> -map_metadata -1 -ac 1 -ar 16000 -c:a pcm_s16le <wav>",
+  "dataset_inventory": {
+    "audio_without_matching_transcript_count": 172,
+    "bits_per_sample_file_counts": {
+      "16": 88328
+    },
+    "channel_file_counts": {
+      "1": 88328
+    },
+    "clip_duration_sec": {
+      "max": 16.556875,
+      "median": 3.124292,
+      "min": 1.219667,
+      "p25": 2.604729,
+      "p75": 3.841167,
+      "p90": 4.652083
+    },
+    "file_count": 88328,
+    "header_readable_file_count": 88328,
+    "mic1_usable_speaker_count": 110,
+    "microphone_variant_counts": {
+      "other_variant_count": 0,
+      "paired_mic1_mic2": 43873,
+      "single_variant": 582
+    },
+    "missing_mic1_audio_for_transcript_count": 300,
+    "sample_rate_file_counts": {
+      "48000": 88328
+    },
+    "speaker_count": 110,
+    "total_header_duration_sec": 297552.225,
+    "unreadable_header_file_count": 0,
+    "utterance_identity_count": 44455
+  },
+  "dataset_inventory_sha256": "4c04c8538deabe594b44ac4200d8fcefe5ac400918ecc382815b842e4687fac4",
+  "expanded_manifest": {
+    "bytes": 2485559,
+    "cpp_fnv1a64": "e05801befeca3869",
+    "sha256": "e94030685ab8e1b56702e77629c8e0848ed4dde962ec6aa30fd84be968ff4596",
+    "storage": "external to Git; regenerate with prepare_command"
+  },
+  "experiment_counts": {
+    "conversation_scenarios": {
+      "overlapping_speech": 18,
+      "short_turns": 6,
+      "turn_taking": 6,
+      "unknown_heavy_then_known_return": 6
+    },
+    "conversations": 36,
+    "isolated_query_attempts": 210,
+    "known_queries": 129,
+    "microphones": {
+      "mic1": 210
+    },
+    "prepared_assets_referenced": 765,
+    "query_duration_buckets": {
+      "2_to_5s": 90,
+      "5_to_10s": 54,
+      "over_10s": 6,
+      "under_2s": 60
+    },
+    "trials": 18,
+    "unknown_queries": 81
+  },
+  "model": "models/Nemotron-3-Diarization.q8_0.gguf",
+  "partition_rules": {
+    "duration_candidate_index": "FLAC header duration narrows conversion candidates; final duration buckets use converted PCM VAD speech duration",
+    "mic1_mic2_group_key": "speaker_id + filename with _micN suffix removed",
+    "mic2_experiment": "separate robustness queries; source utterance IDs remain grouped across microphones",
+    "partition_digest_sha256": "4e2b8a1c88ee88658071c5017c5140e2190a1659be54735de8bf90f86b7a556e",
+    "primary_microphone": "mic1",
+    "speaker_cohorts_disjoint": true,
+    "speaker_population_fractions": {
+      "calibration": 0.3,
+      "development": 0.15,
+      "final_holdout": 0.55
+    },
+    "speaker_seed": 20261020,
+    "utterance_identity_fractions_per_speaker": {
+      "calibration": 0.15,
+      "development": 0.1,
+      "enrollment": 0.6,
+      "final_holdout": 0.15
+    }
+  },
+  "preparation_script_sha256": "1f1b83a3aa9f2b6332e1d2459ecb55e6435e727a3957999b4eb4f555ba9db3d2",
+  "prepare_command": "python3 tests/tools/prepare_vctk_voiceid.py prepare --dataset-root VCTK-Corpus-0.92 --cache-dir ~/.cache/nemo-speech-task08/vctk --output /tmp/task08_vctk_pilot_current/manifest.json --preset pilot --seed 20261020 --group-sizes 2,4 --budgets 5,60 --cohorts-per-size 1 --unknown-per-cohort 2 --conversations",
+  "preset": "pilot",
+  "random_seed": 20261020,
+  "schema": "nemo-speech.vctk-voiceid-compact-plan.v1",
+  "speaker_populations": {
+    "calibration": [
+      "p225",
+      "p239",
+      "p241",
+      "p243",
+      "p248",
+      "p249",
+      "p252",
+      "p257",
+      "p259",
+      "p260",
+      "p266",
+      "p269",
+      "p271",
+      "p273",
+      "p274",
+      "p276",
+      "p277",
+      "p278",
+      "p280",
+      "p282",
+      "p299",
+      "p301",
+      "p303",
+      "p305",
+      "p307",
+      "p308",
+      "p310",
+      "p318",
+      "p330",
+      "p341",
+      "p351",
+      "p374",
+      "s5"
+    ],
+    "development": [
+      "p226",
+      "p228",
+      "p234",
+      "p244",
+      "p251",
+      "p264",
+      "p272",
+      "p275",
+      "p284",
+      "p287",
+      "p292",
+      "p297",
+      "p306",
+      "p323",
+      "p333",
+      "p336"
+    ],
+    "final_holdout": [
+      "p227",
+      "p229",
+      "p230",
+      "p231",
+      "p232",
+      "p233",
+      "p236",
+      "p237",
+      "p238",
+      "p240",
+      "p245",
+      "p246",
+      "p247",
+      "p250",
+      "p253",
+      "p254",
+      "p255",
+      "p256",
+      "p258",
+      "p261",
+      "p262",
+      "p263",
+      "p265",
+      "p267",
+      "p268",
+      "p270",
+      "p279",
+      "p281",
+      "p283",
+      "p285",
+      "p286",
+      "p288",
+      "p293",
+      "p294",
+      "p295",
+      "p298",
+      "p300",
+      "p302",
+      "p304",
+      "p311",
+      "p312",
+      "p313",
+      "p314",
+      "p315",
+      "p316",
+      "p317",
+      "p326",
+      "p329",
+      "p334",
+      "p335",
+      "p339",
+      "p340",
+      "p343",
+      "p345",
+      "p347",
+      "p360",
+      "p361",
+      "p362",
+      "p363",
+      "p364",
+      "p376"
+    ]
+  },
+  "speaker_role_coverage": {
+    "calibration": {
+      "represented_as_known": [
+        "p241",
+        "p243",
+        "p269",
+        "p278",
+        "p305",
+        "p318"
+      ],
+      "represented_as_unknown": [
+        "p274",
+        "p308",
+        "p341",
+        "s5"
+      ],
+      "speaker_count": 33,
+      "unrepresented": [
+        "p225",
+        "p239",
+        "p248",
+        "p249",
+        "p252",
+        "p257",
+        "p259",
+        "p260",
+        "p266",
+        "p271",
+        "p273",
+        "p276",
+        "p277",
+        "p280",
+        "p282",
+        "p299",
+        "p301",
+        "p303",
+        "p307",
+        "p310",
+        "p330",
+        "p351",
+        "p374"
+      ]
+    },
+    "development": {
+      "represented_as_known": [
+        "p234",
+        "p264",
+        "p275",
+        "p323",
+        "p333",
+        "p336"
+      ],
+      "represented_as_unknown": [
+        "p228",
+        "p287",
+        "p292",
+        "p306"
+      ],
+      "speaker_count": 16,
+      "unrepresented": [
+        "p226",
+        "p244",
+        "p251",
+        "p272",
+        "p284",
+        "p297"
+      ]
+    },
+    "final_holdout": {
+      "represented_as_known": [
+        "p230",
+        "p256",
+        "p267",
+        "p316",
+        "p317",
+        "p326"
+      ],
+      "represented_as_unknown": [
+        "p288",
+        "p314",
+        "p345",
+        "p362"
+      ],
+      "speaker_count": 61,
+      "unrepresented": [
+        "p227",
+        "p229",
+        "p231",
+        "p232",
+        "p233",
+        "p236",
+        "p237",
+        "p238",
+        "p240",
+        "p245",
+        "p246",
+        "p247",
+        "p250",
+        "p253",
+        "p254",
+        "p255",
+        "p258",
+        "p261",
+        "p262",
+        "p263",
+        "p265",
+        "p268",
+        "p270",
+        "p279",
+        "p281",
+        "p283",
+        "p285",
+        "p286",
+        "p293",
+        "p294",
+        "p295",
+        "p298",
+        "p300",
+        "p302",
+        "p304",
+        "p311",
+        "p312",
+        "p313",
+        "p315",
+        "p329",
+        "p334",
+        "p335",
+        "p339",
+        "p340",
+        "p343",
+        "p347",
+        "p360",
+        "p361",
+        "p363",
+        "p364",
+        "p376"
+      ]
+    }
+  },
+  "trials": [
+    {
+      "cohort_id": "development_n2_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p275",
+        "p264"
+      ],
+      "enrollment_budget_speech_sec_per_person": 5,
+      "enrollment_order": [
+        "p275",
+        "p264"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p264": {
+          "usable_speech_sec": 7.15,
+          "utterance_ids": [
+            "p264_449",
+            "p264_074",
+            "p264_139"
+          ]
+        },
+        "p275": {
+          "usable_speech_sec": 8.61,
+          "utterance_ids": [
+            "p275_377",
+            "p275_072",
+            "p275_125"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "development",
+      "query_count": 7,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:under_2s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1
+      },
+      "trial_id": "development_n2_r00_e05_randomized",
+      "unknown_speaker_ids": [
+        "p292",
+        "p306"
+      ],
+      "unknown_traffic_query_count": 0
+    },
+    {
+      "cohort_id": "development_n2_r00",
+      "conversation_scenarios": [
+        "turn_taking",
+        "short_turns",
+        "overlapping_speech",
+        "overlapping_speech",
+        "overlapping_speech",
+        "unknown_heavy_then_known_return"
+      ],
+      "enrolled_speaker_ids": [
+        "p275",
+        "p264"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p275",
+        "p264"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p264": {
+          "usable_speech_sec": 61.32,
+          "utterance_ids": [
+            "p264_449",
+            "p264_074",
+            "p264_139",
+            "p264_480",
+            "p264_377",
+            "p264_096",
+            "p264_180",
+            "p264_349",
+            "p264_084",
+            "p264_256",
+            "p264_152",
+            "p264_032",
+            "p264_472",
+            "p264_381",
+            "p264_420",
+            "p264_038",
+            "p264_327",
+            "p264_347",
+            "p264_114",
+            "p264_165",
+            "p264_257",
+            "p264_355",
+            "p264_462",
+            "p264_013",
+            "p264_060",
+            "p264_467",
+            "p264_465",
+            "p264_432",
+            "p264_054"
+          ]
+        },
+        "p275": {
+          "usable_speech_sec": 62.17,
+          "utterance_ids": [
+            "p275_377",
+            "p275_072",
+            "p275_125",
+            "p275_032",
+            "p275_362",
+            "p275_086",
+            "p275_079",
+            "p275_414",
+            "p275_178",
+            "p275_165",
+            "p275_143",
+            "p275_323",
+            "p275_173",
+            "p275_172",
+            "p275_288",
+            "p275_397",
+            "p275_388",
+            "p275_170",
+            "p275_117",
+            "p275_321",
+            "p275_364",
+            "p275_068",
+            "p275_010",
+            "p275_403",
+            "p275_367",
+            "p275_119",
+            "p275_048",
+            "p275_343",
+            "p275_187",
+            "p275_084",
+            "p275_301"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "development",
+      "query_count": 7,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:under_2s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1
+      },
+      "trial_id": "development_n2_r00_e60_randomized",
+      "unknown_speaker_ids": [
+        "p292",
+        "p306"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "development_n2_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p264",
+        "p275"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p264",
+        "p275"
+      ],
+      "enrollment_order_variant": "reverse",
+      "enrollment_utterances_by_speaker": {
+        "p264": {
+          "usable_speech_sec": 61.32,
+          "utterance_ids": [
+            "p264_449",
+            "p264_074",
+            "p264_139",
+            "p264_480",
+            "p264_377",
+            "p264_096",
+            "p264_180",
+            "p264_349",
+            "p264_084",
+            "p264_256",
+            "p264_152",
+            "p264_032",
+            "p264_472",
+            "p264_381",
+            "p264_420",
+            "p264_038",
+            "p264_327",
+            "p264_347",
+            "p264_114",
+            "p264_165",
+            "p264_257",
+            "p264_355",
+            "p264_462",
+            "p264_013",
+            "p264_060",
+            "p264_467",
+            "p264_465",
+            "p264_432",
+            "p264_054"
+          ]
+        },
+        "p275": {
+          "usable_speech_sec": 62.17,
+          "utterance_ids": [
+            "p275_377",
+            "p275_072",
+            "p275_125",
+            "p275_032",
+            "p275_362",
+            "p275_086",
+            "p275_079",
+            "p275_414",
+            "p275_178",
+            "p275_165",
+            "p275_143",
+            "p275_323",
+            "p275_173",
+            "p275_172",
+            "p275_288",
+            "p275_397",
+            "p275_388",
+            "p275_170",
+            "p275_117",
+            "p275_321",
+            "p275_364",
+            "p275_068",
+            "p275_010",
+            "p275_403",
+            "p275_367",
+            "p275_119",
+            "p275_048",
+            "p275_343",
+            "p275_187",
+            "p275_084",
+            "p275_301"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "development",
+      "query_count": 7,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:under_2s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1
+      },
+      "trial_id": "development_n2_r00_e60_reverse",
+      "unknown_speaker_ids": [
+        "p292",
+        "p306"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "development_n4_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p323",
+        "p336",
+        "p234",
+        "p333"
+      ],
+      "enrollment_budget_speech_sec_per_person": 5,
+      "enrollment_order": [
+        "p323",
+        "p336",
+        "p234",
+        "p333"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p234": {
+          "usable_speech_sec": 6.45,
+          "utterance_ids": [
+            "p234_321",
+            "p234_114",
+            "p234_076",
+            "p234_275"
+          ]
+        },
+        "p323": {
+          "usable_speech_sec": 5.53,
+          "utterance_ids": [
+            "p323_221",
+            "p323_063",
+            "p323_366"
+          ]
+        },
+        "p333": {
+          "usable_speech_sec": 6.25,
+          "utterance_ids": [
+            "p333_276",
+            "p333_118",
+            "p333_215",
+            "p333_155"
+          ]
+        },
+        "p336": {
+          "usable_speech_sec": 8.53,
+          "utterance_ids": [
+            "p336_366",
+            "p336_274",
+            "p336_290",
+            "p336_169",
+            "p336_009"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "development",
+      "query_count": 15,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 3,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "development_n4_r00_e05_randomized",
+      "unknown_speaker_ids": [
+        "p228",
+        "p287"
+      ],
+      "unknown_traffic_query_count": 0
+    },
+    {
+      "cohort_id": "development_n4_r00",
+      "conversation_scenarios": [
+        "turn_taking",
+        "short_turns",
+        "overlapping_speech",
+        "overlapping_speech",
+        "overlapping_speech",
+        "unknown_heavy_then_known_return"
+      ],
+      "enrolled_speaker_ids": [
+        "p323",
+        "p336",
+        "p234",
+        "p333"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p323",
+        "p336",
+        "p234",
+        "p333"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p234": {
+          "usable_speech_sec": 60.69,
+          "utterance_ids": [
+            "p234_321",
+            "p234_114",
+            "p234_076",
+            "p234_275",
+            "p234_100",
+            "p234_038",
+            "p234_335",
+            "p234_236",
+            "p234_173",
+            "p234_188",
+            "p234_322",
+            "p234_140",
+            "p234_319",
+            "p234_049",
+            "p234_084",
+            "p234_055",
+            "p234_139",
+            "p234_036",
+            "p234_057",
+            "p234_021",
+            "p234_041",
+            "p234_359",
+            "p234_067",
+            "p234_304",
+            "p234_137",
+            "p234_027",
+            "p234_238",
+            "p234_006",
+            "p234_107"
+          ]
+        },
+        "p323": {
+          "usable_speech_sec": 61.48,
+          "utterance_ids": [
+            "p323_221",
+            "p323_063",
+            "p323_366",
+            "p323_255",
+            "p323_258",
+            "p323_147",
+            "p323_052",
+            "p323_196",
+            "p323_224",
+            "p323_018",
+            "p323_422",
+            "p323_090",
+            "p323_182",
+            "p323_101",
+            "p323_253",
+            "p323_096",
+            "p323_165",
+            "p323_189",
+            "p323_404",
+            "p323_295",
+            "p323_013",
+            "p323_144",
+            "p323_276",
+            "p323_080",
+            "p323_316",
+            "p323_211",
+            "p323_237",
+            "p323_260",
+            "p323_036",
+            "p323_216",
+            "p323_070",
+            "p323_380"
+          ]
+        },
+        "p333": {
+          "usable_speech_sec": 64.63,
+          "utterance_ids": [
+            "p333_276",
+            "p333_118",
+            "p333_215",
+            "p333_155",
+            "p333_125",
+            "p333_381",
+            "p333_369",
+            "p333_309",
+            "p333_102",
+            "p333_294",
+            "p333_187",
+            "p333_179",
+            "p333_241",
+            "p333_208",
+            "p333_280",
+            "p333_007",
+            "p333_253",
+            "p333_044",
+            "p333_237",
+            "p333_400",
+            "p333_090",
+            "p333_100",
+            "p333_089",
+            "p333_258",
+            "p333_131",
+            "p333_267",
+            "p333_156",
+            "p333_203",
+            "p333_423",
+            "p333_183",
+            "p333_397",
+            "p333_140",
+            "p333_302",
+            "p333_401",
+            "p333_072",
+            "p333_011"
+          ]
+        },
+        "p336": {
+          "usable_speech_sec": 65.03,
+          "utterance_ids": [
+            "p336_366",
+            "p336_274",
+            "p336_290",
+            "p336_169",
+            "p336_009",
+            "p336_365",
+            "p336_044",
+            "p336_413",
+            "p336_246",
+            "p336_417",
+            "p336_137",
+            "p336_065",
+            "p336_167",
+            "p336_353",
+            "p336_225",
+            "p336_262",
+            "p336_234",
+            "p336_400",
+            "p336_158",
+            "p336_067",
+            "p336_355",
+            "p336_264",
+            "p336_402",
+            "p336_201",
+            "p336_301",
+            "p336_330",
+            "p336_001",
+            "p336_271",
+            "p336_054",
+            "p336_312",
+            "p336_074",
+            "p336_369",
+            "p336_048",
+            "p336_072",
+            "p336_064",
+            "p336_111",
+            "p336_022"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "development",
+      "query_count": 15,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 3,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "development_n4_r00_e60_randomized",
+      "unknown_speaker_ids": [
+        "p228",
+        "p287"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "development_n4_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p333",
+        "p234",
+        "p336",
+        "p323"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p333",
+        "p234",
+        "p336",
+        "p323"
+      ],
+      "enrollment_order_variant": "reverse",
+      "enrollment_utterances_by_speaker": {
+        "p234": {
+          "usable_speech_sec": 60.69,
+          "utterance_ids": [
+            "p234_321",
+            "p234_114",
+            "p234_076",
+            "p234_275",
+            "p234_100",
+            "p234_038",
+            "p234_335",
+            "p234_236",
+            "p234_173",
+            "p234_188",
+            "p234_322",
+            "p234_140",
+            "p234_319",
+            "p234_049",
+            "p234_084",
+            "p234_055",
+            "p234_139",
+            "p234_036",
+            "p234_057",
+            "p234_021",
+            "p234_041",
+            "p234_359",
+            "p234_067",
+            "p234_304",
+            "p234_137",
+            "p234_027",
+            "p234_238",
+            "p234_006",
+            "p234_107"
+          ]
+        },
+        "p323": {
+          "usable_speech_sec": 61.48,
+          "utterance_ids": [
+            "p323_221",
+            "p323_063",
+            "p323_366",
+            "p323_255",
+            "p323_258",
+            "p323_147",
+            "p323_052",
+            "p323_196",
+            "p323_224",
+            "p323_018",
+            "p323_422",
+            "p323_090",
+            "p323_182",
+            "p323_101",
+            "p323_253",
+            "p323_096",
+            "p323_165",
+            "p323_189",
+            "p323_404",
+            "p323_295",
+            "p323_013",
+            "p323_144",
+            "p323_276",
+            "p323_080",
+            "p323_316",
+            "p323_211",
+            "p323_237",
+            "p323_260",
+            "p323_036",
+            "p323_216",
+            "p323_070",
+            "p323_380"
+          ]
+        },
+        "p333": {
+          "usable_speech_sec": 64.63,
+          "utterance_ids": [
+            "p333_276",
+            "p333_118",
+            "p333_215",
+            "p333_155",
+            "p333_125",
+            "p333_381",
+            "p333_369",
+            "p333_309",
+            "p333_102",
+            "p333_294",
+            "p333_187",
+            "p333_179",
+            "p333_241",
+            "p333_208",
+            "p333_280",
+            "p333_007",
+            "p333_253",
+            "p333_044",
+            "p333_237",
+            "p333_400",
+            "p333_090",
+            "p333_100",
+            "p333_089",
+            "p333_258",
+            "p333_131",
+            "p333_267",
+            "p333_156",
+            "p333_203",
+            "p333_423",
+            "p333_183",
+            "p333_397",
+            "p333_140",
+            "p333_302",
+            "p333_401",
+            "p333_072",
+            "p333_011"
+          ]
+        },
+        "p336": {
+          "usable_speech_sec": 65.03,
+          "utterance_ids": [
+            "p336_366",
+            "p336_274",
+            "p336_290",
+            "p336_169",
+            "p336_009",
+            "p336_365",
+            "p336_044",
+            "p336_413",
+            "p336_246",
+            "p336_417",
+            "p336_137",
+            "p336_065",
+            "p336_167",
+            "p336_353",
+            "p336_225",
+            "p336_262",
+            "p336_234",
+            "p336_400",
+            "p336_158",
+            "p336_067",
+            "p336_355",
+            "p336_264",
+            "p336_402",
+            "p336_201",
+            "p336_301",
+            "p336_330",
+            "p336_001",
+            "p336_271",
+            "p336_054",
+            "p336_312",
+            "p336_074",
+            "p336_369",
+            "p336_048",
+            "p336_072",
+            "p336_064",
+            "p336_111",
+            "p336_022"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "development",
+      "query_count": 15,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 3,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "development_n4_r00_e60_reverse",
+      "unknown_speaker_ids": [
+        "p228",
+        "p287"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "calibration_n2_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p278",
+        "p243"
+      ],
+      "enrollment_budget_speech_sec_per_person": 5,
+      "enrollment_order": [
+        "p278",
+        "p243"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p243": {
+          "usable_speech_sec": 5.22,
+          "utterance_ids": [
+            "p243_094",
+            "p243_294"
+          ]
+        },
+        "p278": {
+          "usable_speech_sec": 5.42,
+          "utterance_ids": [
+            "p278_209",
+            "p278_106",
+            "p278_291"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "calibration",
+      "query_count": 11,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:5_to_10s": 1,
+        "known:mic1:under_2s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 2,
+        "unknown:mic1:over_10s": 1,
+        "unknown:mic1:under_2s": 1
+      },
+      "trial_id": "calibration_n2_r00_e05_randomized",
+      "unknown_speaker_ids": [
+        "p274",
+        "p341"
+      ],
+      "unknown_traffic_query_count": 0
+    },
+    {
+      "cohort_id": "calibration_n2_r00",
+      "conversation_scenarios": [
+        "turn_taking",
+        "short_turns",
+        "overlapping_speech",
+        "overlapping_speech",
+        "overlapping_speech",
+        "unknown_heavy_then_known_return"
+      ],
+      "enrolled_speaker_ids": [
+        "p278",
+        "p243"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p278",
+        "p243"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p243": {
+          "usable_speech_sec": 62.31,
+          "utterance_ids": [
+            "p243_094",
+            "p243_294",
+            "p243_270",
+            "p243_061",
+            "p243_183",
+            "p243_002",
+            "p243_245",
+            "p243_197",
+            "p243_236",
+            "p243_194",
+            "p243_067",
+            "p243_346",
+            "p243_356",
+            "p243_080",
+            "p243_202",
+            "p243_207",
+            "p243_192",
+            "p243_110",
+            "p243_362",
+            "p243_359",
+            "p243_149",
+            "p243_315",
+            "p243_069",
+            "p243_263",
+            "p243_036",
+            "p243_271",
+            "p243_383",
+            "p243_265",
+            "p243_146",
+            "p243_193",
+            "p243_347"
+          ]
+        },
+        "p278": {
+          "usable_speech_sec": 60.53,
+          "utterance_ids": [
+            "p278_209",
+            "p278_106",
+            "p278_291",
+            "p278_293",
+            "p278_312",
+            "p278_112",
+            "p278_142",
+            "p278_026",
+            "p278_321",
+            "p278_025",
+            "p278_067",
+            "p278_145",
+            "p278_218",
+            "p278_269",
+            "p278_128",
+            "p278_046",
+            "p278_409",
+            "p278_325",
+            "p278_186",
+            "p278_013",
+            "p278_334",
+            "p278_285",
+            "p278_179",
+            "p278_009",
+            "p278_172",
+            "p278_278",
+            "p278_340",
+            "p278_235",
+            "p278_062",
+            "p278_280",
+            "p278_042",
+            "p278_092",
+            "p278_347",
+            "p278_205",
+            "p278_192",
+            "p278_122",
+            "p278_200",
+            "p278_322"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "calibration",
+      "query_count": 11,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:5_to_10s": 1,
+        "known:mic1:under_2s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 2,
+        "unknown:mic1:over_10s": 1,
+        "unknown:mic1:under_2s": 1
+      },
+      "trial_id": "calibration_n2_r00_e60_randomized",
+      "unknown_speaker_ids": [
+        "p274",
+        "p341"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "calibration_n2_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p243",
+        "p278"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p243",
+        "p278"
+      ],
+      "enrollment_order_variant": "reverse",
+      "enrollment_utterances_by_speaker": {
+        "p243": {
+          "usable_speech_sec": 62.31,
+          "utterance_ids": [
+            "p243_094",
+            "p243_294",
+            "p243_270",
+            "p243_061",
+            "p243_183",
+            "p243_002",
+            "p243_245",
+            "p243_197",
+            "p243_236",
+            "p243_194",
+            "p243_067",
+            "p243_346",
+            "p243_356",
+            "p243_080",
+            "p243_202",
+            "p243_207",
+            "p243_192",
+            "p243_110",
+            "p243_362",
+            "p243_359",
+            "p243_149",
+            "p243_315",
+            "p243_069",
+            "p243_263",
+            "p243_036",
+            "p243_271",
+            "p243_383",
+            "p243_265",
+            "p243_146",
+            "p243_193",
+            "p243_347"
+          ]
+        },
+        "p278": {
+          "usable_speech_sec": 60.53,
+          "utterance_ids": [
+            "p278_209",
+            "p278_106",
+            "p278_291",
+            "p278_293",
+            "p278_312",
+            "p278_112",
+            "p278_142",
+            "p278_026",
+            "p278_321",
+            "p278_025",
+            "p278_067",
+            "p278_145",
+            "p278_218",
+            "p278_269",
+            "p278_128",
+            "p278_046",
+            "p278_409",
+            "p278_325",
+            "p278_186",
+            "p278_013",
+            "p278_334",
+            "p278_285",
+            "p278_179",
+            "p278_009",
+            "p278_172",
+            "p278_278",
+            "p278_340",
+            "p278_235",
+            "p278_062",
+            "p278_280",
+            "p278_042",
+            "p278_092",
+            "p278_347",
+            "p278_205",
+            "p278_192",
+            "p278_122",
+            "p278_200",
+            "p278_322"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "calibration",
+      "query_count": 11,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:5_to_10s": 1,
+        "known:mic1:under_2s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 2,
+        "unknown:mic1:over_10s": 1,
+        "unknown:mic1:under_2s": 1
+      },
+      "trial_id": "calibration_n2_r00_e60_reverse",
+      "unknown_speaker_ids": [
+        "p274",
+        "p341"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "calibration_n4_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p305",
+        "p318",
+        "p241",
+        "p269"
+      ],
+      "enrollment_budget_speech_sec_per_person": 5,
+      "enrollment_order": [
+        "p305",
+        "p318",
+        "p241",
+        "p269"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p241": {
+          "usable_speech_sec": 6.28,
+          "utterance_ids": [
+            "p241_317",
+            "p241_010",
+            "p241_025"
+          ]
+        },
+        "p269": {
+          "usable_speech_sec": 5.28,
+          "utterance_ids": [
+            "p269_223",
+            "p269_193"
+          ]
+        },
+        "p305": {
+          "usable_speech_sec": 6.08,
+          "utterance_ids": [
+            "p305_070",
+            "p305_408",
+            "p305_270"
+          ]
+        },
+        "p318": {
+          "usable_speech_sec": 6.22,
+          "utterance_ids": [
+            "p318_421",
+            "p318_214",
+            "p318_325"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "calibration",
+      "query_count": 13,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 2,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 2
+      },
+      "trial_id": "calibration_n4_r00_e05_randomized",
+      "unknown_speaker_ids": [
+        "s5",
+        "p308"
+      ],
+      "unknown_traffic_query_count": 0
+    },
+    {
+      "cohort_id": "calibration_n4_r00",
+      "conversation_scenarios": [
+        "turn_taking",
+        "short_turns",
+        "overlapping_speech",
+        "overlapping_speech",
+        "overlapping_speech",
+        "unknown_heavy_then_known_return"
+      ],
+      "enrolled_speaker_ids": [
+        "p305",
+        "p318",
+        "p241",
+        "p269"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p305",
+        "p318",
+        "p241",
+        "p269"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p241": {
+          "usable_speech_sec": 60.01,
+          "utterance_ids": [
+            "p241_317",
+            "p241_010",
+            "p241_025",
+            "p241_287",
+            "p241_004",
+            "p241_074",
+            "p241_291",
+            "p241_279",
+            "p241_140",
+            "p241_117",
+            "p241_271",
+            "p241_343",
+            "p241_364",
+            "p241_006",
+            "p241_323",
+            "p241_320",
+            "p241_168",
+            "p241_337",
+            "p241_275",
+            "p241_056",
+            "p241_312",
+            "p241_082",
+            "p241_023",
+            "p241_047",
+            "p241_204",
+            "p241_002"
+          ]
+        },
+        "p269": {
+          "usable_speech_sec": 60.13,
+          "utterance_ids": [
+            "p269_223",
+            "p269_193",
+            "p269_182",
+            "p269_391",
+            "p269_395",
+            "p269_005",
+            "p269_150",
+            "p269_283",
+            "p269_292",
+            "p269_124",
+            "p269_137",
+            "p269_149",
+            "p269_158",
+            "p269_066",
+            "p269_010",
+            "p269_025",
+            "p269_023",
+            "p269_383",
+            "p269_324",
+            "p269_255",
+            "p269_287",
+            "p269_185",
+            "p269_032"
+          ]
+        },
+        "p305": {
+          "usable_speech_sec": 61.51,
+          "utterance_ids": [
+            "p305_070",
+            "p305_408",
+            "p305_270",
+            "p305_040",
+            "p305_108",
+            "p305_273",
+            "p305_055",
+            "p305_186",
+            "p305_343",
+            "p305_142",
+            "p305_029",
+            "p305_392",
+            "p305_114",
+            "p305_398",
+            "p305_407",
+            "p305_065",
+            "p305_090",
+            "p305_167",
+            "p305_258",
+            "p305_293",
+            "p305_244",
+            "p305_404",
+            "p305_153",
+            "p305_335",
+            "p305_097",
+            "p305_330",
+            "p305_290",
+            "p305_159"
+          ]
+        },
+        "p318": {
+          "usable_speech_sec": 61.54,
+          "utterance_ids": [
+            "p318_421",
+            "p318_214",
+            "p318_325",
+            "p318_342",
+            "p318_424",
+            "p318_392",
+            "p318_094",
+            "p318_023",
+            "p318_220",
+            "p318_292",
+            "p318_339",
+            "p318_410",
+            "p318_082",
+            "p318_155",
+            "p318_161",
+            "p318_066",
+            "p318_097",
+            "p318_110",
+            "p318_379",
+            "p318_080",
+            "p318_210",
+            "p318_283",
+            "p318_133",
+            "p318_186",
+            "p318_266",
+            "p318_251",
+            "p318_173",
+            "p318_380",
+            "p318_422",
+            "p318_166",
+            "p318_075",
+            "p318_037"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "calibration",
+      "query_count": 13,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 2,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 2
+      },
+      "trial_id": "calibration_n4_r00_e60_randomized",
+      "unknown_speaker_ids": [
+        "s5",
+        "p308"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "calibration_n4_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p269",
+        "p241",
+        "p318",
+        "p305"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p269",
+        "p241",
+        "p318",
+        "p305"
+      ],
+      "enrollment_order_variant": "reverse",
+      "enrollment_utterances_by_speaker": {
+        "p241": {
+          "usable_speech_sec": 60.01,
+          "utterance_ids": [
+            "p241_317",
+            "p241_010",
+            "p241_025",
+            "p241_287",
+            "p241_004",
+            "p241_074",
+            "p241_291",
+            "p241_279",
+            "p241_140",
+            "p241_117",
+            "p241_271",
+            "p241_343",
+            "p241_364",
+            "p241_006",
+            "p241_323",
+            "p241_320",
+            "p241_168",
+            "p241_337",
+            "p241_275",
+            "p241_056",
+            "p241_312",
+            "p241_082",
+            "p241_023",
+            "p241_047",
+            "p241_204",
+            "p241_002"
+          ]
+        },
+        "p269": {
+          "usable_speech_sec": 60.13,
+          "utterance_ids": [
+            "p269_223",
+            "p269_193",
+            "p269_182",
+            "p269_391",
+            "p269_395",
+            "p269_005",
+            "p269_150",
+            "p269_283",
+            "p269_292",
+            "p269_124",
+            "p269_137",
+            "p269_149",
+            "p269_158",
+            "p269_066",
+            "p269_010",
+            "p269_025",
+            "p269_023",
+            "p269_383",
+            "p269_324",
+            "p269_255",
+            "p269_287",
+            "p269_185",
+            "p269_032"
+          ]
+        },
+        "p305": {
+          "usable_speech_sec": 61.51,
+          "utterance_ids": [
+            "p305_070",
+            "p305_408",
+            "p305_270",
+            "p305_040",
+            "p305_108",
+            "p305_273",
+            "p305_055",
+            "p305_186",
+            "p305_343",
+            "p305_142",
+            "p305_029",
+            "p305_392",
+            "p305_114",
+            "p305_398",
+            "p305_407",
+            "p305_065",
+            "p305_090",
+            "p305_167",
+            "p305_258",
+            "p305_293",
+            "p305_244",
+            "p305_404",
+            "p305_153",
+            "p305_335",
+            "p305_097",
+            "p305_330",
+            "p305_290",
+            "p305_159"
+          ]
+        },
+        "p318": {
+          "usable_speech_sec": 61.54,
+          "utterance_ids": [
+            "p318_421",
+            "p318_214",
+            "p318_325",
+            "p318_342",
+            "p318_424",
+            "p318_392",
+            "p318_094",
+            "p318_023",
+            "p318_220",
+            "p318_292",
+            "p318_339",
+            "p318_410",
+            "p318_082",
+            "p318_155",
+            "p318_161",
+            "p318_066",
+            "p318_097",
+            "p318_110",
+            "p318_379",
+            "p318_080",
+            "p318_210",
+            "p318_283",
+            "p318_133",
+            "p318_186",
+            "p318_266",
+            "p318_251",
+            "p318_173",
+            "p318_380",
+            "p318_422",
+            "p318_166",
+            "p318_075",
+            "p318_037"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "calibration",
+      "query_count": 13,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 2,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 2
+      },
+      "trial_id": "calibration_n4_r00_e60_reverse",
+      "unknown_speaker_ids": [
+        "s5",
+        "p308"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "final_holdout_n2_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p326",
+        "p316"
+      ],
+      "enrollment_budget_speech_sec_per_person": 5,
+      "enrollment_order": [
+        "p326",
+        "p316"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p316": {
+          "usable_speech_sec": 7.79,
+          "utterance_ids": [
+            "p316_296",
+            "p316_084",
+            "p316_006"
+          ]
+        },
+        "p326": {
+          "usable_speech_sec": 7.34,
+          "utterance_ids": [
+            "p326_198",
+            "p326_353",
+            "p326_118",
+            "p326_225"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "final_holdout",
+      "query_count": 8,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:5_to_10s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "final_holdout_n2_r00_e05_randomized",
+      "unknown_speaker_ids": [
+        "p314",
+        "p288"
+      ],
+      "unknown_traffic_query_count": 0
+    },
+    {
+      "cohort_id": "final_holdout_n2_r00",
+      "conversation_scenarios": [
+        "turn_taking",
+        "short_turns",
+        "overlapping_speech",
+        "overlapping_speech",
+        "overlapping_speech",
+        "unknown_heavy_then_known_return"
+      ],
+      "enrolled_speaker_ids": [
+        "p326",
+        "p316"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p326",
+        "p316"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p316": {
+          "usable_speech_sec": 60.69,
+          "utterance_ids": [
+            "p316_296",
+            "p316_084",
+            "p316_006",
+            "p316_116",
+            "p316_097",
+            "p316_206",
+            "p316_007",
+            "p316_388",
+            "p316_258",
+            "p316_370",
+            "p316_308",
+            "p316_052",
+            "p316_269",
+            "p316_196",
+            "p316_042",
+            "p316_037",
+            "p316_085",
+            "p316_287",
+            "p316_017",
+            "p316_303",
+            "p316_180",
+            "p316_205",
+            "p316_242",
+            "p316_220",
+            "p316_012",
+            "p316_231",
+            "p316_288",
+            "p316_273",
+            "p316_029",
+            "p316_408",
+            "p316_354"
+          ]
+        },
+        "p326": {
+          "usable_speech_sec": 62.13,
+          "utterance_ids": [
+            "p326_198",
+            "p326_353",
+            "p326_118",
+            "p326_225",
+            "p326_046",
+            "p326_004",
+            "p326_056",
+            "p326_259",
+            "p326_359",
+            "p326_196",
+            "p326_125",
+            "p326_011",
+            "p326_236",
+            "p326_163",
+            "p326_051",
+            "p326_132",
+            "p326_005",
+            "p326_338",
+            "p326_203",
+            "p326_355",
+            "p326_269",
+            "p326_272",
+            "p326_040",
+            "p326_140",
+            "p326_222",
+            "p326_329",
+            "p326_342",
+            "p326_075"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "final_holdout",
+      "query_count": 8,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:5_to_10s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "final_holdout_n2_r00_e60_randomized",
+      "unknown_speaker_ids": [
+        "p314",
+        "p288"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "final_holdout_n2_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p316",
+        "p326"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p316",
+        "p326"
+      ],
+      "enrollment_order_variant": "reverse",
+      "enrollment_utterances_by_speaker": {
+        "p316": {
+          "usable_speech_sec": 60.69,
+          "utterance_ids": [
+            "p316_296",
+            "p316_084",
+            "p316_006",
+            "p316_116",
+            "p316_097",
+            "p316_206",
+            "p316_007",
+            "p316_388",
+            "p316_258",
+            "p316_370",
+            "p316_308",
+            "p316_052",
+            "p316_269",
+            "p316_196",
+            "p316_042",
+            "p316_037",
+            "p316_085",
+            "p316_287",
+            "p316_017",
+            "p316_303",
+            "p316_180",
+            "p316_205",
+            "p316_242",
+            "p316_220",
+            "p316_012",
+            "p316_231",
+            "p316_288",
+            "p316_273",
+            "p316_029",
+            "p316_408",
+            "p316_354"
+          ]
+        },
+        "p326": {
+          "usable_speech_sec": 62.13,
+          "utterance_ids": [
+            "p326_198",
+            "p326_353",
+            "p326_118",
+            "p326_225",
+            "p326_046",
+            "p326_004",
+            "p326_056",
+            "p326_259",
+            "p326_359",
+            "p326_196",
+            "p326_125",
+            "p326_011",
+            "p326_236",
+            "p326_163",
+            "p326_051",
+            "p326_132",
+            "p326_005",
+            "p326_338",
+            "p326_203",
+            "p326_355",
+            "p326_269",
+            "p326_272",
+            "p326_040",
+            "p326_140",
+            "p326_222",
+            "p326_329",
+            "p326_342",
+            "p326_075"
+          ]
+        }
+      },
+      "group_size": 2,
+      "population": "final_holdout",
+      "query_count": 8,
+      "query_counts": {
+        "known:mic1:2_to_5s": 2,
+        "known:mic1:5_to_10s": 2,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "final_holdout_n2_r00_e60_reverse",
+      "unknown_speaker_ids": [
+        "p314",
+        "p288"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "final_holdout_n4_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p256",
+        "p230",
+        "p267",
+        "p317"
+      ],
+      "enrollment_budget_speech_sec_per_person": 5,
+      "enrollment_order": [
+        "p256",
+        "p230",
+        "p267",
+        "p317"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p230": {
+          "usable_speech_sec": 5.42,
+          "utterance_ids": [
+            "p230_191",
+            "p230_076"
+          ]
+        },
+        "p256": {
+          "usable_speech_sec": 6.73,
+          "utterance_ids": [
+            "p256_092",
+            "p256_148",
+            "p256_127"
+          ]
+        },
+        "p267": {
+          "usable_speech_sec": 5.62,
+          "utterance_ids": [
+            "p267_067",
+            "p267_127"
+          ]
+        },
+        "p317": {
+          "usable_speech_sec": 6.08,
+          "utterance_ids": [
+            "p317_349",
+            "p317_049",
+            "p317_123"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "final_holdout",
+      "query_count": 16,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 3,
+        "known:mic1:over_10s": 1,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "final_holdout_n4_r00_e05_randomized",
+      "unknown_speaker_ids": [
+        "p345",
+        "p362"
+      ],
+      "unknown_traffic_query_count": 0
+    },
+    {
+      "cohort_id": "final_holdout_n4_r00",
+      "conversation_scenarios": [
+        "turn_taking",
+        "short_turns",
+        "overlapping_speech",
+        "overlapping_speech",
+        "overlapping_speech",
+        "unknown_heavy_then_known_return"
+      ],
+      "enrolled_speaker_ids": [
+        "p256",
+        "p230",
+        "p267",
+        "p317"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p256",
+        "p230",
+        "p267",
+        "p317"
+      ],
+      "enrollment_order_variant": "randomized",
+      "enrollment_utterances_by_speaker": {
+        "p230": {
+          "usable_speech_sec": 61.4,
+          "utterance_ids": [
+            "p230_191",
+            "p230_076",
+            "p230_068",
+            "p230_334",
+            "p230_267",
+            "p230_299",
+            "p230_145",
+            "p230_073",
+            "p230_308",
+            "p230_085",
+            "p230_216",
+            "p230_273",
+            "p230_415",
+            "p230_379",
+            "p230_024",
+            "p230_297",
+            "p230_160",
+            "p230_235",
+            "p230_143",
+            "p230_391",
+            "p230_051",
+            "p230_117",
+            "p230_366"
+          ]
+        },
+        "p256": {
+          "usable_speech_sec": 60.69,
+          "utterance_ids": [
+            "p256_092",
+            "p256_148",
+            "p256_127",
+            "p256_135",
+            "p256_005",
+            "p256_089",
+            "p256_313",
+            "p256_203",
+            "p256_002",
+            "p256_095",
+            "p256_207",
+            "p256_070",
+            "p256_134",
+            "p256_074",
+            "p256_147",
+            "p256_302",
+            "p256_124",
+            "p256_223",
+            "p256_141",
+            "p256_048",
+            "p256_210",
+            "p256_197",
+            "p256_224",
+            "p256_128",
+            "p256_245",
+            "p256_308",
+            "p256_228",
+            "p256_233",
+            "p256_106"
+          ]
+        },
+        "p267": {
+          "usable_speech_sec": 61.55,
+          "utterance_ids": [
+            "p267_067",
+            "p267_127",
+            "p267_246",
+            "p267_007",
+            "p267_104",
+            "p267_087",
+            "p267_175",
+            "p267_028",
+            "p267_043",
+            "p267_311",
+            "p267_030",
+            "p267_069",
+            "p267_130",
+            "p267_245",
+            "p267_105",
+            "p267_411",
+            "p267_379",
+            "p267_292",
+            "p267_406",
+            "p267_001",
+            "p267_047",
+            "p267_407",
+            "p267_111",
+            "p267_079"
+          ]
+        },
+        "p317": {
+          "usable_speech_sec": 62.23,
+          "utterance_ids": [
+            "p317_349",
+            "p317_049",
+            "p317_123",
+            "p317_118",
+            "p317_145",
+            "p317_408",
+            "p317_087",
+            "p317_324",
+            "p317_124",
+            "p317_401",
+            "p317_227",
+            "p317_031",
+            "p317_162",
+            "p317_189",
+            "p317_065",
+            "p317_232",
+            "p317_406",
+            "p317_281",
+            "p317_080",
+            "p317_213",
+            "p317_105",
+            "p317_233",
+            "p317_042",
+            "p317_211",
+            "p317_032",
+            "p317_217",
+            "p317_222",
+            "p317_226",
+            "p317_004",
+            "p317_245",
+            "p317_412"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "final_holdout",
+      "query_count": 16,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 3,
+        "known:mic1:over_10s": 1,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "final_holdout_n4_r00_e60_randomized",
+      "unknown_speaker_ids": [
+        "p345",
+        "p362"
+      ],
+      "unknown_traffic_query_count": 2
+    },
+    {
+      "cohort_id": "final_holdout_n4_r00",
+      "conversation_scenarios": [],
+      "enrolled_speaker_ids": [
+        "p317",
+        "p267",
+        "p230",
+        "p256"
+      ],
+      "enrollment_budget_speech_sec_per_person": 60,
+      "enrollment_order": [
+        "p317",
+        "p267",
+        "p230",
+        "p256"
+      ],
+      "enrollment_order_variant": "reverse",
+      "enrollment_utterances_by_speaker": {
+        "p230": {
+          "usable_speech_sec": 61.4,
+          "utterance_ids": [
+            "p230_191",
+            "p230_076",
+            "p230_068",
+            "p230_334",
+            "p230_267",
+            "p230_299",
+            "p230_145",
+            "p230_073",
+            "p230_308",
+            "p230_085",
+            "p230_216",
+            "p230_273",
+            "p230_415",
+            "p230_379",
+            "p230_024",
+            "p230_297",
+            "p230_160",
+            "p230_235",
+            "p230_143",
+            "p230_391",
+            "p230_051",
+            "p230_117",
+            "p230_366"
+          ]
+        },
+        "p256": {
+          "usable_speech_sec": 60.69,
+          "utterance_ids": [
+            "p256_092",
+            "p256_148",
+            "p256_127",
+            "p256_135",
+            "p256_005",
+            "p256_089",
+            "p256_313",
+            "p256_203",
+            "p256_002",
+            "p256_095",
+            "p256_207",
+            "p256_070",
+            "p256_134",
+            "p256_074",
+            "p256_147",
+            "p256_302",
+            "p256_124",
+            "p256_223",
+            "p256_141",
+            "p256_048",
+            "p256_210",
+            "p256_197",
+            "p256_224",
+            "p256_128",
+            "p256_245",
+            "p256_308",
+            "p256_228",
+            "p256_233",
+            "p256_106"
+          ]
+        },
+        "p267": {
+          "usable_speech_sec": 61.55,
+          "utterance_ids": [
+            "p267_067",
+            "p267_127",
+            "p267_246",
+            "p267_007",
+            "p267_104",
+            "p267_087",
+            "p267_175",
+            "p267_028",
+            "p267_043",
+            "p267_311",
+            "p267_030",
+            "p267_069",
+            "p267_130",
+            "p267_245",
+            "p267_105",
+            "p267_411",
+            "p267_379",
+            "p267_292",
+            "p267_406",
+            "p267_001",
+            "p267_047",
+            "p267_407",
+            "p267_111",
+            "p267_079"
+          ]
+        },
+        "p317": {
+          "usable_speech_sec": 62.23,
+          "utterance_ids": [
+            "p317_349",
+            "p317_049",
+            "p317_123",
+            "p317_118",
+            "p317_145",
+            "p317_408",
+            "p317_087",
+            "p317_324",
+            "p317_124",
+            "p317_401",
+            "p317_227",
+            "p317_031",
+            "p317_162",
+            "p317_189",
+            "p317_065",
+            "p317_232",
+            "p317_406",
+            "p317_281",
+            "p317_080",
+            "p317_213",
+            "p317_105",
+            "p317_233",
+            "p317_042",
+            "p317_211",
+            "p317_032",
+            "p317_217",
+            "p317_222",
+            "p317_226",
+            "p317_004",
+            "p317_245",
+            "p317_412"
+          ]
+        }
+      },
+      "group_size": 4,
+      "population": "final_holdout",
+      "query_count": 16,
+      "query_counts": {
+        "known:mic1:2_to_5s": 4,
+        "known:mic1:5_to_10s": 3,
+        "known:mic1:over_10s": 1,
+        "known:mic1:under_2s": 3,
+        "unknown:mic1:2_to_5s": 2,
+        "unknown:mic1:5_to_10s": 1,
+        "unknown:mic1:under_2s": 2
+      },
+      "trial_id": "final_holdout_n4_r00_e60_reverse",
+      "unknown_speaker_ids": [
+        "p345",
+        "p362"
+      ],
+      "unknown_traffic_query_count": 2
+    }
+  ],
+  "vad": {
+    "bridge_frames": 6,
+    "floor_dbfs": -45.0,
+    "frame_period_sec": 0.01,
+    "hop_samples": 160,
+    "method": "20ms RMS windows at 10ms hop; speech threshold is max(-45 dBFS, peak-window RMS - 28 dB); bridge gaps <= 60ms; drop runs < 30ms",
+    "minimum_run_frames": 3,
+    "relative_db": 28.0,
+    "window_samples": 320
+  }
+}

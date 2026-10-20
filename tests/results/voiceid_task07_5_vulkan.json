@@ -89,7 +89,10 @@
     ],
     "runtime_libraries": {
       "linkage": "dynamic",
-      "needed": ["libggml-vulkan.so.0", "libvulkan.so.1"],
+      "needed": [
+        "libggml-vulkan.so.0",
+        "libvulkan.so.1"
+      ],
       "ldd_missing_libraries": []
     },
     "graph_optimization_guard": "GGML_VK_DISABLE_GRAPH_OPTIMIZE=1"
@@ -102,7 +105,13 @@
     "cached_graphs": 11,
     "scheduled_nodes": 9559,
     "cpu_fallback_nodes": 0,
-    "sampled_vulkan_ops": ["RESHAPE", "MUL_MAT", "NORM", "ROPE", "FLASH_ATTN_EXT"],
+    "sampled_vulkan_ops": [
+      "RESHAPE",
+      "MUL_MAT",
+      "NORM",
+      "ROPE",
+      "FLASH_ATTN_EXT"
+    ],
     "research_probe_backend_metadata": "Vulkan / Vulkan0 / index 0",
     "cpu_only_explicit_vulkan_request": "rejected with no-matching-Vulkan-device error; no fallback"
   },
@@ -113,7 +122,8 @@
       "sample_rate_hz": 16000,
       "stream_push_ms": 160,
       "same_chunk_boundaries": true,
-      "probability_channels": 4
+      "probability_channels": 8,
+      "probability_frame_period_sec": 0.01
     },
     "acceptance_criteria": {
       "mae_max": 0.001,
@@ -123,12 +133,15 @@
       "segment_speaker_ids_and_count": "must match",
       "segment_boundary_delta_ms_max": 10,
       "max_absolute_error": "reported and inspected; not used alone as a gate",
-      "thresholds_inspected": {"onset": 0.641, "offset": 0.561}
+      "thresholds_inspected": {
+        "onset": 0.641,
+        "offset": 0.561
+      }
     },
     "cases": [
       {
         "name": "JFK single speaker",
-        "frames": 2202,
+        "frames": 1101,
         "max_abs": 0.014664233,
         "mae": 0.000110861,
         "rmse": 0.000711828,
@@ -139,18 +152,20 @@
         "same_speaker_ids": true,
         "max_boundary_delta_ms": 0,
         "onset_threshold_crossings": 0,
-        "offset_threshold_crossings": 1
+        "offset_threshold_crossings": 1,
+        "top1_mismatch_proportion": 0.0,
+        "top1_flip_frames_explained_by_local_error": 0
       },
       {
         "name": "AMI speaker changes and overlap",
-        "frames": 12002,
+        "frames": 6001,
         "max_abs": 0.06291014,
         "mae": 0.000294551,
         "rmse": 0.001960949,
         "max_relative_when_cpu_gt_0_01": 0.584061363,
-        "top1_mismatches": 38,
-        "top1_mismatch_proportion": 0.00316614,
-        "top1_flip_frames_explained_by_local_error": 38,
+        "top1_mismatches": 30,
+        "top1_mismatch_proportion": 0.004999166805532411,
+        "top1_flip_frames_explained_by_local_error": 30,
         "max_cpu_top1_margin_on_flip": 0.010651976,
         "segments_cpu": 25,
         "segments_vulkan": 25,
@@ -170,10 +185,10 @@
       },
       {
         "name": "8 second silence",
-        "frames": 1602,
+        "frames": 801,
         "max_abs": 0.000177609,
-        "mae": 0.000006799,
-        "rmse": 0.000020061,
+        "mae": 6.799e-06,
+        "rmse": 2.0061e-05,
         "max_relative_when_cpu_gt_0_01": 0.012337433,
         "top1_mismatches": 0,
         "segments_cpu": 0,
@@ -181,18 +196,20 @@
         "same_speaker_ids": true,
         "max_boundary_delta_ms": 0,
         "onset_threshold_crossings": 0,
-        "offset_threshold_crossings": 0
+        "offset_threshold_crossings": 0,
+        "top1_mismatch_proportion": 0.0,
+        "top1_flip_frames_explained_by_local_error": 0
       },
       {
         "name": "VCTK p225",
-        "frames": 412,
+        "frames": 206,
         "max_abs": 0.003740907,
-        "mae": 0.000036944,
+        "mae": 3.6944e-05,
         "rmse": 0.000223257,
         "max_relative_when_cpu_gt_0_01": 0.034946355,
-        "top1_mismatches": 1,
-        "top1_mismatch_proportion": 0.00242718,
-        "top1_flip_frames_explained_by_local_error": 1,
+        "top1_mismatches": 0,
+        "top1_mismatch_proportion": 0.0,
+        "top1_flip_frames_explained_by_local_error": 0,
         "segments_cpu": 1,
         "segments_vulkan": 1,
         "same_speaker_ids": true,
@@ -202,9 +219,9 @@
       },
       {
         "name": "VCTK p226",
-        "frames": 560,
+        "frames": 280,
         "max_abs": 0.019296318,
-        "mae": 0.000062504,
+        "mae": 6.2504e-05,
         "rmse": 0.000796779,
         "max_relative_when_cpu_gt_0_01": 0.079851484,
         "top1_mismatches": 0,
@@ -213,11 +230,13 @@
         "same_speaker_ids": true,
         "max_boundary_delta_ms": 0,
         "onset_threshold_crossings": 0,
-        "offset_threshold_crossings": 0
+        "offset_threshold_crossings": 0,
+        "top1_mismatch_proportion": 0.0,
+        "top1_flip_frames_explained_by_local_error": 0
       },
       {
         "name": "VCTK p227",
-        "frames": 686,
+        "frames": 343,
         "max_abs": 0.018787712,
         "mae": 0.000237778,
         "rmse": 0.001278686,
@@ -228,7 +247,9 @@
         "same_speaker_ids": true,
         "max_boundary_delta_ms": 0,
         "onset_threshold_crossings": 1,
-        "offset_threshold_crossings": 0
+        "offset_threshold_crossings": 0,
+        "top1_mismatch_proportion": 0.0,
+        "top1_flip_frames_explained_by_local_error": 0
       }
     ],
     "aosc_same_imported_cpu_profile": [
@@ -238,7 +259,7 @@
         "cpu_top1_channel": 0,
         "vulkan_top1_channel": 0,
         "cpu_vulkan_max_abs": 0.008237303,
-        "mae": 0.000059953,
+        "mae": 5.9953e-05,
         "rmse": 0.000428592,
         "top1_assignment_stability_cpu": 1.0,
         "top1_assignment_stability_vulkan": 1.0
@@ -265,17 +286,74 @@
         "top1_assignment_stability_cpu": 1.0,
         "top1_assignment_stability_vulkan": 1.0
       }
-    ]
+    ],
+    "geometry_preflight": {
+      "gguf_metadata": {
+        "sortformer.num_speakers": 8,
+        "sortformer.output_subsampling_factor": 1,
+        "sortformer.preprocessor.window_stride_sec": 0.009999999776482582
+      },
+      "loaded_runtime": {
+        "cfg.num_speakers": 8,
+        "seconds_per_output_frame_sec": 0.01
+      },
+      "ami_input_duration_sec": 60.0,
+      "ami_native_output_frames": 6001,
+      "ami_prediction_tensor_shape_channels_frames_batch": [
+        8,
+        6001,
+        1
+      ],
+      "ami_cpp_probability_vector_shape_frames_channels": [
+        6001,
+        8
+      ],
+      "ami_binary_probability_values": 48008,
+      "ami_binary_probability_bytes": 192032,
+      "resolution": "Task 07.5 treated headerless frame-major 8-channel floats as four channels, doubling displayed frame counts. Runtime tensor and probability vectors are correct; no trained output dimensions changed."
+    },
+    "reporting_only_geometry_correction": {
+      "runtime_bug": false,
+      "exporter_or_report_bug": true,
+      "old_ami_reported_frames": 12002,
+      "correct_ami_frames": 6001,
+      "aggregate_elementwise_error_metrics_changed": false,
+      "shape_dependent_top1_metrics_recomputed": true
+    }
   },
   "streaming_state": {
     "vulkan_snapshot_export_destroy_recreate_import_continue": "passed",
     "same_backend_probability_continuity": "bit exact",
     "repeated_restore": "passed",
     "cases": [
-      {"name": "160 ms pushes after AOSC updates", "frames": 1101, "probability_values": 8808, "segments": 3, "exact": true},
-      {"name": "48 kHz input resampling", "frames": 201, "probability_values": 1608, "segments": 1, "exact": true},
-      {"name": "silence and compaction checkpoint", "frames": 1601, "probability_values": 3208, "segments": 3, "exact": true},
-      {"name": "AMI speaker-change crop", "frames": 921, "probability_values": 7368, "segments": 4, "exact": true}
+      {
+        "name": "160 ms pushes after AOSC updates",
+        "frames": 1101,
+        "probability_values": 8808,
+        "segments": 3,
+        "exact": true
+      },
+      {
+        "name": "48 kHz input resampling",
+        "frames": 201,
+        "probability_values": 1608,
+        "segments": 1,
+        "exact": true
+      },
+      {
+        "name": "silence and compaction checkpoint",
+        "frames": 1601,
+        "probability_values": 3208,
+        "segments": 3,
+        "exact": true
+      },
+      {
+        "name": "AMI speaker-change crop",
+        "frames": 921,
+        "probability_values": 7368,
+        "segments": 4,
+        "exact": true
+      }
     ],
     "aosc_profile": {
       "cpu_export_bytes": 551305,
@@ -285,7 +363,10 @@
       "cpu_profile_imported_on_vulkan": true,
       "cpu_profile_crc_after_vulkan_import": 334994840,
       "vulkan_profile_imported_on_vulkan": true,
-      "external_id_to_channel": {"P1": 0, "P2": 2},
+      "external_id_to_channel": {
+        "P1": 0,
+        "P2": 2
+      },
       "immutable_profile_preserved": true,
       "unknown_traffic_temporarily_changed_profile": true
     }
@@ -298,12 +379,132 @@
       "native_aosc_inference": "stream processing through completion; model initialization measured separately"
     },
     "single_stream": [
-      {"input": "JFK", "audio_sec": 11, "backend": "CPU", "threads": 4, "model_init_ms": 578.889, "first_inference_ms": 2656.649, "warm_ms": [2649.689, 2448.598, 2452.031], "warm_median_ms": 2452.031, "warm_range_ms": [2448.598, 2649.689], "rtf": 0.222911909, "audio_per_wall_second": 4.486077, "max_rss_mib": 127.95},
-      {"input": "JFK", "audio_sec": 11, "backend": "Vulkan", "device": "Vulkan0", "model_init_ms": 741.044, "first_inference_ms": 147.488, "warm_ms": [100.772, 68.525, 66.102], "warm_median_ms": 68.525, "warm_range_ms": [66.102, 100.772], "rtf": 0.006229545, "audio_per_wall_second": 160.525356, "max_rss_mib": 117.95},
-      {"input": "AMI medium crop", "audio_sec": 20, "backend": "CPU", "threads": 4, "model_init_ms": 561.987, "first_inference_ms": 7851.134, "warm_ms": [7755.936, 8162.962, 7776.12], "warm_median_ms": 7776.12, "warm_range_ms": [7755.936, 8162.962], "rtf": 0.388806, "audio_per_wall_second": 2.571977, "max_rss_mib": 142.805},
-      {"input": "AMI medium crop", "audio_sec": 20, "backend": "Vulkan", "device": "Vulkan0", "model_init_ms": 700.704, "first_inference_ms": 267.342, "warm_ms": [189.814, 138.609, 136.157], "warm_median_ms": 138.609, "warm_range_ms": [136.157, 189.814], "rtf": 0.00693045, "audio_per_wall_second": 144.290775, "max_rss_mib": 126.438},
-      {"input": "AMI full", "audio_sec": 60, "backend": "CPU", "threads": 4, "model_init_ms": 590.949, "first_inference_ms": 46033.961, "warm_ms": [45592.724, 45474.894, 45221.466], "warm_median_ms": 45474.894, "warm_range_ms": [45221.466, 45592.724], "rtf": 0.7579149, "audio_per_wall_second": 1.319409, "max_rss_mib": 198.238},
-      {"input": "AMI full", "audio_sec": 60, "backend": "Vulkan", "device": "Vulkan0", "model_init_ms": 715.714, "first_inference_ms": 769.707, "warm_ms": [671.731, 687.003, 683.963], "warm_median_ms": 683.963, "warm_range_ms": [671.731, 687.003], "rtf": 0.011399383, "audio_per_wall_second": 87.724044, "max_rss_mib": 146.848}
+      {
+        "input": "JFK",
+        "audio_sec": 11,
+        "backend": "CPU",
+        "threads": 4,
+        "model_init_ms": 578.889,
+        "first_inference_ms": 2656.649,
+        "warm_ms": [
+          2649.689,
+          2448.598,
+          2452.031
+        ],
+        "warm_median_ms": 2452.031,
+        "warm_range_ms": [
+          2448.598,
+          2649.689
+        ],
+        "rtf": 0.222911909,
+        "audio_per_wall_second": 4.486077,
+        "max_rss_mib": 127.95
+      },
+      {
+        "input": "JFK",
+        "audio_sec": 11,
+        "backend": "Vulkan",
+        "device": "Vulkan0",
+        "model_init_ms": 741.044,
+        "first_inference_ms": 147.488,
+        "warm_ms": [
+          100.772,
+          68.525,
+          66.102
+        ],
+        "warm_median_ms": 68.525,
+        "warm_range_ms": [
+          66.102,
+          100.772
+        ],
+        "rtf": 0.006229545,
+        "audio_per_wall_second": 160.525356,
+        "max_rss_mib": 117.95
+      },
+      {
+        "input": "AMI medium crop",
+        "audio_sec": 20,
+        "backend": "CPU",
+        "threads": 4,
+        "model_init_ms": 561.987,
+        "first_inference_ms": 7851.134,
+        "warm_ms": [
+          7755.936,
+          8162.962,
+          7776.12
+        ],
+        "warm_median_ms": 7776.12,
+        "warm_range_ms": [
+          7755.936,
+          8162.962
+        ],
+        "rtf": 0.388806,
+        "audio_per_wall_second": 2.571977,
+        "max_rss_mib": 142.805
+      },
+      {
+        "input": "AMI medium crop",
+        "audio_sec": 20,
+        "backend": "Vulkan",
+        "device": "Vulkan0",
+        "model_init_ms": 700.704,
+        "first_inference_ms": 267.342,
+        "warm_ms": [
+          189.814,
+          138.609,
+          136.157
+        ],
+        "warm_median_ms": 138.609,
+        "warm_range_ms": [
+          136.157,
+          189.814
+        ],
+        "rtf": 0.00693045,
+        "audio_per_wall_second": 144.290775,
+        "max_rss_mib": 126.438
+      },
+      {
+        "input": "AMI full",
+        "audio_sec": 60,
+        "backend": "CPU",
+        "threads": 4,
+        "model_init_ms": 590.949,
+        "first_inference_ms": 46033.961,
+        "warm_ms": [
+          45592.724,
+          45474.894,
+          45221.466
+        ],
+        "warm_median_ms": 45474.894,
+        "warm_range_ms": [
+          45221.466,
+          45592.724
+        ],
+        "rtf": 0.7579149,
+        "audio_per_wall_second": 1.319409,
+        "max_rss_mib": 198.238
+      },
+      {
+        "input": "AMI full",
+        "audio_sec": 60,
+        "backend": "Vulkan",
+        "device": "Vulkan0",
+        "model_init_ms": 715.714,
+        "first_inference_ms": 769.707,
+        "warm_ms": [
+          671.731,
+          687.003,
+          683.963
+        ],
+        "warm_median_ms": 683.963,
+        "warm_range_ms": [
+          671.731,
+          687.003
+        ],
+        "rtf": 0.011399383,
+        "audio_per_wall_second": 87.724044,
+        "max_rss_mib": 146.848
+      }
     ],
     "multistream": {
       "workload_audio_sec": 21.408064,
@@ -312,22 +513,271 @@
       "processes_per_configuration": 3,
       "cpu_threads": 4,
       "configurations": [
-        {"backend": "CPU", "concurrency": 1, "batching": false, "wall_sec": [2.34, 2.4, 2.5], "wall_median_sec": 2.4, "wall_range_sec": [2.34, 2.5], "audio_per_wall_second": 8.920027, "per_file_latency_mean_ms": 227.63, "per_file_latency_p50_ms": 218.8, "per_file_latency_p95_ms": 387.8, "max_rss_mib_mean": 121.3},
-        {"backend": "CPU", "concurrency": 2, "batching": false, "wall_sec": [2.54, 2.56, 2.62], "wall_median_sec": 2.56, "wall_range_sec": [2.54, 2.62], "audio_per_wall_second": 8.362525, "per_file_latency_mean_ms": 466.33, "per_file_latency_p50_ms": 394.95, "per_file_latency_p95_ms": 774.96, "max_rss_mib_mean": 122.9},
-        {"backend": "CPU", "concurrency": 4, "batching": false, "wall_sec": [2.72, 2.8, 2.71], "wall_median_sec": 2.72, "wall_range_sec": [2.71, 2.8], "audio_per_wall_second": 7.870612, "per_file_latency_mean_ms": 923.44, "per_file_latency_p50_ms": 829.98, "per_file_latency_p95_ms": 1545.47, "max_rss_mib_mean": 126.5},
-        {"backend": "CPU", "concurrency": 8, "batching": false, "wall_sec": [2.72, 2.76, 2.79], "wall_median_sec": 2.76, "wall_range_sec": [2.72, 2.79], "audio_per_wall_second": 7.756545, "per_file_latency_mean_ms": 1337.13, "per_file_latency_p50_ms": 1354.93, "per_file_latency_p95_ms": 2153.0, "max_rss_mib_mean": 128.7},
-        {"backend": "Vulkan", "concurrency": 1, "batching": false, "wall_sec": [1.52, 0.98, 0.94], "wall_median_sec": 0.98, "wall_range_sec": [0.94, 1.52], "audio_per_wall_second": 21.844963, "per_file_latency_mean_ms": 40.96, "per_file_latency_p50_ms": 17.52, "per_file_latency_p95_ms": 203.31, "max_rss_mib_mean": 165.1},
-        {"backend": "Vulkan", "concurrency": 2, "batching": false, "wall_sec": [0.96, 0.98, 0.95], "wall_median_sec": 0.96, "wall_range_sec": [0.95, 0.98], "audio_per_wall_second": 22.300067, "per_file_latency_mean_ms": 36.2, "per_file_latency_p50_ms": 34.82, "per_file_latency_p95_ms": 58.7, "max_rss_mib_mean": 155.0},
-        {"backend": "Vulkan", "concurrency": 4, "batching": false, "wall_sec": [0.99, 0.96, 0.97], "wall_median_sec": 0.97, "wall_range_sec": [0.96, 0.99], "audio_per_wall_second": 22.070169, "per_file_latency_mean_ms": 65.97, "per_file_latency_p50_ms": 51.0, "per_file_latency_p95_ms": 114.71, "max_rss_mib_mean": 157.9},
-        {"backend": "Vulkan", "concurrency": 8, "batching": false, "wall_sec": [1.12, 0.98, 0.95], "wall_median_sec": 0.98, "wall_range_sec": [0.95, 1.12], "audio_per_wall_second": 21.844963, "per_file_latency_mean_ms": 97.48, "per_file_latency_p50_ms": 102.75, "per_file_latency_p95_ms": 132.27, "max_rss_mib_mean": 158.6},
-        {"backend": "Vulkan", "concurrency": 2, "batching": true, "wall_sec": [1.03, 1.07, 1.0], "wall_median_sec": 1.03, "wall_range_sec": [1.0, 1.07], "audio_per_wall_second": 20.784528, "per_file_latency_mean_ms": 40.0, "per_file_latency_p50_ms": 41.25, "per_file_latency_p95_ms": 56.75, "batch_count_per_repeat": [22, 22, 22], "items_per_repeat": [23, 23, 23], "mean_batch_size": 1.045, "max_batch_size": 2},
-        {"backend": "Vulkan", "concurrency": 4, "batching": true, "wall_sec": [0.94, 0.94, 0.93], "wall_median_sec": 0.94, "wall_range_sec": [0.93, 0.94], "audio_per_wall_second": 22.774536, "per_file_latency_mean_ms": 55.04, "per_file_latency_p50_ms": 48.52, "per_file_latency_p95_ms": 78.06, "batch_count_per_repeat": [16, 16, 16], "items_per_repeat": [23, 23, 23], "mean_batch_size": 1.4375, "max_batch_size": 4},
-        {"backend": "Vulkan", "concurrency": 8, "batching": true, "wall_sec": [1.72, 0.92, 0.9], "wall_median_sec": 0.92, "wall_range_sec": [0.9, 1.72], "audio_per_wall_second": 23.269635, "per_file_latency_mean_ms": 137.26, "per_file_latency_p50_ms": 79.21, "per_file_latency_p95_ms": 339.81, "batch_count_per_repeat": [8, 6, 6], "items_per_repeat": [23, 23, 23], "mean_batch_size": 3.45, "max_batch_size": 8, "outlier": "first repeat took 1.72 s and reached max batch 7"}
+        {
+          "backend": "CPU",
+          "concurrency": 1,
+          "batching": false,
+          "wall_sec": [
+            2.34,
+            2.4,
+            2.5
+          ],
+          "wall_median_sec": 2.4,
+          "wall_range_sec": [
+            2.34,
+            2.5
+          ],
+          "audio_per_wall_second": 8.920027,
+          "per_file_latency_mean_ms": 227.63,
+          "per_file_latency_p50_ms": 218.8,
+          "per_file_latency_p95_ms": 387.8,
+          "max_rss_mib_mean": 121.3
+        },
+        {
+          "backend": "CPU",
+          "concurrency": 2,
+          "batching": false,
+          "wall_sec": [
+            2.54,
+            2.56,
+            2.62
+          ],
+          "wall_median_sec": 2.56,
+          "wall_range_sec": [
+            2.54,
+            2.62
+          ],
+          "audio_per_wall_second": 8.362525,
+          "per_file_latency_mean_ms": 466.33,
+          "per_file_latency_p50_ms": 394.95,
+          "per_file_latency_p95_ms": 774.96,
+          "max_rss_mib_mean": 122.9
+        },
+        {
+          "backend": "CPU",
+          "concurrency": 4,
+          "batching": false,
+          "wall_sec": [
+            2.72,
+            2.8,
+            2.71
+          ],
+          "wall_median_sec": 2.72,
+          "wall_range_sec": [
+            2.71,
+            2.8
+          ],
+          "audio_per_wall_second": 7.870612,
+          "per_file_latency_mean_ms": 923.44,
+          "per_file_latency_p50_ms": 829.98,
+          "per_file_latency_p95_ms": 1545.47,
+          "max_rss_mib_mean": 126.5
+        },
+        {
+          "backend": "CPU",
+          "concurrency": 8,
+          "batching": false,
+          "wall_sec": [
+            2.72,
+            2.76,
+            2.79
+          ],
+          "wall_median_sec": 2.76,
+          "wall_range_sec": [
+            2.72,
+            2.79
+          ],
+          "audio_per_wall_second": 7.756545,
+          "per_file_latency_mean_ms": 1337.13,
+          "per_file_latency_p50_ms": 1354.93,
+          "per_file_latency_p95_ms": 2153.0,
+          "max_rss_mib_mean": 128.7
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 1,
+          "batching": false,
+          "wall_sec": [
+            1.52,
+            0.98,
+            0.94
+          ],
+          "wall_median_sec": 0.98,
+          "wall_range_sec": [
+            0.94,
+            1.52
+          ],
+          "audio_per_wall_second": 21.844963,
+          "per_file_latency_mean_ms": 40.96,
+          "per_file_latency_p50_ms": 17.52,
+          "per_file_latency_p95_ms": 203.31,
+          "max_rss_mib_mean": 165.1
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 2,
+          "batching": false,
+          "wall_sec": [
+            0.96,
+            0.98,
+            0.95
+          ],
+          "wall_median_sec": 0.96,
+          "wall_range_sec": [
+            0.95,
+            0.98
+          ],
+          "audio_per_wall_second": 22.300067,
+          "per_file_latency_mean_ms": 36.2,
+          "per_file_latency_p50_ms": 34.82,
+          "per_file_latency_p95_ms": 58.7,
+          "max_rss_mib_mean": 155.0
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 4,
+          "batching": false,
+          "wall_sec": [
+            0.99,
+            0.96,
+            0.97
+          ],
+          "wall_median_sec": 0.97,
+          "wall_range_sec": [
+            0.96,
+            0.99
+          ],
+          "audio_per_wall_second": 22.070169,
+          "per_file_latency_mean_ms": 65.97,
+          "per_file_latency_p50_ms": 51.0,
+          "per_file_latency_p95_ms": 114.71,
+          "max_rss_mib_mean": 157.9
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 8,
+          "batching": false,
+          "wall_sec": [
+            1.12,
+            0.98,
+            0.95
+          ],
+          "wall_median_sec": 0.98,
+          "wall_range_sec": [
+            0.95,
+            1.12
+          ],
+          "audio_per_wall_second": 21.844963,
+          "per_file_latency_mean_ms": 97.48,
+          "per_file_latency_p50_ms": 102.75,
+          "per_file_latency_p95_ms": 132.27,
+          "max_rss_mib_mean": 158.6
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 2,
+          "batching": true,
+          "wall_sec": [
+            1.03,
+            1.07,
+            1.0
+          ],
+          "wall_median_sec": 1.03,
+          "wall_range_sec": [
+            1.0,
+            1.07
+          ],
+          "audio_per_wall_second": 20.784528,
+          "per_file_latency_mean_ms": 40.0,
+          "per_file_latency_p50_ms": 41.25,
+          "per_file_latency_p95_ms": 56.75,
+          "batch_count_per_repeat": [
+            22,
+            22,
+            22
+          ],
+          "items_per_repeat": [
+            23,
+            23,
+            23
+          ],
+          "mean_batch_size": 1.045,
+          "max_batch_size": 2
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 4,
+          "batching": true,
+          "wall_sec": [
+            0.94,
+            0.94,
+            0.93
+          ],
+          "wall_median_sec": 0.94,
+          "wall_range_sec": [
+            0.93,
+            0.94
+          ],
+          "audio_per_wall_second": 22.774536,
+          "per_file_latency_mean_ms": 55.04,
+          "per_file_latency_p50_ms": 48.52,
+          "per_file_latency_p95_ms": 78.06,
+          "batch_count_per_repeat": [
+            16,
+            16,
+            16
+          ],
+          "items_per_repeat": [
+            23,
+            23,
+            23
+          ],
+          "mean_batch_size": 1.4375,
+          "max_batch_size": 4
+        },
+        {
+          "backend": "Vulkan",
+          "concurrency": 8,
+          "batching": true,
+          "wall_sec": [
+            1.72,
+            0.92,
+            0.9
+          ],
+          "wall_median_sec": 0.92,
+          "wall_range_sec": [
+            0.9,
+            1.72
+          ],
+          "audio_per_wall_second": 23.269635,
+          "per_file_latency_mean_ms": 137.26,
+          "per_file_latency_p50_ms": 79.21,
+          "per_file_latency_p95_ms": 339.81,
+          "batch_count_per_repeat": [
+            8,
+            6,
+            6
+          ],
+          "items_per_repeat": [
+            23,
+            23,
+            23
+          ],
+          "mean_batch_size": 3.45,
+          "max_batch_size": 8,
+          "outlier": "first repeat took 1.72 s and reached max batch 7"
+        }
       ],
       "gpu_sampler": {
         "scope": "whole device, includes desktop/background activity",
-        "multistream_memory_used_mib_min_max": [1797, 1955],
-        "multistream_utilization_percent_min_max": [4, 47],
+        "multistream_memory_used_mib_min_max": [
+          1797,
+          1955
+        ],
+        "multistream_utilization_percent_min_max": [
+          4,
+          47
+        ],
         "single_stream_peak_memory_used_mib": 1990,
         "single_stream_peak_utilization_percent": 71,
         "process_specific_vram": "not available"
@@ -347,8 +797,16 @@
         "model_init_ms": 613.261622,
         "warmup_wall_ms": 10629.2644,
         "warmup_inference_ms": 10591.6853,
-        "wall_ms": [10549.5841, 10569.3177, 10639.9212],
-        "inference_ms": [10513.6878, 10539.7069, 10610.6477],
+        "wall_ms": [
+          10549.5841,
+          10569.3177,
+          10639.9212
+        ],
+        "inference_ms": [
+          10513.6878,
+          10539.7069,
+          10610.6477
+        ],
         "mean_inference_ms": 10554.6808,
         "median_inference_ms": 10539.7069,
         "mean_wall_ms": 10586.2743,
@@ -363,8 +821,16 @@
         "model_init_ms": 731.772081,
         "warmup_wall_ms": 226.63783,
         "warmup_inference_ms": 190.774087,
-        "wall_ms": [167.728156, 142.733234, 139.329525],
-        "inference_ms": [136.934702, 113.833215, 110.883895],
+        "wall_ms": [
+          167.728156,
+          142.733234,
+          139.329525
+        ],
+        "inference_ms": [
+          136.934702,
+          113.833215,
+          110.883895
+        ],
         "mean_inference_ms": 120.550604,
         "median_inference_ms": 113.833215,
         "mean_wall_ms": 149.930305,
@@ -378,29 +844,94 @@
   "vctk_smoke": {
     "dataset_path": "VCTK-Corpus-0.92/",
     "audio_layout": "wav48_silence_trimmed",
-    "source_formats": {"flac": 88328, "wav": 0},
+    "source_formats": {
+      "flac": 88328,
+      "wav": 0
+    },
     "speaker_directories": 111,
     "conversion": "one FFmpeg conversion per source: -map_metadata -1 -ac 1 -ar 16000 -c:a pcm_s16le",
     "cpu_and_vulkan_used_same_converted_files": true,
     "clips": [
-      {"source": "p225/p225_001_mic1.flac", "duration_sec": 2.0515, "frames": 412, "top1_differences": 1, "segments_cpu": 1, "segments_vulkan": 1, "same_speaker_and_boundaries": true, "converted_wav_sha256": "936b0811722b7937c413d97bac556e8facdcc42f2a70ef63300a542b405ec69b"},
-      {"source": "p226/p226_001_mic1.flac", "duration_sec": 2.798688, "frames": 560, "top1_differences": 0, "segments_cpu": 1, "segments_vulkan": 1, "same_speaker_and_boundaries": true, "converted_wav_sha256": "e1837db3dc9f306e162ee2d4043e2b0e90e9d5cd15c4e0ee37976acb83ee3f36"},
-      {"source": "p227/p227_001_mic1.flac", "duration_sec": 3.42875, "frames": 686, "top1_differences": 0, "segments_cpu": 1, "segments_vulkan": 1, "same_speaker_and_boundaries": true, "converted_wav_sha256": "7623063f70c62e69a68f0453e2bafc2e13e9c63a260f63dc06ff2e9681f8fbd0"}
+      {
+        "source": "p225/p225_001_mic1.flac",
+        "duration_sec": 2.0515,
+        "frames": 412,
+        "top1_differences": 1,
+        "segments_cpu": 1,
+        "segments_vulkan": 1,
+        "same_speaker_and_boundaries": true,
+        "converted_wav_sha256": "936b0811722b7937c413d97bac556e8facdcc42f2a70ef63300a542b405ec69b"
+      },
+      {
+        "source": "p226/p226_001_mic1.flac",
+        "duration_sec": 2.798688,
+        "frames": 560,
+        "top1_differences": 0,
+        "segments_cpu": 1,
+        "segments_vulkan": 1,
+        "same_speaker_and_boundaries": true,
+        "converted_wav_sha256": "e1837db3dc9f306e162ee2d4043e2b0e90e9d5cd15c4e0ee37976acb83ee3f36"
+      },
+      {
+        "source": "p227/p227_001_mic1.flac",
+        "duration_sec": 3.42875,
+        "frames": 686,
+        "top1_differences": 0,
+        "segments_cpu": 1,
+        "segments_vulkan": 1,
+        "same_speaker_and_boundaries": true,
+        "converted_wav_sha256": "7623063f70c62e69a68f0453e2bafc2e13e9c63a260f63dc06ff2e9681f8fbd0"
+      }
     ],
     "full_dataset_benchmark_run": false,
     "dataset_gitignored": true,
     "dataset_tracked_file_count": 0
   },
   "regression": {
-    "cpu_ctest": {"passed": 6, "failed": 0, "tests": ["audio_resampler", "aosc_profile_intervention", "diar_state", "mel_features", "diar_c_api_model", "diar_snapshot_continuity"]},
-    "vulkan_build_ctest": {"passed": 6, "failed": 0, "normal_test_device": "CPU unless explicitly selected"},
+    "cpu_ctest": {
+      "passed": 6,
+      "failed": 0,
+      "tests": [
+        "audio_resampler",
+        "aosc_profile_intervention",
+        "diar_state",
+        "mel_features",
+        "diar_c_api_model",
+        "diar_snapshot_continuity"
+      ]
+    },
+    "vulkan_build_ctest": {
+      "passed": 6,
+      "failed": 0,
+      "normal_test_device": "CPU unless explicitly selected"
+    },
     "explicit_gpu_cli_inference": "passed",
     "explicit_gpu_snapshot_continuity": "passed",
     "explicit_gpu_native_matching_probe": "passed",
     "explicit_gpu_representation_probe": "passed",
     "task06_representation_regression_per_backend": {
-      "cpu": {"backend": "CPU", "status": "pass", "clips_compared": 2, "mismatching_clips": 0, "raw_probability_values_compared": 4408, "identical_channel_assignment_frames": 551, "identical_segment_cases": 2, "identical_aosc_profile_cases": 2, "identical_snapshot_cases": 2},
-      "vulkan": {"backend": "Vulkan0", "status": "pass", "clips_compared": 2, "mismatching_clips": 0, "raw_probability_values_compared": 4408, "identical_channel_assignment_frames": 551, "identical_segment_cases": 2, "identical_aosc_profile_cases": 2, "identical_snapshot_cases": 2}
+      "cpu": {
+        "backend": "CPU",
+        "status": "pass",
+        "clips_compared": 2,
+        "mismatching_clips": 0,
+        "raw_probability_values_compared": 4408,
+        "identical_channel_assignment_frames": 551,
+        "identical_segment_cases": 2,
+        "identical_aosc_profile_cases": 2,
+        "identical_snapshot_cases": 2
+      },
+      "vulkan": {
+        "backend": "Vulkan0",
+        "status": "pass",
+        "clips_compared": 2,
+        "mismatching_clips": 0,
+        "raw_probability_values_compared": 4408,
+        "identical_channel_assignment_frames": 551,
+        "identical_segment_cases": 2,
+        "identical_aosc_profile_cases": 2,
+        "identical_snapshot_cases": 2
+      }
     },
     "test_sortformer_parity": "not run; reference tensor assets are absent",
     "normal_cpu_cli_inference": "passed"

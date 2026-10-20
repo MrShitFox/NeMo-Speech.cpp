@@ -117,6 +117,7 @@ DiarStream::reset() {
     mel_consumed_ = 0;
     provisional_frames_ = 0;
     finished_ = false;
+    last_prediction_tensor_shape_ = {{0, 0, 0}};
     probs_.clear();
     probs_base_ = 0;
     frozen_segs_.clear();
@@ -221,6 +222,7 @@ DiarStream::run_one_chunk(bool force, bool final_flush) {
         mel, t_mel, run_state.spkcache_frames() ? run_state.spkcache().data() : nullptr,
         run_state.spkcache_frames(), run_state.fifo_frames() ? run_state.fifo().data() : nullptr,
         run_state.fifo_frames());
+    last_prediction_tensor_shape_ = out.prediction_tensor_shape;
 
     const int lc_enc = static_cast<int>(std::lround(lc_mel / static_cast<double>(sub_)));
     const int rc_enc = static_cast<int>(std::ceil(rc_mel / static_cast<double>(sub_)));

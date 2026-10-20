@@ -366,10 +366,11 @@ class SortformerModel::SortformerBatcher {
         const int out_pred_batch = static_cast<int>(outputs[0].out_shape[2]);
         const int out_t3 = static_cast<int>(outputs[1].out_shape[1]);
         const int out_emb_batch = static_cast<int>(outputs[1].out_shape[2]);
-        if (out_native_total != total * output_factor || out_t3 != t3 || out_pred_batch != B ||
-            out_emb_batch != B) {
+        if (outputs[0].out_shape[0] != n_spk || out_native_total != total * output_factor ||
+            out_t3 != t3 || out_pred_batch != B || out_emb_batch != B) {
             throw std::runtime_error(
-                "sortformer: unexpected batched output shape (got total=" +
+                "sortformer: unexpected batched output shape (got channels=" +
+                std::to_string(outputs[0].out_shape[0]) + " total=" +
                 std::to_string(out_native_total) + " chunk=" + std::to_string(out_t3) +
                 " batch=" + std::to_string(out_pred_batch) + "/" + std::to_string(out_emb_batch) +
                 ", expected total=" + std::to_string(total) + " chunk=" + std::to_string(t3) +
@@ -391,6 +392,8 @@ class SortformerModel::SortformerBatcher {
             const int state_offset = max_state_frames - state_frames;
             result.total_frames = state_frames + t3;
             result.chunk_frames = t3;
+            result.prediction_tensor_shape = {
+                outputs[0].out_shape[0], outputs[0].out_shape[1], outputs[0].out_shape[2]};
             const auto pred_begin = preds.begin() + static_cast<size_t>(b) * preds_item +
                                     static_cast<size_t>(state_offset) * output_factor * n_spk;
             result.native_total_frames = result.total_frames * output_factor;

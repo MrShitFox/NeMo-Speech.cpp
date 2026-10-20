@@ -14,6 +14,7 @@
 #pragma once
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <cstddef>
 #include <memory>
@@ -184,6 +185,9 @@ class SortformerModel {
         // coarse row.
         std::vector<float> native_preds;
         int native_total_frames = 0;
+        // GGML tensor axes are [channel, native_frame, batch]. Host copies are
+        // contiguous frame-major vectors with channels adjacent per frame.
+        std::array<int64_t, 3> prediction_tensor_shape{{0, 0, 0}};
         // Present only when research taps were requested at construction.
         std::vector<SortformerResearchFeature> research_features;
         size_t research_host_copy_bytes = 0;

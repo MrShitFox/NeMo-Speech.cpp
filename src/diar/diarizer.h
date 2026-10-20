@@ -51,6 +51,7 @@ class DiarizationStream {
     int64_t frame_count() const;
     int64_t frame_probs_start() const;
     const std::vector<float>& frame_probabilities() const;
+    std::array<int64_t, 3> last_prediction_tensor_shape() const;
     int num_speakers() const;
     double seconds_per_frame() const;
     std::vector<DiarSegment> segments(const DiarSegmentationCfg& config = {}) const;

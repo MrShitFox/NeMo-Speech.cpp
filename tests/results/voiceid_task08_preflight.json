@@ -1,0 +1,66 @@
+{
+  "backend": {
+    "device": "Vulkan0",
+    "name": "Vulkan"
+  },
+  "binary_trace": {
+    "file": "task08_geometry_preflight.nmsp8f1",
+    "layout": "NMSP8F1 v1; little-endian float32; explicit channel/frame axes",
+    "probability_hash_fnv1a64": "4f2dc8fb519e8f75"
+  },
+  "export_layouts": {
+    "csv_probability_export": "none in the native C++ research harnesses; external CSV conversion must reshape by cfg.num_speakers",
+    "json_research_exports": "per-frame arrays contain num_speakers values in channel order",
+    "task08_binary_trace": {
+      "channels": 8,
+      "format": "NMSP8F1 v1 header plus little-endian float32 payload",
+      "logical_shape": "[frame, channel]"
+    },
+    "test_diar_streaming_dump_probs": {
+      "channels": 8,
+      "format": "headerless float32 array",
+      "logical_shape": "[frame, channel]",
+      "values_per_frame": 8
+    }
+  },
+  "gguf_config_loaded_from_metadata": {
+    "sortformer.num_speakers": 8,
+    "sortformer.output_subsampling_factor": 1,
+    "sortformer.preprocessor.window_stride_sec": 0.009999999776482582
+  },
+  "inference_ms": 781.853437,
+  "input": {
+    "channels": 1,
+    "duration_sec": 60.0,
+    "sample_rate_hz": 16000,
+    "wav": "test_files/diar/ami_en2002d_2132.wav"
+  },
+  "observed_frames_per_input_second": 100.01666666666667,
+  "reporting_only_reinterpretation": {
+    "correct_ami_frames": 6001,
+    "correct_channel_count": 8,
+    "runtime_geometry_bug": false,
+    "task07_5_reported_ami_frames": 12002,
+    "task07_5_reported_channel_count": 4
+  },
+  "runtime": {
+    "cfg.num_speakers": 8,
+    "cpp_probability_vector_layout": "frame-major; probabilities[frame * num_speakers + channel]",
+    "cpp_probability_vector_shape_frames_channels": [
+      6001,
+      8
+    ],
+    "expected_value_count": 48008,
+    "frame_count": 6001,
+    "last_prediction_tensor_shape_channels_frames_batch": [
+      8,
+      2680,
+      1
+    ],
+    "output_tensor_axis_order": "[channels, native_frames, batch]",
+    "probability_value_count": 48008,
+    "seconds_per_output_frame_sec": 0.009999999776482582,
+    "top1_channel_comparison_index": "probabilities[frame * num_speakers + channel]"
+  },
+  "schema": "nemo-speech.voiceid-task08-preflight.v1"
+}

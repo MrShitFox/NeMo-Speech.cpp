@@ -192,6 +192,9 @@ class DiarStream {
     const std::vector<float>& frame_probs() const { return probs_; }
     int64_t frame_probs_base() const { return probs_base_; }
     double seconds_per_frame() const { return sec_per_frame_; }
+    std::array<int64_t, 3> last_prediction_tensor_shape() const {
+        return last_prediction_tensor_shape_;
+    }
 
     // Long-stream memory bound. The raw probability timeline would otherwise
     // grow forever (n_spk floats per native output frame) and every segments()
@@ -264,6 +267,7 @@ class DiarStream {
     ResearchEmbeddingObserver research_embedding_observer_;
     ResearchFeatureObserver research_feature_observer_;
     ResearchAoscSelectionObserver research_aosc_selection_observer_;
+    std::array<int64_t, 3> last_prediction_tensor_shape_{{0, 0, 0}};
 
     std::vector<float> probs_;              // retained timeline tail (see frame_probs_base)
     int64_t probs_base_ = 0;                // emitted frames compacted off the front

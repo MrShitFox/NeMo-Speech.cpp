@@ -59,7 +59,7 @@ The native matching probe ran on Vulkan with `Vulkan0`. The Task 06 representati
 
 ## CPU/Vulkan parity
 
-All direct comparisons used the same GGUF, exact same WAV bytes, 16 kHz input, streaming geometry, 160 ms pushes, and chunk boundaries. Float files contain four output channels per frame. These checks compare numerical outputs without requiring bit-exact CPU/GPU equality.
+All direct comparisons used the same GGUF, exact same WAV bytes, 16 kHz input, streaming geometry, 160 ms pushes, and chunk boundaries. The saved summary incorrectly described the raw float comparison files as four channels per frame; that reshape is corrected below. These checks compare numerical outputs without requiring bit-exact CPU/GPU equality.
 
 Acceptance checks used for interpretation:
 
@@ -70,16 +70,45 @@ Acceptance checks used for interpretation:
 
 | Input | Frames | Max abs | MAE | RMSE | Max relative¹ | Top-1 channel differences | Segments / speaker IDs | Max boundary shift |
 |---|---:|---:|---:|---:|---:|---:|---|---:|
-| JFK, one speaker | 2,202 | 0.014664 | 0.000111 | 0.000712 | 0.1044 | 0 / 0% | 3 / same | 0 ms |
-| AMI, speaker changes and overlap | 12,002 | 0.062910 | 0.000295 | 0.001961 | 0.5841 | 38 / 0.3166% | 25 / same | 10 ms |
-| Silence, 8 s | 1,602 | 0.000178 | 0.0000068 | 0.000020 | 0.0123 | 0 / 0% | 0 / same | 0 ms |
-| VCTK p225 | 412 | 0.003741 | 0.0000369 | 0.000223 | 0.0349 | 1 / 0.2427% | 1 / same | 0 ms |
-| VCTK p226 | 560 | 0.019296 | 0.0000625 | 0.000797 | 0.0799 | 0 / 0% | 1 / same | 0 ms |
-| VCTK p227 | 686 | 0.018788 | 0.000238 | 0.001279 | 0.1074 | 0 / 0% | 1 / same | 0 ms |
+| JFK, one speaker | 1,101 | 0.014664 | 0.000111 | 0.000712 | 0.1044 | 0 / 0% | 3 / same | 0 ms |
+| AMI, speaker changes and overlap | 6,001 | 0.062910 | 0.000295 | 0.001961 | 0.5841 | 30 / 0.4999% | 25 / same | 10 ms |
+| Silence, 8 s | 801 | 0.000178 | 0.0000068 | 0.000020 | 0.0123 | 0 / 0% | 0 / same | 0 ms |
+| VCTK p225 | 206 | 0.003741 | 0.0000369 | 0.000223 | 0.0349 | 0 / 0% | 1 / same | 0 ms |
+| VCTK p226 | 280 | 0.019296 | 0.0000625 | 0.000797 | 0.0799 | 0 / 0% | 1 / same | 0 ms |
+| VCTK p227 | 343 | 0.018788 | 0.000238 | 0.001279 | 0.1074 | 0 / 0% | 1 / same | 0 ms |
 
 ¹ Maximum relative error is computed only where the CPU probability is greater than 0.01.
 
-All 38 AMI top-1 differences and the single p225 difference were explainable by local numerical error at near-tie frames. The largest AMI absolute error occurred at frame 614 (6.14 s), channel 2: CPU 0.73696, Vulkan 0.67405; both kept channel 2 as top-1 and above the onset threshold. Across AMI, 11 onset and 9 offset channel values crossed a threshold; the resulting segment count and speaker IDs remained the same, with at most a 10 ms boundary change. JFK had one offset crossing; p227 had one onset crossing. No meaningful speaker assignment change was found.
+All 30 AMI top-1 differences were explainable by local numerical error at near-tie frames; there were no top-1 changes on the three VCTK clips after using the correct channel grouping. The largest AMI absolute error occurred at frame 614 (6.14 s), channel 2: CPU 0.73696, Vulkan 0.67405; both kept channel 2 as top-1 and above the onset threshold. Across AMI, 11 onset and 9 offset channel values crossed a threshold; the resulting segment count and speaker IDs remained the same, with at most a 10 ms boundary change. JFK had one offset crossing; p227 had one onset crossing. No meaningful speaker assignment change was found.
+
+### Output geometry discrepancy correction
+
+The loaded GGUF metadata contains `sortformer.num_speakers = 8`,
+`sortformer.output_subsampling_factor = 1`, and
+`sortformer.preprocessor.window_stride = 0.0099999998` seconds. The loaded
+runtime reports `cfg.num_speakers = 8` and
+`seconds_per_output_frame() = 0.01`. Its prediction tensor is ordered
+`[channels, native_frames, batch]`; for the single-item 60 s AMI run this is
+`[8, 6001, 1]`. The C++ probability vector and the CLI's headerless float32
+dump are frame-major, `[frame, channel]`, so the dump has 48,008 values
+(`6001 × 8`, 192,032 bytes). Top-1 scans index each frame as
+`probabilities[frame * 8 + channel]` over channels 0–7.
+
+Task 07.5's comparison script reshaped those same values as 12,002 frames × 4
+channels. The runtime, trained output dimensions, C++ vector, and segmenter
+were correct; this was a reporting/export interpretation error. We reran the
+CPU/Vulkan fixture comparisons with eight channels per 10 ms frame. The
+element-wise max error, MAE, RMSE, relative error, and per-channel threshold
+crossings did not change because they compare the same float values. The
+shape-dependent top-1 result changed to 30/6,001 AMI frames (0.4999%) and
+0/206 p225 frames. The 30 AMI changes are all locally explained by numerical
+error, and the existing 0.5% gate still passes, narrowly. The binary file
+format used in Task 07.5 did not carry its dimensions, which allowed the
+mistake; Task 08 writes dimensions and layout with every probability trace.
+
+The runtime now also validates that the prediction tensor's channel dimension
+matches `sortformer.num_speakers` before copying outputs. This is a fail-fast
+shape check and does not alter model outputs.
 
 The RTTM output was also compared: segment count and speaker IDs matched, with at most the one-frame boundary change shown above. The AOSC-only warm-start comparison used the Task 07 AMI fixture and the same imported CPU profile on CPU and Vulkan. The three query assignments were identical: P1 known → channel 0 for 261 speech frames, P2 overlap → channel 2 for 116 frames, and unknown P3 → channel 1 for 612 frames. Top-1 stability was 1.0 in each case. For the overlap query, raw probability max-absolute error was 0.03201, MAE 0.000888, RMSE 0.003842; all selected frames still assigned to channel 2.
 
@@ -150,9 +179,9 @@ The repository contains `VCTK-Corpus-0.92/wav48_silence_trimmed`, with 88,328 FL
 
 | Source | Duration | Output frames | CPU/Vulkan result |
 |---|---:|---:|---|
-| `p225/p225_001_mic1.flac` | 2.052 s | 412 | 1 segment on both; same ID and boundaries |
-| `p226/p226_001_mic1.flac` | 2.799 s | 560 | 1 segment on both; same ID and boundaries |
-| `p227/p227_001_mic1.flac` | 3.429 s | 686 | 1 segment on both; same ID and boundaries |
+| `p225/p225_001_mic1.flac` | 2.052 s | 206 | 1 segment on both; same ID and boundaries |
+| `p226/p226_001_mic1.flac` | 2.799 s | 280 | 1 segment on both; same ID and boundaries |
+| `p227/p227_001_mic1.flac` | 3.429 s | 343 | 1 segment on both; same ID and boundaries |
 
 Each FLAC was converted once to a temporary 16 kHz, mono, PCM16 WAV with FFmpeg (`-map_metadata -1 -ac 1 -ar 16000 -c:a pcm_s16le`). The exact same converted file was used for CPU and Vulkan. All three completed on the physical Vulkan device. Converted files and logs stayed under `/tmp`.
 

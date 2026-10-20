@@ -141,6 +141,11 @@ DiarizationStream::frame_probabilities() const {
     return stream_->frame_probs();
 }
 
+std::array<int64_t, 3>
+DiarizationStream::last_prediction_tensor_shape() const {
+    return stream_->last_prediction_tensor_shape();
+}
+
 int
 DiarizationStream::num_speakers() const {
     return model_->cfg().num_speakers;
