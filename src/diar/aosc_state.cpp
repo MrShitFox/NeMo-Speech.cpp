@@ -270,7 +270,8 @@ AoscState::update(
     const int l1 = spk_frames_;
     const int l2 = fifo_frames_;
 
-    if (research_selection_observer_) {
+    const bool trace_lineage = research_selection_observer_ || research_compression_observer_;
+    if (trace_lineage) {
         if (spkcache_source_frames_.size() != static_cast<size_t>(l1))
             spkcache_source_frames_.resize(static_cast<size_t>(l1), -1);
         if (fifo_source_frames_.size() != static_cast<size_t>(l2))
@@ -310,7 +311,7 @@ AoscState::update(
 
         const float* pop_embs = fifo_.data();
         const float* pop_preds = fifo_preds_full.data();
-        if (research_selection_observer_)
+        if (trace_lineage)
             spkcache_source_frames_.insert(
                 spkcache_source_frames_.end(), fifo_source_frames_.begin(),
                 fifo_source_frames_.begin() + pop);
@@ -335,7 +336,7 @@ AoscState::update(
                 static_cast<size_t>(pop) * n_spk_ * 4);
         }
         fifo_.erase(fifo_.begin(), fifo_.begin() + static_cast<size_t>(pop) * emb_dim_);
-        if (research_selection_observer_)
+        if (trace_lineage)
             fifo_source_frames_.erase(fifo_source_frames_.begin(), fifo_source_frames_.begin() + pop);
         fifo_frames_ -= pop;
         if (spk_frames_ > geo_.spkcache_len)
@@ -445,7 +446,8 @@ AoscState::compress(const std::vector<float>& cache_preds) {
     std::vector<float> new_cache(static_cast<size_t>(cap) * emb_dim_);
     std::vector<float> new_preds(static_cast<size_t>(cap) * n_spk_, 0.f);
     std::vector<int64_t> new_source_frames;
-    if (research_selection_observer_) new_source_frames.resize(static_cast<size_t>(cap), -1);
+    const bool trace_lineage = research_selection_observer_ || research_compression_observer_;
+    if (trace_lineage) new_source_frames.resize(static_cast<size_t>(cap), -1);
     for (int j = 0; j < cap; j++) {
         const int64_t i = picked[j];
         const int f = static_cast<int>(i % n_pad);
@@ -463,15 +465,24 @@ AoscState::compress(const std::vector<float>& cache_preds) {
                 new_preds.data() + static_cast<size_t>(j) * n_spk_,
                 cache_preds.data() + static_cast<size_t>(f) * n_spk_,
                 static_cast<size_t>(n_spk_) * 4);
-            if (research_selection_observer_)
+            if (trace_lineage)
                 new_source_frames[static_cast<size_t>(j)] =
                     spkcache_source_frames_[static_cast<size_t>(f)];
         }
     }
+    if (research_compression_observer_) {
+        ResearchAoscCompressionEvent event;
+        event.speaker_channels = n_spk_;
+        event.input_source_frames = spkcache_source_frames_;
+        event.input_predictions = cache_preds;
+        event.output_source_frames = new_source_frames;
+        event.output_predictions = new_preds;
+        research_compression_observer_(event);
+    }
     if (research_selection_observer_) research_selection_observer_(new_source_frames);
     spkcache_ = std::move(new_cache);
     spkcache_preds_ = std::move(new_preds);
-    if (research_selection_observer_)
+    if (trace_lineage)
         spkcache_source_frames_ = std::move(new_source_frames);
     spk_frames_ = cap;
 }

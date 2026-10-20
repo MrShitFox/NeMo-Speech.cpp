@@ -150,6 +150,8 @@ class DiarStream {
         int64_t coarse_frame_start, const std::vector<SortformerResearchFeatureView>& features)>;
     using ResearchAoscSelectionObserver =
         std::function<void(const std::vector<int64_t>& source_frames)>;
+    using ResearchAoscCompressionObserver =
+        AoscState::ResearchCompressionObserver;
 
     DiarStream(DiarModel& model, const DiarGeometry& geometry);
 
@@ -172,6 +174,9 @@ class DiarStream {
     void set_research_aosc_selection_observer(ResearchAoscSelectionObserver observer) {
         research_aosc_selection_observer_ = std::move(observer);
         state_.set_research_selection_observer(research_aosc_selection_observer_);
+    }
+    void set_research_aosc_compression_observer(ResearchAoscCompressionObserver observer) {
+        state_.set_research_compression_observer(std::move(observer));
     }
 
     // Label arrived audio toward target_frame using a temporary state copy.

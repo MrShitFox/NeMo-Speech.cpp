@@ -28,6 +28,7 @@ from typing import Any, Iterable
 
 
 SCHEMA = "nemo-speech.voiceid-task08.v1"
+TASK09A_SCHEMA = "nemo-speech.voiceid-task09a-enrollment.v1"
 CONVERSION = "ffmpeg -nostdin -v error -y -i <source> -map_metadata -1 -ac 1 -ar 16000 -c:a pcm_s16le <wav>"
 VAD = {
     "method": "20ms RMS windows at 10ms hop; speech threshold is max(-45 dBFS, peak-window RMS - 28 dB); bridge gaps <= 60ms; drop runs < 30ms",
@@ -968,8 +969,67 @@ def make_trials(
     return trials
 
 
+def _expand_task09a_manifest(manifest: dict[str, Any]) -> tuple[dict[str, Any], list[str]]:
+    """Adapt the compact Task 09A asset catalog to the shared leakage checks."""
+    errors: list[str] = []
+    catalog = manifest.get("task09a_asset_catalog", {})
+    expanded_trials = []
+    population_ids: dict[str, set[str]] = defaultdict(set)
+    for trial in manifest.get("trials", []):
+        trial_id = trial.get("trial_id", "unnamed")
+        enrolled = set(trial.get("enrolled_speaker_ids", []))
+        unknown = set(trial.get("unknown_speaker_ids", []))
+        population_ids[trial.get("population", "")].update(enrolled | unknown)
+
+        def resolve(reference: Any, role: str) -> dict[str, Any] | None:
+            if not isinstance(reference, str):
+                errors.append(f"{trial_id}: compact {role} reference is not an asset ID")
+                return None
+            asset = catalog.get(reference)
+            if not isinstance(asset, dict):
+                errors.append(f"{trial_id}: {role} references unknown asset {reference}")
+                return None
+            if Path(asset.get("audio_file", "")).stem != reference:
+                errors.append(f"{trial_id}: asset ID does not match its audio path: {reference}")
+            return dict(asset)
+
+        construction = [resolve(reference, "enrollment") for reference in trial.get("enrollment", [])]
+        validation = [resolve(reference, "validation enrollment")
+                      for reference in trial.get("validation_enrollment", [])]
+        queries = []
+        for reference in trial.get("queries", []):
+            if not isinstance(reference, dict):
+                errors.append(f"{trial_id}: compact query reference is not an object")
+                continue
+            asset = catalog.get(reference.get("asset_id"))
+            if not isinstance(asset, dict):
+                errors.append(f"{trial_id}: query references unknown asset {reference.get('asset_id')}")
+                continue
+            if Path(asset.get("audio_file", "")).stem != reference.get("asset_id"):
+                errors.append(f"{trial_id}: query asset ID does not match its audio path")
+            queries.append({**asset, "known": bool(reference.get("known")),
+                            "query_id": reference.get("query_id")})
+        expanded_trials.append({
+            **trial,
+            "enrollment": [item for item in construction if item is not None],
+            "validation_enrollment": [item for item in validation if item is not None],
+            "queries": queries,
+            "conversations": [],
+        })
+    expanded = {
+        **manifest,
+        "schema": SCHEMA,
+        "speaker_populations": {key: sorted(value) for key, value in population_ids.items()},
+        "trials": expanded_trials,
+    }
+    return expanded, errors
+
+
 def validate_manifest(manifest: dict[str, Any], cache_dir: Path | None = None, verify_hashes: bool = False) -> list[str]:
-    errors = []
+    initial_errors: list[str] = []
+    if manifest.get("schema") == TASK09A_SCHEMA:
+        manifest, initial_errors = _expand_task09a_manifest(manifest)
+    errors = initial_errors
     if manifest.get("schema") != SCHEMA:
         errors.append("unexpected Task 08 manifest schema")
     population_ids = manifest.get("speaker_populations", {})
@@ -1016,14 +1076,31 @@ def validate_manifest(manifest: dict[str, Any], cache_dir: Path | None = None, v
                 errors.append(f"{trial_id}: primary enrollment contains non-mic1 audio")
             if item.get("source_partition") != "enrollment":
                 errors.append(f"{trial_id}: enrollment item came from a non-enrollment utterance partition")
+        validation_pairs = set()
+        validation_by_speaker: dict[str, set[str]] = defaultdict(set)
+        for item in trial.get("validation_enrollment", []):
+            if item.get("speaker_id") not in enrolled:
+                errors.append(f"{trial_id}: validation item speaker is not registered")
+            pair = (item.get("speaker_id"), item.get("utterance_id"))
+            if pair in enroll_pairs or pair in validation_pairs:
+                errors.append(f"{trial_id}: duplicate or construction-overlapping validation utterance identity {pair}")
+            validation_pairs.add(pair)
+            validation_by_speaker[pair[0]].add(pair[1])
+            if item.get("mic") != "mic1":
+                errors.append(f"{trial_id}: held-out enrollment validation contains non-mic1 audio")
+            if item.get("source_partition") != "enrollment":
+                errors.append(f"{trial_id}: validation item came from a non-enrollment utterance partition")
         for query in trial.get("queries", []):
             speaker = query.get("speaker_id")
             if query.get("known") and speaker not in enrolled:
                 errors.append(f"{trial_id}/{query.get('query_id')}: known query identity is not enrolled")
             if not query.get("known") and speaker in enrolled:
                 errors.append(f"{trial_id}/{query.get('query_id')}: unknown query identity is enrolled")
-            if query.get("known") and query.get("utterance_id") in enroll_by_speaker.get(speaker, set()):
-                errors.append(f"{trial_id}/{query.get('query_id')}: enrollment/query utterance leakage")
+            if query.get("known") and (
+                query.get("utterance_id") in enroll_by_speaker.get(speaker, set())
+                or query.get("utterance_id") in validation_by_speaker.get(speaker, set())
+            ):
+                errors.append(f"{trial_id}/{query.get('query_id')}: enrollment or validation/query utterance leakage")
             if query.get("mic") not in ("mic1", "mic2"):
                 errors.append(f"{trial_id}/{query.get('query_id')}: unknown microphone")
             if query.get("source_partition") != trial.get("evaluation_partition"):
@@ -1038,12 +1115,21 @@ def validate_manifest(manifest: dict[str, Any], cache_dir: Path | None = None, v
                 if verify_hashes and (cache_dir / query["audio_file"]).is_file():
                     if sha256_file(cache_dir / query["audio_file"]) != query.get("converted_sha256"):
                         errors.append(f"{trial_id}/{query.get('query_id')}: converted WAV SHA-256 mismatch")
+                if verify_hashes and (cache_dir / query["vad_mask_file"]).is_file():
+                    if sha256_file(cache_dir / query["vad_mask_file"]) != query.get("vad_sha256"):
+                        errors.append(f"{trial_id}/{query.get('query_id')}: VAD mask SHA-256 mismatch")
         if cache_dir:
-            for item in trial.get("enrollment", []):
+            for item in [*trial.get("enrollment", []), *trial.get("validation_enrollment", [])]:
                 for field in ("audio_file", "vad_mask_file"):
                     rel = Path(item.get(field, ""))
                     if rel.is_absolute() or ".." in rel.parts or not (cache_dir / rel).is_file():
-                        errors.append(f"{trial_id}: missing/unsafe enrollment asset {rel}")
+                        errors.append(f"{trial_id}: missing/unsafe enrollment or validation asset {rel}")
+                if verify_hashes and (cache_dir / item.get("audio_file", "")).is_file():
+                    if sha256_file(cache_dir / item["audio_file"]) != item.get("converted_sha256"):
+                        errors.append(f"{trial_id}: converted enrollment WAV SHA-256 mismatch")
+                if verify_hashes and (cache_dir / item.get("vad_mask_file", "")).is_file():
+                    if sha256_file(cache_dir / item["vad_mask_file"]) != item.get("vad_sha256"):
+                        errors.append(f"{trial_id}: enrollment VAD mask SHA-256 mismatch")
         query_by_id = {item.get("query_id"): item for item in trial.get("queries", [])}
         for conversation in trial.get("conversations", []):
             conversation_id = conversation.get("conversation_id", "unnamed")

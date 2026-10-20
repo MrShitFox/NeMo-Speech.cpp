@@ -24,6 +24,18 @@ class DiarStreamSnapshotCodec;
 class DiarSnapshotAccess;
 class DiarAoscProfileCodec;
 
+// Detailed research-only view of a cache compression. The input and output
+// prediction matrices are row-major [cache_frame, speaker_channel]. Source
+// frame IDs identify the enrollment audio interval for each acoustic row;
+// -1 marks silence or unavailable lineage.
+struct ResearchAoscCompressionEvent {
+    int speaker_channels = 0;
+    std::vector<int64_t> input_source_frames;
+    std::vector<float> input_predictions;
+    std::vector<int64_t> output_source_frames;
+    std::vector<float> output_predictions;
+};
+
 // Streaming geometry in coarse encoder frames (80 ms for both v2 and v3).
 // V3's public predictions are upsampled to 10 ms; its AOSC state remains on
 // this coarse grid. Prefer the named presets over setting individual fields.
@@ -89,6 +101,8 @@ class ChannelBirthGate {
 class AoscState {
    public:
     using ResearchSelectionObserver = std::function<void(const std::vector<int64_t>& source_frames)>;
+    using ResearchCompressionObserver =
+        std::function<void(const ResearchAoscCompressionEvent& event)>;
     AoscState(
         const DiarGeometry& geo, const DiarScoringConfig& scoring, int n_spk, int emb_dim,
         const std::vector<float>& learned_silence = {});
@@ -108,6 +122,9 @@ class AoscState {
     // lineage (for example, a restored snapshot). Does not affect compression.
     void set_research_selection_observer(ResearchSelectionObserver observer) {
         research_selection_observer_ = std::move(observer);
+    }
+    void set_research_compression_observer(ResearchCompressionObserver observer) {
+        research_compression_observer_ = std::move(observer);
     }
 
     int spkcache_frames() const { return spk_frames_; }
@@ -143,6 +160,7 @@ class AoscState {
     int64_t n_sil_frames_ = 0;
     bool use_learned_silence_ = false;
     ResearchSelectionObserver research_selection_observer_;
+    ResearchCompressionObserver research_compression_observer_;
     std::vector<int64_t> spkcache_source_frames_;
     std::vector<int64_t> fifo_source_frames_;
 };

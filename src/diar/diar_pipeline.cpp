@@ -216,6 +216,7 @@ DiarStream::run_one_chunk(bool force, bool final_flush) {
     if (provisional) {
         preview_state.emplace(state_);
         preview_state->set_research_selection_observer({});
+        preview_state->set_research_compression_observer({});
     }
     auto& run_state = preview_state ? *preview_state : state_;
     auto out = m_.model().run_chunk(

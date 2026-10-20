@@ -48,6 +48,8 @@ class DiarizationStream {
     void set_research_feature_observer(DiarStream::ResearchFeatureObserver observer);
     void set_research_aosc_selection_observer(
         DiarStream::ResearchAoscSelectionObserver observer);
+    void set_research_aosc_compression_observer(
+        DiarStream::ResearchAoscCompressionObserver observer);
     int64_t frame_count() const;
     int64_t frame_probs_start() const;
     const std::vector<float>& frame_probabilities() const;

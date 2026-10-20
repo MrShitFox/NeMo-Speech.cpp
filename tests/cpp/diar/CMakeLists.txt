@@ -21,6 +21,10 @@ add_executable(diar_vctk_voiceid_probe diar_vctk_voiceid_probe.cpp)
 target_include_directories(diar_vctk_voiceid_probe PRIVATE ${CMAKE_SOURCE_DIR}/llama.cpp/vendor)
 target_link_libraries(diar_vctk_voiceid_probe PRIVATE nemo_speech_diar)
 
+add_executable(test_voiceid_mapping_research test_voiceid_mapping_research.cpp)
+target_include_directories(test_voiceid_mapping_research PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+add_test(NAME voiceid_mapping_research COMMAND test_voiceid_mapping_research)
+
 add_executable(test_aosc_profile_intervention test_aosc_profile_intervention.cpp)
 target_include_directories(test_aosc_profile_intervention PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(test_aosc_profile_intervention PRIVATE nemo_speech_diar)
